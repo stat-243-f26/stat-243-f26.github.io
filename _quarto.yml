@@ -1,0 +1,60 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "!*_download.qmd"
+    - "!admin/*"
+    - "!*.geojson"
+
+website:
+  title: "Stat 243"
+#  image: assets/math141-hex.png
+  site-url: "https://www.stat-243-f26.github.io/"
+#  favicon: assets/favicon.ico
+  navbar:
+    title: "Stat 243: Statistical Learning"
+#    logo: assets/math141-hex.png
+    logo-alt: "Stat 243 logo"
+    background: white
+    foreground: "gray-800"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: syllabus.qmd
+        text: Syllabus
+      - href: office_hours.qmd
+        text: Office Hours
+    tools:
+      # - icon: chat-dots-fill
+      #   href: https://reed-data-science.slack.com
+      #   aria-label: Slack
+      - icon: r-circle-fill
+        href: https://rstudio.reed.edu/
+        aria-label: RStudio Server
+      # - icon: bar-chart-fill
+      #   href: https://www.gradescope.com/courses/1231801
+      #   aria-label: Gradescope
+      # - icon: door-closed-fill
+      #   href: https://moodle.reed.edu/
+      #   aria-label: Moodle
+  sidebar:
+    style: "floating"  # or "docked"
+    logo: slides/img/r-hex.jpg
+
+format:
+  html:
+    theme:
+      - sandstone
+      - assets/styles.scss
+    toc: true
+
+resources:
+  - CNAME
+  - .nojekyll
+
+editor: visual
+
+execute:
+  freeze: auto
+

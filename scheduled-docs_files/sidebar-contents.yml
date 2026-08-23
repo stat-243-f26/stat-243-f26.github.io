@@ -1,0 +1,5 @@
+website:
+  sidebar:
+    - title: Notes
+      contents:
+        - href: notes.qmd

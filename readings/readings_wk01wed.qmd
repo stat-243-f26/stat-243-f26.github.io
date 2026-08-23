@@ -1,0 +1,10 @@
+---
+date: 1/28/26
+editor: source
+---
+
+# Stat 243: Suggested readings for {{< meta date >}}
+
+## Reading 
+
+Before coming to lecture today, please read the following material: 

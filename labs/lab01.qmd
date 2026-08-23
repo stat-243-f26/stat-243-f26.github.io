@@ -1,0 +1,127 @@
+---
+title: "Setup and Data Viz Considerations"
+subtitle: "Stat 243: Problem Set 0"
+format: html
+editor: source
+toc: false
+---
+
+## Due: Wednesday, Feb 4th, 9am PT.
+
+**NOTE**: for this problem set only, this is due on WEDNESDAY 9am, not THURSDAY 9am!
+
+## Problem 1: Setup
+
+In this class, we'll encounter a variety of technologies. This problem aims to help you navigate setting up some of those technologies.
+
+### part a: GitHub
+
+We'll use GitHub for collaboration and portfolio building, so each of you need to have a GitHub profile. If you don't have a GitHub profile already, go to [https://github.com/](https://github.com/) and sign up for one. Once you've signed up for an account, please add it to the [Google Sheet](https://docs.google.com/spreadsheets/d/1yhQfUwGpKj1bQYg3rmDybKobVkh-tjnY-GcYn4LTf7c/edit?usp=sharing) so that I can add you to the Reed-Data-Science organization. Note: you'll need to be logged in to your Reed Google account to edit the Google Sheet.
+
+### part b: R and RStudio (or Positron!)
+
+We'll use `R` and RStudio/Positron for computing in this class. `R` is a statistical programming language, while RStudio and Positron are Integrated Development Environments (IDEs) that allow you to run `R`, view files, view `R` code output, and much more! Reed has an [RStudio Server](https://rstudio.reed.edu/) where you can run `R` and RStudio in the cloud, but for this class I would recommend a local installation of both `R` and RStudio. Positron is a new IDE from Posit (the company that makes RStudio) you are welcomed and encouraged to try out Positron, although I may not be able to provide as good of problem solving for any issues related to your IDE if you use Positron. Positron seems to be the hot new thing, and I imagine in the next ~5 years we will see a steep decline of RStudio use in favor of Positron for `R` users and data scientists.
+
+To install `R` and RStudio, follow the [directions from Posit's website](https://posit.co/download/rstudio-desktop/).
+
+To install Positron, see this [link from Posit's website](https://positron.posit.co/download.html). 
+
+**Note**: always make sure to have `R` installed before installing your IDE. 
+
+### part c: Connect git, GitHub and RStudio (or Positron)
+
+These instructions are based on pieces of [Happy git with R](https://happygitwithr.com/), in particular chapters 6, 7, and 9. Depending on your computer, setup, or just luck, this step can become difficult/frustrating. If you are having trouble with this step, please come to office hours for help!  
+
+In order to have your computer talk with GitHub, you'll need to install git on your computer. Sometimes, git is already installed on your computer, and you can check it by running
+
+```
+which git
+```
+
+in a Terminal or shell window. If you have git installed, you should see something like "/usr/bin/git" returned to you. If you don't have git installed, you might see something like "git: command not found" or nothing at all. If you have git installed, congrats! If not, follow the steps in [Happy git with R, Chapter 6](https://happygitwithr.com/install-git) to install git. 
+
+Next, up you have to introduce yourself to git. Again, following Happy git with R, in [Chapter 7](https://happygitwithr.com/hello-git) we can run the following in an R session/console
+
+```{r}
+#| eval: false
+## install if needed (do this exactly once):
+## install.packages("usethis")
+
+library(usethis)
+use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")
+```
+
+where Jane Doe is replaced with your full name and jane\@example.org is replaced with the email you used to sign up for GitHub. 
+
+Next, you'll have to authenticate yourself (i.e., give your computer permission to make changes to GitHub projects when you ask it to). To do this, run the following in an R session/console:
+
+```{r}
+#| eval: false
+usethis::create_github_token()
+```
+
+This should open a new browser window where you can create your token. I often set no expiration date and check all of the boxes, but that is up to you. Note that when your token expires you'll have to make a new one if you're still using the same computer. Now, your token is created (it will start with "ghp_")! Copy it down somewhere so that you don't lose it.
+
+The final step is to run 
+
+```{r}
+#| eval: false
+## install if needed (do this exactly once):
+## install.packages("gitcreds")
+
+gitcreds::gitcreds_set()
+```
+
+and then enter the token when prompted. If also this has gone well, you are set! 
+
+
+Unless... you're running Linux. If you're running Linux, I am happy to help you get git working correctly, but I'd say the first step is to read and follow Danielle Navarro's [blog post](https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/), in addition to the steps above. 
+
+
+### part d: testing
+
+To make sure everything is working correctly, run
+
+```{r}
+#| eval: false
+gitcreds::gitcreds_get()
+```
+
+in an R session/console. You should see something like
+
+```
+<gitcreds>
+  protocol: https
+  host    : github.com
+  username: PersonalAccessToken
+  password: <-- hidden -->
+```
+
+but if you see
+
+```
+Error in throw(new_error("gitcreds_no_credentials", url = url)) : 
+  Could not find any credentials
+```
+
+something has gone wrong. 
+
+
+### part e: congrats!
+
+If you've made it this far, congrats! You've successfully set up git, GitHub, and your IDE on your local machine! We'll spend time in class during week 2 talking about how to use all of these tools, but for now you are good to go.
+
+If you've had trouble with any of these steps, please come to office hours so that we can debug and get you set up. 
+
+
+
+## Problem 2: Data Visualization
+
+On Wednesday in class we talked about considerations for data visualization. In this problem, I'd like you to find two data visualizations "in the wild". In particular, I'd like you to find one data visualization that you think is very good at accurately portraying the story/answering the research question at hand, and another that is quite bad at the task. For both data visualizations, make sure they are portraying real data, and not simulated or fake data. Once you've found your visualizations, post an image (or link to, if interactive) in our `datasci-in-the-wild` Slack channel, along with a few sentences about why you believe the data visualization to be quite good/bad. In your discussion of the graphs, make sure to mention the aesthetic mappings and other attributes of the graphs. Also, make sure to respond to and engage with at least one data viz from two other people in the channel.
+
+If you're having trouble finding a data visualization, some places to consider might be: 
+
+-   [The New York Times](https://www.nytimes.com/), in particular their [What's going on in this graph?](https://www.nytimes.com/column/whats-going-on-in-this-graph) column.
+-   [Information is beautiful](https://informationisbeautiful.net/)
+-   [r/dataisbeautiful](https://www.reddit.com/r/dataisbeautiful/) or its other half, [r/dataisugly](https://www.reddit.com/r/dataisugly/)
+

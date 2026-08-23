@@ -1,0 +1,32 @@
+---
+toc: false
+editor: source
+page-layout: full
+resources:
+  - "homepage-readings"
+listing:
+  id: schedule-listing
+  contents: scheduled-docs_files/schedule.yml
+  template: _extensions/qmd-lab/course-website-ejs/schedule-1.ejs
+---
+
+:::::::: content-block
+::::::: grid
+::::: {#banner .g-col-12 .g-col-md-6 style="margin: -4em 1em 0em 0em"}
+
+::: banner-text
+Statistical Learning
+:::
+
+[Stat 243 Reed College, Fall 2026]{.smallcaps}
+
+
+:::::
+
+:::::::
+::::::::
+
+:::: content-block
+::: {#schedule-listing}
+:::
+::::

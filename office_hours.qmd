@@ -1,0 +1,23 @@
+---
+title: "Office Hours"
+editor: source
+---
+
+Please stop by to introduce yourself or ask some questions about the course! 
+
+We offer two types of office hours for Stat 243:
+
+-   **Instructor office hours**, which occur in Library 386. 
+-   **Course Assistant office hours**, which occur in ETC 105B. 
+
+**Instructor office hours** are a great place to ask questions about the content or course in general. They're also a great place to get help on problems that you are stuck on.
+
+**Course Assistant office hours** are a great place to work on your assignments with fellow students and seek the help of the course assistants whenever you get stuck.
+
+Further, each Reed student is entitled to one hour of [individual tutoring](https://www.reed.edu/academic_support/individual_tutoring.html) per course per week. You can sign up for individual tutoring in [iris](https://iris.reed.edu/). 
+
+
+Below is the schedule of office hours for the week. We will update this calendar in case office hours need to change times or locations. 
+
+
+<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&showPrint=0&mode=WEEK&src=Y182NzJkNmJlMzdkZTRlN2U5MTM2MDIxYWNlYWFmMTFjMWY4ZGFhM2VhNWY3NTUxNjVjNjA2YmE1MzJlYTRjYTIxQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23f09300" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
