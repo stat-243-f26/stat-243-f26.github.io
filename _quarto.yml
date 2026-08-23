@@ -10,12 +10,12 @@ project:
 
 website:
   title: "Stat 243"
-#  image: assets/math141-hex.png
+  # image: assets/trips.jpg
   site-url: "https://www.stat-243-f26.github.io/"
 #  favicon: assets/favicon.ico
   navbar:
     title: "Stat 243: Statistical Learning"
-#    logo: assets/math141-hex.png
+    #logo: assets/trips.jpg
     logo-alt: "Stat 243 logo"
     background: white
     foreground: "gray-800"
@@ -41,7 +41,7 @@ website:
       #   aria-label: Moodle
   sidebar:
     style: "floating"  # or "docked"
-    logo: slides/img/r-hex.jpg
+    logo: assets/trips.jpg
 
 format:
   html:
@@ -49,10 +49,13 @@ format:
       - sandstone
       - assets/styles.scss
     toc: true
+    include-after-body:
+      text: <script src="./assets/sidebar-photo.js"></script>
 
 resources:
   - CNAME
   - .nojekyll
+  - assets/sidebar-photo.js
 
 editor: visual
 
