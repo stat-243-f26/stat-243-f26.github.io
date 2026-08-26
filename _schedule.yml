@@ -30,9 +30,9 @@ scheduled-docs:
           docs:
             - type: Lab 1
               href: labs/lab01.qmd
-      # resources:
-      #   - '<a href="https://join.slack.com/t/reed-data-science/shared_invite/zt-3m9hhwi5f-javjb99NvUzwcC8r1MCXjg">Join Slack</a>'
-      #   - 'Gradescope course entry code: ZJPD33'
+      resources:
+        - '<a href="https://join.slack.com/t/stat243f26/shared_invite/zt-47qhj8xhz-VQj7slULCPkMTvUVUCjSeA">Join Slack</a>'
+        - 'Gradescope course entry code: ZJPD33'
     - week: 2
       days:
         - topic: "No Class: Holiday"
@@ -54,8 +54,9 @@ scheduled-docs:
               href: readings/readings_wk02fri.qmd
             - type: Slides
               href: slides/stat243_wk02fri.qmd
-      # resources:
-      #   - 'Some text'
+      resources:
+        - 'For Wednesday: Read <a href="https://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/">this blog post</a>'
+        - 'For Friday: TBD'
     - week: 3
       days:
         - topic: "Linear Models III"

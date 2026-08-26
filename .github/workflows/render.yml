@@ -1,8 +1,8 @@
 name: Render site
 
 on:
-  push:
-    branches: [main]
+  # push:
+  #   branches: [main]
   workflow_dispatch:
   schedule:
     - cron: "0 15 * * 1,3,5"  # Mon, Wed & Fri 8:00am Pacific (UTC-7 / PDT)
