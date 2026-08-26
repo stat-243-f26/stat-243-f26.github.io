@@ -1,14 +1,12 @@
 ---
-title: "Setup and Data Viz Considerations"
-subtitle: "Stat 243: Problem Set 0"
+title: "Technologies, Data, and Stat Learning Methods"
+subtitle: "Stat 243: Lab 1"
 format: html
 editor: source
 toc: false
 ---
 
-## Due: Wednesday, Feb 4th, 9am PT.
-
-**NOTE**: for this problem set only, this is due on WEDNESDAY 9am, not THURSDAY 9am!
+## Due: Friday, Sep 11th, 11am PT.
 
 ## Problem 1: Setup
 
@@ -16,7 +14,7 @@ In this class, we'll encounter a variety of technologies. This problem aims to h
 
 ### part a: GitHub
 
-We'll use GitHub for collaboration and portfolio building, so each of you need to have a GitHub profile. If you don't have a GitHub profile already, go to [https://github.com/](https://github.com/) and sign up for one. Once you've signed up for an account, please add it to the [Google Sheet](https://docs.google.com/spreadsheets/d/1yhQfUwGpKj1bQYg3rmDybKobVkh-tjnY-GcYn4LTf7c/edit?usp=sharing) so that I can add you to the Reed-Data-Science organization. Note: you'll need to be logged in to your Reed Google account to edit the Google Sheet.
+We'll use GitHub for collaboration and portfolio building, so each of you need to have a GitHub profile. If you don't have a GitHub profile already, go to [https://github.com/](https://github.com/) and sign up for one. Once you've signed up for an account, please add it to the [Google Sheet](https://docs.google.com/spreadsheets/d/1yhQfUwGpKj1bQYg3rmDybKobVkh-tjnY-GcYn4LTf7c/edit?usp=sharing) so that I can add you to the stat-243-f26 organization. Note: you'll need to be logged in to your Reed Google account to edit the Google Sheet.
 
 ### part b: R and RStudio (or Positron!)
 
@@ -30,7 +28,7 @@ To install Positron, see this [link from Posit's website](https://positron.posit
 
 ### part c: Connect git, GitHub and RStudio (or Positron)
 
-These instructions are based on pieces of [Happy git with R](https://happygitwithr.com/), in particular chapters 6, 7, and 9. Depending on your computer, setup, or just luck, this step can become difficult/frustrating. If you are having trouble with this step, please come to office hours for help!  
+These instructions are based on pieces of [Happy git with R](https://happygitwithr.com/), in particular chapters 6, 7, and 9. Depending on your computer, setup, or just luck, this step can become difficult/frustrating. If you are having trouble with this step, please ask for help!  
 
 In order to have your computer talk with GitHub, you'll need to install git on your computer. Sometimes, git is already installed on your computer, and you can check it by running
 
@@ -115,13 +113,18 @@ If you've had trouble with any of these steps, please come to office hours so th
 
 
 
-## Problem 2: Data Visualization
 
-On Wednesday in class we talked about considerations for data visualization. In this problem, I'd like you to find two data visualizations "in the wild". In particular, I'd like you to find one data visualization that you think is very good at accurately portraying the story/answering the research question at hand, and another that is quite bad at the task. For both data visualizations, make sure they are portraying real data, and not simulated or fake data. Once you've found your visualizations, post an image (or link to, if interactive) in our `datasci-in-the-wild` Slack channel, along with a few sentences about why you believe the data visualization to be quite good/bad. In your discussion of the graphs, make sure to mention the aesthetic mappings and other attributes of the graphs. Also, make sure to respond to and engage with at least one data viz from two other people in the channel.
+## Problems 2, 3, and 4
 
-If you're having trouble finding a data visualization, some places to consider might be: 
+In order to access the next two problems, clone the following repo: 
 
--   [The New York Times](https://www.nytimes.com/), in particular their [What's going on in this graph?](https://www.nytimes.com/column/whats-going-on-in-this-graph) column.
--   [Information is beautiful](https://informationisbeautiful.net/)
--   [r/dataisbeautiful](https://www.reddit.com/r/dataisbeautiful/) or its other half, [r/dataisugly](https://www.reddit.com/r/dataisugly/)
+
+```
+https://github.com/stat-243-f26/lab01_YOURGITHUBUSERNAME.git
+```
+
+From there, you can answer the questions and then commit and push your work. 
+
+
+
 

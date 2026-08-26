@@ -1,0 +1,15 @@
+{
+  "hash": "1538140d1ba01fe6b89dab9e95047f6e",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Activity: How Old Are Reed Faculty?\"\nformat: pdf\neditor: source\n---\n\n```{=html}\n<style type=\"text/css\">\n  body{\n  font-size: 9pt;\n}\n</style>\n```\n\n\n\n\nPlease answer the questions on the following pages with your group members.\n\n\\vspace{2em}\n\n\n```{=latex}\n\\noindent\n\\includegraphics[width=0.24\\textwidth]{../slides/img/Faculty_Img/megan-23.jpeg}\\hfill\n\\includegraphics[width=0.24\\textwidth]{../slides/img/Faculty_Img/chris.jpg}\\hfill\n\\includegraphics[width=0.24\\textwidth]{../slides/img/Faculty_Img/alex.jpg}\\hfill\n\\includegraphics[width=0.24\\textwidth]{../slides/img/Faculty_Img/img10.jpg}\n\n\\vspace{1em}\n\n\\noindent\n\\includegraphics[width=0.24\\textwidth]{../slides/img/Faculty_Img/Wainstein-color.png}\\hfill\n\\includegraphics[width=0.24\\textwidth]{../slides/img/Faculty_Img/marcus-17.jpg}\\hfill\n\\includegraphics[width=0.24\\textwidth]{../slides/img/Faculty_Img/michael.jpg}\\hfill\n\\includegraphics[width=0.24\\textwidth]{../slides/img/Faculty_Img/img3.jpg}\n```\n\n\n\\newpage\n\n## Modeling Questions\n\n- What explicit features are you analyzing?\n\n\\vspace{8em}\n\n- How do you convert these features to numerical estimates? \\vspace{8em}\n\n- How do you resolve differences in opinion among group members?\n\n\\vspace{8em}\n\n## Definitional Questions\n\n- Is the activity supervised or unsupervised? \\vspace{2em}\n\n- Does it represent a classification or regression problem? \\vspace{2em}\n\n- Are you interested primarily in prediction or inference? \\vspace{2em}\n\n- Are you using parametric or non-parametric methods?\n\n\\newpage\n\n## Conceptual Questions\n\n- What are some sources of \"error\" in your estimates? \\vspace{8em}\n\n- How can we quantify the error in your estimates? \\vspace{8em}\n\n- How should we assess the overall accuracy of a group's predictions? \\vspace{8em}\n\n- In what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}

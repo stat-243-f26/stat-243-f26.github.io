@@ -124,5 +124,586 @@
     "title": "Stat 243: Suggested readings for January 28, 2026",
     "section": "",
     "text": "Before coming to lecture today, please read the following material:"
+  },
+  {
+    "objectID": "slides/01_Intro.html#outline",
+    "href": "slides/01_Intro.html#outline",
+    "title": "Stat 243",
+    "section": "Outline",
+    "text": "Outline\nIn this lecture, we will…\n\nDiscuss the syllabus\nMake introductions\nOverview “Statistical Learning”"
+  },
+  {
+    "objectID": "slides/01_Intro.html#me",
+    "href": "slides/01_Intro.html#me",
+    "title": "Stat 243",
+    "section": "Me",
+    "text": "Me\nName: Michael (he/him)\nEmail: michaelpearce@reed.edu\nOffice: Library 386\nOffice Hours: M 12-1pm, W 4-5pm, Th 5-6pm, or by appointment\n\nOther Information:\n\nWent to St. Olaf College (Minnesota) and University of Washington\nWorked as a statistician at Boeing and Deloitte (consulting)\nResearch: Bayesian methods for social sciences; ranked data analysis (e.g., voting)"
+  },
+  {
+    "objectID": "slides/01_Intro.html#what-is-243",
+    "href": "slides/01_Intro.html#what-is-243",
+    "title": "Stat 243",
+    "section": "What is 243?",
+    "text": "What is 243?\nThis course will:\n\nIn a nutshell: Expand your “toolbox” for analyzing large, modern, and complex data\n\n\n\nCover important modeling and predictive techniques (e.g., regression, classification, clustering, tree-based methods, neural networks)\nPractice each method in R using real/simulated data\n\nSee syllabus for more detailed learning outcomes"
+  },
+  {
+    "objectID": "slides/01_Intro.html#class-time",
+    "href": "slides/01_Intro.html#class-time",
+    "title": "Stat 243",
+    "section": "Class Time",
+    "text": "Class Time\nLecture: Mondays and Wednesdays\n\nComplete a reading before each “lecture” from textbook, An Introduction to Statistical Learning: with Applications in R, 2nd Edition (2021) by James, Witten, Hastie, and Tibshirani\nFree online! See the syllabus!\n\n\nLab: Fridays\n\nPractice course content and/or work on assignments\nMix of pen-and-paper work, coding activities"
+  },
+  {
+    "objectID": "slides/01_Intro.html#technology",
+    "href": "slides/01_Intro.html#technology",
+    "title": "Stat 243",
+    "section": "Technology",
+    "text": "Technology\nYou will need access to a laptop for this course.\n\nBring a laptop to class every day\nPlease let me know ASAP if you do not have access to a personal laptop!\n\n\nWe will regularly use the R programming language\n\nAll assignments will be completed in RStudio\nRStudio can be downloaded to your computer (see syllabus) or accessed on the Reed RStudio Server: https://rstudio.reed.edu/"
+  },
+  {
+    "objectID": "slides/01_Intro.html#communication-and-resources",
+    "href": "slides/01_Intro.html#communication-and-resources",
+    "title": "Stat 243",
+    "section": "Communication and Resources",
+    "text": "Communication and Resources\n\nMoodle ← Check this often!!\n\nannouncements, assignments, lecture materials\n\n\n\n\nGradescope\n\nsubmitting assignments\n\n\nPlease email me if you notice any errors/omissions on Moodle/Gradescope!!"
+  },
+  {
+    "objectID": "slides/01_Intro.html#avenues-for-help",
+    "href": "slides/01_Intro.html#avenues-for-help",
+    "title": "Stat 243",
+    "section": "Avenues for Help",
+    "text": "Avenues for Help\nThis course moves at a fairly brisk pace! Expect yourself to be make mistakes, and embrace them! You belong here, and struggle is part of the learning.\n\nWhen you find yourself challenged, I encourage you to seek out help via the following avenues:\n\nAttend office hours. I especially welcome you to attend my office hours in the first few weeks to introduce yourself. Coding questions are often best answered in person.\nWork with your peers. Statistics is colloborative and iterative. Form a study group and work with others in labs.\nInvest in the readings and assignments. Allow yourself time to soak in this rich and complex material."
+  },
+  {
+    "objectID": "slides/01_Intro.html#assessments-and-grading-criteria",
+    "href": "slides/01_Intro.html#assessments-and-grading-criteria",
+    "title": "Stat 243",
+    "section": "Assessments and Grading Criteria",
+    "text": "Assessments and Grading Criteria\nYour grade will be determined via the following course components:\n\nAttendance and Participation (about 10%)\nHomework (about 50%)\nMidterm Exams (about 20%)\nFinal Project (about 20%)\n\nLet’s talk through each of these…"
+  },
+  {
+    "objectID": "slides/01_Intro.html#attendance-and-participation",
+    "href": "slides/01_Intro.html#attendance-and-participation",
+    "title": "Stat 243",
+    "section": "Attendance and Participation",
+    "text": "Attendance and Participation\nThe topics covered in this course are challenging! Attendance and participation will contribute greatly to your learning.\n\nI expect all students to attend class regularly.\nI expect all students to participate in a way that’s most comfortable to them (e.g. engage in class discussions/activities, ask questions, attend office hours, etc.).\n\n\nI understand that attendance is not always possible due to a variety of important reasons.\n\nI won’t penalize your grade for 3 absences. Each absence beyond 3 will incur a very minor penalty.\nI won’t penalize absences in exceptional circumstances (e.g., medical leave, urgent personal matters, etc.)"
+  },
+  {
+    "objectID": "slides/01_Intro.html#homework",
+    "href": "slides/01_Intro.html#homework",
+    "title": "Stat 243",
+    "section": "Homework",
+    "text": "Homework\nFormative opportunities to practice course material.\n\nUsually due Fridays on Gradescope at 6pm\nI expect 10 homework assignments.\n\nI have high expectations for your homework submissions:\n\nAnswer questions completely and respond in full sentences\nShow your work\nInclude, annotate, and add comments to your code\nBe clear and concise"
+  },
+  {
+    "objectID": "slides/01_Intro.html#unique-homework-policies",
+    "href": "slides/01_Intro.html#unique-homework-policies",
+    "title": "Stat 243",
+    "section": "Unique Homework Policies",
+    "text": "Unique Homework Policies\n\nInitial Deadlines and Extensions\n\nEvery assignment has an initial deadline.\nTwice during the term, you may obtain a 48-hour extension by emailing me; no excuse necessary. Requests must be made prior to the due date.\n\n\n\n\nResubmissions\n\nEach assignment may be resubmitted twice for full credit.\nResubmissions for HW 1-6 due at time of Midterm 1; for HW 7–10 due at time of Midterm 2\n\n\n\n\n\nAlternative Grading\n\nTo promote sustained and thorough engagement with course content, each problem is graded on a satisfactory/unsatisfactory basis; no partial credit!"
+  },
+  {
+    "objectID": "slides/01_Intro.html#midterm-exams",
+    "href": "slides/01_Intro.html#midterm-exams",
+    "title": "Stat 243",
+    "section": "Midterm Exams",
+    "text": "Midterm Exams\nTo encourage holistic learning and synthesis of the course materials, the course will include two midterms:\n\nWednesday 10/15 (in-class); Friday 10/17 (take-home due by 6pm)\nFriday, 12/5 (in-class); Monday, 12/8 (take-home due by 6pm)\n\nPlease ensure you will be on campus on these dates!\n\nNotes:\n\nTimed tests are stressful! I will try to write fair, straightforward exams. Plus, tests are just 20% of your grade!\nWhy in-person? To promote substantive review of material and integrity."
+  },
+  {
+    "objectID": "slides/01_Intro.html#final-project",
+    "href": "slides/01_Intro.html#final-project",
+    "title": "Stat 243",
+    "section": "Final Project",
+    "text": "Final Project\nYou’ll work in groups of 2-3 students to analyze a significant research question using a real dataset.\n4 “In-Progress” Assignments:\n\nWeek 5 — Proposal\nWeek 10 — Exploratory Analysis\nWeek 12 — Methods\nWeek 15 — Report Draft and Peer Review\n\n\nFinal Deliverables:\n\nFinals Week — In-Class Presentations\nFinals Week — Technical Report Due\n\nMore details to come!"
+  },
+  {
+    "objectID": "slides/01_Intro.html#course-environment",
+    "href": "slides/01_Intro.html#course-environment",
+    "title": "Stat 243",
+    "section": "Course Environment",
+    "text": "Course Environment\nCode of Conduct\nI am absolutely committed to fostering a friendly and inclusive classroom environment in which all students have an equal opportunity to learn and succeed.\n\nI expect all members of this course to make participation a harassment-free experience for everyone.\nI expect everyone to act and interact in ways that contribute to an open, welcoming, healthy, and anti-racist community of learners.\n\nPlease see the syllabus for additional information, and reach out to me if you would like to discuss any of this further.\nNames and Pronouns\nEveryone deserves to be addressed correctly. You are always welcome to update your preferred name and pronouns."
+  },
+  {
+    "objectID": "slides/01_Intro.html#course-environment-cont.",
+    "href": "slides/01_Intro.html#course-environment-cont.",
+    "title": "Stat 243",
+    "section": "Course Environment (cont.)",
+    "text": "Course Environment (cont.)\nDisability and Accommodations\n\nIf you have a documented disability in need of accommodations, please reach out to Disability & Accessibility Resources (DAR; dar@reed.edu).\nIf you have accommodations, please feel free to reach out to discuss them!\nPlease let me know ASAP if the course-design creates disability-related barriers to your participation (regardless of any formal accommodations).\n\nAcademic Integrity\n\nPlease work with your peers!\nHowever, any work you turn in must be your own!\nYou may not use generative AI (e.g., ChatGPT, Copilot) unless explicitely stated.\nYou may search the internet for help, as long as you avoid direct copying of solutions"
+  },
+  {
+    "objectID": "slides/01_Intro.html#introductions",
+    "href": "slides/01_Intro.html#introductions",
+    "title": "Stat 243",
+    "section": "Introductions",
+    "text": "Introductions\nIn pairs, please take a few minutes to share:\n\nName and preferred pronouns (if desired)\nClass Year and major\nWhy you’re taking this course\nAn unusual or unexpected fact about yourself\n\nI will ask you to introduce your partner to the class"
+  },
+  {
+    "objectID": "slides/01_Intro.html#example-loan-default",
+    "href": "slides/01_Intro.html#example-loan-default",
+    "title": "Stat 243",
+    "section": "Example: Loan Default",
+    "text": "Example: Loan Default\nA bank wants to model the probability customers default on a loan\nCommon Considerations:\n\nCustomer age\nMarital status\nIncome\n\n\nQ: What other factors might a bank consider?\nQ: How might each factor relate to probability of default?\nQ: What ethical problems might be present?"
+  },
+  {
+    "objectID": "slides/01_Intro.html#the-setting",
+    "href": "slides/01_Intro.html#the-setting",
+    "title": "Stat 243",
+    "section": "The Setting",
+    "text": "The Setting\nLet:\n\n\\(Y\\) be a “response variable” (e.g., prob of default)\n\\(X_1, \\dots , X_p\\) be \\(p\\) “predictor variables” (e.g., age, marital status, income)\n\n\nStat Learning: the study of the relationships between predictors (\\(X_1, \\dots , X_p\\)) and a response (\\(Y\\))\n\n(Sometimes we study the relationship among only predictors)"
+  },
+  {
+    "objectID": "slides/01_Intro.html#models",
+    "href": "slides/01_Intro.html#models",
+    "title": "Stat 243",
+    "section": "Models",
+    "text": "Models\nWe usually assume there is a relationship between predictors and response:\n\\[\nY = \\underbrace{f(X_1, \\dots, X_p)}_{\\text{function of predictors}} + \\underbrace{\\epsilon}_{\\text{\"error\"}}\n\\]\nwhere \\(\\epsilon\\) (“epsilon”) is a random error (more on this later!)\nExample: Linear regression!\n\\[\\text{Default Prob} = \\beta_0 + \\beta_1\\text{(Age)}+\\beta_2\\text{(Married)} + \\beta_3\\text{(Income)} + \\epsilon\\]\n\nThe goal of stat learning is to estimate \\(f\\), given data on \\(X\\) and \\(Y\\).\n\n\\(f\\) captures the “relationship” between \\(X\\) and \\(Y\\)"
+  },
+  {
+    "objectID": "slides/01_Intro.html#types-of-statistical-learning",
+    "href": "slides/01_Intro.html#types-of-statistical-learning",
+    "title": "Stat 243",
+    "section": "Types of Statistical Learning",
+    "text": "Types of Statistical Learning\nIt’s helpful to distinguish different types of statistical learning.\n\nOn the next 4 slides, I’ll contrast the following 4 pairs of terms:\n\nPrediction vs. Inference Tasks\nParametric vs. Non-Parametric Methods\nSupervised vs. Unsupervised Learning\nRegression vs. Classification Problems"
+  },
+  {
+    "objectID": "slides/01_Intro.html#prediction-vs.-inference",
+    "href": "slides/01_Intro.html#prediction-vs.-inference",
+    "title": "Stat 243",
+    "section": "Prediction vs. Inference",
+    "text": "Prediction vs. Inference\n\nPrediction\n\nGoal: Use a model to make predictions for new data\nExample: Predict probability of default for a new customer\n\n\n\n\nInference\n\nGoal: Understand relationships among predictors/response\nExample: What’s the general relationship between age and loan default?\nExample: Is marital status an important predictor of loan default?"
+  },
+  {
+    "objectID": "slides/01_Intro.html#parametric-and-non-parametric-methods",
+    "href": "slides/01_Intro.html#parametric-and-non-parametric-methods",
+    "title": "Stat 243",
+    "section": "Parametric and Non-Parametric Methods",
+    "text": "Parametric and Non-Parametric Methods\n\nParametric Methods\n\nMake assumptions about form of \\(f\\) using parameters\nExample: Linear regression \\[f(X) = \\beta_0 + \\beta_1X_1+\\dots+\\beta_pX_p\\] where \\(\\beta_0,\\beta_1,\\dots,\\beta_p\\) are parameters\n\n\n\n\nNon-Parametric Methods\n\nForgo assumptions on the shape of \\(f\\)\nExamples: Neural networks, “nearest neighbor” algorithms\nProblems: Require much more data, uninterpretable, not generalizable (more on this later!)"
+  },
+  {
+    "objectID": "slides/01_Intro.html#supervised-vs.-unsupervised-learning",
+    "href": "slides/01_Intro.html#supervised-vs.-unsupervised-learning",
+    "title": "Stat 243",
+    "section": "Supervised vs. Unsupervised Learning",
+    "text": "Supervised vs. Unsupervised Learning\n\nSupervised Learning\n\nModels with response variable (and predictors!)\nExample: Predicting default risk using age\n\n\n\n\nUnsupervised Learning\n\nModels with no response variables\nCluster or detect pattern among observations\nExample: Create “social groups” among bank customers using age and income (such as “wealthy Millenials”, “low-income retirees”, etc.)"
+  },
+  {
+    "objectID": "slides/01_Intro.html#regression-vs.-classification-problems",
+    "href": "slides/01_Intro.html#regression-vs.-classification-problems",
+    "title": "Stat 243",
+    "section": "Regression vs. Classification Problems",
+    "text": "Regression vs. Classification Problems\n\nRegression Problems\n\nModels with quantitative response variables\nExample: Model probability of wildfire by temperature\n\n\n\n\nClassification Problems\n\nModels with qualitative response variables or outputs\nExample: Predict if there will/won’t be a wildfire by temperature"
+  },
+  {
+    "objectID": "slides/01_Intro.html#recap-1",
+    "href": "slides/01_Intro.html#recap-1",
+    "title": "Stat 243",
+    "section": "Recap",
+    "text": "Recap\nToday, we…\n\nReviewed the syllabus\nDefined “Statistical Learning”\nContrasted prediction vs. inference, (non-)parametric methods, (un)supervised learning, and regression vs. classification problems\n\nNext Time: Lab 1! Before then, please:\n\nCarefully read syllabus\nComplete assigned readings\nStart Homework 1 (short; initial submission due Friday at 6pm)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#goals-for-today-and-next-time",
+    "href": "slides/stat243_wk01mon.html#goals-for-today-and-next-time",
+    "title": "Stat 243",
+    "section": "Goals for Today (and next time)",
+    "text": "Goals for Today (and next time)\n\n\n\nToday:\n\nGetting started in Stat 243\n\nCourse structure and technologies\nWhere to find resources\nCourse expectations\n\n\n\n\n\nWednesday:\n\nAssessing accuracy"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#my-info",
+    "href": "slides/stat243_wk01mon.html#my-info",
+    "title": "Stat 243",
+    "section": "My info",
+    "text": "My info\n\n\n\nName: Grayson White (he/him), you can call me ‘Grayson’\nEmail: gwhite@reed.edu\nOffice: Library 386\nOffice hours: TBD"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#research-interests",
+    "href": "slides/stat243_wk01mon.html#research-interests",
+    "title": "Stat 243",
+    "section": "Research Interests",
+    "text": "Research Interests\n\nStatistical modeling with environmental applications"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#research-interests-1",
+    "href": "slides/stat243_wk01mon.html#research-interests-1",
+    "title": "Stat 243",
+    "section": "Research Interests",
+    "text": "Research Interests\nAdvising Undergraduate Forestry Data Science Research"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#what-is-243",
+    "href": "slides/stat243_wk01mon.html#what-is-243",
+    "title": "Stat 243",
+    "section": "What is 243?",
+    "text": "What is 243?\nThis course will:\n\nIn a nutshell: Expand your “toolbox” for analyzing large, modern, and complex data\n\n\n\nCover important modeling and predictive techniques (e.g., regression, classification, clustering, tree-based methods, neural networks)\nPractice each method in R using real/simulated data\n\nSee syllabus for more detailed learning outcomes"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#class-time",
+    "href": "slides/stat243_wk01mon.html#class-time",
+    "title": "Stat 243",
+    "section": "Class Time",
+    "text": "Class Time\nLecture: Mondays and Wednesdays\n\nComplete a reading before each “lecture” from one of our textbooks, An Introduction to Statistical Learning in R (ISLR), or Beyond Multiple Linear Regression (BMLR).\nOccasionally, I might assign a blog post or reading from a different (free, online) textbook.\nOur textbooks are free online! See the syllabus!\n\n\nLab: Fridays\n\nPractice course content, work on assignments, and take short quizzes on past material.\nMix of pen-and-paper work, coding activities.\nTypical Friday workflow: start with a brief quiz on last week’s material, then transition to practice of current content."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#technology",
+    "href": "slides/stat243_wk01mon.html#technology",
+    "title": "Stat 243",
+    "section": "Technology",
+    "text": "Technology\nYou will need access to a laptop for this course.\n\nBring a laptop to class every day\nPlease let me know ASAP if you do not have access to a personal laptop!\n\n\nWe will regularly use the R programming language\n\nAll assignments will be completed in RStudio\nRStudio can be downloaded to your computer (see syllabus) or accessed on the Reed RStudio Server: https://rstudio.reed.edu/"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#communication-and-resources",
+    "href": "slides/stat243_wk01mon.html#communication-and-resources",
+    "title": "Stat 243",
+    "section": "Communication and Resources",
+    "text": "Communication and Resources\n\nMoodle ← Check this often!!\n\nannouncements, assignments, lecture materials\n\n\n\n\nGradescope\n\nsubmitting assignments\n\n\nPlease email me if you notice any errors/omissions on Moodle/Gradescope!!"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#avenues-for-help",
+    "href": "slides/stat243_wk01mon.html#avenues-for-help",
+    "title": "Stat 243",
+    "section": "Avenues for Help",
+    "text": "Avenues for Help\nThis course moves at a fairly brisk pace! Expect yourself to be make mistakes, and embrace them! You belong here, and struggle is part of the learning.\n\nWhen you find yourself challenged, I encourage you to seek out help via the following avenues:\n\nAttend office hours. Coming to office hours often is a really great habit to build! I always enjoy my office hours and think that students get a lot out of them. Take advantage of being at a small liberal arts college!!\nWork with your peers. Statistics is collaborative and iterative. Form a study group and work with others in labs.\nInvest in the readings and assignments. Allow yourself time to soak in this rich and complex material."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#assessments-and-grading-criteria",
+    "href": "slides/stat243_wk01mon.html#assessments-and-grading-criteria",
+    "title": "Stat 243",
+    "section": "Assessments and Grading Criteria",
+    "text": "Assessments and Grading Criteria\nYour grade will be determined via the following course components:\n\nAttendance and Participation (about 10%)\nHomework (about 50%)\nMidterm Exams (about 20%)\nFinal Project (about 20%)\n\nLet’s talk through each of these…"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#attendance-and-participation",
+    "href": "slides/stat243_wk01mon.html#attendance-and-participation",
+    "title": "Stat 243",
+    "section": "Attendance and Participation",
+    "text": "Attendance and Participation\nThe topics covered in this course are challenging! Attendance and participation will contribute greatly to your learning.\n\nI expect all students to attend class regularly.\nI expect all students to participate in a way that’s most comfortable to them (e.g. engage in class discussions/activities, ask questions, attend office hours, etc.).\n\n\nI understand that attendance is not always possible due to a variety of important reasons.\n\nI won’t penalize your grade for 3 absences. Each absence beyond 3 will incur a very minor penalty.\nI won’t penalize absences in exceptional circumstances (e.g., medical leave, urgent personal matters, etc.)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#homework",
+    "href": "slides/stat243_wk01mon.html#homework",
+    "title": "Stat 243",
+    "section": "Homework",
+    "text": "Homework\nFormative opportunities to practice course material.\n\nUsually due Fridays on Gradescope at 6pm\nI expect 10 homework assignments.\n\nI have high expectations for your homework submissions:\n\nAnswer questions completely and respond in full sentences\nShow your work\nInclude, annotate, and add comments to your code\nBe clear and concise"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#unique-homework-policies",
+    "href": "slides/stat243_wk01mon.html#unique-homework-policies",
+    "title": "Stat 243",
+    "section": "Unique Homework Policies",
+    "text": "Unique Homework Policies\n\nInitial Deadlines and Extensions\n\nEvery assignment has an initial deadline.\nTwice during the term, you may obtain a 48-hour extension by emailing me; no excuse necessary. Requests must be made prior to the due date.\n\n\n\n\nResubmissions\n\nEach assignment may be resubmitted twice for full credit.\nResubmissions for HW 1-6 due at time of Midterm 1; for HW 7–10 due at time of Midterm 2\n\n\n\n\n\nAlternative Grading\n\nTo promote sustained and thorough engagement with course content, each problem is graded on a satisfactory/unsatisfactory basis; no partial credit!"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#midterm-exams",
+    "href": "slides/stat243_wk01mon.html#midterm-exams",
+    "title": "Stat 243",
+    "section": "Midterm Exams",
+    "text": "Midterm Exams\nTo encourage holistic learning and synthesis of the course materials, the course will include two midterms:\n\nWednesday 10/15 (in-class); Friday 10/17 (take-home due by 6pm)\nFriday, 12/5 (in-class); Monday, 12/8 (take-home due by 6pm)\n\nPlease ensure you will be on campus on these dates!\n\nNotes:\n\nTimed tests are stressful! I will try to write fair, straightforward exams. Plus, tests are just 20% of your grade!\nWhy in-person? To promote substantive review of material and integrity."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#final-project",
+    "href": "slides/stat243_wk01mon.html#final-project",
+    "title": "Stat 243",
+    "section": "Final Project",
+    "text": "Final Project\nYou’ll work in groups of 2-3 students to analyze a significant research question using a real dataset.\n4 “In-Progress” Assignments:\n\nWeek 5 — Proposal\nWeek 10 — Exploratory Analysis\nWeek 12 — Methods\nWeek 15 — Report Draft and Peer Review\n\n\nFinal Deliverables:\n\nFinals Week — In-Class Presentations\nFinals Week — Technical Report Due\n\nMore details to come!"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#course-environment",
+    "href": "slides/stat243_wk01mon.html#course-environment",
+    "title": "Stat 243",
+    "section": "Course Environment",
+    "text": "Course Environment\nCode of Conduct\nI am absolutely committed to fostering a friendly and inclusive classroom environment in which all students have an equal opportunity to learn and succeed.\n\nI expect all members of this course to make participation a harassment-free experience for everyone.\nI expect everyone to act and interact in ways that contribute to an open, welcoming, healthy, and anti-racist community of learners.\n\nPlease see the syllabus for additional information, and reach out to me if you would like to discuss any of this further.\nNames and Pronouns\nEveryone deserves to be addressed correctly. You are always welcome to update your preferred name and pronouns."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#course-environment-cont.",
+    "href": "slides/stat243_wk01mon.html#course-environment-cont.",
+    "title": "Stat 243",
+    "section": "Course Environment (cont.)",
+    "text": "Course Environment (cont.)\nDisability and Accommodations\n\nIf you have a documented disability in need of accommodations, please reach out to Disability & Accessibility Resources (DAR; dar@reed.edu).\nIf you have accommodations, please feel free to reach out to discuss them!\nPlease let me know ASAP if the course-design creates disability-related barriers to your participation (regardless of any formal accommodations).\n\nAcademic Integrity\n\nPlease work with your peers!\nHowever, any work you turn in must be your own!\nYou may not use generative AI (e.g., ChatGPT, Copilot) unless explicitely stated.\nYou may search the internet for help, as long as you avoid direct copying of solutions"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#introductions-1",
+    "href": "slides/stat243_wk01mon.html#introductions-1",
+    "title": "Stat 243",
+    "section": "Introductions",
+    "text": "Introductions\nIn pairs, please take a few minutes to share:\n\nName and preferred pronouns (if desired)\nClass Year and major\nWhy you’re taking this course\nAn unusual or unexpected fact about yourself\n\nI will ask you to introduce your partner to the class"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#example-loan-default",
+    "href": "slides/stat243_wk01mon.html#example-loan-default",
+    "title": "Stat 243",
+    "section": "Example: Loan Default",
+    "text": "Example: Loan Default\nA bank wants to model the probability customers default on a loan\nCommon Considerations:\n\nCustomer age\nMarital status\nIncome\n\n\nQ: What other factors might a bank consider?\nQ: How might each factor relate to probability of default?\nQ: What ethical problems might be present?"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#the-setting",
+    "href": "slides/stat243_wk01mon.html#the-setting",
+    "title": "Stat 243",
+    "section": "The Setting",
+    "text": "The Setting\nLet:\n\n\\(Y\\) be a “response variable” (e.g., prob of default)\n\\(X_1, \\dots , X_p\\) be \\(p\\) “predictor variables” (e.g., age, marital status, income)\n\n\nStat Learning: the study of the relationships between predictors (\\(X_1, \\dots , X_p\\)) and a response (\\(Y\\))\n\n(Sometimes we study the relationship among only predictors)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#models",
+    "href": "slides/stat243_wk01mon.html#models",
+    "title": "Stat 243",
+    "section": "Models",
+    "text": "Models\nWe usually assume there is a relationship between predictors and response:\n\\[\nY = \\underbrace{f(X_1, \\dots, X_p)}_{\\text{function of predictors}} + \\underbrace{\\epsilon}_{\\text{\"error\"}}\n\\]\nwhere \\(\\epsilon\\) (“epsilon”) is a random error (more on this later!)\nExample: Linear regression!\n\\[\\text{Default Prob} = \\beta_0 + \\beta_1\\text{(Age)}+\\beta_2\\text{(Married)} + \\beta_3\\text{(Income)} + \\epsilon\\]\n\nThe goal of stat learning is to estimate \\(f\\), given data on \\(X\\) and \\(Y\\).\n\n\\(f\\) captures the “relationship” between \\(X\\) and \\(Y\\)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#types-of-statistical-learning",
+    "href": "slides/stat243_wk01mon.html#types-of-statistical-learning",
+    "title": "Stat 243",
+    "section": "Types of Statistical Learning",
+    "text": "Types of Statistical Learning\nIt’s helpful to distinguish different types of statistical learning.\n\nOn the next 4 slides, I’ll contrast the following 4 pairs of terms:\n\nPrediction vs. Inference Tasks\nParametric vs. Non-Parametric Methods\nSupervised vs. Unsupervised Learning\nRegression vs. Classification Problems"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#prediction-vs.-inference",
+    "href": "slides/stat243_wk01mon.html#prediction-vs.-inference",
+    "title": "Stat 243",
+    "section": "Prediction vs. Inference",
+    "text": "Prediction vs. Inference\n\nPrediction\n\nGoal: Use a model to make predictions for new data\nExample: Predict probability of default for a new customer\n\n\n\n\nInference\n\nGoal: Understand relationships among predictors/response\nExample: What’s the general relationship between age and loan default?\nExample: Is marital status an important predictor of loan default?"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#parametric-and-non-parametric-methods",
+    "href": "slides/stat243_wk01mon.html#parametric-and-non-parametric-methods",
+    "title": "Stat 243",
+    "section": "Parametric and Non-Parametric Methods",
+    "text": "Parametric and Non-Parametric Methods\n\nParametric Methods\n\nMake assumptions about form of \\(f\\) using parameters\nExample: Linear regression \\[f(X) = \\beta_0 + \\beta_1X_1+\\dots+\\beta_pX_p\\] where \\(\\beta_0,\\beta_1,\\dots,\\beta_p\\) are parameters\n\n\n\n\nNon-Parametric Methods\n\nForgo assumptions on the shape of \\(f\\)\nExamples: Neural networks, “nearest neighbor” algorithms\nProblems: Require much more data, uninterpretable, not generalizable (more on this later!)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#supervised-vs.-unsupervised-learning",
+    "href": "slides/stat243_wk01mon.html#supervised-vs.-unsupervised-learning",
+    "title": "Stat 243",
+    "section": "Supervised vs. Unsupervised Learning",
+    "text": "Supervised vs. Unsupervised Learning\n\nSupervised Learning\n\nModels with response variable (and predictors!)\nExample: Predicting default risk using age\n\n\n\n\nUnsupervised Learning\n\nModels with no response variables\nCluster or detect pattern among observations\nExample: Create “social groups” among bank customers using age and income (such as “wealthy Millenials”, “low-income retirees”, etc.)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#regression-vs.-classification-problems",
+    "href": "slides/stat243_wk01mon.html#regression-vs.-classification-problems",
+    "title": "Stat 243",
+    "section": "Regression vs. Classification Problems",
+    "text": "Regression vs. Classification Problems\n\nRegression Problems\n\nModels with quantitative response variables\nExample: Model probability of wildfire by temperature\n\n\n\n\nClassification Problems\n\nModels with qualitative response variables or outputs\nExample: Predict if there will/won’t be a wildfire by temperature"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#recap-1",
+    "href": "slides/stat243_wk01mon.html#recap-1",
+    "title": "Stat 243",
+    "section": "Recap",
+    "text": "Recap\nToday, we…\n\nReviewed the syllabus\nDefined “Statistical Learning”\nContrasted prediction vs. inference, (non-)parametric methods, (un)supervised learning, and regression vs. classification problems\n\nNext Time: Lab 1! Before then, please:\n\nCarefully read syllabus\nComplete assigned readings\nStart Homework 1 (short; initial submission due Friday at 6pm)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#getting-started-in-stat-243",
+    "href": "slides/stat243_wk01mon.html#getting-started-in-stat-243",
+    "title": "Stat 243",
+    "section": "Getting Started in Stat 243",
+    "text": "Getting Started in Stat 243\nCourse website\n\n\n\n\n\nThe course website, stat-243-f26.github.io, will be the central location for all our course materials.\nWe’ll also use some other technologies and resources for collaboration, dissemination, and communication."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#getting-started-in-stat-243-1",
+    "href": "slides/stat243_wk01mon.html#getting-started-in-stat-243-1",
+    "title": "Stat 243",
+    "section": "Getting Started in Stat 243",
+    "text": "Getting Started in Stat 243\nOther Resources\n\n\nReed’s RStudio Server or a local installation of RStudio, for completing coursework,\n\n\n\nA course-wide Slack workspace, for course communication,\n\n\n\nGradescope, for turning in assignments and exams, and\n\n\n\nOur course GitHub organization, for collaboration, portfolio-building, and dissemination of work."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#course-assistant-info",
+    "href": "slides/stat243_wk01mon.html#course-assistant-info",
+    "title": "Stat 243",
+    "section": "Course assistant info",
+    "text": "Course assistant info\n\n\n\nName:\nEmail:\nOffice: ETC 105B\nOffice hours:"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#assignments-and-projects",
+    "href": "slides/stat243_wk01mon.html#assignments-and-projects",
+    "title": "Stat 243",
+    "section": "Assignments and projects",
+    "text": "Assignments and projects\n\n\n\n\nLabs (weekly-ish)\n\nAssigned Friday at class time.\nDue the following Friday on Gradescope before class.\nGraded for completion and effort.\nPlanning on 10 labs. Subject to change by \\(\\pm\\) 1 lab.\nEach week, we will have a quiz, graded for correctness on the past week’s lab.\n\n\n\n \n\n\nFinal Project\n\nThe proposal for the final project will be due before fall break.\nMore info to come!\n\n\n\n\n\n\n\n\nIn-class activities (semi-regular)\n\nIndividual activities.\nGroup activities.\n\n\n\n \n\n\nAttendance and active participation\n\nIs key to your learning!\nPlease participate in class and in Slack.\nAnd will be considered in your final grade.\nLet me know if you cannot make it to class for health reasons or otherwise! If you are experiencing extenuating circumstances that inhibit your ability to attend I will work with you to help you succeed in the class. Communication is key."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#late-work",
+    "href": "slides/stat243_wk01mon.html#late-work",
+    "title": "Stat 243",
+    "section": "Late Work",
+    "text": "Late Work\n\n\nLabs: up to 4 extensions days can be used throughout the semester.\n\ne.g., 1 additional day for 4 labs, 4 additional days for 1 lab, …\nrounding days up\nBut! You may not delay the quiz if you are using extension days.\n\n\n\n\n\nProjects: no late projects are accepted.\n\n\n\n\nIn-class assignments: cannot be made up."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#course-climate",
+    "href": "slides/stat243_wk01mon.html#course-climate",
+    "title": "Stat 243",
+    "section": "Course Climate",
+    "text": "Course Climate\n\nWe expect everyone in this class to strive to foster a learning environment that is equitable, inclusive, and welcoming. If you experience any barriers to learning, please come to Professor Grayson White or a college administrator with your concerns.\n\nCode of Conduct:\nWe expect all members of Stat 243 to make participation a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation.\nWe expect everyone to act and interact in ways that contribute to an open, welcoming, inclusive, and healthy community of learners. You can contribute to a positive learning environment by demonstrating empathy and kindness, being respectful of differing viewpoints and experiences, and giving and gracefully accepting constructive feedback.1\n\n\n\n\n−+\n01:00\n\n\n\nThis Code of Conduct is adapted from the Contributor Covenant, version 2.0."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#engagement",
+    "href": "slides/stat243_wk01mon.html#engagement",
+    "title": "Stat 243",
+    "section": "Engagement",
+    "text": "Engagement\n\n\n \n\n\n\n\n\n\nBeing actively present is key.\n\n\n\nDuring lecture and lab, remove distractions.\n\nWhen we are on our computers, close email, social media, news, etc.\nHide your phone.\n\nI have high expectations but know that all of you (regardless of your stats, math, or computing background) have the ability to meet them."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#artificial-intelligence-ai-policy",
+    "href": "slides/stat243_wk01mon.html#artificial-intelligence-ai-policy",
+    "title": "Stat 243",
+    "section": "Artificial Intelligence (AI) Policy",
+    "text": "Artificial Intelligence (AI) Policy\n\nArtificial intelligence (AI) tools, such as ChatGPT, Claude, Co-Pilot, Gemini, and others are being used to generate code, analyze data, write, and much more (and they are getting quite good at many of these tasks!). However, learning to think critically about a problem at hand, and engaging with your peers, tutors, and instructors when not understanding a concept or question are integral components of a liberal arts education and goals of this course. Therefore,\nFor all course content: The use of generative AI tools, such as ChatGPT and others, are strictly prohibited in any stage of the work process for this course.\n\n\n\n\n−+\n01:00\n\n\n\n\nWell, what’s the policy??"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#artificial-intelligence-ai-policy-1",
+    "href": "slides/stat243_wk01mon.html#artificial-intelligence-ai-policy-1",
+    "title": "Stat 243",
+    "section": "Artificial Intelligence (AI) Policy",
+    "text": "Artificial Intelligence (AI) Policy\nFor all course content: The use of generative AI tools, such as ChatGPT and others, are strictly prohibited in any stage of the work process for this course."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#why-this-policy",
+    "href": "slides/stat243_wk01mon.html#why-this-policy",
+    "title": "Stat 243",
+    "section": "Why this policy?",
+    "text": "Why this policy?\n\n\nRelying too heavily on AI tools to think for you, and to write your code prohibits understanding of the core concepts.\n\n\n\nMy goal: Make you an excellent statistician / data scientist / machine learning guru / … with a great deal of personal understanding of the material so that you can…\n\nindependently engage with statistical learning methods,\nethically engage with sensitive data, and\ncontinue to embrace and engage in the very human aspects of statistical learning."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#next-time",
+    "href": "slides/stat243_wk01mon.html#next-time",
+    "title": "Stat 243",
+    "section": "Next Time",
+    "text": "Next Time\n\nAn activity\nA deeper introduction to stat learning"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#goals-for-today-and-next-time",
+    "href": "slides/stat243_wk01wed.html#goals-for-today-and-next-time",
+    "title": "Stat 243",
+    "section": "Goals for Today (and next time)",
+    "text": "Goals for Today (and next time)\n\n\n\nToday:\n\nGuess the age of Reed math / stats / cs faculty\nStart to think about quantifying error\n\n\n\n\nFriday (lab):\n\nDeeper considerations of quantifying error"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#the-rules",
+    "href": "slides/stat243_wk01wed.html#the-rules",
+    "title": "Stat 243",
+    "section": "The Rules",
+    "text": "The Rules\nI will display photos from 8 current and former math/stats faculty:\n\nGoal: Estimate the age of each faculty member (at the time the picture was taken)\nNote: None of these pictures were taken this year!\n\n\nWork in groups of 2-3 to develop a consistent method for estimating age.\nRecord your estimates for each faculty member on paper and submit it to me."
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-1",
+    "href": "slides/stat243_wk01wed.html#photo-1",
+    "title": "Stat 243",
+    "section": "Photo 1",
+    "text": "Photo 1"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-2",
+    "href": "slides/stat243_wk01wed.html#photo-2",
+    "title": "Stat 243",
+    "section": "Photo 2",
+    "text": "Photo 2"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-3",
+    "href": "slides/stat243_wk01wed.html#photo-3",
+    "title": "Stat 243",
+    "section": "Photo 3",
+    "text": "Photo 3"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-4",
+    "href": "slides/stat243_wk01wed.html#photo-4",
+    "title": "Stat 243",
+    "section": "Photo 4",
+    "text": "Photo 4"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-5",
+    "href": "slides/stat243_wk01wed.html#photo-5",
+    "title": "Stat 243",
+    "section": "Photo 5",
+    "text": "Photo 5"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-6",
+    "href": "slides/stat243_wk01wed.html#photo-6",
+    "title": "Stat 243",
+    "section": "Photo 6",
+    "text": "Photo 6"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-7",
+    "href": "slides/stat243_wk01wed.html#photo-7",
+    "title": "Stat 243",
+    "section": "Photo 7",
+    "text": "Photo 7"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-8",
+    "href": "slides/stat243_wk01wed.html#photo-8",
+    "title": "Stat 243",
+    "section": "Photo 8",
+    "text": "Photo 8"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#all-photos",
+    "href": "slides/stat243_wk01wed.html#all-photos",
+    "title": "Stat 243",
+    "section": "All Photos",
+    "text": "All Photos\nAs we wait for groups to guess ages, complete the reflection worksheet."
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#reflection-questions",
+    "href": "slides/stat243_wk01wed.html#reflection-questions",
+    "title": "Stat 243",
+    "section": "Reflection Questions",
+    "text": "Reflection Questions\n\nWhat explicit features are you analyzing?\nHow do you convert these features to numerical estimates?\nHow do you resolve differences in opinion among group members?\nIs the activity supervised or unsupervised?\nDoes it represent a classification or regression problem?\nAre you interested primarily in prediction or inference?\nAre you using parametric or non-parametric methods?\nWhat are some sources of “error” in your estimates?\nHow can we quantify the error in your estimates?\nHow should we assess the overall accuracy of a group’s predictions?\nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#results",
+    "href": "slides/stat243_wk01wed.html#results",
+    "title": "Stat 243",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#answers",
+    "href": "slides/stat243_wk01wed.html#answers",
+    "title": "Stat 243",
+    "section": "Answers",
+    "text": "Answers\nModeling Questions Answers will vary\n\nWhat explicit features are you analyzing?\nHow do you convert these features to numerical estimates?\nHow do you resolve differences in opinion among group members?\n\n\nDefinitional Questions\n\nIs the activity supervised or unsupervised? Supervised\nDoes it represent a classification or regression problem? Regression\nAre you interested primarily in prediction or inference? Prediction\nAre you using parametric or non-parametric methods? Either would have worked!"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#answers-cont.",
+    "href": "slides/stat243_wk01wed.html#answers-cont.",
+    "title": "Stat 243",
+    "section": "Answers (cont.)",
+    "text": "Answers (cont.)\nConceptual Questions Answers will vary\n\nWhat are some sources of “error” in your estimates?\nHow can we quantify the error in your estimates?\nHow should we assess the overall accuracy of a group’s predictions?\nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#next-time",
+    "href": "slides/stat243_wk01wed.html#next-time",
+    "title": "Stat 243",
+    "section": "Next Time",
+    "text": "Next Time\n\nAn activity\nA deeper introduction to stat learning"
+  },
+  {
+    "objectID": "in_class/wk01wed_Worksheet.html",
+    "href": "in_class/wk01wed_Worksheet.html",
+    "title": "Lab: How Old Are Reed Faculty?",
+    "section": "",
+    "text": "Answer the following questions with your group members."
+  },
+  {
+    "objectID": "in_class/wk01wed_Worksheet.html#modeling-questions",
+    "href": "in_class/wk01wed_Worksheet.html#modeling-questions",
+    "title": "Lab: How Old Are Reed Faculty?",
+    "section": "Modeling Questions",
+    "text": "Modeling Questions\n\nWhat explicit features are you analyzing?\n\n\nHow do you convert these features to numerical estimates? \nHow do you resolve differences in opinion among group members?"
+  },
+  {
+    "objectID": "in_class/wk01wed_Worksheet.html#definitional-questions",
+    "href": "in_class/wk01wed_Worksheet.html#definitional-questions",
+    "title": "Lab: How Old Are Reed Faculty?",
+    "section": "Definitional Questions",
+    "text": "Definitional Questions\n\nIs the activity supervised or unsupervised? \nDoes it represent a classification or regression problem? \nAre you interested primarily in prediction or inference? \nAre you using parametric or non-parametric methods?"
+  },
+  {
+    "objectID": "in_class/wk01wed_Worksheet.html#conceptual-questions",
+    "href": "in_class/wk01wed_Worksheet.html#conceptual-questions",
+    "title": "Lab: How Old Are Reed Faculty?",
+    "section": "Conceptual Questions",
+    "text": "Conceptual Questions\n\nWhat are some sources of “error” in your estimates? \nHow can we quantify the error in your estimates? \nHow should we assess the overall accuracy of a group’s predictions? \nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
   }
 ]

@@ -1,0 +1,350 @@
+---
+pagetitle: "Introduction to Statistical Learning"
+editor: source
+format:
+  revealjs:
+    html-math-method: mathjax
+    chalkboard: true
+    incremental: true
+    theme: [default, custom.scss]
+    height: 900
+    width: 1600
+    slide-number: c
+    auto-stretch: false
+    callout-appearance: simple
+    pdf-max-pages-per-slide: 2
+    menu:
+      side: right
+      numbers: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.retina = 3, fig.align = 'center')
+library(knitr)
+library(tidyverse)
+```
+
+::::: columns
+::: {.column .center width="60%"}
+![](img/tidymodels.png){width="90%"}
+:::
+
+::: {.column .center width="40%"}
+<br>
+
+[How old are we?]{.custom-title}
+
+<br> <br> 
+
+[Grayson White]{.custom-subtitle}
+
+[Stat 243 <br> Week 1 \| Fall 2026]{.custom-subtitle}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+
+
+## Goals for Today (and next time)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Today:**
+
+-   Guess the age of Reed math / stats / cs faculty
+-   Start to think about quantifying error
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Friday (lab):**
+
+-   Deeper considerations of quantifying error
+
+
+:::
+
+:::
+
+::::
+
+
+
+# How Old Are We?
+
+## The Rules
+
+I will display photos from 8 current and former math/stats faculty:
+
+::: {.nonincremental}
+
+  - **Goal:** Estimate the age of each faculty member (at the time the picture was taken)
+  - **Note:** None of these pictures were taken this year!
+
+:::
+
+::: {.fragment .nonincremental}
+
+Work **in groups of 2-3** to develop a consistent method for estimating age.
+
+Record your estimates for each faculty member on paper and submit it to me.
+
+:::
+
+## Photo 1
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "50%"
+include_graphics("img/Faculty_Img/megan-23.jpeg")
+```
+
+## Photo 2
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "40%"
+include_graphics("img/Faculty_Img/Wainstein-color.png")
+```
+
+## Photo 3
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "40%"
+include_graphics("img/Faculty_Img/chris.jpg")
+```
+
+## Photo 4
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "40%"
+include_graphics("img/Faculty_Img/marcus-17.jpg")
+```
+
+## Photo 5
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "40%"
+include_graphics("img/Faculty_Img/alex.jpg")
+```
+
+## Photo 6
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "40%"
+include_graphics("img/Faculty_Img/michael.jpg")
+```
+
+## Photo 7
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "50%"
+include_graphics("img/Faculty_Img/img10.jpg")
+```
+
+## Photo 8
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "50%"
+include_graphics("img/Faculty_Img/img3.jpg")
+```
+
+## All Photos
+
+As we wait for groups to guess ages, complete the reflection worksheet.
+
+:::: {.columns}
+
+::: {.column width='25%'}
+
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "100%"
+include_graphics("img/Faculty_Img/megan-23.jpeg")
+```
+
+
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "100%"
+include_graphics("img/Faculty_Img/Wainstein-color.png")
+```
+
+:::
+
+::: {.column width='25%'}
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "70%"
+include_graphics("img/Faculty_Img/chris.jpg")
+```
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "70%"
+include_graphics("img/Faculty_Img/marcus-17.jpg")
+```
+
+:::
+
+::: {.column width='25%'}
+
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "72%"
+include_graphics("img/Faculty_Img/alex.jpg")
+```
+
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "72%"
+include_graphics("img/Faculty_Img/michael.jpg")
+```
+
+:::
+
+::: {.column width='25%'}
+
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "50%"
+include_graphics("img/Faculty_Img/img10.jpg")
+```
+
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "50%"
+include_graphics("img/Faculty_Img/img3.jpg")
+```
+
+
+:::
+
+
+
+::::
+
+# Questions
+
+## Reflection Questions {.small}
+
+::: {.nonincremental}
+
+- What explicit features are you analyzing?
+- How do you convert these features to numerical estimates?
+- How do you resolve differences in opinion among group members?
+
+- Is the activity **supervised** or **unsupervised**?
+- Does it represent a **classification** or **regression** problem?
+- Are you interested primarily in **prediction** or **inference**?
+- Are you using **parametric** or **non-parametric** methods?
+
+- What are some sources of "error" in your estimates?
+- How can we quantify the error in your estimates?
+- How should we assess the overall accuracy of a group's predictions?
+- In what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?
+
+:::
+
+## Results
+
+## Answers
+
+**Modeling Questions** **Answers will vary**
+
+::: {.nonincremental}
+
+- What explicit features are you analyzing?
+- How do you convert these features to numerical estimates?
+- How do you resolve differences in opinion among group members?
+
+:::
+
+::: {.fragment .nonincremental}
+
+**Definitional Questions**
+
+- Is the activity **supervised** or **unsupervised**? [Supervised]{.fragment}
+
+- Does it represent a **classification** or **regression** problem? [Regression]{.fragment}
+
+- Are you interested primarily in **prediction** or **inference**? [Prediction]{.fragment}
+
+- Are you using **parametric** or **non-parametric** methods? [Either would have worked!]{.fragment}
+
+:::
+
+## Answers (cont.)
+
+**Conceptual Questions** **Answers will vary**
+
+::: {.nonincremental}
+
+- What are some sources of "error" in your estimates?
+
+- How can we quantify the error in your estimates?
+
+- How should we assess the overall accuracy of a group's predictions?
+
+- In what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?
+
+:::
+
+
+
+
+## Next Time
+
+- Lab: Assessing accuracy
+
+
+
+
+

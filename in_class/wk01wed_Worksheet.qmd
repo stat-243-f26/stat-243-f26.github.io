@@ -1,0 +1,78 @@
+---
+title: "Activity: How Old Are Reed Faculty?"
+format: pdf
+editor: source
+---
+
+```{=html}
+<style type="text/css">
+  body{
+  font-size: 9pt;
+}
+</style>
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE,message = FALSE,fig.align = 'center')
+set.seed(1)
+library(knitr)
+```
+
+
+Please answer the questions on the following pages with your group members.
+
+\vspace{2em}
+
+
+```{=latex}
+\noindent
+\includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/megan-23.jpeg}\hfill
+\includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/chris.jpg}\hfill
+\includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/alex.jpg}\hfill
+\includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/img10.jpg}
+
+\vspace{1em}
+
+\noindent
+\includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/Wainstein-color.png}\hfill
+\includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/marcus-17.jpg}\hfill
+\includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/michael.jpg}\hfill
+\includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/img3.jpg}
+```
+
+
+\newpage
+
+## Modeling Questions
+
+- What explicit features are you analyzing?
+
+\vspace{8em}
+
+- How do you convert these features to numerical estimates? \vspace{8em}
+
+- How do you resolve differences in opinion among group members?
+
+\vspace{8em}
+
+## Definitional Questions
+
+- Is the activity supervised or unsupervised? \vspace{2em}
+
+- Does it represent a classification or regression problem? \vspace{2em}
+
+- Are you interested primarily in prediction or inference? \vspace{2em}
+
+- Are you using parametric or non-parametric methods?
+
+\newpage
+
+## Conceptual Questions
+
+- What are some sources of "error" in your estimates? \vspace{8em}
+
+- How can we quantify the error in your estimates? \vspace{8em}
+
+- How should we assess the overall accuracy of a group's predictions? \vspace{8em}
+
+- In what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?
