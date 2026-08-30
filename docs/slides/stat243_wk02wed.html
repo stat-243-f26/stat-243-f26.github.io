@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
-  <title>Stat 243 – How old are we?</title>
+  <title>Stat 243 – Assessing Accuracy</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -33,6 +33,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-c529b4720787994cceb3b19d116aa975.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -141,10 +207,10 @@
 <p><img data-src="img/tidymodels.png" style="width:90.0%"></p>
 </div><div class="column center" style="width:40%;">
 <p><br></p>
-<p><span class="custom-title">How old are we?</span></p>
+<p><span class="custom-title">Assessing Accuracy</span></p>
 <p><br> <br></p>
 <p><span class="custom-subtitle">Grayson White</span></p>
-<p><span class="custom-subtitle">Stat 243 <br> Week 1 | Fall 2026</span></p>
+<p><span class="custom-subtitle">Stat 243 <br> Week 2 | Fall 2026</span></p>
 </div></div>
 </section>
 <section id="goals-for-today-and-next-time" class="slide level2">
@@ -154,26 +220,17 @@
 <div class="fragment">
 <p><strong>Today:</strong></p>
 <ul>
-<li>Guess the age of Reed math / stats / cs faculty</li>
-<li>Start to think about quantifying error</li>
+<li>Formalize how we think about assessing accuracy.</li>
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
-<p><strong>Friday (lab):</strong></p>
+<p><strong>Friday (<em>NOT</em> lab):</strong></p>
 <ul>
-<li>Technologies, Data, and Stat Learning Methods</li>
+<li>Linear regression.</li>
 </ul>
 </div>
 </div></div>
-</section>
-<section id="before-we-get-started-pre-lab-assignment" class="slide level2">
-<h2>Before we get started: Pre-lab assignment</h2>
-<p>Before Thursday 9/3 (tomorrow) at noon, please do the following:</p>
-<p><br> <br></p>
-<div class="blockquote fragment">
-<p>We’ll use GitHub for our class, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to <a href="https://github.com/">https://github.com/</a> and sign up for one. Once you’ve signed up for an account, please add it to the <a href="https://docs.google.com/spreadsheets/d/1yhQfUwGpKj1bQYg3rmDybKobVkh-tjnY-GcYn4LTf7c/edit?usp=sharing">Google Sheet</a> so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet.</p>
-</div>
 </section>
 <section>
 <section id="how-old-are-we" class="title-slide slide level1 center">
@@ -190,102 +247,6 @@
 <div class="fragment">
 <p>Work <strong>in groups of 2-3</strong> to develop a consistent method for estimating age.</p>
 <p>Record your estimates for each faculty member on paper and submit it to me.</p>
-</div>
-</section>
-<section id="photo-1" class="slide level2">
-<h2>Photo 1</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/Faculty_Img/megan-23.jpeg" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="photo-2" class="slide level2">
-<h2>Photo 2</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/Faculty_Img/Wainstein-color.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="photo-3" class="slide level2">
-<h2>Photo 3</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/Faculty_Img/chris.jpg" class="quarto-figure quarto-figure-center" style="width:40.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="photo-4" class="slide level2">
-<h2>Photo 4</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/Faculty_Img/marcus-17.jpg" class="quarto-figure quarto-figure-center" style="width:40.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="photo-5" class="slide level2">
-<h2>Photo 5</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/Faculty_Img/alex.jpg" class="quarto-figure quarto-figure-center" style="width:40.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="photo-6" class="slide level2">
-<h2>Photo 6</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/Faculty_Img/michael.jpg" class="quarto-figure quarto-figure-center" style="width:40.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="photo-7" class="slide level2">
-<h2>Photo 7</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/Faculty_Img/img10.jpg" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="photo-8" class="slide level2">
-<h2>Photo 8</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/Faculty_Img/img3.jpg" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
-</figure>
-</div>
-</div>
 </div>
 </section>
 <section id="all-photos" class="slide level2">
@@ -371,61 +332,339 @@
 </div></div>
 </section></section>
 <section>
-<section id="questions" class="title-slide slide level1 center">
-<h1>Questions</h1>
+<section id="mean-squared-error" class="title-slide slide level1 center">
+<h1>Mean Squared Error</h1>
 
 </section>
-<section id="reflection-questions" class="slide level2 small">
-<h2>Reflection Questions</h2>
-<ul>
-<li><p>What explicit features are you analyzing?</p></li>
-<li><p>How do you convert these features to numerical estimates?</p></li>
-<li><p>How do you resolve differences in opinion among group members?</p></li>
-<li><p>Is the activity <strong>supervised</strong> or <strong>unsupervised</strong>?</p></li>
-<li><p>Does it represent a <strong>classification</strong> or <strong>regression</strong> problem?</p></li>
-<li><p>Are you interested primarily in <strong>prediction</strong> or <strong>inference</strong>?</p></li>
-<li><p>Are you using <strong>parametric</strong> or <strong>non-parametric</strong> methods?</p></li>
-<li><p>What are some sources of “error” in your estimates?</p></li>
-<li><p>How can we quantify the error in your estimates?</p></li>
-<li><p>How should we assess the overall accuracy of a group’s predictions?</p></li>
-<li><p>In what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?</p></li>
-</ul>
+<section id="running-example-adelie-penguins" class="slide level2">
+<h2>Running Example: Adelie Penguins</h2>
+<p>We want to <strong>predict</strong> Body Mass (<span class="math inline">\(Y\)</span>) based on Bill Length (<span class="math inline">\(X\)</span>), based on a sample of <span class="math inline">\(n=50\)</span> Adelie penguins.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb1-2"><a aria-label="2"></a>adelie <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> <span class="fu">filter</span>(species<span class="sc">==</span><span class="st">"Adelie"</span>)</span>
+<span id="cb1-3"><a aria-label="3"></a>which_train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(adelie),<span class="dv">50</span>)</span>
+<span id="cb1-4"><a aria-label="4"></a>adelie <span class="ot">&lt;-</span> adelie[which_train,]</span>
+<span id="cb1-5"><a aria-label="5"></a><span class="fu">ggplot</span>(adelie,<span class="fu">aes</span>(<span class="at">x=</span>bill_length_mm,<span class="at">y=</span>body_mass_g))<span class="sc">+</span><span class="fu">geom_point</span>() <span class="sc">+</span><span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">18</span>) <span class="sc">+</span></span>
+<span id="cb1-6"><a aria-label="6"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Sample of n=50 Adelie Penguins"</span>,<span class="at">x=</span><span class="st">"Bill Length"</span>,<span class="at">y=</span><span class="st">"Body Mass"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Note: This is prediction, supervised learning, and a regression problem</em></p>
+<p><strong>Q:</strong> How would you model this relationship? (<em>Parametric vs.&nbsp;Non-Parametric?</em>)</p>
 </section>
-<section id="results" class="slide level2">
-<h2>Results</h2>
-</section>
-<section id="answers" class="slide level2">
-<h2>Answers</h2>
-<p><strong>Modeling Questions</strong> <strong>Answers will vary</strong></p>
-<ul>
-<li>What explicit features are you analyzing?</li>
-<li>How do you convert these features to numerical estimates?</li>
-<li>How do you resolve differences in opinion among group members?</li>
-</ul>
+<section id="types-of-error" class="slide level2">
+<h2>Types of Error</h2>
+<p>There are two sources of error in a <strong>model</strong>, <span class="math display">\[
+\hat{Y} = \hat{f}(X)
+\]</span> for the <strong>true relationship</strong>, <span class="math display">\[
+Y = f(X)+\epsilon
+\]</span></p>
+<p><span class="math display">\[
+  \text{Error} = Y - \hat{Y} = \underbrace{(f - \hat{f})}_{\text{Reducible}} + \underbrace{\epsilon}_{\text{irreducible}}
+\]</span></p>
 <div class="fragment">
-<p><strong>Definitional Questions</strong></p>
+<ol type="1">
+<li><p><strong>Reducible error:</strong> in the form of our estimate <span class="math inline">\(\hat{f}\)</span> for <span class="math inline">\(f\)</span>.</p></li>
+<li><p><strong>Irreducible error:</strong> in the form of <span class="math inline">\(\epsilon\)</span></p></li>
+</ol>
+</div>
+<div class="fragment">
 <ul>
-<li><p>Is the activity <strong>supervised</strong> or <strong>unsupervised</strong>? <span class="fragment">Supervised</span></p></li>
-<li><p>Does it represent a <strong>classification</strong> or <strong>regression</strong> problem? <span class="fragment">Regression</span></p></li>
-<li><p>Are you interested primarily in <strong>prediction</strong> or <strong>inference</strong>? <span class="fragment">Prediction</span></p></li>
-<li><p>Are you using <strong>parametric</strong> or <strong>non-parametric</strong> methods? <span class="fragment">Either would have worked!</span></p></li>
+<li><p>We usually lower Reducible error by <strong>increasing the sample size</strong></p></li>
+<li><p>We usually <strong>cannot</strong> lower Irreducible error</p></li>
 </ul>
 </div>
 </section>
-<section id="answers-cont." class="slide level2">
-<h2>Answers (cont.)</h2>
-<p><strong>Conceptual Questions</strong> <strong>Answers will vary</strong></p>
+<section id="quality-of-a-model" class="slide level2">
+<h2>Quality of a Model</h2>
+<p>When given a modeling question, we can conceive of <strong>many possible models</strong>.</p>
+<div class="fragment">
+<p>How do we measure <strong>quality of a model?</strong></p>
+<ol type="1">
+<li><p>Devise a quantitative measurement of model error.</p></li>
+<li><p>Select the model that minimizes this measure of error.</p></li>
+</ol>
+</div>
+<div class="fragment">
+<p>For regression, the most common measure of error is the <strong>Mean Squared Error</strong> (MSE): <span class="math display">\[
+\mathrm{MSE}(\hat{f}) = \frac{1}{n}\sum_{i=1}^n \Big(y_i - \hat{f}(x_i) \Big)^2
+\]</span> where</p>
 <ul>
-<li><p>What are some sources of “error” in your estimates?</p></li>
-<li><p>How can we quantify the error in your estimates?</p></li>
-<li><p>How should we assess the overall accuracy of a group’s predictions?</p></li>
-<li><p>In what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?</p></li>
+<li><span class="math inline">\(\hat{f}\)</span> is the model</li>
+<li><span class="math inline">\(x_i\)</span> are the observed predictor values</li>
+<li><span class="math inline">\(y_i\)</span> are the corresponding observed response values.</li>
 </ul>
+</div>
+</section>
+<section id="mean-squared-error-mse" class="slide level2">
+<h2>Mean Squared Error (MSE)</h2>
+<p><span class="math display">\[
+\mathrm{MSE}(\hat{f}) = \frac{1}{n}\sum_{i=1}^n \Big(y_i - \hat{f}(x_i) \Big)^2
+\]</span></p>
+<p><strong>Q:</strong> Under what circumstances is MSE small?</p>
+<div class="fragment">
+<ul>
+<li><p>When the (reducible + irreducible) error is small!</p></li>
+<li><p><strong>A:</strong> Reducible error (usually) lowers as <span class="math inline">\(n\)</span> increases</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Q:</strong> What could go wrong if we try to minimize <span class="math inline">\(\mathrm{MSE}\)</span> on observed data?</p>
+<ul>
+<li>Hint: Consider prediction with new penguins</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><strong>A:</strong> We could make a model <em>too specific</em> to our <em>observed</em> data that doesn’t generalize to <em>new</em> data (i.e., <strong>overfitting</strong>)</li>
+</ul>
+</div>
+</section>
+<section id="training-and-test-data-for-prediction-problems" class="slide level2">
+<h2>Training and Test Data (for prediction problems)</h2>
+<p>We can solve this problem by dividing our data into <strong>training</strong> and <strong>test</strong> sets.</p>
+<div class="fragment">
+<ul>
+<li><p><strong>Training Data</strong>: Subset used for building a model</p></li>
+<li><p><strong>Test Data</strong>: Rest of data used for assessing model accuracy</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p>If we have training and test data, we can:</p>
+<ol type="1">
+<li><p>Build many models on the training data</p></li>
+<li><p>Compare their performance on the test data (e.g., compare MSE)</p></li>
+<li><p>Select the model that did the best on the test data</p></li>
+</ol>
+</div>
+</section>
+<section id="returning-to-penguins" class="slide level2">
+<h2>Returning to Penguins</h2>
+<p>We want to predict Body Mass (<span class="math inline">\(Y\)</span>) over future penguins based on Bill Length (<span class="math inline">\(X\)</span>).</p>
+<p>We have a random sample of <span class="math inline">\(n=50\)</span> penguins.</p>
+<div class="fragment">
+<p><strong>Q:</strong> How might we split our data into training and test sets?</p>
+</div>
+<div class="fragment">
+<p><strong>A:</strong> Randomly split data in two halves:</p>
+<ul>
+<li><p><span class="math inline">\(n=25\)</span> “training” observations</p></li>
+<li><p><span class="math inline">\(n=25\)</span> “testing” observations</p></li>
+</ul>
+<p>Let’s demonstrate this process!</p>
+</div>
+</section>
+<section id="training-set" class="slide level2">
+<h2>Training Set</h2>
+<div class="smaller">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="co">#</span></span>
+<span id="cb2-2"><a aria-label="2"></a><span class="co">#</span></span>
+<span id="cb2-3"><a aria-label="3"></a><span class="fu">ggplot</span>(adelie_train,<span class="fu">aes</span>(<span class="at">x=</span>bill_length_mm,<span class="at">y=</span>body_mass_g))<span class="sc">+</span><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a aria-label="4"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Training Data"</span>,<span class="at">x=</span><span class="st">"Bill Length"</span>,<span class="at">y=</span><span class="st">"Body Mass"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-1" class="slide level2 smaller">
+<h2>Model 1</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="fu">ggplot</span>(adelie_train,<span class="fu">aes</span>(<span class="at">x=</span>bill_length_mm,<span class="at">y=</span>body_mass_g))<span class="sc">+</span><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-2"><a aria-label="2"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Training Data"</span>,<span class="at">x=</span><span class="st">"Bill Length"</span>,<span class="at">y=</span><span class="st">"Body Mass"</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a aria-label="3"></a>  <span class="fu">geom_smooth</span>( <span class="at">method =</span> <span class="st">"lm"</span> , <span class="at">se =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-1-and-2" class="slide level2 smaller">
+<h2>Model 1 and 2</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a><span class="fu">ggplot</span>(adelie_train,<span class="fu">aes</span>(<span class="at">x=</span>bill_length_mm,<span class="at">y=</span>body_mass_g))<span class="sc">+</span><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-2"><a aria-label="2"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Training Data"</span>,<span class="at">x=</span><span class="st">"Bill Length"</span>,<span class="at">y=</span><span class="st">"Body Mass"</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a aria-label="3"></a>  <span class="fu">geom_smooth</span>( <span class="at">method =</span> <span class="st">"lm"</span> , <span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb4-4"><a aria-label="4"></a>  <span class="fu">geom_smooth</span>( <span class="at">method =</span> <span class="st">"lm"</span> ,<span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">7</span>), <span class="at">se =</span> F, <span class="at">color =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="test-set" class="slide level2">
+<h2>Test Set</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="test-set-with-models" class="slide level2 small">
+<h2>Test Set with models</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">ggplot</span>(adelie_test,<span class="fu">aes</span>(<span class="at">x=</span>bill_length_mm,<span class="at">y=</span>body_mass_g))<span class="sc">+</span><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-2"><a aria-label="2"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Testing Data"</span>,<span class="at">x=</span><span class="st">"Bill Length"</span>,<span class="at">y=</span><span class="st">"Body Mass"</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a aria-label="3"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> adelie_train, <span class="at">method =</span> <span class="st">"lm"</span> , <span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb5-4"><a aria-label="4"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> adelie_train, <span class="at">method =</span> <span class="st">"lm"</span> ,<span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">7</span>), <span class="at">se =</span> F, <span class="at">color =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="test-mse" class="slide level2">
+<h2>Test MSE</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a><span class="fu">tibble</span>(<span class="st">"Linear MSE"</span><span class="ot">=</span>lin_mse, <span class="st">"Polynomial MSE"</span><span class="ot">=</span>poly_mse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  `Linear MSE` `Polynomial MSE`
+         &lt;dbl&gt;            &lt;dbl&gt;
+1      117858.        10083784.</code></pre>
+</div>
+</div>
+<p><strong>Q:</strong> Which model should we pick? <span class="fragment"><strong>A: Linear model, since lower test MSE</strong></span></p>
+<div class="fragment">
+<p><strong>Q:</strong> What’s actually going on in this situation? <strong>A: The Bias-Variance Trade-off!</strong></p>
+</div>
+</section></section>
+<section>
+<section id="bias-variance-trade-off" class="title-slide slide level1 center">
+<h1>Bias-Variance Trade-off</h1>
+
+</section>
+<section id="training-vs-test-mse" class="slide level2">
+<h2>Training vs Test MSE</h2>
+<p>Suppose we consider various models to predict <span class="math inline">\(Y\)</span>, each of increasing complexity.</p>
+<ul>
+<li>What happens to training and test MSE as model complexity increases?</li>
+</ul>
+<div class="columns fragment">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a><span class="fu">include_graphics</span>(<span class="st">"img/ucurve_ISLR.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/ucurve_ISLR.png" class="quarto-figure quarto-figure-center" style="height:70.0%" width="187"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:38%;">
+<p>Figure 2.9 from <em>ISLR</em></p>
+<ul>
+<li><p>GRAY: Training MSE</p></li>
+<li><p>RED: Test MSE</p></li>
+<li><p>X-axis is model complexity</p></li>
+</ul>
+</div></div>
+</section>
+<section id="mse-decomposition" class="slide level2">
+<h2>MSE Decomposition</h2>
+<p>U-Curve for Test MSE is a result of competition between two sources of model error.</p>
+<div class="fragment">
+<p><strong>Expected Test MSE at <span class="math inline">\(x_0\)</span></strong> <span class="math display">\[
+\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
+\]</span></p>
+</div>
+<div class="fragment">
+<ol type="1">
+<li class="fragment"><strong>(Squared) Bias</strong> – <span class="math inline">\(\left[\mathrm{Bias}(\hat{f}(x_0))\right]^2\)</span> By “Bias”, we mean <span class="math inline">\(E[ \hat{f} (x_0) - f (x_0) ]\)</span></li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="2" type="1">
+<li class="fragment"><strong>Variance</strong> – <span class="math inline">\(\mathrm{Var}(\hat{f}(x_0))\)</span></li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="3" type="1">
+<li class="fragment"><strong>Irreducible Error Variance</strong> – <span class="math inline">\(\mathrm{Var}(\epsilon)\)</span> Can’t do anything about this!</li>
+</ol>
+</div>
+<div class="fragment">
+<p><strong>Takeaway:</strong> To minimize MSE, we need to balance minimizing bias AND variance.</p>
+</div>
+</section>
+<section id="bias-and-variance" class="slide level2">
+<h2>Bias and Variance</h2>
+<p><strong>Bias</strong> is amount by which model estimates, <span class="math inline">\(\hat{f}(x_0)\)</span>, differ from the truth, <span class="math inline">\(f(x_0)\)</span>.</p>
+<ul>
+<li><p>Bias produced when assumed model doesn’t match reality</p></li>
+<li><p>Simple models: Generally high bias</p></li>
+<li><p>Complex models: Generally low bias</p></li>
+</ul>
+<div class="fragment">
+<p><strong>Variance</strong> is amount of variability in <span class="math inline">\(\hat{f}(x_0)\)</span> across training sets</p>
+<ul>
+<li><p>Simple models: Generally low variance</p></li>
+<li><p>Complex models: Generally high variance</p></li>
+</ul>
+</div>
+</section>
+<section id="the-trade-off" class="slide level2">
+<h2>The Trade-off</h2>
+<p><strong>Q:</strong> What happens as we pick more complex models?</p>
+<ul>
+<li><p>As complexity increases, we tend to “overfit” model to training data.</p></li>
+<li><p>Bias decreases and variance increases</p></li>
+</ul>
+<div class="fragment">
+<p>We want a sufficiently complex model that doesn’t overfit training data.</p>
+<ul>
+<li>How we <em>actually do this</em> is a major theme of this course!!</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="recap" class="title-slide slide level1 center">
+<h1>Recap</h1>
+
+</section>
+<section id="recap-1" class="slide level2">
+<h2>Recap</h2>
+<p>Today, we…</p>
+<ul>
+<li><p>Contrasted <strong>prediction vs.&nbsp;inference, (non-)parametric methods, (un)supervised learning, and regression vs.&nbsp;classification problems</strong></p></li>
+<li><p><strong>Mean Squared Error (MSE)</strong> - Common metric of measuring error in a model</p></li>
+<li><p>Fit models on “training data”, compare on “testing data”</p></li>
+<li><p><strong>Bias-Variance Trade-off</strong> - to minimize MSE, we must balance minimizing model bias and variance</p></li>
+</ul>
+<p>For next time, please:</p>
+<ol type="1">
+<li><p>Complete readings</p></li>
+<li><p>Start HW 3 (due Friday) and work on resubmissions</p></li>
+</ol>
 </section>
 <section id="next-time" class="slide level2">
 <h2>Next Time</h2>
 <ul>
-<li class="fragment">Lab 1: <em>Technologies, Data, and Stat Learning Methods</em></li>
+<li class="fragment">Linear regression</li>
 </ul>
 
 

@@ -2,30 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.stat-243-f26.github.io/syllabus.html</loc>
-    <lastmod>2026-08-22T17:31:35.177Z</lastmod>
+    <lastmod>2026-08-30T21:34:35.862Z</lastmod>
   </url>
   <url>
-    <loc>https://www.stat-243-f26.github.io/slides/stat243_wk01mon.html</loc>
-    <lastmod>2026-08-25T18:02:16.649Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.stat-243-f26.github.io/office_hours.html</loc>
-    <lastmod>2026-08-22T16:23:20.556Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.stat-243-f26.github.io/index.html</loc>
-    <lastmod>2026-08-23T20:20:30.895Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.stat-243-f26.github.io/labs/lab01_setup.html</loc>
-    <lastmod>2026-08-26T21:00:07.919Z</lastmod>
+    <loc>https://www.stat-243-f26.github.io/slides/stat243_wk01wed.html</loc>
+    <lastmod>2026-08-30T21:33:28.943Z</lastmod>
   </url>
   <url>
     <loc>https://www.stat-243-f26.github.io/readings/readings_wk01wed.html</loc>
     <lastmod>2026-08-23T18:52:00.109Z</lastmod>
   </url>
   <url>
-    <loc>https://www.stat-243-f26.github.io/slides/stat243_wk01wed.html</loc>
-    <lastmod>2026-08-26T17:47:15.506Z</lastmod>
+    <loc>https://www.stat-243-f26.github.io/labs/lab01_setup.html</loc>
+    <lastmod>2026-08-26T21:00:07.919Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.stat-243-f26.github.io/index.html</loc>
+    <lastmod>2026-08-23T20:20:30.895Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.stat-243-f26.github.io/office_hours.html</loc>
+    <lastmod>2026-08-22T16:23:20.556Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.stat-243-f26.github.io/slides/stat243_wk01mon.html</loc>
+    <lastmod>2026-08-30T21:26:24.364Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.stat-243-f26.github.io/slides/stat243_wk02wed.html</loc>
+    <lastmod>2026-08-26T22:27:05.214Z</lastmod>
   </url>
 </urlset>

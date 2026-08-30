@@ -32,7 +32,7 @@ scheduled-docs:
               href: labs/lab01.qmd
       resources:
         - '<a href="https://join.slack.com/t/stat243f26/shared_invite/zt-47qhj8xhz-VQj7slULCPkMTvUVUCjSeA">Join Slack</a>'
-        - 'Gradescope course entry code: ZJPD33'
+        - 'Gradescope course entry code: 68V7B3'
     - week: 2
       days:
         - topic: "No Class: Holiday"

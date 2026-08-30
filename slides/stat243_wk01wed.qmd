@@ -1,5 +1,5 @@
 ---
-pagetitle: "Introduction to Statistical Learning"
+pagetitle: "How old are we?"
 editor: source
 format:
   revealjs:
@@ -77,7 +77,7 @@ library(tidyverse)
 
 **Friday (lab):**
 
--   Deeper considerations of quantifying error
+-   Technologies, Data, and Stat Learning Methods
 
 
 :::
@@ -87,6 +87,17 @@ library(tidyverse)
 ::::
 
 
+## Before we get started: Pre-lab assignment
+
+Before Thursday 9/3 (tomorrow) at noon, please do the following:
+
+<br> <br>
+
+::: {.blockquote .fragment}
+
+We'll use GitHub for our class, so each of you need to have a GitHub profile. If you don't have a GitHub profile already, go to [https://github.com/](https://github.com/) and sign up for one. Once you've signed up for an account, please add it to the [Google Sheet](https://docs.google.com/spreadsheets/d/1yhQfUwGpKj1bQYg3rmDybKobVkh-tjnY-GcYn4LTf7c/edit?usp=sharing) so that I can add you to the stat-243-f26 organization. Note: you'll need to be logged in to your Reed Google account to edit the Google Sheet.
+
+:::
 
 # How Old Are We?
 
@@ -342,7 +353,7 @@ include_graphics("img/Faculty_Img/img3.jpg")
 
 ## Next Time
 
-- Lab: Assessing accuracy
+- Lab 1: *Technologies, Data, and Stat Learning Methods*
 
 
 

@@ -20,14 +20,6 @@ editor:
 -   Office: Library 386
 -   Office hours: Available [here](office_hours.qmd). 
 
-**Course Assistant**:  TBD
-
--   Email: TBD 
--   Office: ETC 105B
--   Office hours: TBD 
-
-<!-- In addition to holding office hours, [the course assistant] will attend class on Monday's and will be available to help via Slack.  -->
-
 
 **Links and course resources**:
 

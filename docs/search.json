@@ -4,14 +4,14 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Instructor: Grayson White (he/him)\n\nEmail: gwhite@reed.edu\nOffice: Library 386\nOffice hours: Available here.\n\nCourse Assistant: TBD\n\nEmail: TBD\nOffice: ETC 105B\nOffice hours: TBD\n\n\nLinks and course resources:\nThe course website, stat-243-f26.github.io, includes information on the course, lecture slides, public course materials, and links to all other course resources:\n\nSlack, for course correspondence,\nGradescope, for turning in (most) assignments, and\nthe RStudio Server.\n\nMeeting Times:\nWe’ll have a lecture-style meeting twice a week. Attendance is required (please see the Participation and Attendance section of the syllabus.\n\nLectures are on Mondays and Wednesdays, 1:10pm - 2:30pm, Eliot Hall Room 207.\n“Lectures” will consist of both (1) content delivery from the instructor and (2) interactive activities, worksheets, project work time, and more."
+    "text": "Instructor: Grayson White (he/him)\n\nEmail: gwhite@reed.edu\nOffice: Library 386\nOffice hours: Available here.\n\nLinks and course resources:\nThe course website, stat-243-f26.github.io, includes information on the course, lecture slides, public course materials, and links to all other course resources:\n\nSlack, for course correspondence,\nGradescope, for turning in (most) assignments, and\nthe RStudio Server.\n\nMeeting Times:\nWe’ll have a lecture-style meeting twice a week. Attendance is required (please see the Participation and Attendance section of the syllabus.\n\nLectures are on Mondays and Wednesdays, 1:10pm - 2:30pm, Eliot Hall Room 207.\n“Lectures” will consist of both (1) content delivery from the instructor and (2) interactive activities, worksheets, project work time, and more."
   },
   {
     "objectID": "syllabus.html#useful-information",
     "href": "syllabus.html#useful-information",
     "title": "Syllabus",
     "section": "",
-    "text": "Instructor: Grayson White (he/him)\n\nEmail: gwhite@reed.edu\nOffice: Library 386\nOffice hours: Available here.\n\nCourse Assistant: TBD\n\nEmail: TBD\nOffice: ETC 105B\nOffice hours: TBD\n\n\nLinks and course resources:\nThe course website, stat-243-f26.github.io, includes information on the course, lecture slides, public course materials, and links to all other course resources:\n\nSlack, for course correspondence,\nGradescope, for turning in (most) assignments, and\nthe RStudio Server.\n\nMeeting Times:\nWe’ll have a lecture-style meeting twice a week. Attendance is required (please see the Participation and Attendance section of the syllabus.\n\nLectures are on Mondays and Wednesdays, 1:10pm - 2:30pm, Eliot Hall Room 207.\n“Lectures” will consist of both (1) content delivery from the instructor and (2) interactive activities, worksheets, project work time, and more."
+    "text": "Instructor: Grayson White (he/him)\n\nEmail: gwhite@reed.edu\nOffice: Library 386\nOffice hours: Available here.\n\nLinks and course resources:\nThe course website, stat-243-f26.github.io, includes information on the course, lecture slides, public course materials, and links to all other course resources:\n\nSlack, for course correspondence,\nGradescope, for turning in (most) assignments, and\nthe RStudio Server.\n\nMeeting Times:\nWe’ll have a lecture-style meeting twice a week. Attendance is required (please see the Participation and Attendance section of the syllabus.\n\nLectures are on Mondays and Wednesdays, 1:10pm - 2:30pm, Eliot Hall Room 207.\n“Lectures” will consist of both (1) content delivery from the instructor and (2) interactive activities, worksheets, project work time, and more."
   },
   {
     "objectID": "syllabus.html#learning-outcomes",
@@ -70,235 +70,18 @@
     "text": "Footnotes\n\n\nThis Code of Conduct is adapted from the Contributor Covenant, version 2.0.↩︎"
   },
   {
-    "objectID": "slides/stat243_wk01mon.html#goals-for-today-and-next-time",
-    "href": "slides/stat243_wk01mon.html#goals-for-today-and-next-time",
-    "title": "Stat 243",
-    "section": "Goals for Today (and next time)",
-    "text": "Goals for Today (and next time)\n\n\n\nToday:\n\nGetting started in Stat 243\n\nCourse structure and technologies\nWhere to find resources\nCourse expectations\n\n\n\n\n\nWednesday:\n\nAssessing accuracy"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#my-info",
-    "href": "slides/stat243_wk01mon.html#my-info",
-    "title": "Stat 243",
-    "section": "My info",
-    "text": "My info\n\n\n\nName: Grayson White (he/him), you can call me ‘Grayson’\nEmail: gwhite@reed.edu\nOffice: Library 386\nOffice hours: TBD"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#research-interests",
-    "href": "slides/stat243_wk01mon.html#research-interests",
-    "title": "Stat 243",
-    "section": "Research Interests",
-    "text": "Research Interests\n\nStatistical modeling with environmental applications"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#research-interests-1",
-    "href": "slides/stat243_wk01mon.html#research-interests-1",
-    "title": "Stat 243",
-    "section": "Research Interests",
-    "text": "Research Interests\nAdvising Undergraduate Forestry Data Science Research"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#what-is-243",
-    "href": "slides/stat243_wk01mon.html#what-is-243",
-    "title": "Stat 243",
-    "section": "What is 243?",
-    "text": "What is 243?\nThis course will:\n\nIn a nutshell: Expand your “toolbox” for analyzing large, modern, and complex data\n\n\n\nCover important modeling and predictive techniques (e.g., regression, classification, clustering, tree-based methods, neural networks)\nPractice each method in R using real/simulated data\n\nSee syllabus for more detailed learning outcomes"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#getting-started-in-stat-243",
-    "href": "slides/stat243_wk01mon.html#getting-started-in-stat-243",
-    "title": "Stat 243",
-    "section": "Getting Started in Stat 243",
-    "text": "Getting Started in Stat 243\nCourse website\n\n\n\n\n\nThe course website, stat-243-f26.github.io, will be the central location for all our course materials.\nWe’ll also use some other technologies and resources for collaboration, dissemination, and communication."
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#getting-started-in-stat-243-1",
-    "href": "slides/stat243_wk01mon.html#getting-started-in-stat-243-1",
-    "title": "Stat 243",
-    "section": "Getting Started in Stat 243",
-    "text": "Getting Started in Stat 243\nOther Resources\n\n\nReed’s RStudio Server or a local installation of RStudio, for completing coursework,\n\n\n\nA course-wide Slack workspace, for course communication,\n\n\n\nGradescope, for turning in assignments and exams, and\n\n\n\nOur course GitHub organization, for collaboration, portfolio-building, and dissemination of work."
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#example-loan-default",
-    "href": "slides/stat243_wk01mon.html#example-loan-default",
-    "title": "Stat 243",
-    "section": "Example: Loan Default",
-    "text": "Example: Loan Default\nA bank wants to model the probability customers default on a loan\nCommon Considerations:\n\nCustomer age\nMarital status\nIncome\n\n\nQ: What other factors might a bank consider?\nQ: How might each factor relate to probability of default?\nQ: What ethical problems might be present?"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#the-setting",
-    "href": "slides/stat243_wk01mon.html#the-setting",
-    "title": "Stat 243",
-    "section": "The Setting",
-    "text": "The Setting\nLet:\n\n\\(Y\\) be a “response variable” (e.g., prob of default)\n\\(X_1, \\dots , X_p\\) be \\(p\\) “predictor variables” (e.g., age, marital status, income)\n\n\nStat Learning: the study of the relationships between predictors (\\(X_1, \\dots , X_p\\)) and a response (\\(Y\\))\n\n(Sometimes we study the relationship among only predictors)"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#models",
-    "href": "slides/stat243_wk01mon.html#models",
-    "title": "Stat 243",
-    "section": "Models",
-    "text": "Models\nWe usually assume there is a relationship between predictors and response:\n\\[\nY = \\underbrace{f(X_1, \\dots, X_p)}_{\\text{function of predictors}} + \\underbrace{\\epsilon}_{\\text{\"error\"}}\n\\]\nwhere \\(\\epsilon\\) (“epsilon”) is a random error (more on this later!)\nExample: Linear regression!\n\\[\\text{Default Prob} = \\beta_0 + \\beta_1\\text{(Age)}+\\beta_2\\text{(Married)} + \\beta_3\\text{(Income)} + \\epsilon\\]\n\nThe goal of stat learning is to estimate \\(f\\), given data on \\(X\\) and \\(Y\\).\n\n\\(f\\) captures the “relationship” between \\(X\\) and \\(Y\\)"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#types-of-statistical-learning",
-    "href": "slides/stat243_wk01mon.html#types-of-statistical-learning",
-    "title": "Stat 243",
-    "section": "Types of Statistical Learning",
-    "text": "Types of Statistical Learning\nIt’s helpful to distinguish different types of statistical learning.\n\nOn the next 4 slides, I’ll contrast the following 4 pairs of terms:\n\nPrediction vs. Inference Tasks\nParametric vs. Non-Parametric Methods\nSupervised vs. Unsupervised Learning\nRegression vs. Classification Problems"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#prediction-vs.-inference",
-    "href": "slides/stat243_wk01mon.html#prediction-vs.-inference",
-    "title": "Stat 243",
-    "section": "Prediction vs. Inference",
-    "text": "Prediction vs. Inference\n\nPrediction\n\nGoal: Use a model to make predictions for new data\nExample: Predict probability of default for a new customer\n\n\n\n\nInference\n\nGoal: Understand relationships among predictors/response\nExample: What’s the general relationship between age and loan default?\nExample: Is marital status an important predictor of loan default?"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#parametric-and-non-parametric-methods",
-    "href": "slides/stat243_wk01mon.html#parametric-and-non-parametric-methods",
-    "title": "Stat 243",
-    "section": "Parametric and Non-Parametric Methods",
-    "text": "Parametric and Non-Parametric Methods\n\nParametric Methods\n\nMake assumptions about form of \\(f\\) using parameters\nExample: Linear regression \\[f(X) = \\beta_0 + \\beta_1X_1+\\dots+\\beta_pX_p\\] where \\(\\beta_0,\\beta_1,\\dots,\\beta_p\\) are parameters\n\n\n\n\nNon-Parametric Methods\n\nForgo assumptions on the shape of \\(f\\)\nExamples: Neural networks, “nearest neighbor” algorithms\nProblems: Require much more data, uninterpretable, not generalizable (more on this later!)"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#supervised-vs.-unsupervised-learning",
-    "href": "slides/stat243_wk01mon.html#supervised-vs.-unsupervised-learning",
-    "title": "Stat 243",
-    "section": "Supervised vs. Unsupervised Learning",
-    "text": "Supervised vs. Unsupervised Learning\n\nSupervised Learning\n\nModels with response variable (and predictors!)\nExample: Predicting default risk using age\n\n\n\n\nUnsupervised Learning\n\nModels with no response variables\nCluster or detect pattern among observations\nExample: Create “social groups” among bank customers using age and income (such as “wealthy Millenials”, “low-income retirees”, etc.)"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#regression-vs.-classification-problems",
-    "href": "slides/stat243_wk01mon.html#regression-vs.-classification-problems",
-    "title": "Stat 243",
-    "section": "Regression vs. Classification Problems",
-    "text": "Regression vs. Classification Problems\n\nRegression Problems\n\nModels with quantitative response variables\nExample: Model probability of wildfire by temperature\n\n\n\n\nClassification Problems\n\nModels with qualitative response variables or outputs\nExample: Predict if there will/won’t be a wildfire by temperature"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#course-assistant-info",
-    "href": "slides/stat243_wk01mon.html#course-assistant-info",
-    "title": "Stat 243",
-    "section": "Course assistant info",
-    "text": "Course assistant info\n\n\n\nName:\nEmail:\nOffice: ETC 105B\nOffice hours:"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#class-time",
-    "href": "slides/stat243_wk01mon.html#class-time",
-    "title": "Stat 243",
-    "section": "Class Time",
-    "text": "Class Time\nLecture: Mondays and Wednesdays\n\nComplete a reading before each “lecture” from one of our textbooks, An Introduction to Statistical Learning in R (ISLR), or Beyond Multiple Linear Regression (BMLR).\nOccasionally, I might assign a blog post or reading from a different (free, online) textbook.\nOur textbooks are free online! See the syllabus!\n\n\nLab: Fridays\n\nPractice course content, work on assignments, and take short quizzes on past material.\nMix of pen-and-paper work, coding activities.\nTypical Friday workflow: start with a brief quiz on last week’s material, then transition to practice of current content."
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#technology",
-    "href": "slides/stat243_wk01mon.html#technology",
-    "title": "Stat 243",
-    "section": "Technology",
-    "text": "Technology\nYou will need access to a laptop for this course.\n\nBring a laptop to class every day\nPlease let me know ASAP if you do not have access to a personal laptop!\n\n\nWe will regularly use the R programming language\n\nAll assignments will be completed in RStudio\nRStudio can be downloaded to your computer (see syllabus) or accessed on the Reed RStudio Server: https://rstudio.reed.edu/"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#assignments-and-projects",
-    "href": "slides/stat243_wk01mon.html#assignments-and-projects",
-    "title": "Stat 243",
-    "section": "Assignments and projects",
-    "text": "Assignments and projects\n\n\n\n\nLabs (weekly-ish)\n\nAssigned Friday at class time.\nDue the following Friday on Gradescope before class.\nGraded for completion and effort.\nPlanning on 10 labs. Subject to change by \\(\\pm\\) 1 lab.\nEach week, we will have a quiz, graded for correctness on the past week’s lab.\n\n\n\n \n\n\nFinal Project\n\nThe proposal for the final project will be due before fall break.\nMore info to come!\n\n\n\n\n\n\n\n\nIn-class activities (semi-regular)\n\nIndividual activities.\nGroup activities.\n\n\n\n \n\n\nAttendance and active participation\n\nIs key to your learning!\nPlease participate in class and in Slack.\nAnd will be considered in your final grade.\nLet me know if you cannot make it to class for health reasons or otherwise! If you are experiencing extenuating circumstances that inhibit your ability to attend I will work with you to help you succeed in the class. Communication is key."
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#late-work",
-    "href": "slides/stat243_wk01mon.html#late-work",
-    "title": "Stat 243",
-    "section": "Late Work",
-    "text": "Late Work\n\n\nLabs: up to 4 extensions days can be used throughout the semester.\n\ne.g., 1 additional day for 4 labs, 4 additional days for 1 lab, …\nrounding days up\nBut! You may not delay the quiz if you are using extension days.\n\n\n\n\n\nProjects: no late projects are accepted.\n\n\n\n\nIn-class assignments: cannot be made up."
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#course-climate",
-    "href": "slides/stat243_wk01mon.html#course-climate",
-    "title": "Stat 243",
-    "section": "Course Climate",
-    "text": "Course Climate\n\nWe expect everyone in this class to strive to foster a learning environment that is equitable, inclusive, and welcoming. If you experience any barriers to learning, please come to Professor Grayson White or a college administrator with your concerns.\n\nCode of Conduct:\nWe expect all members of Stat 243 to make participation a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation.\nWe expect everyone to act and interact in ways that contribute to an open, welcoming, inclusive, and healthy community of learners. You can contribute to a positive learning environment by demonstrating empathy and kindness, being respectful of differing viewpoints and experiences, and giving and gracefully accepting constructive feedback.1\n\n\n\n\n−+\n01:00\n\n\n\nThis Code of Conduct is adapted from the Contributor Covenant, version 2.0."
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#engagement",
-    "href": "slides/stat243_wk01mon.html#engagement",
-    "title": "Stat 243",
-    "section": "Engagement",
-    "text": "Engagement\n\n\n \n\n\n\n\n\n\nBeing actively present is key.\n\n\n\nDuring lecture and lab, remove distractions.\n\nWhen we are on our computers, close email, social media, news, etc.\nHide your phone.\n\nI have high expectations but know that all of you (regardless of your stats, math, or computing background) have the ability to meet them."
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#artificial-intelligence-ai-policy",
-    "href": "slides/stat243_wk01mon.html#artificial-intelligence-ai-policy",
-    "title": "Stat 243",
-    "section": "Artificial Intelligence (AI) Policy",
-    "text": "Artificial Intelligence (AI) Policy\n\nArtificial intelligence (AI) tools, such as ChatGPT, Claude, Co-Pilot, Gemini, and others are being used to generate code, analyze data, write, and much more (and they are getting quite good at many of these tasks!). However, learning to think critically about a problem at hand, and engaging with your peers, tutors, and instructors when not understanding a concept or question are integral components of a liberal arts education and goals of this course. Therefore,\nFor all course content: The use of generative AI tools, such as ChatGPT and others, are strictly prohibited in any stage of the work process for this course.\n\n\n\n\n−+\n01:00\n\n\n\n\nWell, what’s the policy??"
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#artificial-intelligence-ai-policy-1",
-    "href": "slides/stat243_wk01mon.html#artificial-intelligence-ai-policy-1",
-    "title": "Stat 243",
-    "section": "Artificial Intelligence (AI) Policy",
-    "text": "Artificial Intelligence (AI) Policy\nFor all course content: The use of generative AI tools, such as ChatGPT and others, are strictly prohibited in any stage of the work process for this course."
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#why-this-policy",
-    "href": "slides/stat243_wk01mon.html#why-this-policy",
-    "title": "Stat 243",
-    "section": "Why this policy?",
-    "text": "Why this policy?\n\n\nRelying too heavily on AI tools to think for you, and to write your code prohibits understanding of the core concepts.\n\n\n\nMy goal: Make you an excellent statistician / data scientist / machine learning guru / … with a great deal of personal understanding of the material so that you can…\n\nindependently engage with statistical learning methods,\nethically engage with sensitive data, and\ncontinue to embrace and engage in the very human aspects of statistical learning."
-  },
-  {
-    "objectID": "slides/stat243_wk01mon.html#next-time",
-    "href": "slides/stat243_wk01mon.html#next-time",
-    "title": "Stat 243",
-    "section": "Next Time",
-    "text": "Next Time\n\nAn activity\nA deeper introduction to stat learning"
-  },
-  {
-    "objectID": "office_hours.html",
-    "href": "office_hours.html",
-    "title": "Office Hours",
-    "section": "",
-    "text": "Please stop by to introduce yourself or ask some questions about the course!\nWe offer two types of office hours for Stat 243:\n\nInstructor office hours, which occur in Library 386.\nCourse Assistant office hours, which occur in ETC 105B.\n\nInstructor office hours are a great place to ask questions about the content or course in general. They’re also a great place to get help on problems that you are stuck on.\nCourse Assistant office hours are a great place to work on your assignments with fellow students and seek the help of the course assistants whenever you get stuck.\nFurther, each Reed student is entitled to one hour of individual tutoring per course per week. You can sign up for individual tutoring in iris.\nBelow is the schedule of office hours for the week. We will update this calendar in case office hours need to change times or locations."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Stat 243",
-    "section": "",
-    "text": "Statistical Learning\n\nStat 243 Reed College, Fall 2026\n\n\n\n\n\n\n  Week 1\n  \n  \n\n  \n    \n    Monday, Aug 31\n    \n    \n    Course Introduction\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 2\n    \n    \n    Assessing Accuracy\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 4\n    \n    \n    Lab 1: Pictures\n    \n      \n        \n          Lab 1\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      Join Slack\n    \n      Gradescope course entry code: ZJPD33\n    \n  \n  \n  \n  \n\n  Week 2\n  \n  \n\n  \n    \n    Monday, Sep 7\n    \n    \n    No Class: Holiday\n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 9\n    \n    \n    Linear Models I\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 11\n    \n    \n    Linear Models II (and Quiz I)\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Wednesday: Read this blog post\n    \n      For Friday: TBD\n    \n  \n  \n  \n  \n\n  Week 3\n  \n  \n\n  \n    \n    Monday, Sep 14\n    \n    \n    Linear Models III\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 16\n    \n    \n    Linear Models IV\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 18\n    \n    \n    Lab 2: Linear Models\n    \n      \n        \n          Lab 2\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 4\n  \n  \n\n  \n    \n    Monday, Sep 21\n    \n    \n    Cross Validation\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 23\n    \n    \n    Bootstrapping\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 25\n    \n    \n    Lab 3: Resampling Methods (and Quiz 2)\n    \n      \n        \n          Lab 3\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 5\n  \n  \n\n  \n    \n    Monday, Sep 28\n    \n    \n    Penalized Regression: Ridge\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 30\n    \n    \n    Penalized Regression: LASSO\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 1 9:00am\n    \n    \n    Lab 4: Penalized Regression (and Quiz 3)\n    \n      \n        \n          Lab 4\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 6\n  \n  \n\n  \n    \n    Monday, Oct 5\n    \n    \n    Generalized Linear Models\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 7\n    \n    \n    Generalized Linear Models: Counts\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 8 9:00am\n    \n    \n    Lab 5: GLM Regression (and Quiz 4)\n    \n      \n        \n          Lab 5\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 7\n  \n  \n\n  \n    \n    Monday, Oct 12\n    \n    \n    Classification with GLMs\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 14\n    \n    \n    More classification with GLMs\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    Lab 6: GLM Classification (and Quiz 5)\n    \n      \n        \n          Lab 6\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week Fall Break\n  \n  \n\n  \n    \n    Saturday, Oct 17 - Sunday, Oct 25\n    \n    \n    No Class\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 8\n  \n  \n\n  \n    \n    Monday, Oct 26\n    \n    \n    kNN\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 28\n    \n    \n    Classification Trees\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 30\n    \n    \n    Lab 7: Nonparametric Classification (and Quiz 6)\n    \n      \n        \n          Lab 7\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 9\n  \n  \n\n  \n    \n    Monday, Nov 2\n    \n    \n    Regression Trees I\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 4\n    \n    \n    Regression Trees II\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 6\n    \n    \n    Lab 8: Trees (and Quiz 7)\n    \n      \n        \n          Lab 8\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 10\n  \n  \n\n  \n    \n    Monday, Nov 9\n    \n    \n    Bagging\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 11\n    \n    \n    Boosting\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 13\n    \n    \n    Lab 9: Ensemble Trees (and Quiz 8)\n    \n      \n        \n          Lab 9\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 11\n  \n  \n\n  \n    \n    Monday, Nov 16\n    \n    \n    k-Means clustering\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 18\n    \n    \n    Hierarchical clustering\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 20\n    \n    \n    Lab 10: Clustering (and Quiz 9)\n    \n      \n        \n          Lab 10\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 12\n  \n  \n\n  \n    \n    Monday, Nov 23\n    \n    \n    Selected Topics\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 25\n    \n    \n    Selected Topics\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    No class: Holiday\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 13\n  \n  \n\n  \n    \n    Monday, Nov 30\n    \n    \n    Selected Topics\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 2\n    \n    \n    Selected Topics\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Dec 4\n    \n    \n    Project Work Day\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 14\n  \n  \n\n  \n    \n    Monday, Dec 7\n    \n    \n    Selected Topics / Project Presentations\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 9\n    \n    \n    Project Presentations\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\nNo matching items"
-  },
-  {
-    "objectID": "labs/lab01_setup.html#problem-1-setup",
-    "href": "labs/lab01_setup.html#problem-1-setup",
-    "title": "Technologies, Data, and Stat Learning Methods",
-    "section": "Problem 1: Setup",
-    "text": "Problem 1: Setup\nIn this class, we’ll encounter a variety of technologies. This problem aims to help you navigate setting up some of those technologies.\n\npart a: GitHub\nWe’ll use GitHub for collaboration and portfolio building, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to https://github.com/ and sign up for one. Once you’ve signed up for an account, please add it to the Google Sheet so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet.\n\n\npart b: R and RStudio (or Positron!)\nWe’ll use R and RStudio/Positron for computing in this class. R is a statistical programming language, while RStudio and Positron are Integrated Development Environments (IDEs) that allow you to run R, view files, view R code output, and much more! Reed has an RStudio Server where you can run R and RStudio in the cloud, but for this class I would recommend a local installation of both R and RStudio. Positron is a new IDE from Posit (the company that makes RStudio) you are welcomed and encouraged to try out Positron, although I may not be able to provide as good of problem solving for any issues related to your IDE if you use Positron. Positron seems to be the hot new thing, and I imagine in the next ~5 years we will see a steep decline of RStudio use in favor of Positron for R users and data scientists.\nTo install R and RStudio, follow the directions from Posit’s website.\nTo install Positron, see this link from Posit’s website.\nNote: always make sure to have R installed before installing your IDE.\n\n\npart c: Connect git, GitHub and RStudio (or Positron)\nThese instructions are based on pieces of Happy git with R, in particular chapters 6, 7, and 9. Depending on your computer, setup, or just luck, this step can become difficult/frustrating. If you are having trouble with this step, please ask for help!\nIn order to have your computer talk with GitHub, you’ll need to install git on your computer. Sometimes, git is already installed on your computer, and you can check it by running\nwhich git\nin a Terminal or shell window. If you have git installed, you should see something like “/usr/bin/git” returned to you. If you don’t have git installed, you might see something like “git: command not found” or nothing at all. If you have git installed, congrats! If not, follow the steps in Happy git with R, Chapter 6 to install git.\nNext, up you have to introduce yourself to git. Again, following Happy git with R, in Chapter 7 we can run the following in an R session/console\n\n## install if needed (do this exactly once):\n## install.packages(\"usethis\")\n\nlibrary(usethis)\nuse_git_config(user.name = \"Jane Doe\", user.email = \"jane@example.org\")\n\nwhere Jane Doe is replaced with your full name and jane@example.org is replaced with the email you used to sign up for GitHub.\nNext, you’ll have to authenticate yourself (i.e., give your computer permission to make changes to GitHub projects when you ask it to). To do this, run the following in an R session/console:\n\nusethis::create_github_token()\n\nThis should open a new browser window where you can create your token. I often set no expiration date and check all of the boxes, but that is up to you. Note that when your token expires you’ll have to make a new one if you’re still using the same computer. Now, your token is created (it will start with “ghp_”)! Copy it down somewhere so that you don’t lose it.\nThe final step is to run\n\n## install if needed (do this exactly once):\n## install.packages(\"gitcreds\")\n\ngitcreds::gitcreds_set()\n\nand then enter the token when prompted. If also this has gone well, you are set!\nUnless… you’re running Linux. If you’re running Linux, I am happy to help you get git working correctly, but I’d say the first step is to read and follow Danielle Navarro’s blog post, in addition to the steps above.\n\n\npart d: testing\nTo make sure everything is working correctly, run\n\ngitcreds::gitcreds_get()\n\nin an R session/console. You should see something like\n&lt;gitcreds&gt;\n  protocol: https\n  host    : github.com\n  username: PersonalAccessToken\n  password: &lt;-- hidden --&gt;\nbut if you see\nError in throw(new_error(\"gitcreds_no_credentials\", url = url)) : \n  Could not find any credentials\nsomething has gone wrong.\n\n\npart e: congrats!\nIf you’ve made it this far, congrats! You’ve successfully set up git, GitHub, and your IDE on your local machine! We’ll spend time in class during week 2 talking about how to use all of these tools, but for now you are good to go.\nIf you’ve had trouble with any of these steps, please come to office hours so that we can debug and get you set up."
-  },
-  {
-    "objectID": "labs/lab01_setup.html#problems-2-3-and-4",
-    "href": "labs/lab01_setup.html#problems-2-3-and-4",
-    "title": "Technologies, Data, and Stat Learning Methods",
-    "section": "Problems 2, 3, and 4",
-    "text": "Problems 2, 3, and 4\nIn order to access the next two problems, clone the following repo:\nhttps://github.com/stat-243-f26/lab01_YOURGITHUBUSERNAME.git\nFrom there, you can answer the questions and then commit and push your work."
-  },
-  {
-    "objectID": "readings/readings_wk01wed.html",
-    "href": "readings/readings_wk01wed.html",
-    "title": "Stat 243: Suggested readings for January 28, 2026",
-    "section": "",
-    "text": "Before coming to lecture today, please read the following material:"
-  },
-  {
-    "objectID": "readings/readings_wk01wed.html#reading",
-    "href": "readings/readings_wk01wed.html#reading",
-    "title": "Stat 243: Suggested readings for January 28, 2026",
-    "section": "",
-    "text": "Before coming to lecture today, please read the following material:"
-  },
-  {
     "objectID": "slides/stat243_wk01wed.html#goals-for-today-and-next-time",
     "href": "slides/stat243_wk01wed.html#goals-for-today-and-next-time",
     "title": "Stat 243",
     "section": "Goals for Today (and next time)",
-    "text": "Goals for Today (and next time)\n\n\n\nToday:\n\nGuess the age of Reed math / stats / cs faculty\nStart to think about quantifying error\n\n\n\n\nFriday (lab):\n\nDeeper considerations of quantifying error"
+    "text": "Goals for Today (and next time)\n\n\n\nToday:\n\nGuess the age of Reed math / stats / cs faculty\nStart to think about quantifying error\n\n\n\n\nFriday (lab):\n\nTechnologies, Data, and Stat Learning Methods"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#before-we-get-started-pre-lab-assignment",
+    "href": "slides/stat243_wk01wed.html#before-we-get-started-pre-lab-assignment",
+    "title": "Stat 243",
+    "section": "Before we get started: Pre-lab assignment",
+    "text": "Before we get started: Pre-lab assignment\nBefore Thursday 9/3 (tomorrow) at noon, please do the following:\n \n\nWe’ll use GitHub for our class, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to https://github.com/ and sign up for one. Once you’ve signed up for an account, please add it to the Google Sheet so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet."
   },
   {
     "objectID": "slides/stat243_wk01wed.html#the-rules",
@@ -403,6 +186,363 @@
     "href": "slides/stat243_wk01wed.html#next-time",
     "title": "Stat 243",
     "section": "Next Time",
-    "text": "Next Time\n\nLab: Assessing accuracy"
+    "text": "Next Time\n\nLab 1: Technologies, Data, and Stat Learning Methods"
+  },
+  {
+    "objectID": "readings/readings_wk01wed.html",
+    "href": "readings/readings_wk01wed.html",
+    "title": "Stat 243: Suggested readings for January 28, 2026",
+    "section": "",
+    "text": "Before coming to lecture today, please read the following material:"
+  },
+  {
+    "objectID": "readings/readings_wk01wed.html#reading",
+    "href": "readings/readings_wk01wed.html#reading",
+    "title": "Stat 243: Suggested readings for January 28, 2026",
+    "section": "",
+    "text": "Before coming to lecture today, please read the following material:"
+  },
+  {
+    "objectID": "labs/lab01_setup.html#problem-1-setup",
+    "href": "labs/lab01_setup.html#problem-1-setup",
+    "title": "Technologies, Data, and Stat Learning Methods",
+    "section": "Problem 1: Setup",
+    "text": "Problem 1: Setup\nIn this class, we’ll encounter a variety of technologies. This problem aims to help you navigate setting up some of those technologies.\n\npart a: GitHub\nWe’ll use GitHub for collaboration and portfolio building, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to https://github.com/ and sign up for one. Once you’ve signed up for an account, please add it to the Google Sheet so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet.\n\n\npart b: R and RStudio (or Positron!)\nWe’ll use R and RStudio/Positron for computing in this class. R is a statistical programming language, while RStudio and Positron are Integrated Development Environments (IDEs) that allow you to run R, view files, view R code output, and much more! Reed has an RStudio Server where you can run R and RStudio in the cloud, but for this class I would recommend a local installation of both R and RStudio. Positron is a new IDE from Posit (the company that makes RStudio) you are welcomed and encouraged to try out Positron, although I may not be able to provide as good of problem solving for any issues related to your IDE if you use Positron. Positron seems to be the hot new thing, and I imagine in the next ~5 years we will see a steep decline of RStudio use in favor of Positron for R users and data scientists.\nTo install R and RStudio, follow the directions from Posit’s website.\nTo install Positron, see this link from Posit’s website.\nNote: always make sure to have R installed before installing your IDE.\n\n\npart c: Connect git, GitHub and RStudio (or Positron)\nThese instructions are based on pieces of Happy git with R, in particular chapters 6, 7, and 9. Depending on your computer, setup, or just luck, this step can become difficult/frustrating. If you are having trouble with this step, please ask for help!\nIn order to have your computer talk with GitHub, you’ll need to install git on your computer. Sometimes, git is already installed on your computer, and you can check it by running\nwhich git\nin a Terminal or shell window. If you have git installed, you should see something like “/usr/bin/git” returned to you. If you don’t have git installed, you might see something like “git: command not found” or nothing at all. If you have git installed, congrats! If not, follow the steps in Happy git with R, Chapter 6 to install git.\nNext, up you have to introduce yourself to git. Again, following Happy git with R, in Chapter 7 we can run the following in an R session/console\n\n## install if needed (do this exactly once):\n## install.packages(\"usethis\")\n\nlibrary(usethis)\nuse_git_config(user.name = \"Jane Doe\", user.email = \"jane@example.org\")\n\nwhere Jane Doe is replaced with your full name and jane@example.org is replaced with the email you used to sign up for GitHub.\nNext, you’ll have to authenticate yourself (i.e., give your computer permission to make changes to GitHub projects when you ask it to). To do this, run the following in an R session/console:\n\nusethis::create_github_token()\n\nThis should open a new browser window where you can create your token. I often set no expiration date and check all of the boxes, but that is up to you. Note that when your token expires you’ll have to make a new one if you’re still using the same computer. Now, your token is created (it will start with “ghp_”)! Copy it down somewhere so that you don’t lose it.\nThe final step is to run\n\n## install if needed (do this exactly once):\n## install.packages(\"gitcreds\")\n\ngitcreds::gitcreds_set()\n\nand then enter the token when prompted. If also this has gone well, you are set!\nUnless… you’re running Linux. If you’re running Linux, I am happy to help you get git working correctly, but I’d say the first step is to read and follow Danielle Navarro’s blog post, in addition to the steps above.\n\n\npart d: testing\nTo make sure everything is working correctly, run\n\ngitcreds::gitcreds_get()\n\nin an R session/console. You should see something like\n&lt;gitcreds&gt;\n  protocol: https\n  host    : github.com\n  username: PersonalAccessToken\n  password: &lt;-- hidden --&gt;\nbut if you see\nError in throw(new_error(\"gitcreds_no_credentials\", url = url)) : \n  Could not find any credentials\nsomething has gone wrong.\n\n\npart e: congrats!\nIf you’ve made it this far, congrats! You’ve successfully set up git, GitHub, and your IDE on your local machine! We’ll spend time in class during week 2 talking about how to use all of these tools, but for now you are good to go.\nIf you’ve had trouble with any of these steps, please come to office hours so that we can debug and get you set up."
+  },
+  {
+    "objectID": "labs/lab01_setup.html#problems-2-3-and-4",
+    "href": "labs/lab01_setup.html#problems-2-3-and-4",
+    "title": "Technologies, Data, and Stat Learning Methods",
+    "section": "Problems 2, 3, and 4",
+    "text": "Problems 2, 3, and 4\nIn order to access the next two problems, clone the following repo:\nhttps://github.com/stat-243-f26/lab01_YOURGITHUBUSERNAME.git\nFrom there, you can answer the questions and then commit and push your work."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Stat 243",
+    "section": "",
+    "text": "Statistical Learning\n\nStat 243 Reed College, Fall 2026\n\n\n\n\n\n\n  Week 1\n  \n  \n\n  \n    \n    Monday, Aug 31\n    \n    \n    Course Introduction\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 2\n    \n    \n    Assessing Accuracy\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 4\n    \n    \n    Lab 1: Pictures\n    \n      \n        \n          Lab 1\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      Join Slack\n    \n      Gradescope course entry code: 68V7B3\n    \n  \n  \n  \n  \n\n  Week 2\n  \n  \n\n  \n    \n    Monday, Sep 7\n    \n    \n    No Class: Holiday\n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 9\n    \n    \n    Linear Models I\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 11\n    \n    \n    Linear Models II (and Quiz I)\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Wednesday: Read this blog post\n    \n      For Friday: TBD\n    \n  \n  \n  \n  \n\n  Week 3\n  \n  \n\n  \n    \n    Monday, Sep 14\n    \n    \n    Linear Models III\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 16\n    \n    \n    Linear Models IV\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 18\n    \n    \n    Lab 2: Linear Models\n    \n      \n        \n          Lab 2\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 4\n  \n  \n\n  \n    \n    Monday, Sep 21\n    \n    \n    Cross Validation\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 23\n    \n    \n    Bootstrapping\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 25\n    \n    \n    Lab 3: Resampling Methods (and Quiz 2)\n    \n      \n        \n          Lab 3\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 5\n  \n  \n\n  \n    \n    Monday, Sep 28\n    \n    \n    Penalized Regression: Ridge\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 30\n    \n    \n    Penalized Regression: LASSO\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 1 9:00am\n    \n    \n    Lab 4: Penalized Regression (and Quiz 3)\n    \n      \n        \n          Lab 4\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 6\n  \n  \n\n  \n    \n    Monday, Oct 5\n    \n    \n    Generalized Linear Models\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 7\n    \n    \n    Generalized Linear Models: Counts\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 8 9:00am\n    \n    \n    Lab 5: GLM Regression (and Quiz 4)\n    \n      \n        \n          Lab 5\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 7\n  \n  \n\n  \n    \n    Monday, Oct 12\n    \n    \n    Classification with GLMs\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 14\n    \n    \n    More classification with GLMs\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    Lab 6: GLM Classification (and Quiz 5)\n    \n      \n        \n          Lab 6\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week Fall Break\n  \n  \n\n  \n    \n    Saturday, Oct 17 - Sunday, Oct 25\n    \n    \n    No Class\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 8\n  \n  \n\n  \n    \n    Monday, Oct 26\n    \n    \n    kNN\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 28\n    \n    \n    Classification Trees\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 30\n    \n    \n    Lab 7: Nonparametric Classification (and Quiz 6)\n    \n      \n        \n          Lab 7\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 9\n  \n  \n\n  \n    \n    Monday, Nov 2\n    \n    \n    Regression Trees I\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 4\n    \n    \n    Regression Trees II\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 6\n    \n    \n    Lab 8: Trees (and Quiz 7)\n    \n      \n        \n          Lab 8\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 10\n  \n  \n\n  \n    \n    Monday, Nov 9\n    \n    \n    Bagging\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 11\n    \n    \n    Boosting\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 13\n    \n    \n    Lab 9: Ensemble Trees (and Quiz 8)\n    \n      \n        \n          Lab 9\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 11\n  \n  \n\n  \n    \n    Monday, Nov 16\n    \n    \n    k-Means clustering\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 18\n    \n    \n    Hierarchical clustering\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 20\n    \n    \n    Lab 10: Clustering (and Quiz 9)\n    \n      \n        \n          Lab 10\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 12\n  \n  \n\n  \n    \n    Monday, Nov 23\n    \n    \n    Selected Topics\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 25\n    \n    \n    Selected Topics\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    No class: Holiday\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 13\n  \n  \n\n  \n    \n    Monday, Nov 30\n    \n    \n    Selected Topics\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 2\n    \n    \n    Selected Topics\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Dec 4\n    \n    \n    Project Work Day\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 14\n  \n  \n\n  \n    \n    Monday, Dec 7\n    \n    \n    Selected Topics / Project Presentations\n    \n      \n        \n          Reading\n        \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 9\n    \n    \n    Project Presentations\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\nNo matching items"
+  },
+  {
+    "objectID": "office_hours.html",
+    "href": "office_hours.html",
+    "title": "Office Hours",
+    "section": "",
+    "text": "Please stop by to introduce yourself or ask some questions about the course!\nWe offer two types of office hours for Stat 243:\n\nInstructor office hours, which occur in Library 386.\nCourse Assistant office hours, which occur in ETC 105B.\n\nInstructor office hours are a great place to ask questions about the content or course in general. They’re also a great place to get help on problems that you are stuck on.\nCourse Assistant office hours are a great place to work on your assignments with fellow students and seek the help of the course assistants whenever you get stuck.\nFurther, each Reed student is entitled to one hour of individual tutoring per course per week. You can sign up for individual tutoring in iris.\nBelow is the schedule of office hours for the week. We will update this calendar in case office hours need to change times or locations."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#goals-for-today-and-next-time",
+    "href": "slides/stat243_wk01mon.html#goals-for-today-and-next-time",
+    "title": "Stat 243",
+    "section": "Goals for Today (and next time)",
+    "text": "Goals for Today (and next time)\n\n\n\nToday:\n\nGetting started in Stat 243\n\nCourse structure and technologies\nWhere to find resources\nCourse expectations\n\n\n\n\n\nWednesday:\n\nAssessing accuracy"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#my-info",
+    "href": "slides/stat243_wk01mon.html#my-info",
+    "title": "Stat 243",
+    "section": "My info",
+    "text": "My info\n\n\n\nName: Grayson White (he/him), you can call me ‘Grayson’\nEmail: gwhite@reed.edu\nOffice: Library 386\nOffice hours: TBD, please fill out the office hours survey ASAP for your availability to be considered.\n\nThis week, I’ll hold office hours on Tuesday 1pm - 3pm and Friday 9am - 10:30am, or by appointment."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#research-interests",
+    "href": "slides/stat243_wk01mon.html#research-interests",
+    "title": "Stat 243",
+    "section": "Research Interests",
+    "text": "Research Interests\n\nStatistical modeling with environmental applications"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#research-interests-1",
+    "href": "slides/stat243_wk01mon.html#research-interests-1",
+    "title": "Stat 243",
+    "section": "Research Interests",
+    "text": "Research Interests\nAdvising Undergraduate Forestry Data Science Research"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#what-is-243",
+    "href": "slides/stat243_wk01mon.html#what-is-243",
+    "title": "Stat 243",
+    "section": "What is 243?",
+    "text": "What is 243?\nThis course will:\n\nIn a nutshell: Expand your “toolbox” for analyzing large, modern, and complex data\n\n\n\nCover important modeling and predictive techniques (e.g., regression, classification, clustering, tree-based methods, neural networks)\nPractice each method in R using real/simulated data\n\nSee syllabus for more detailed learning outcomes"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#getting-started-in-stat-243",
+    "href": "slides/stat243_wk01mon.html#getting-started-in-stat-243",
+    "title": "Stat 243",
+    "section": "Getting Started in Stat 243",
+    "text": "Getting Started in Stat 243\nCourse website\n\n\n\n\n\nThe course website, stat-243-f26.github.io, will be the central location for all our course materials.\nWe’ll also use some other technologies and resources for collaboration, dissemination, and communication."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#getting-started-in-stat-243-1",
+    "href": "slides/stat243_wk01mon.html#getting-started-in-stat-243-1",
+    "title": "Stat 243",
+    "section": "Getting Started in Stat 243",
+    "text": "Getting Started in Stat 243\nOther Resources\n\n\nReed’s RStudio Server or a local installation of RStudio, for completing coursework,\n\n\n\nA course-wide Slack workspace, for course communication,\n\n\n\nGradescope, for turning in assignments and exams, and\n\n\n\nOur course GitHub organization, for collaboration, portfolio-building, and dissemination of work."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#example-loan-default",
+    "href": "slides/stat243_wk01mon.html#example-loan-default",
+    "title": "Stat 243",
+    "section": "Example: Loan Default",
+    "text": "Example: Loan Default\nA bank wants to model the probability customers default on a loan\nCommon Considerations:\n\nCustomer age\nMarital status\nIncome\n\n\nQ: What other factors might a bank consider?\nQ: How might each factor relate to probability of default?\nQ: What ethical problems might be present?"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#the-setting",
+    "href": "slides/stat243_wk01mon.html#the-setting",
+    "title": "Stat 243",
+    "section": "The Setting",
+    "text": "The Setting\nLet:\n\n\\(Y\\) be a “response variable” (e.g., prob of default)\n\\(X_1, \\dots , X_p\\) be \\(p\\) “predictor variables” (e.g., age, marital status, income)\n\n\nStat Learning: the study of the relationships between predictors (\\(X_1, \\dots , X_p\\)) and a response (\\(Y\\))\n\n(Sometimes we study the relationship among only predictors)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#models",
+    "href": "slides/stat243_wk01mon.html#models",
+    "title": "Stat 243",
+    "section": "Models",
+    "text": "Models\nWe usually assume there is a relationship between predictors and response:\n\\[\nY = \\underbrace{f(X_1, \\dots, X_p)}_{\\text{function of predictors}} + \\underbrace{\\epsilon}_{\\text{\"error\"}}\n\\]\nwhere \\(\\epsilon\\) (“epsilon”) is a random error (more on this later!)\nExample: Linear regression!\n\\[\\text{Default Prob} = \\beta_0 + \\beta_1\\text{(Age)}+\\beta_2\\text{(Married)} + \\beta_3\\text{(Income)} + \\epsilon\\]\n\nThe goal of stat learning is to estimate \\(f\\), given data on \\(X\\) and \\(Y\\).\n\n\\(f\\) captures the “relationship” between \\(X\\) and \\(Y\\)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#types-of-statistical-learning",
+    "href": "slides/stat243_wk01mon.html#types-of-statistical-learning",
+    "title": "Stat 243",
+    "section": "Types of Statistical Learning",
+    "text": "Types of Statistical Learning\nIt’s helpful to distinguish different types of statistical learning.\n\nOn the next 4 slides, I’ll contrast the following 4 pairs of terms:\n\nPrediction vs. Inference Tasks\nParametric vs. Non-Parametric Methods\nSupervised vs. Unsupervised Learning\nRegression vs. Classification Problems"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#prediction-vs.-inference",
+    "href": "slides/stat243_wk01mon.html#prediction-vs.-inference",
+    "title": "Stat 243",
+    "section": "Prediction vs. Inference",
+    "text": "Prediction vs. Inference\n\nPrediction\n\nGoal: Use a model to make predictions for new data\nExample: Predict probability of default for a new customer\n\n\n\n\nInference\n\nGoal: Understand relationships among predictors/response\nExample: What’s the general relationship between age and loan default?\nExample: Is marital status an important predictor of loan default?"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#parametric-and-non-parametric-methods",
+    "href": "slides/stat243_wk01mon.html#parametric-and-non-parametric-methods",
+    "title": "Stat 243",
+    "section": "Parametric and Non-Parametric Methods",
+    "text": "Parametric and Non-Parametric Methods\n\nParametric Methods\n\nMake assumptions about form of \\(f\\) using parameters\nExample: Linear regression \\[f(X) = \\beta_0 + \\beta_1X_1+\\dots+\\beta_pX_p\\] where \\(\\beta_0,\\beta_1,\\dots,\\beta_p\\) are parameters\n\n\n\n\nNon-Parametric Methods\n\nForgo assumptions on the shape of \\(f\\)\nExamples: Neural networks, “nearest neighbor” algorithms\nProblems: Require much more data, uninterpretable, not generalizable (more on this later!)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#supervised-vs.-unsupervised-learning",
+    "href": "slides/stat243_wk01mon.html#supervised-vs.-unsupervised-learning",
+    "title": "Stat 243",
+    "section": "Supervised vs. Unsupervised Learning",
+    "text": "Supervised vs. Unsupervised Learning\n\nSupervised Learning\n\nModels with response variable (and predictors!)\nExample: Predicting default risk using age\n\n\n\n\nUnsupervised Learning\n\nModels with no response variables\nCluster or detect pattern among observations\nExample: Create “social groups” among bank customers using age and income (such as “wealthy Millenials”, “low-income retirees”, etc.)"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#regression-vs.-classification-problems",
+    "href": "slides/stat243_wk01mon.html#regression-vs.-classification-problems",
+    "title": "Stat 243",
+    "section": "Regression vs. Classification Problems",
+    "text": "Regression vs. Classification Problems\n\nRegression Problems\n\nModels with quantitative response variables\nExample: Model probability of wildfire by temperature\n\n\n\n\nClassification Problems\n\nModels with qualitative response variables or outputs\nExample: Predict if there will/won’t be a wildfire by temperature"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#class-time",
+    "href": "slides/stat243_wk01mon.html#class-time",
+    "title": "Stat 243",
+    "section": "Class Time",
+    "text": "Class Time\nLecture: Mondays and Wednesdays\n\nComplete a reading before each “lecture” from one of our textbooks, An Introduction to Statistical Learning in R (ISLR), or Beyond Multiple Linear Regression (BMLR).\nOccasionally, I might assign a blog post or reading from a different (free, online) textbook.\nOur textbooks are free online! See the syllabus!\n\n\nLab: Fridays\n\nPractice course content, work on assignments, and take short quizzes on past material.\nMix of pen-and-paper work, coding activities.\nTypical Friday workflow: start with a brief quiz on last week’s material, then transition to practice of current content."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#technology",
+    "href": "slides/stat243_wk01mon.html#technology",
+    "title": "Stat 243",
+    "section": "Technology",
+    "text": "Technology\nYou will need access to a laptop for this course.\n\nBring a laptop to class every day\nPlease let me know ASAP if you do not have access to a personal laptop!\n\n\nWe will regularly use the R programming language\n\nAll assignments will be completed in RStudio\nRStudio can be downloaded to your computer (see syllabus) or accessed on the Reed RStudio Server: https://rstudio.reed.edu/"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#assignments-and-projects",
+    "href": "slides/stat243_wk01mon.html#assignments-and-projects",
+    "title": "Stat 243",
+    "section": "Assignments and projects",
+    "text": "Assignments and projects\n\n\n\n\nLabs (weekly-ish)\n\nAssigned Friday at class time.\nDue the following Friday on Gradescope before class.\nGraded for completion and effort.\nPlanning on 10 labs. Subject to change by \\(\\pm\\) 1 lab.\nEach week, we will have a quiz, graded for correctness on the past week’s lab.\n\n\n\n\n\nFinal Project\n\nThe proposal for the final project will be due before fall break.\nMore info to come!\n\n\n\n\n\nFinal Exam\n\nWe will have a final exam during finals week.\n\n\n\n\n\n\n\n\nIn-class activities (semi-regular)\n\nIndividual activities.\nGroup activities.\n\n\n\n \n\n\nAttendance and active participation\n\nIs key to your learning!\nPlease participate in class and in Slack.\nAnd will be considered in your final grade.\nLet me know if you cannot make it to class for health reasons or otherwise! If you are experiencing extenuating circumstances that inhibit your ability to attend I will work with you to help you succeed in the class. Communication is key."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#late-work",
+    "href": "slides/stat243_wk01mon.html#late-work",
+    "title": "Stat 243",
+    "section": "Late Work",
+    "text": "Late Work\n\n\nLabs: up to 4 extensions days can be used throughout the semester.\n\ne.g., 1 additional day for 4 labs, 4 additional days for 1 lab, …\nrounding days up\nBut! You may not delay the quiz if you are using extension days.\n\n\n\n\n\nProjects: no late projects are accepted.\n\n\n\n\nIn-class assignments: cannot be made up.\n\n\n\n\nFinal exam: cannot be made up.\n\n\n\n\nQuizzes: cannot be made up, but if you will have a planned absence for a Friday or are ill, email me beforehand and we can discuss possible solutions for taking a quiz."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#course-climate",
+    "href": "slides/stat243_wk01mon.html#course-climate",
+    "title": "Stat 243",
+    "section": "Course Climate",
+    "text": "Course Climate\n\nWe expect everyone in this class to strive to foster a learning environment that is equitable, inclusive, and welcoming. If you experience any barriers to learning, please come to Professor Grayson White or a college administrator with your concerns.\n\nCode of Conduct:\nWe expect all members of Stat 243 to make participation a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation.\nWe expect everyone to act and interact in ways that contribute to an open, welcoming, inclusive, and healthy community of learners. You can contribute to a positive learning environment by demonstrating empathy and kindness, being respectful of differing viewpoints and experiences, and giving and gracefully accepting constructive feedback.1\n\n\n\n\n−+\n01:00\n\n\n\nThis Code of Conduct is adapted from the Contributor Covenant, version 2.0."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#engagement",
+    "href": "slides/stat243_wk01mon.html#engagement",
+    "title": "Stat 243",
+    "section": "Engagement",
+    "text": "Engagement\n\n\n \n\n\n\n\n\n\nBeing actively present is key.\n\n\n\nDuring lecture and lab, remove distractions.\n\nWhen we are on our computers, close email, social media, news, etc.\nHide your phone.\n\nI have high expectations but know that all of you (regardless of your stats, math, or computing background) have the ability to meet them."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#artificial-intelligence-ai-policy",
+    "href": "slides/stat243_wk01mon.html#artificial-intelligence-ai-policy",
+    "title": "Stat 243",
+    "section": "Artificial Intelligence (AI) Policy",
+    "text": "Artificial Intelligence (AI) Policy\n\nArtificial intelligence (AI) tools, such as ChatGPT, Claude, Co-Pilot, Gemini, and others are being used to generate code, analyze data, write, and much more (and they are getting quite good at many of these tasks!). However, learning to think critically about a problem at hand, and engaging with your peers, tutors, and instructors when not understanding a concept or question are integral components of a liberal arts education and goals of this course. Therefore,\nFor all course content: The use of generative AI tools, such as ChatGPT and others, are strictly prohibited in any stage of the work process for this course.\n\n\n\n\n−+\n01:00"
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#why-this-policy",
+    "href": "slides/stat243_wk01mon.html#why-this-policy",
+    "title": "Stat 243",
+    "section": "Why this policy?",
+    "text": "Why this policy?\n\n\nRelying too heavily on AI tools to think for you, and to write your code prohibits understanding of the core concepts.\n\n\n\nMy goal: Make you an excellent statistician / data scientist / machine learning guru / … with a great deal of personal understanding of the material so that you can…\n\nindependently engage with statistical learning methods,\nethically engage with sensitive data, and\ncontinue to embrace and engage in the very human aspects of statistical learning."
+  },
+  {
+    "objectID": "slides/stat243_wk01mon.html#next-time",
+    "href": "slides/stat243_wk01mon.html#next-time",
+    "title": "Stat 243",
+    "section": "Next Time",
+    "text": "Next Time\n\nAn activity\nA deeper introduction to stat learning"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#goals-for-today-and-next-time",
+    "href": "slides/stat243_wk02wed.html#goals-for-today-and-next-time",
+    "title": "Stat 243",
+    "section": "Goals for Today (and next time)",
+    "text": "Goals for Today (and next time)\n\n\n\nToday:\n\nFormalize how we think about assessing accuracy.\n\n\n\n\nFriday (NOT lab):\n\nLinear regression."
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#the-rules",
+    "href": "slides/stat243_wk02wed.html#the-rules",
+    "title": "Stat 243",
+    "section": "The Rules",
+    "text": "The Rules\nI will display photos from 8 current and former math/stats faculty:\n\nGoal: Estimate the age of each faculty member (at the time the picture was taken)\nNote: None of these pictures were taken this year!\n\n\nWork in groups of 2-3 to develop a consistent method for estimating age.\nRecord your estimates for each faculty member on paper and submit it to me."
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#all-photos",
+    "href": "slides/stat243_wk02wed.html#all-photos",
+    "title": "Stat 243",
+    "section": "All Photos",
+    "text": "All Photos\nAs we wait for groups to guess ages, complete the reflection worksheet."
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#running-example-adelie-penguins",
+    "href": "slides/stat243_wk02wed.html#running-example-adelie-penguins",
+    "title": "Stat 243",
+    "section": "Running Example: Adelie Penguins",
+    "text": "Running Example: Adelie Penguins\nWe want to predict Body Mass (\\(Y\\)) based on Bill Length (\\(X\\)), based on a sample of \\(n=50\\) Adelie penguins.\n\nset.seed(0)\nadelie &lt;- penguins %&gt;% filter(species==\"Adelie\")\nwhich_train &lt;- sample(1:nrow(adelie),50)\nadelie &lt;- adelie[which_train,]\nggplot(adelie,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +theme_bw(base_size=18) +\n  labs(title=\"Sample of n=50 Adelie Penguins\",x=\"Bill Length\",y=\"Body Mass\")\n\n\n\n\n\n\n\n\nNote: This is prediction, supervised learning, and a regression problem\nQ: How would you model this relationship? (Parametric vs. Non-Parametric?)"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#types-of-error",
+    "href": "slides/stat243_wk02wed.html#types-of-error",
+    "title": "Stat 243",
+    "section": "Types of Error",
+    "text": "Types of Error\nThere are two sources of error in a model, \\[\n\\hat{Y} = \\hat{f}(X)\n\\] for the true relationship, \\[\nY = f(X)+\\epsilon\n\\]\n\\[\n  \\text{Error} = Y - \\hat{Y} = \\underbrace{(f - \\hat{f})}_{\\text{Reducible}} + \\underbrace{\\epsilon}_{\\text{irreducible}}\n\\]\n\n\nReducible error: in the form of our estimate \\(\\hat{f}\\) for \\(f\\).\nIrreducible error: in the form of \\(\\epsilon\\)\n\n\n\n\nWe usually lower Reducible error by increasing the sample size\nWe usually cannot lower Irreducible error"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#quality-of-a-model",
+    "href": "slides/stat243_wk02wed.html#quality-of-a-model",
+    "title": "Stat 243",
+    "section": "Quality of a Model",
+    "text": "Quality of a Model\nWhen given a modeling question, we can conceive of many possible models.\n\nHow do we measure quality of a model?\n\nDevise a quantitative measurement of model error.\nSelect the model that minimizes this measure of error.\n\n\n\nFor regression, the most common measure of error is the Mean Squared Error (MSE): \\[\n\\mathrm{MSE}(\\hat{f}) = \\frac{1}{n}\\sum_{i=1}^n \\Big(y_i - \\hat{f}(x_i) \\Big)^2\n\\] where\n\n\\(\\hat{f}\\) is the model\n\\(x_i\\) are the observed predictor values\n\\(y_i\\) are the corresponding observed response values."
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#mean-squared-error-mse",
+    "href": "slides/stat243_wk02wed.html#mean-squared-error-mse",
+    "title": "Stat 243",
+    "section": "Mean Squared Error (MSE)",
+    "text": "Mean Squared Error (MSE)\n\\[\n\\mathrm{MSE}(\\hat{f}) = \\frac{1}{n}\\sum_{i=1}^n \\Big(y_i - \\hat{f}(x_i) \\Big)^2\n\\]\nQ: Under what circumstances is MSE small?\n\n\nWhen the (reducible + irreducible) error is small!\nA: Reducible error (usually) lowers as \\(n\\) increases\n\n\n\nQ: What could go wrong if we try to minimize \\(\\mathrm{MSE}\\) on observed data?\n\nHint: Consider prediction with new penguins\n\n\n\n\nA: We could make a model too specific to our observed data that doesn’t generalize to new data (i.e., overfitting)"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#training-and-test-data-for-prediction-problems",
+    "href": "slides/stat243_wk02wed.html#training-and-test-data-for-prediction-problems",
+    "title": "Stat 243",
+    "section": "Training and Test Data (for prediction problems)",
+    "text": "Training and Test Data (for prediction problems)\nWe can solve this problem by dividing our data into training and test sets.\n\n\nTraining Data: Subset used for building a model\nTest Data: Rest of data used for assessing model accuracy\n\n\n\nIf we have training and test data, we can:\n\nBuild many models on the training data\nCompare their performance on the test data (e.g., compare MSE)\nSelect the model that did the best on the test data"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#returning-to-penguins",
+    "href": "slides/stat243_wk02wed.html#returning-to-penguins",
+    "title": "Stat 243",
+    "section": "Returning to Penguins",
+    "text": "Returning to Penguins\nWe want to predict Body Mass (\\(Y\\)) over future penguins based on Bill Length (\\(X\\)).\nWe have a random sample of \\(n=50\\) penguins.\n\nQ: How might we split our data into training and test sets?\n\n\nA: Randomly split data in two halves:\n\n\\(n=25\\) “training” observations\n\\(n=25\\) “testing” observations\n\nLet’s demonstrate this process!"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#training-set",
+    "href": "slides/stat243_wk02wed.html#training-set",
+    "title": "Stat 243",
+    "section": "Training Set",
+    "text": "Training Set\n\n\n#\n#\nggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +\n  theme_bw(base_size=15) + labs(title=\"Training Data\",x=\"Bill Length\",y=\"Body Mass\")"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#model-1",
+    "href": "slides/stat243_wk02wed.html#model-1",
+    "title": "Stat 243",
+    "section": "Model 1",
+    "text": "Model 1\n\nggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +\n  theme_bw(base_size=15) + labs(title=\"Training Data\",x=\"Bill Length\",y=\"Body Mass\") +\n  geom_smooth( method = \"lm\" , se = F)"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#model-1-and-2",
+    "href": "slides/stat243_wk02wed.html#model-1-and-2",
+    "title": "Stat 243",
+    "section": "Model 1 and 2",
+    "text": "Model 1 and 2\n\nggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +\n  theme_bw(base_size=15) + labs(title=\"Training Data\",x=\"Bill Length\",y=\"Body Mass\") +\n  geom_smooth( method = \"lm\" , se = F) +\n  geom_smooth( method = \"lm\" ,formula = y ~ poly(x, 7), se = F, color = \"red\")"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#test-set",
+    "href": "slides/stat243_wk02wed.html#test-set",
+    "title": "Stat 243",
+    "section": "Test Set",
+    "text": "Test Set"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#test-set-with-models",
+    "href": "slides/stat243_wk02wed.html#test-set-with-models",
+    "title": "Stat 243",
+    "section": "Test Set with models",
+    "text": "Test Set with models\n\nggplot(adelie_test,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +\n  theme_bw(base_size=15) + labs(title=\"Testing Data\",x=\"Bill Length\",y=\"Body Mass\") +\n  geom_smooth(data = adelie_train, method = \"lm\" , se = F) +\n  geom_smooth(data = adelie_train, method = \"lm\" ,formula = y ~ poly(x, 7), se = F, color = \"red\")"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#test-mse",
+    "href": "slides/stat243_wk02wed.html#test-mse",
+    "title": "Stat 243",
+    "section": "Test MSE",
+    "text": "Test MSE\n\ntibble(\"Linear MSE\"=lin_mse, \"Polynomial MSE\"=poly_mse)\n\n# A tibble: 1 × 2\n  `Linear MSE` `Polynomial MSE`\n         &lt;dbl&gt;            &lt;dbl&gt;\n1      117858.        10083784.\n\n\nQ: Which model should we pick? A: Linear model, since lower test MSE\n\nQ: What’s actually going on in this situation? A: The Bias-Variance Trade-off!"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#training-vs-test-mse",
+    "href": "slides/stat243_wk02wed.html#training-vs-test-mse",
+    "title": "Stat 243",
+    "section": "Training vs Test MSE",
+    "text": "Training vs Test MSE\nSuppose we consider various models to predict \\(Y\\), each of increasing complexity.\n\nWhat happens to training and test MSE as model complexity increases?\n\n\n\n\ninclude_graphics(\"img/ucurve_ISLR.png\")\n\n\n\n\n\n\n\n\n\nFigure 2.9 from ISLR\n\nGRAY: Training MSE\nRED: Test MSE\nX-axis is model complexity"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#mse-decomposition",
+    "href": "slides/stat243_wk02wed.html#mse-decomposition",
+    "title": "Stat 243",
+    "section": "MSE Decomposition",
+    "text": "MSE Decomposition\nU-Curve for Test MSE is a result of competition between two sources of model error.\n\nExpected Test MSE at \\(x_0\\) \\[\n\\mathrm{E} \\Big[ ( y_0 - \\hat{f}(x_0))^2 \\big]  = \\left[\\mathrm{Bias}(\\hat{f}(x_0))\\right]^2 + \\mathrm{Var}(\\hat{f}(x_0)) +  \\mathrm{Var}(\\epsilon)\n\\]\n\n\n\n(Squared) Bias – \\(\\left[\\mathrm{Bias}(\\hat{f}(x_0))\\right]^2\\) By “Bias”, we mean \\(E[ \\hat{f} (x_0) - f (x_0) ]\\)\n\n\n\n\nVariance – \\(\\mathrm{Var}(\\hat{f}(x_0))\\)\n\n\n\n\nIrreducible Error Variance – \\(\\mathrm{Var}(\\epsilon)\\) Can’t do anything about this!\n\n\n\nTakeaway: To minimize MSE, we need to balance minimizing bias AND variance."
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#bias-and-variance",
+    "href": "slides/stat243_wk02wed.html#bias-and-variance",
+    "title": "Stat 243",
+    "section": "Bias and Variance",
+    "text": "Bias and Variance\nBias is amount by which model estimates, \\(\\hat{f}(x_0)\\), differ from the truth, \\(f(x_0)\\).\n\nBias produced when assumed model doesn’t match reality\nSimple models: Generally high bias\nComplex models: Generally low bias\n\n\nVariance is amount of variability in \\(\\hat{f}(x_0)\\) across training sets\n\nSimple models: Generally low variance\nComplex models: Generally high variance"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#the-trade-off",
+    "href": "slides/stat243_wk02wed.html#the-trade-off",
+    "title": "Stat 243",
+    "section": "The Trade-off",
+    "text": "The Trade-off\nQ: What happens as we pick more complex models?\n\nAs complexity increases, we tend to “overfit” model to training data.\nBias decreases and variance increases\n\n\nWe want a sufficiently complex model that doesn’t overfit training data.\n\nHow we actually do this is a major theme of this course!!"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#recap-1",
+    "href": "slides/stat243_wk02wed.html#recap-1",
+    "title": "Stat 243",
+    "section": "Recap",
+    "text": "Recap\nToday, we…\n\nContrasted prediction vs. inference, (non-)parametric methods, (un)supervised learning, and regression vs. classification problems\nMean Squared Error (MSE) - Common metric of measuring error in a model\nFit models on “training data”, compare on “testing data”\nBias-Variance Trade-off - to minimize MSE, we must balance minimizing model bias and variance\n\nFor next time, please:\n\nComplete readings\nStart HW 3 (due Friday) and work on resubmissions"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#next-time",
+    "href": "slides/stat243_wk02wed.html#next-time",
+    "title": "Stat 243",
+    "section": "Next Time",
+    "text": "Next Time\n\nLinear regression"
   }
 ]

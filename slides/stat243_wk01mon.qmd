@@ -108,10 +108,8 @@ library(tidyverse)
 
 - **Office**: Library 386
 
-- **Office hours**: TBD
-<!-- , please fill out the [office hours survey](https://whenisgood.net/r3nfpzr) ASAP for your availability to be considered. -->
-
-<!-- -   This week, I'll hold office hours on Tuesday 1pm - 3pm and Friday 8am - 10am, or by appointment.  -->
+- **Office hours**: TBD, please fill out the [office hours survey](https://whenisgood.net/y2zt3a2) ASAP for your availability to be considered.
+    -   This week, I'll hold office hours on Tuesday 1pm - 3pm and Friday 9am - 10:30am, or by appointment.
 
 
 :::
@@ -497,25 +495,6 @@ On the next 4 slides, I'll contrast the following 4 pairs of terms:
 
 # Now, let's discuss course structure and policies
 
-## Course assistant info {.center}
-
-<br>
-
-::: {.fragment .fade-up .midi .nonincremental}
-
-
-- **Name**: 
-
-- **Email**: 
-
-- **Office**: ETC 105B
-
-- **Office hours**: 
-
-
-:::
-
-------------------------------------------------------------------------
 
 ## Class Time
 
@@ -592,13 +571,20 @@ We will regularly use the `R` programming language
     
 :::
 
-<br> <br>
 
 ::: {.fragment .fade-up}
 
 -   **Final Project**
     - The proposal for the final project will be due before fall break.
     - More info to come!
+    
+:::
+
+
+::: {.fragment .fade-up}
+
+-   **Final Exam**
+    - We will have a final exam during finals week.
     
 :::
 
@@ -662,6 +648,19 @@ We will regularly use the `R` programming language
 :::{.fragment .fade-up}
 
 -   **In-class assignments**: cannot be made up.
+
+:::
+
+:::{.fragment .fade-up}
+
+-   **Final exam**: cannot be made up.
+
+:::
+
+
+:::{.fragment .fade-up}
+
+-   **Quizzes**: cannot be made up, but if you will have a planned absence for a Friday or are ill, email me **beforehand** and we can discuss possible solutions for taking a quiz.  
 
 :::
 
@@ -734,15 +733,6 @@ Artificial intelligence (AI) tools, such as ChatGPT, Claude, Co-Pilot, Gemini, a
 countdown::countdown(1)
 ```
 
-
-
-- Well, what's the policy??
-
-
-## Artificial Intelligence (AI) Policy
-
-
-**For all course content**: The use of generative AI tools, such as ChatGPT and others, are strictly prohibited in any stage of the work process for this course.
 
 
 ## Why this policy?
