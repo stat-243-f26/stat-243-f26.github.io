@@ -80,7 +80,7 @@ library(tidyverse)
 
 **Wednesday:**
 
--   Assessing accuracy
+-   Activity
 
 
 :::
