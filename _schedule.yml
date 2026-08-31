@@ -16,7 +16,7 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/stat243_wk01mon.qmd
-        - topic: "Assessing Accuracy"
+        - topic: "Activity"
           display-date: Wednesday, Sep 2
           date: 9/2/26
           docs:
@@ -24,7 +24,7 @@ scheduled-docs:
               href: readings/readings_wk01wed.qmd
             - type: Slides
               href: slides/stat243_wk01wed.qmd
-        - topic: "Lab 1: Pictures"
+        - topic: "Lab 1: Intro"
           display-date: Friday, Sep 4
           date: 9/4/26
           docs:
@@ -38,7 +38,7 @@ scheduled-docs:
         - topic: "No Class: Holiday"
           display-date: Monday, Sep 7
           date: 9/7/26
-        - topic: "Linear Models I"
+        - topic: "Assessing Accuracy"
           display-date: Wednesday, Sep 9
           date: 9/9/26
           docs:
@@ -46,7 +46,7 @@ scheduled-docs:
               href: readings/readings_wk02wed.qmd
             - type: Slides
               href: slides/stat243_wk02wed.qmd
-        - topic: "Linear Models II (and Quiz I)"
+        - topic: "Linear Models I"
           display-date: Friday, Sep 11 
           date: 9/11/26
           docs:
@@ -59,7 +59,7 @@ scheduled-docs:
         - 'For Friday: TBD'
     - week: 3
       days:
-        - topic: "Linear Models III"
+        - topic: "Linear Models II  (and Quiz I)"
           display-date: Monday, Sep 14
           date: 9/14/26
           docs:
@@ -67,7 +67,7 @@ scheduled-docs:
               href: readings/readings_wk03mon.qmd
             - type: Slides
               href: slides/stat243_wk03mon.qmd
-        - topic: "Linear Models IV"
+        - topic: "Linear Models III"
           display-date: Wednesday, Sep 16
           date: 9/16/26
           docs:
