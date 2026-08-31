@@ -32,9 +32,10 @@ The course website, [stat-243-f26.github.io](https://stat-243-f26.github.io/), i
 
 **Meeting Times**:
 
-We'll have a lecture-style meeting twice a week. **Attendance is required** (please see the *Participation and Attendance* section of the syllabus. 
+We'll have a lecture-style meeting twice a week, and a lab-style meeting once a week. **Attendance is required** to both "lecture" and "lab" (please see the *Participation and Attendance* section of the syllabus. 
 
--   Class is on Mondays, Wednesdays, and Fridays 11:00am - 11:50am, Library Room 389.
+-   "Lecture"-style meetings are on Mondays & Wednesdays, 11:00am - 11:50am, Library Room 389.
+-   "Lab"-style meetins are on Fridays, 11:00am - 11:50am, Library Room 389
 
 
 
