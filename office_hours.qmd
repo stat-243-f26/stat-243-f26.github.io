@@ -5,14 +5,7 @@ editor: source
 
 Please stop by to introduce yourself or ask some questions about the course! 
 
-We offer two types of office hours for Stat 243:
-
--   **Instructor office hours**, which occur in Library 386. 
--   **Course Assistant office hours**, which occur in ETC 105B. 
-
-**Instructor office hours** are a great place to ask questions about the content or course in general. They're also a great place to get help on problems that you are stuck on.
-
-**Course Assistant office hours** are a great place to work on your assignments with fellow students and seek the help of the course assistants whenever you get stuck.
+Office hours are a great place to work on your assignments with fellow students and seek the help of the course assistants whenever you get stuck.
 
 Further, each Reed student is entitled to one hour of [individual tutoring](https://www.reed.edu/academic_support/individual_tutoring.html) per course per week. You can sign up for individual tutoring in [iris](https://iris.reed.edu/). 
 
