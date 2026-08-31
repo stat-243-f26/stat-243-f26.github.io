@@ -762,7 +762,6 @@ About the syllabus, AI, the course, etc.?
 ## Next Time
 
 - An activity
-- A deeper introduction to stat learning
 
 
 
