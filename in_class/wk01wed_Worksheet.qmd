@@ -1,6 +1,7 @@
 ---
 title: "Activity: How Old Are Reed Faculty?"
 format: pdf
+author: "Name: _______________"
 editor: source
 ---
 
@@ -21,6 +22,7 @@ library(knitr)
 
 Please answer the questions on the following pages with your group members.
 
+
 \vspace{2em}
 
 
@@ -40,6 +42,10 @@ Please answer the questions on the following pages with your group members.
 \includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/img3.jpg}
 ```
 
+
+\newpage
+
+\textcolor{white}{blue text}
 
 \newpage
 
