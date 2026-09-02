@@ -13,4 +13,4 @@ Further, each Reed student is entitled to one hour of [individual tutoring](http
 Below is the schedule of office hours for the week. We will update this calendar in case office hours need to change times or locations. 
 
 
-<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&showPrint=0&mode=WEEK&src=Y182NzJkNmJlMzdkZTRlN2U5MTM2MDIxYWNlYWFmMTFjMWY4ZGFhM2VhNWY3NTUxNjVjNjA2YmE1MzJlYTRjYTIxQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23f09300" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&showPrint=0&mode=WEEK&showTitle=0&showTabs=0&src=Y19hZmZhMzljZmJmYWExMzZkMDY5NDFjN2Q4NmIyYjMyNTQzMDViY2ZjYWRmNThhY2I2MTczNDg1YTIyYzJjNWE3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&src=Y182NDZkNTUwMTkzMjg5NTE5Mjc1NzYxYTk1Y2I2ZTIyM2FjZjM3MDYzZTQ4ZWQ4MmM1YTU0NWQyNzJiZDJmZjgwQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23b39ddb&color=%23b39ddb" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
