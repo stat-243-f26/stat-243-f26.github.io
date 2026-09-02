@@ -20,6 +20,12 @@ editor:
 -   Office: Library 386
 -   Office hours: Available [here](office_hours.qmd). 
 
+**Course Assistant**: Leland Russell (they/them)
+
+-   Email: [lrussell@reed.edu](mailto:lrussell@reed.edu)
+-   Office: ETC 105B
+-   Office hours: Available [here](office_hours.qmd). 
+
 
 **Links and course resources**:
 
