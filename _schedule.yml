@@ -20,8 +20,8 @@ scheduled-docs:
           display-date: Wednesday, Sep 2
           date: 9/2/26
           docs:
-            - type: Reading
-              href: readings/readings_wk01wed.qmd
+            # - type: Reading
+            #   href: readings/readings_wk01wed.qmd
             - type: Slides
               href: slides/stat243_wk01wed.qmd
         - topic: "Lab 1: Intro"
