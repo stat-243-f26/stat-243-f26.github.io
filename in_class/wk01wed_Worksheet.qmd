@@ -29,7 +29,7 @@ Please answer the questions on the following pages with your group members.
 \includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/megan-23.jpeg}\hfill
 \includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/chris.jpg}\hfill
 \includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/alex.jpg}\hfill
-\includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/img10.jpg}
+\includegraphics[width=0.24\textwidth]{../slides/img/Faculty_Img/blum-erica-27.jpg}
 
 \vspace{1em}
 

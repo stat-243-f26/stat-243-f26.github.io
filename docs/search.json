@@ -154,39 +154,39 @@
     "text": "All Photos\nAs we wait for groups to guess ages, complete the reflection worksheet."
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#reflection-questions",
-    "href": "slides/stat243_wk01wed.html#reflection-questions",
+    "objectID": "slides/stat243_wk01wed.html#reflection-modeling-questions",
+    "href": "slides/stat243_wk01wed.html#reflection-modeling-questions",
     "title": "Stat 243",
-    "section": "Reflection Questions",
-    "text": "Reflection Questions\n\nWhat explicit features are you analyzing?\nHow do you convert these features to numerical estimates?\nHow do you resolve differences in opinion among group members?\nIs the activity supervised or unsupervised?\nDoes it represent a classification or regression problem?\nAre you interested primarily in prediction or inference?\nAre you using parametric or non-parametric methods?\nWhat are some sources of “error” in your estimates?\nHow can we quantify the error in your estimates?\nHow should we assess the overall accuracy of a group’s predictions?\nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
+    "section": "Reflection: Modeling Questions",
+    "text": "Reflection: Modeling Questions\n\nWhat explicit features are you analyzing?\nHow do you convert these features to numerical estimates?\nHow do you resolve differences in opinion among group members?"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#results",
-    "href": "slides/stat243_wk01wed.html#results",
+    "objectID": "slides/stat243_wk01wed.html#reflection-definitional-questions",
+    "href": "slides/stat243_wk01wed.html#reflection-definitional-questions",
     "title": "Stat 243",
-    "section": "Results",
-    "text": "Results"
+    "section": "Reflection: Definitional Questions",
+    "text": "Reflection: Definitional Questions\n\nIs the activity supervised or unsupervised?\n\nSupervised\n\nDoes it represent a classification or regression problem?\n\nRegression\n\nAre you interested primarily in prediction or inference?\n\nPrediction\n\nAre you using parametric or non-parametric methods?\n\nEither would have worked!"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#answers",
-    "href": "slides/stat243_wk01wed.html#answers",
+    "objectID": "slides/stat243_wk01wed.html#reflection-conceptual-questions",
+    "href": "slides/stat243_wk01wed.html#reflection-conceptual-questions",
     "title": "Stat 243",
-    "section": "Answers",
-    "text": "Answers\nModeling Questions Answers will vary\n\nWhat explicit features are you analyzing?\nHow do you convert these features to numerical estimates?\nHow do you resolve differences in opinion among group members?\n\n\nDefinitional Questions\n\nIs the activity supervised or unsupervised? Supervised\nDoes it represent a classification or regression problem? Regression\nAre you interested primarily in prediction or inference? Prediction\nAre you using parametric or non-parametric methods? Either would have worked!"
+    "section": "Reflection: Conceptual Questions",
+    "text": "Reflection: Conceptual Questions\n\nWhat are some sources of “error” in your estimates?\nHow can we quantify the error in your estimates?\nHow should we assess the overall accuracy of a group’s predictions?\nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#answers-cont.",
-    "href": "slides/stat243_wk01wed.html#answers-cont.",
+    "objectID": "slides/stat243_wk01wed.html#returning-to-conceptual-questions",
+    "href": "slides/stat243_wk01wed.html#returning-to-conceptual-questions",
     "title": "Stat 243",
-    "section": "Answers (cont.)",
-    "text": "Answers (cont.)\nConceptual Questions Answers will vary\n\nWhat are some sources of “error” in your estimates?\nHow can we quantify the error in your estimates?\nHow should we assess the overall accuracy of a group’s predictions?\nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
+    "section": "Returning to conceptual questions",
+    "text": "Returning to conceptual questions\n\nWhat are some sources of “error” in your estimates?\nHow can we quantify the error in your estimates?\nHow should we assess the overall accuracy of a group’s predictions?\nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
   },
   {
     "objectID": "slides/stat243_wk01wed.html#next-time",
     "href": "slides/stat243_wk01wed.html#next-time",
     "title": "Stat 243",
     "section": "Next Time",
-    "text": "Next Time\n\nLab 1: Technologies, Data, and Stat Learning Methods"
+    "text": "Next Time\n\nLab 1: Technologies, Data, and Stat Learning Methods\n\n\n\nRemember, before Thursday 9/3 (tomorrow) at noon, please do the following:\n\n\nWe’ll use GitHub for our class, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to https://github.com/ and sign up for one. Once you’ve signed up for an account, please add it to the Google Sheet so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet."
   },
   {
     "objectID": "readings/readings_wk01wed.html",

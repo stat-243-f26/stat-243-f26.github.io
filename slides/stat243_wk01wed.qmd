@@ -179,8 +179,8 @@ include_graphics("img/Faculty_Img/michael.jpg")
 ```{r}
 #| echo: false
 #| fig-align: "center"
-#| out-width: "50%"
-include_graphics("img/Faculty_Img/img10.jpg")
+#| out-width: "40%"
+include_graphics("img/Faculty_Img/blum-erica-27.jpg")
 ```
 
 ## Photo 8
@@ -188,7 +188,7 @@ include_graphics("img/Faculty_Img/img10.jpg")
 ```{r}
 #| echo: false
 #| fig-align: "center"
-#| out-width: "50%"
+#| out-width: "40%"
 include_graphics("img/Faculty_Img/img3.jpg")
 ```
 
@@ -263,15 +263,15 @@ include_graphics("img/Faculty_Img/michael.jpg")
 ```{r}
 #| echo: false
 #| fig-align: "center"
-#| out-width: "50%"
-include_graphics("img/Faculty_Img/img10.jpg")
+#| out-width: "73%"
+include_graphics("img/Faculty_Img/blum-erica-27.jpg")
 ```
 
 
 ```{r}
 #| echo: false
 #| fig-align: "center"
-#| out-width: "50%"
+#| out-width: "73%"
 include_graphics("img/Faculty_Img/img3.jpg")
 ```
 
@@ -284,31 +284,7 @@ include_graphics("img/Faculty_Img/img3.jpg")
 
 # Questions
 
-## Reflection Questions {.small}
-
-::: {.nonincremental}
-
-- What explicit features are you analyzing?
-- How do you convert these features to numerical estimates?
-- How do you resolve differences in opinion among group members?
-
-- Is the activity **supervised** or **unsupervised**?
-- Does it represent a **classification** or **regression** problem?
-- Are you interested primarily in **prediction** or **inference**?
-- Are you using **parametric** or **non-parametric** methods?
-
-- What are some sources of "error" in your estimates?
-- How can we quantify the error in your estimates?
-- How should we assess the overall accuracy of a group's predictions?
-- In what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?
-
-:::
-
-## Results
-
-## Answers
-
-**Modeling Questions** **Answers will vary**
+## Reflection: Modeling Questions
 
 ::: {.nonincremental}
 
@@ -318,42 +294,68 @@ include_graphics("img/Faculty_Img/img3.jpg")
 
 :::
 
-::: {.fragment .nonincremental}
 
-**Definitional Questions**
+## Reflection: Definitional Questions
 
-- Is the activity **supervised** or **unsupervised**? [Supervised]{.fragment}
+::: {.nonincremental}
 
-- Does it represent a **classification** or **regression** problem? [Regression]{.fragment}
-
-- Are you interested primarily in **prediction** or **inference**? [Prediction]{.fragment}
-
-- Are you using **parametric** or **non-parametric** methods? [Either would have worked!]{.fragment}
+- Is the activity **supervised** or **unsupervised**? 
+    - [Supervised]{.fragment}
+- Does it represent a **classification** or **regression** problem? 
+    - [Regression]{.fragment}
+- Are you interested primarily in **prediction** or **inference**? 
+    - [Prediction]{.fragment}
+- Are you using **parametric** or **non-parametric** methods? 
+    - [Either would have worked!]{.fragment}
 
 :::
 
-## Answers (cont.)
 
-**Conceptual Questions** **Answers will vary**
+## Reflection: Conceptual Questions
+
 
 ::: {.nonincremental}
 
 - What are some sources of "error" in your estimates?
-
 - How can we quantify the error in your estimates?
-
 - How should we assess the overall accuracy of a group's predictions?
-
 - In what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?
 
 :::
 
+# Results
+
+(on the board)
+
+
+## Returning to conceptual questions
+
+::: {.nonincremental}
+
+- What are some sources of "error" in your estimates?
+- How can we quantify the error in your estimates?
+- How should we assess the overall accuracy of a group's predictions?
+- In what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?
+
+:::
 
 
 
 ## Next Time
 
 - Lab 1: *Technologies, Data, and Stat Learning Methods*
+    
+::: {.fragment .nonincremental}
+    
+- Remember, before Thursday 9/3 (tomorrow) at noon, please do the following:
+
+::: {.blockquote}
+
+We'll use GitHub for our class, so each of you need to have a GitHub profile. If you don't have a GitHub profile already, go to [https://github.com/](https://github.com/) and sign up for one. Once you've signed up for an account, please add it to the [Google Sheet](https://docs.google.com/spreadsheets/d/1yhQfUwGpKj1bQYg3rmDybKobVkh-tjnY-GcYn4LTf7c/edit?usp=sharing) so that I can add you to the stat-243-f26 organization. Note: you'll need to be logged in to your Reed Google account to edit the Google Sheet.
+
+:::
+
+:::
 
 
 
