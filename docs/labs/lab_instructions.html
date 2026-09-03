@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Technologies, Data, and Stat Learning Methods – Stat 243</title>
+<title>Instructions for Accessing Math 243 Labs – Stat 243</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,41 +25,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -153,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Technologies, Data, and Stat Learning Methods</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Instructions for Accessing Math 243 Labs</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -178,8 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Technologies, Data, and Stat Learning Methods</h1>
-<p class="subtitle lead">Stat 243: Lab 1</p>
+<h1 class="title">Instructions for Accessing Math 243 Labs</h1>
 </div>
 
 
@@ -196,98 +160,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="due-monday-sep-14th-11am-pt." class="level2">
-<h2 class="anchored" data-anchor-id="due-monday-sep-14th-11am-pt.">Due: Monday, Sep 14th, 11am PT.</h2>
-</section>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p><code>R</code> is a wonderful programming language that we will frequently use in our course to visualize and tidy data, create programs to assist computations, create data models, and perform statistical inference. It is free, open-source, and has a large community of users who care about statistics and data science.</p>
-<p>To begin, note that there are 3 closely related computer processes that we will work with: <code>R</code>, <code>RStudio</code> (or <code>Positron</code>), and <code>Quarto</code>. It’s worth taking a moment to distinguish between them.</p>
-<ul>
-<li><code>R</code> is a programming language, which can be accessed by typing particular commands into the console or at the command prompt.</li>
-<li><code>RStudio</code> and <code>Positron</code> are integrated development environments (IDEs), and provides a clean user interface for writing and executing R code. IDEs are the main tool we will use to interact with the R language.</li>
-<li><code>Quarto</code> is a file type we’ll use to write R code and text (similar to .docx, but for programming!). It can record R code, text, and graphical outputs. One of the easiest ways to share your results with others is to distribute your Quarto (or .qmd) file. It’s a “one-stop shop” of statistical work!</li>
-</ul>
-<p>RStudio comes in two varieties: RStudio Desktop and RStudio Server. The desktop version is a program you can install on your personal computer, and uses your computer’s resources to perform calculations. On the other hand, the server version can be accessed just using a web-browser, and will perform calculations on Reed’s server; there is no need to install any additional programs. For class purposes, you have the option of using the RStudio Server or RStudio Desktop (or Positron).</p>
-</section>
-<section id="optional-read-below-problem-1-setup" class="level2">
-<h2 class="anchored" data-anchor-id="optional-read-below-problem-1-setup">(Optional – Read below) Problem 1: Setup</h2>
-<p>Problem 1 is optional. If you would like to run R and RStudio / Positron locally on your computer, complete the steps below for Problem 1. However, if you would rather use the <a href="https://rstudio.reed.edu/">Reed RStudio Server</a>, you can skip this problem and move on to the header that says “Problems 2 and beyond”.</p>
-<section id="part-a-github" class="level3">
-<h3 class="anchored" data-anchor-id="part-a-github">part a: GitHub</h3>
-<p>We’ll use GitHub for collaboration and portfolio building, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to <a href="https://github.com/">https://github.com/</a> and sign up for one. Once you’ve signed up for an account, please add it to the <a href="https://docs.google.com/spreadsheets/d/1yhQfUwGpKj1bQYg3rmDybKobVkh-tjnY-GcYn4LTf7c/edit?usp=sharing">Google Sheet</a> so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet.</p>
-</section>
-<section id="part-b-r-and-rstudio-or-positron" class="level3">
-<h3 class="anchored" data-anchor-id="part-b-r-and-rstudio-or-positron">part b: R and RStudio (or Positron!)</h3>
-<p>We’ll use <code>R</code> and RStudio/Positron for computing in this class. <code>R</code> is a statistical programming language, while RStudio and Positron are Integrated Development Environments (IDEs) that allow you to run <code>R</code>, view files, view <code>R</code> code output, and much more! Reed has an <a href="https://rstudio.reed.edu/">RStudio Server</a> where you can run <code>R</code> and RStudio in the cloud, but for this class I would recommend a local installation of both <code>R</code> and RStudio. Positron is a new IDE from Posit (the company that makes RStudio) you are welcomed and encouraged to try out Positron, although I may not be able to provide as good of problem solving for any issues related to your IDE if you use Positron. Positron seems to be the hot new thing, and I imagine in the next ~5 years we will see a steep decline of RStudio use in favor of Positron for <code>R</code> users and data scientists.</p>
-<p>To install <code>R</code> and RStudio, follow the <a href="https://posit.co/download/rstudio-desktop/">directions from Posit’s website</a>.</p>
-<p>To install Positron, see this <a href="https://positron.posit.co/download.html">link from Posit’s website</a>.</p>
-<p><strong>Note</strong>: always make sure to have <code>R</code> installed before installing your IDE.</p>
-</section>
-<section id="part-c-connect-git-github-and-rstudio-or-positron" class="level3">
-<h3 class="anchored" data-anchor-id="part-c-connect-git-github-and-rstudio-or-positron">part c: Connect git, GitHub and RStudio (or Positron)</h3>
-<p>These instructions are based on pieces of <a href="https://happygitwithr.com/">Happy git with R</a>, in particular chapters 6, 7, and 9. Depending on your computer, setup, or just luck, this step can become difficult/frustrating. If you are having trouble with this step, please ask for help!</p>
-<p>In order to have your computer talk with GitHub, you’ll need to install git on your computer. Sometimes, git is already installed on your computer, and you can check it by running</p>
-<pre><code>which git</code></pre>
-<p>in a Terminal or shell window. If you have git installed, you should see something like “/usr/bin/git” returned to you. If you don’t have git installed, you might see something like “git: command not found” or nothing at all. If you have git installed, congrats! If not, follow the steps in <a href="https://happygitwithr.com/install-git">Happy git with R, Chapter 6</a> to install git.</p>
-<p>Next, up you have to introduce yourself to git. Again, following Happy git with R, in <a href="https://happygitwithr.com/hello-git">Chapter 7</a> we can run the following in an R session/console</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## install if needed (do this exactly once):</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages("usethis")</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">use_git_config</span>(<span class="at">user.name =</span> <span class="st">"Jane Doe"</span>, <span class="at">user.email =</span> <span class="st">"jane@example.org"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="accessing-this-lab" class="level2">
+<h2 class="anchored" data-anchor-id="accessing-this-lab">Accessing this Lab</h2>
+<p>In order to access the lab each week, you’ll have to follow these steps. Here, we detail the process of logging in to the RStudio Server and “cloning” a GitHub repository to get the lab materials. “Cloning”, in this case, means making a copy of my a folder I’ve uploaded with all files and data needed so that you can complete the lab. Anyways, here are the steps:</p>
+<ol type="1">
+<li>Use your web browser to navigate to the Reed RStudio server at <a href="https://rstudio.reed.edu">https://rstudio.reed.edu</a>.</li>
+<li>Log-in using your Reed username and password (the one you use for Moodle, Gmail, etc.).</li>
+<li>In the Projects dropdown (typically upper right) of RStudio, click the “Project: (None)” button<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Then, click “New Project…”.</li>
+</ol>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/screen1.png" class="img-fluid figure-img"></p>
+<figcaption>The project button</figcaption>
+</figure>
 </div>
-<p>where Jane Doe is replaced with your full name and jane@example.org is replaced with the email you used to sign up for GitHub.</p>
-<p>Next, you’ll have to authenticate yourself (i.e., give your computer permission to make changes to GitHub projects when you ask it to). To do this, run the following in an R session/console:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/screen2.png" class="img-fluid figure-img"></p>
+<figcaption>Selecting “New Project…”</figcaption>
+</figure>
 </div>
-<p>This should open a new browser window where you can create your token. I often set no expiration date and check all of the boxes, but that is up to you. Note that when your token expires you’ll have to make a new one if you’re still using the same computer. Now, your token is created (it will start with “ghp_”)! Copy it down somewhere so that you don’t lose it.</p>
-<p>The final step is to run</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## install if needed (do this exactly once):</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages("gitcreds")</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>and then enter the token when prompted. If also this has gone well, you are set!</p>
-<p>Unless… you’re running Linux. If you’re running Linux, I am happy to help you get git working correctly, but I’d say the first step is to read and follow Danielle Navarro’s <a href="https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/">blog post</a>, in addition to the steps above.</p>
-</section>
-<section id="part-d-testing" class="level3">
-<h3 class="anchored" data-anchor-id="part-d-testing">part d: testing</h3>
-<p>To make sure everything is working correctly, run</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_get</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>in an R session/console. You should see something like</p>
-<pre><code>&lt;gitcreds&gt;
-  protocol: https
-  host    : github.com
-  username: PersonalAccessToken
-  password: &lt;-- hidden --&gt;</code></pre>
-<p>but if you see</p>
-<pre><code>Error in throw(new_error("gitcreds_no_credentials", url = url)) : 
-  Could not find any credentials</code></pre>
-<p>something has gone wrong.</p>
-</section>
-<section id="part-e-congrats" class="level3">
-<h3 class="anchored" data-anchor-id="part-e-congrats">part e: congrats!</h3>
-<p>If you’ve made it this far, congrats! You’ve successfully set up git, GitHub, and your IDE on your local machine! We’ll spend time in class during week 2 talking about how to use all of these tools, but for now you are good to go.</p>
-<p>If you’ve had trouble with any of these steps, please come to office hours so that we can debug and get you set up.</p>
-</section>
-</section>
-<section id="problems-2-and-beyond" class="level2">
-<h2 class="anchored" data-anchor-id="problems-2-and-beyond">Problems 2 and beyond</h2>
-<p>In order to access the next problems, clone the following repo:</p>
-<pre><code>https://github.com/stat-243-f26/lab01.git</code></pre>
-<p>For instructions on cloning a repo, see <a href="../labs/lab_instructions.html">Lab Instructions</a></p>
-<p>From there, you can answer the questions and then Render the document to submit the PDF to Gradescope.</p>
+<ol start="4" type="1">
+<li><p>A pop-up will appear to ask how you’d like to create the project. You’ll need to click “Version Control” and the “Git” to access the lab materials. After you’ve clicked “Version Control” and “Git”, add the link to the lab materials in the “Repository URL” section:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><strong>https://github.com/stat-243-f26/lab01.git</strong></p>
+<p>Finally, give the Project Directory the name “lab01”</p></li>
+</ol>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/screen3.png" class="img-fluid figure-img"></p>
+<figcaption>Selecting Version Control from the pop-up</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/screen4.png" class="img-fluid figure-img"></p>
+<figcaption>How things should look after you’ve added the link and project name</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Press “Create Project”. If all has gone well, you should see “lab01” in the top right corner of RStudio, and some new files for the lab in the bottom right corner of RStudio.</li>
+</ol>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/screen5.png" class="img-fluid figure-img"></p>
+<figcaption>The Create Project button</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/screen6.png" class="img-fluid figure-img"></p>
+<figcaption>A successful cloning of the lab!</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li>Open <code>lab01_yourname.qmd</code>. This is the Quarto document that you’ll complete the lab in. You can (and should) rename this file to include your actual name by checking the box next to the file, clicking “Rename”, and modifying the text to include your name, e.g.&nbsp;<code>lab01_graysonwhite.qmd</code>, rather than <code>lab01_yourname.qmd</code>.</li>
+</ol>
+<p>We’ve also provided a gif of steps 3-6 to help minimize confusion in these steps:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/accessing_the_lab.gif" class="img-fluid figure-img"></p>
+<figcaption>Steps 3-6, via gif</figcaption>
+</figure>
+</div>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>If you’re already in a project, this button will show that projects name. This shouldn’t be the case for the first lab, but will likely be the case for the remaining labs.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This link will always be the same, but updated for the lab number, e.g.&nbsp;<a href="https://github.com/stat-243-f26/lab01.git">https://github.com/stat-243-f26/lab02.git</a> for lab 2, <a href="https://github.com/stat-243-f26/lab01.git">https://github.com/stat-243-f26/lab10.git</a> for lab 10, etc. You won’t be able to access these projects until the day that the lab is released, though.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

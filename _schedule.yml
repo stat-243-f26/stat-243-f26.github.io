@@ -29,7 +29,9 @@ scheduled-docs:
           date: 9/4/26
           docs:
             - type: Lab 1
-              href: labs/lab01.qmd
+              href: labs/lab01_setup.qmd
+            - type: Lab Instructions
+              href: labs/lab_instructions.qmd
       resources:
         - '<a href="https://join.slack.com/t/stat243f26/shared_invite/zt-47qhj8xhz-VQj7slULCPkMTvUVUCjSeA">Join Slack</a>'
         - 'Gradescope course entry code: 68V7B3'
@@ -42,16 +44,12 @@ scheduled-docs:
           display-date: Wednesday, Sep 9
           date: 9/9/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk02wed.qmd
             - type: Slides
               href: slides/stat243_wk02wed.qmd
         - topic: "Linear Models I"
           display-date: Friday, Sep 11 
           date: 9/11/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk02fri.qmd
             - type: Slides
               href: slides/stat243_wk02fri.qmd
       resources:
@@ -63,16 +61,12 @@ scheduled-docs:
           display-date: Monday, Sep 14
           date: 9/14/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk03mon.qmd
             - type: Slides
               href: slides/stat243_wk03mon.qmd
         - topic: "Linear Models III"
           display-date: Wednesday, Sep 16
           date: 9/16/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk03wed.qmd
             - type: Slides
               href: slides/stat243_wk03wed.qmd
         - topic: "Lab 2: Linear Models"
@@ -89,16 +83,12 @@ scheduled-docs:
           display-date: Monday, Sep 21
           date: 9/21/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk04mon.qmd
             - type: Slides
               href: slides/stat243_wk04mon.qmd
         - topic: "Bootstrapping"
           display-date: Wednesday, Sep 23
           date: 9/23/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk04wed.qmd
             - type: Slides
               href: slides/stat243_wk04wed.qmd
         - topic: "Lab 3: Resampling Methods (and Quiz 2)"
@@ -115,16 +105,12 @@ scheduled-docs:
           display-date: Monday, Sep 28
           date: 9/28/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk05mon.qmd
             - type: Slides
               href: slides/stat243_wk05mon.qmd
         - topic: "Penalized Regression: LASSO"
           display-date: Wednesday, Sep 30
           date: 9/30/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk05wed.qmd
             - type: Slides
               href: slides/stat243_wk05wed.qmd
         - topic: "Lab 4: Penalized Regression (and Quiz 3)"
@@ -139,16 +125,12 @@ scheduled-docs:
           display-date: Monday, Oct 5
           date: 10/5/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk06mon.qmd
             - type: Slides
               href: slides/stat243_wk06mon.qmd
         - topic: "Generalized Linear Models: Counts"
           display-date: Wednesday, Oct 7
           date: 10/7/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk06wed.qmd
             - type: Slides
               href: slides/stat243_wk06wed.qmd
         - topic: "Lab 5: GLM Regression (and Quiz 4)"
@@ -165,16 +147,12 @@ scheduled-docs:
           display-date: Monday, Oct 12
           date: 10/12/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk07mon.qmd
             - type: Slides
               href: slides/stat243_wk07mon.qmd
         - topic: "More classification with GLMs"
           display-date: Wednesday, Oct 14
           date: 10/14/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk07wed.qmd
             - type: Slides
               href: slides/stat243_wk07wed.qmd
         - topic: "Lab 6: GLM Classification (and Quiz 5)"
@@ -195,16 +173,12 @@ scheduled-docs:
           display-date: Monday, Oct 26
           date: 10/26/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk08mon.qmd
             - type: Slides
               href: slides/stat243_wk08mon.qmd
         - topic: "Classification Trees"
           display-date: Wednesday, Oct 28
           date: 10/28/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk08wed.qmd
             - type: Slides
               href: slides/stat243_wk08wed.qmd
         - topic: "Lab 7: Nonparametric Classification (and Quiz 6)"
@@ -221,16 +195,12 @@ scheduled-docs:
           display-date: Monday, Nov 2
           date: 11/2/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk09mon.qmd
             - type: Slides
               href: slides/stat243_wk09mon.qmd
         - topic: "Regression Trees II"
           display-date: Wednesday, Nov 4
           date: 11/4/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk09wed.qmd
             - type: Slides
               href: slides/stat243_wk09wed.qmd
         - topic: "Lab 8: Trees (and Quiz 7)"
@@ -247,16 +217,12 @@ scheduled-docs:
           display-date: Monday, Nov 9
           date: 11/9/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk10mon.qmd
             - type: Slides
               href: slides/stat243_wk10mon.qmd
         - topic: "Boosting"
           display-date: Wednesday, Nov 11
           date: 11/11/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk10wed.qmd
             - type: Slides
               href: slides/stat243_wk10wed.qmd
         - topic: "Lab 9: Ensemble Trees (and Quiz 8)"
@@ -273,16 +239,12 @@ scheduled-docs:
           display-date: Monday, Nov 16
           date: 11/16/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk11mon.qmd
             - type: Slides
               href: slides/stat243_wk11mon.qmd
         - topic: "Hierarchical clustering"
           display-date: Wednesday, Nov 18
           date: 11/18/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk11wed.qmd
             - type: Slides
               href: slides/stat243_wk11wed.qmd
         - topic: "Lab 10: Clustering (and Quiz 9)"
@@ -299,16 +261,12 @@ scheduled-docs:
           display-date: Monday, Nov 23
           date: 11/23/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk12mon.qmd
             - type: Slides
               href: slides/stat243_wk12mon.qmd
         - topic: "Selected Topics"
           display-date: Wednesday, Nov 25
           date: 12/25/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk12wed.qmd
             - type: Slides
               href: slides/stat243_wk12wed.qmd
         - topic: "No class: Holiday"
@@ -322,16 +280,12 @@ scheduled-docs:
           display-date: Monday, Nov 30
           date: 11/30/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk13mon.qmd
             - type: Slides
               href: slides/stat243_wk13mon.qmd
         - topic: "Selected Topics"
           display-date: Wednesday, Dec 2
           date: 12/2/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk13wed.qmd
             - type: Slides
               href: slides/stat243_wk13wed.qmd
         - topic: "Project Work Day"
@@ -345,8 +299,6 @@ scheduled-docs:
           display-date: Monday, Dec 7
           date: 12/7/26
           docs:
-            # - type: Reading
-            #   href: readings/readings_wk14mon.qmd
             - type: Slides
               href: slides/stat243_wk14mon.qmd
         - topic: "Project Presentations"

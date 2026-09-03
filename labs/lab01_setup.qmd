@@ -6,11 +6,24 @@ editor: source
 toc: false
 ---
 
-## Due: Friday, Sep 11th, 11am PT.
+## Due: Monday, Sep 14th, 11am PT.
 
-## Problem 1: Setup
+## Introduction
 
-In this class, we'll encounter a variety of technologies. This problem aims to help you navigate setting up some of those technologies.
+`R` is a wonderful programming language that we will frequently use in our course to visualize and tidy data, create programs to assist computations, create data models, and perform statistical inference. It is free, open-source, and has a large community of users who care about statistics and data science.
+
+To begin, note that there are 3 closely related computer processes that we will work with: `R`, `RStudio` (or `Positron`), and `Quarto`. It's worth taking a moment to distinguish between them.
+
+- `R` is a programming language, which can be accessed by typing particular commands into the console or at the command prompt.
+- `RStudio` and `Positron` are integrated development environments (IDEs), and provides a clean user interface for writing and executing R code. IDEs are the main tool we will use to interact with the R language.
+- `Quarto` is a file type we'll use to write R code and text (similar to .docx, but for programming!). It can record R code, text, and graphical outputs. One of the easiest ways to share your results with others is to distribute your Quarto (or .qmd) file. It's a "one-stop shop" of statistical work! 
+
+RStudio comes in two varieties: RStudio Desktop and RStudio Server. The desktop version is a program you can install on your personal computer, and uses your computer's resources to perform calculations. On the other hand, the server version can be accessed just using a web-browser, and will perform calculations on Reed's server; there is no need to install any additional programs. For class purposes, you have the option of using the RStudio Server or RStudio Desktop (or Positron).
+
+## (Optional -- Read below) Problem 1: Setup
+
+Problem 1 is optional. If you would like to run R and RStudio / Positron locally on your computer, complete the steps below for Problem 1. However, if you would rather use the [Reed RStudio Server](https://rstudio.reed.edu/), you can skip this problem and move on to the header that says "Problems 2 and beyond".
+
 
 ### part a: GitHub
 
@@ -114,16 +127,18 @@ If you've had trouble with any of these steps, please come to office hours so th
 
 
 
-## Problems 2, 3, and 4
+## Problems 2 and beyond
 
-In order to access the next two problems, clone the following repo: 
+In order to access the next problems, clone the following repo: 
 
 
 ```
-https://github.com/stat-243-f26/lab01_YOURGITHUBUSERNAME.git
+https://github.com/stat-243-f26/lab01.git
 ```
 
-From there, you can answer the questions and then commit and push your work. 
+For instructions on cloning a repo, see [Lab Instructions](lab_instructions.qmd)
+
+From there, you can answer the questions and then Render the document to submit the PDF to Gradescope. 
 
 
 
