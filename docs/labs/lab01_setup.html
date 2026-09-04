@@ -208,11 +208,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>RStudio</code> and <code>Positron</code> are integrated development environments (IDEs), and provides a clean user interface for writing and executing R code. IDEs are the main tool we will use to interact with the R language.</li>
 <li><code>Quarto</code> is a file type we’ll use to write R code and text (similar to .docx, but for programming!). It can record R code, text, and graphical outputs. One of the easiest ways to share your results with others is to distribute your Quarto (or .qmd) file. It’s a “one-stop shop” of statistical work!</li>
 </ul>
-<p>RStudio comes in two varieties: RStudio Desktop and RStudio Server. The desktop version is a program you can install on your personal computer, and uses your computer’s resources to perform calculations. On the other hand, the server version can be accessed just using a web-browser, and will perform calculations on Reed’s server; there is no need to install any additional programs. For class purposes, you have the option of using the RStudio Server or RStudio Desktop (or Positron).</p>
+<p>RStudio comes in two varieties: RStudio Desktop and RStudio Server. The desktop version is a program you can install on your personal computer, and uses your computer’s resources to perform calculations. For class purposes, we highly recommend RStudio Desktop (or Positron, the newer IDE from Posit that is also available in a Desktop version).</p>
 </section>
-<section id="optional-read-below-problem-1-setup" class="level2">
-<h2 class="anchored" data-anchor-id="optional-read-below-problem-1-setup">(Optional – Read below) Problem 1: Setup</h2>
-<p>Problem 1 is optional. If you would like to run R and RStudio / Positron locally on your computer, complete the steps below for Problem 1. However, if you would rather use the <a href="https://rstudio.reed.edu/">Reed RStudio Server</a>, you can skip this problem and move on to the header that says “Problems 2 and beyond”.</p>
+<section id="problem-1-setup" class="level2">
+<h2 class="anchored" data-anchor-id="problem-1-setup">Problem 1: Setup</h2>
 <section id="part-a-github" class="level3">
 <h3 class="anchored" data-anchor-id="part-a-github">part a: GitHub</h3>
 <p>We’ll use GitHub for collaboration and portfolio building, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to <a href="https://github.com/">https://github.com/</a> and sign up for one. Once you’ve signed up for an account, please add it to the <a href="https://docs.google.com/spreadsheets/d/1yhQfUwGpKj1bQYg3rmDybKobVkh-tjnY-GcYn4LTf7c/edit?usp=sharing">Google Sheet</a> so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet.</p>
@@ -230,6 +229,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In order to have your computer talk with GitHub, you’ll need to install git on your computer. Sometimes, git is already installed on your computer, and you can check it by running</p>
 <pre><code>which git</code></pre>
 <p>in a Terminal or shell window. If you have git installed, you should see something like “/usr/bin/git” returned to you. If you don’t have git installed, you might see something like “git: command not found” or nothing at all. If you have git installed, congrats! If not, follow the steps in <a href="https://happygitwithr.com/install-git">Happy git with R, Chapter 6</a> to install git.</p>
+</section>
+<section id="notice-parts-d-e-and-f-are-optional" class="level3">
+<h3 class="anchored" data-anchor-id="notice-parts-d-e-and-f-are-optional">NOTICE: PARTS d, e, and f are OPTIONAL!</h3>
+<p>If you would like to set up your GitHub account with your computer, complete steps d, e, and f.&nbsp;This will not be relevant to our class, though, so it is entirely optional. You are welcome to come to office hours for help completing steps d, e, and f.&nbsp;</p>
+<p>In order to get everyone set up in a reasonable amount of time during lab, we recommend skipping these steps for now. You are welcome to return to them after our in-class lab time.</p>
+</section>
+<section id="part-d-introduce-yourself-to-git" class="level3">
+<h3 class="anchored" data-anchor-id="part-d-introduce-yourself-to-git">part d: Introduce yourself to git</h3>
 <p>Next, up you have to introduce yourself to git. Again, following Happy git with R, in <a href="https://happygitwithr.com/hello-git">Chapter 7</a> we can run the following in an R session/console</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## install if needed (do this exactly once):</span></span>
@@ -254,8 +261,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>and then enter the token when prompted. If also this has gone well, you are set!</p>
 <p>Unless… you’re running Linux. If you’re running Linux, I am happy to help you get git working correctly, but I’d say the first step is to read and follow Danielle Navarro’s <a href="https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/">blog post</a>, in addition to the steps above.</p>
 </section>
-<section id="part-d-testing" class="level3">
-<h3 class="anchored" data-anchor-id="part-d-testing">part d: testing</h3>
+<section id="part-e-testing" class="level3">
+<h3 class="anchored" data-anchor-id="part-e-testing">part e: testing</h3>
 <p>To make sure everything is working correctly, run</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_get</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -271,8 +278,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   Could not find any credentials</code></pre>
 <p>something has gone wrong.</p>
 </section>
-<section id="part-e-congrats" class="level3">
-<h3 class="anchored" data-anchor-id="part-e-congrats">part e: congrats!</h3>
+<section id="part-f-congrats" class="level3">
+<h3 class="anchored" data-anchor-id="part-f-congrats">part f: congrats!</h3>
 <p>If you’ve made it this far, congrats! You’ve successfully set up git, GitHub, and your IDE on your local machine! We’ll spend time in class during week 2 talking about how to use all of these tools, but for now you are good to go.</p>
 <p>If you’ve had trouble with any of these steps, please come to office hours so that we can debug and get you set up.</p>
 </section>

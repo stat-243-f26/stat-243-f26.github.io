@@ -18,12 +18,9 @@ To begin, note that there are 3 closely related computer processes that we will 
 - `RStudio` and `Positron` are integrated development environments (IDEs), and provides a clean user interface for writing and executing R code. IDEs are the main tool we will use to interact with the R language.
 - `Quarto` is a file type we'll use to write R code and text (similar to .docx, but for programming!). It can record R code, text, and graphical outputs. One of the easiest ways to share your results with others is to distribute your Quarto (or .qmd) file. It's a "one-stop shop" of statistical work! 
 
-RStudio comes in two varieties: RStudio Desktop and RStudio Server. The desktop version is a program you can install on your personal computer, and uses your computer's resources to perform calculations. On the other hand, the server version can be accessed just using a web-browser, and will perform calculations on Reed's server; there is no need to install any additional programs. For class purposes, you have the option of using the RStudio Server or RStudio Desktop (or Positron).
+RStudio comes in two varieties: RStudio Desktop and RStudio Server. The desktop version is a program you can install on your personal computer, and uses your computer's resources to perform calculations. For class purposes, we highly recommend RStudio Desktop (or Positron, the newer IDE from Posit that is also available in a Desktop version).
 
-## (Optional -- Read below) Problem 1: Setup
-
-Problem 1 is optional. If you would like to run R and RStudio / Positron locally on your computer, complete the steps below for Problem 1. However, if you would rather use the [Reed RStudio Server](https://rstudio.reed.edu/), you can skip this problem and move on to the header that says "Problems 2 and beyond".
-
+## Problem 1: Setup
 
 ### part a: GitHub
 
@@ -39,6 +36,8 @@ To install Positron, see this [link from Posit's website](https://positron.posit
 
 **Note**: always make sure to have `R` installed before installing your IDE. 
 
+
+
 ### part c: Connect git, GitHub and RStudio (or Positron)
 
 These instructions are based on pieces of [Happy git with R](https://happygitwithr.com/), in particular chapters 6, 7, and 9. Depending on your computer, setup, or just luck, this step can become difficult/frustrating. If you are having trouble with this step, please ask for help!  
@@ -49,7 +48,17 @@ In order to have your computer talk with GitHub, you'll need to install git on y
 which git
 ```
 
-in a Terminal or shell window. If you have git installed, you should see something like "/usr/bin/git" returned to you. If you don't have git installed, you might see something like "git: command not found" or nothing at all. If you have git installed, congrats! If not, follow the steps in [Happy git with R, Chapter 6](https://happygitwithr.com/install-git) to install git. 
+in a Terminal or shell window. If you have git installed, you should see something like "/usr/bin/git" returned to you. If you don't have git installed, you might see something like "git: command not found" or nothing at all. If you have git installed, congrats! If not, follow the steps in [Happy git with R, Chapter 6](https://happygitwithr.com/install-git) to install git.
+
+
+### NOTICE: PARTS d, e, and f are OPTIONAL!
+
+If you would like to set up your GitHub account with your computer, complete steps d, e, and f. This will not be relevant to our class, though, so it is entirely optional. You are welcome to come to office hours for help completing steps d, e, and f. 
+
+In order to get everyone set up in a reasonable amount of time during lab, we recommend skipping these steps for now. You are welcome to return to them after our in-class lab time. 
+
+
+### part d: Introduce yourself to git
 
 Next, up you have to introduce yourself to git. Again, following Happy git with R, in [Chapter 7](https://happygitwithr.com/hello-git) we can run the following in an R session/console
 
@@ -89,7 +98,7 @@ and then enter the token when prompted. If also this has gone well, you are set!
 Unless... you're running Linux. If you're running Linux, I am happy to help you get git working correctly, but I'd say the first step is to read and follow Danielle Navarro's [blog post](https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/), in addition to the steps above. 
 
 
-### part d: testing
+### part e: testing
 
 To make sure everything is working correctly, run
 
@@ -118,7 +127,7 @@ Error in throw(new_error("gitcreds_no_credentials", url = url)) :
 something has gone wrong. 
 
 
-### part e: congrats!
+### part f: congrats!
 
 If you've made it this far, congrats! You've successfully set up git, GitHub, and your IDE on your local machine! We'll spend time in class during week 2 talking about how to use all of these tools, but for now you are good to go.
 

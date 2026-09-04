@@ -8,11 +8,10 @@ toc: false
 
 ## Accessing this Lab
 
-In order to access the lab each week, you'll have to follow these steps. Here, we detail the process of logging in to the RStudio Server and "cloning" a GitHub repository to get the lab materials. "Cloning", in this case, means making a copy of my a folder I've uploaded with all files and data needed so that you can complete the lab. Anyways, here are the steps: 
+In order to access the lab each week, you'll have to follow these steps. Here, we detail the process of opening RStudio and "cloning" a GitHub repository to get the lab materials. "Cloning", in this case, means making a copy of my a folder I've uploaded with all files and data needed so that you can complete the lab. Anyways, here are the steps: 
 
-1. Use your web browser to navigate to the Reed RStudio server at [https://rstudio.reed.edu](https://rstudio.reed.edu).
-2. Log-in using your Reed username and password (the one you use for Moodle, Gmail, etc.).
-3. In the Projects dropdown (typically upper right) of RStudio, click the "Project: (None)" button[^1]. Then, click "New Project...". 
+1. Open RStudio.
+2. In the Projects dropdown (typically upper right) of RStudio, click the "Project: (None)" button[^1]. Then, click "New Project...". 
 
 [^1]: If you're already in a project, this button will show that projects name. This shouldn't be the case for the first lab, but will likely be the case for the remaining labs. 
 
