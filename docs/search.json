@@ -473,7 +473,7 @@
     "href": "slides/stat243_wk02wed.html#mean-squared-error-mse",
     "title": "Stat 243",
     "section": "Mean Squared Error (MSE)",
-    "text": "Mean Squared Error (MSE)\n\\[\n\\mathrm{MSE}(\\hat{f}) = \\frac{1}{n}\\sum_{i=1}^n \\Big(y_i - \\hat{f}(x_i) \\Big)^2\n\\]\nQ: Under what circumstances is MSE small?\n\n\nWhen the (reducible + irreducible) error is small!\nA: Reducible error (usually) lowers as \\(n\\) increases\n\n\n\nQ: What could go wrong if we try to minimize \\(\\mathrm{MSE}\\) on observed data?\n\nHint: Consider prediction with new penguins\n\n\n\n\nA: We could make a model too specific to our observed data that doesn’t generalize to new data (i.e., overfitting)"
+    "text": "Mean Squared Error (MSE)\n\\[\n\\mathrm{MSE}(\\hat{f}) = \\frac{1}{n}\\sum_{i=1}^n \\Big(y_i - \\hat{f}(x_i) \\Big)^2\n\\]\nQ: Under what circumstances is MSE small?\n\n\nA: When the (reducible + irreducible) error is small!\n\n\n\nQ: What could go wrong if we try to minimize \\(\\mathrm{MSE}\\) on observed data?\n\nHint: Consider prediction with new penguins\n\n\n\n\nA: We could make a model too specific to our observed data that doesn’t generalize to new, unobserved data (i.e., overfitting)"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#training-and-test-data-for-prediction-problems",
@@ -509,6 +509,13 @@
     "title": "Stat 243",
     "section": "Model 1 and 2",
     "text": "Model 1 and 2"
+  },
+  {
+    "objectID": "slides/stat243_wk02wed.html#training-mse",
+    "href": "slides/stat243_wk02wed.html#training-mse",
+    "title": "Stat 243",
+    "section": "Training MSE",
+    "text": "Training MSE\n\n# Training linear model\nlin_mod &lt;- lm(body_mass_g ~ bill_length_mm, data = adelie_train)\nlin_pred &lt;-predict(lin_mod, adelie_train)\n\n# Training polynomial model\npoly_mod &lt;- lm(body_mass_g ~ poly(bill_length_mm, degree = 5), data = adelie_train)\npoly_pred &lt;- predict(poly_mod, adelie_train)\n\n# MSE linear model\nmean((adelie_train$body_mass_g - lin_pred)^2)\n\n[1] 143573.9\n\n# MSE polynomial model\nmean((adelie_train$body_mass_g - poly_pred)^2)\n\n[1] 103889.4"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#test-set",

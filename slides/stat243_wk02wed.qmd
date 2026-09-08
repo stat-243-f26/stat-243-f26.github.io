@@ -242,7 +242,7 @@ How do we measure **quality of a model?**
 
 1) Devise a quantitative measurement of model error.
 
-2) Select the model that minimizes this measure of error.
+2) Select the model that **minimizes** this measure of error.
 
 :::
 
@@ -270,9 +270,7 @@ $$
 
 ::: {.fragment .nonincremental}
 
-  - When the (reducible + irreducible) error  is small!
-
-  - **A:** Reducible error (usually) lowers as $n$ increases
+  - **A:** When the (reducible + irreducible) error  is small!
 
 :::
 
@@ -286,7 +284,7 @@ $$
 
 ::: {.fragment .nonincremental}
 
-  - **A:** We could make a model *too specific* to our *observed* data that doesn't generalize to *new* data (i.e., **overfitting**)
+  - **A:** We could make a model **too specific** to our **observed** data that doesn't generalize to new, unobserved data (i.e., **overfitting**)
 
 :::
 
@@ -390,6 +388,27 @@ ggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
   geom_smooth( method = "lm" ,formula = y ~ poly(x, 7), se = F, color = "red")
 ```
 
+## Training MSE
+
+```{r}
+#| echo: true
+# Training linear model
+lin_mod <- lm(body_mass_g ~ bill_length_mm, data = adelie_train)
+lin_pred <-predict(lin_mod, adelie_train)
+
+# Training polynomial model
+poly_mod <- lm(body_mass_g ~ poly(bill_length_mm, degree = 5), data = adelie_train)
+poly_pred <- predict(poly_mod, adelie_train)
+
+# MSE linear model
+mean((adelie_train$body_mass_g - lin_pred)^2)
+# MSE polynomial model
+mean((adelie_train$body_mass_g - poly_pred)^2)
+```
+
+
+
+
 ## Test Set
 
 ```{r}
@@ -397,8 +416,18 @@ ggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
 #| fig-height: 4
 #| fig-width: 6
 #| out-width: "65%"
-ggplot(adelie_test,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
-  theme_bw(base_size=15) + labs(title="Testing Data",x="Bill Length",y="Body Mass")
+train_test <- adelie_train %>%
+  mutate(dataset = "training") %>%
+  bind_rows(adelie_test %>% mutate(dataset = "testing"))
+ggplot() + 
+  geom_point(data = adelie_train, 
+             aes(x = bill_length_mm, y = body_mass_g)) +
+    geom_point(data = train_test, 
+             aes(x = bill_length_mm, y = body_mass_g, color = dataset)) +
+  scale_color_manual(values = c("magenta3", "black")) + 
+  theme_bw(base_size=15) + 
+  labs(title="Testing Data",x="Bill Length",y="Body Mass") + 
+  theme(legend.position = "bottom")
 ```
 
 ## Test Set with models 
@@ -409,7 +438,7 @@ ggplot(adelie_test,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
 #| out-width: "65%"
 #| message: false
 #| echo: false
-ggplot(adelie_test,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
+ggplot(adelie_test,aes(x=bill_length_mm,y=body_mass_g))+geom_point(color = "magenta3") +
   theme_bw(base_size=15) + labs(title="Testing Data",x="Bill Length",y="Body Mass") +
   geom_smooth(data = adelie_train, method = "lm" , se = F) +
   geom_smooth(data = adelie_train, method = "lm" ,formula = y ~ poly(x, 7), se = F, color = "red")
