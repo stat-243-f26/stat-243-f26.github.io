@@ -66,7 +66,7 @@ library(palmerpenguins)
 
 **Today:**
 
--   Formalize how we think about assessing accuracy.
+-   Continue to think about assessing accuracy.
 
 :::
 
@@ -88,127 +88,90 @@ library(palmerpenguins)
 ::::
 
 
+# Warm Up: Stat Learning Terms
 
-# How Old Are We?
+## Warm Up (Part 1)
 
-## The Rules
-
-I will display photos from 8 current and former math/stats faculty:
-
-::: {.nonincremental}
-
-  - **Goal:** Estimate the age of each faculty member (at the time the picture was taken)
-  - **Note:** None of these pictures were taken this year!
-
-:::
-
-::: {.fragment .nonincremental}
-
-Work **in groups of 2-3** to develop a consistent method for estimating age.
-
-Record your estimates for each faculty member on paper and submit it to me.
-
-:::
-
-
-## All Photos
-
-As we wait for groups to guess ages, complete the reflection worksheet.
+For each of the following scenarios, identify if it is primarily a...
 
 :::: {.columns}
 
-::: {.column width='25%'}
+::: {.column width="50%" .nonincremental}
 
++ Prediction or Inference task
 
-```{r}
-#| echo: false
-#| fig-align: "center"
-#| out-width: "100%"
-include_graphics("img/Faculty_Img/megan-23.jpeg")
-```
-
-
-
-```{r}
-#| echo: false
-#| fig-align: "center"
-#| out-width: "100%"
-include_graphics("img/Faculty_Img/Wainstein-color.png")
-```
++ Parametric or Non-Parametric method
 
 :::
 
-::: {.column width='25%'}
+::: {.column width="50%" .nonincremental}
 
-```{r}
-#| echo: false
-#| fig-align: "center"
-#| out-width: "70%"
-include_graphics("img/Faculty_Img/chris.jpg")
-```
++ Supervised or Unsupervised problem
 
-```{r}
-#| echo: false
-#| fig-align: "center"
-#| out-width: "70%"
-include_graphics("img/Faculty_Img/marcus-17.jpg")
-```
++ Regression or Classification problem
 
 :::
-
-::: {.column width='25%'}
-
-
-```{r}
-#| echo: false
-#| fig-align: "center"
-#| out-width: "72%"
-include_graphics("img/Faculty_Img/alex.jpg")
-```
-
-
-```{r}
-#| echo: false
-#| fig-align: "center"
-#| out-width: "72%"
-include_graphics("img/Faculty_Img/michael.jpg")
-```
-
-:::
-
-::: {.column width='25%'}
-
-
-```{r}
-#| echo: false
-#| fig-align: "center"
-#| out-width: "50%"
-include_graphics("img/Faculty_Img/img10.jpg")
-```
-
-
-```{r}
-#| echo: false
-#| fig-align: "center"
-#| out-width: "50%"
-include_graphics("img/Faculty_Img/img3.jpg")
-```
-
-
-:::
-
-
 
 ::::
 
-# Mean Squared Error
+:::: {.columns}
 
-## Running Example: Adelie Penguins
+::: {.column width="45%" .nonincremental}
+
+1. A biologist wants to determine how strongly certain genes are correlated with breast cancer to improve early detection DNA tests. They will fit a multiple linear regression model based on DNA sequencing data of people with and without breast cancer.
+
+:::
+
+::: {.column width="50%" .nonincremental}
+
+2. Researchers at Zillow (a real estate app) want to predict which users actually want to buy a home vs. simply browse fancy mansions. They will train a neural network using data provided by users, their browsing habits, and other user data harvested from website "cookies".
+
+:::
+
+::::
+
+## Warm Up (Part 2)
+
+:::: {.columns}
+
+::: {.column width="50%" .nonincremental}
+
+Insomnia Cookies wants to better understand their customers, so they conduct a small survey and ask customers their age ($X_1$) and hours worked per week ($X_2$).
+
+  1. What can Insomnia Cookies infer about their customers?
+
+  2. Label each "cluster".
+
+  3. Determine whether this is supervised or unsupervised learning, and explain why.
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+#| echo: false
+set.seed(1)
+data <- data.frame(Age=c(runif(20,18,23),runif(20,30,45)),
+                   Hours=c(runif(20,0,20),runif(20,30,40)))
+ggplot(data,aes(x=Age,y=Hours))+geom_point(size=6,alpha=0.7)+theme_minimal(base_size=40)
+```
+
+:::
+
+::::
+
+
+
+# Assessing Accuracy
+
+## Example: Adelie Penguins
 
 We want to **predict** Body Mass ($Y$) based on Bill Length ($X$), based on a sample of $n=50$ Adelie penguins.
 
+
 ```{r}
-#| fig-asp: .4
+#| echo: false
 set.seed(0)
 adelie <- penguins %>% filter(species=="Adelie")
 which_train <- sample(1:nrow(adelie),50)
@@ -216,11 +179,26 @@ adelie <- adelie[which_train,]
 ggplot(adelie,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +theme_bw(base_size=18) +
   labs(title="Sample of n=50 Adelie Penguins",x="Bill Length",y="Body Mass")
 ```
+
+
+
+
+
 *Note: This is prediction, supervised learning, and a regression problem*
+
+::: {.fragment}
 
 **Q:** How would you model this relationship? (*Parametric vs. Non-Parametric?*)
 
+:::
+
+
 ## Types of Error
+
+
+:::: .columns
+
+::: {.column width='60%'}
 
 There are two sources of error in a **model**,
 $$
@@ -235,21 +213,24 @@ $$
   \text{Error} = Y - \hat{Y} = \underbrace{(f - \hat{f})}_{\text{Reducible}} + \underbrace{\epsilon}_{\text{irreducible}}
 $$
 
+:::
+
+::: {.column width='40%'}
+
 ::: {.fragment .nonincremental}
 
 1. **Reducible error:** in the form of our estimate $\hat{f}$ for $f$.
+    + [We usually lower Reducible error by **increasing the sample size**]{.fragment}
 
 2. **Irreducible error:** in the form of $\epsilon$
+    + [We usually **cannot** lower Irreducible error]{.fragment}
+
 
 :::
 
-::: {.fragment .nonincremental}
-
-+ We usually lower Reducible error by **increasing the sample size**
-
-+ We usually **cannot** lower Irreducible error
-
 :::
+
+::::
 
 ## Quality of a Model
 
@@ -269,13 +250,13 @@ How do we measure **quality of a model?**
 
 For regression, the most common measure of error is the **Mean Squared Error** (MSE):
 $$
-\mathrm{MSE}(\hat{f}) = \frac{1}{n}\sum_{i=1}^n \Big(y_i - \hat{f}(x_i) \Big)^2
+\mathrm{MSE}(\hat{f}) = \frac{1}{n}\sum_{i=1}^n \Big(y_i - \hat{f}(x_i) \Big)^2,
 $$
-where
+where $\hat{f}$ is the model, $x_i$ are the observed predictor values, and $y_i$ are the corresponding observed response values.
 
-  - $\hat{f}$ is the model
-  - $x_i$ are the observed predictor values
-  - $y_i$ are the corresponding observed response values.
+**Recall**: other options like MAE and MZOL are popular for particular applications or regression and classification. 
+
+
 
 :::
 
@@ -370,7 +351,7 @@ adelie_test <- adelie[-which_train,]
 ::: {.smaller}
 
 ```{r}
-#| echo: true
+#| echo: false
 #| fig-height: 4
 #| fig-width: 6
 #| out-width: "65%"
@@ -385,7 +366,7 @@ ggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
 ## Model 1 {.smaller}
 
 ```{r}
-#| echo: true
+#| echo: false
 #| fig-height: 4
 #| fig-width: 6
 #| out-width: "65%"
@@ -398,7 +379,7 @@ ggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
 ## Model 1 and 2 {.smaller}
 
 ```{r}
-#| echo: true
+#| echo: false
 #| fig-height: 4
 #| fig-width: 6
 #| out-width: "65%"
@@ -415,18 +396,19 @@ ggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
 #| echo: false
 #| fig-height: 4
 #| fig-width: 6
-#| out-width: "80%"
+#| out-width: "65%"
 ggplot(adelie_test,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
   theme_bw(base_size=15) + labs(title="Testing Data",x="Bill Length",y="Body Mass")
 ```
 
-## Test Set with models {.small}
+## Test Set with models 
 
 ```{r}
 #| fig-height: 4
 #| fig-width: 6
-#| out-width: "80%"
+#| out-width: "65%"
 #| message: false
+#| echo: false
 ggplot(adelie_test,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
   theme_bw(base_size=15) + labs(title="Testing Data",x="Bill Length",y="Body Mass") +
   geom_smooth(data = adelie_train, method = "lm" , se = F) +
@@ -436,31 +418,32 @@ ggplot(adelie_test,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
 ## Test MSE
 
 ```{r}
-#| echo: false
-lin_mod <- lm( body_mass_g ~ bill_length_mm, data = adelie_train)
+#| echo: true
+# Training linear model
+lin_mod <- lm(body_mass_g ~ bill_length_mm, data = adelie_train)
 lin_pred <-predict(lin_mod, adelie_test)
+
+# Training polynomial model
 poly_mod <- lm(body_mass_g ~ poly(bill_length_mm, degree = 5), data = adelie_train)
 poly_pred <- predict(poly_mod, adelie_test)
 
-get_MSE <- function(actual, pred){mean((actual - pred)^2)}
-
-lin_mse <- get_MSE(adelie_test$body_mass_g, lin_pred)
-poly_mse <- get_MSE(adelie_test$body_mass_g, poly_pred)
-
-error <- data.frame(actual = adelie_test$body_mass_g, lin_pred, poly_pred ) %>%
-  mutate(lin_sq_error = (actual - lin_pred)^2, poly_sq_error = (actual - poly_pred)^2) %>%
-  as_tibble()
+# MSE linear model
+mean((adelie_test$body_mass_g - lin_pred)^2)
+# MSE polynomial model
+mean((adelie_test$body_mass_g - poly_pred)^2)
 ```
 
-```{r}
-tibble("Linear MSE"=lin_mse, "Polynomial MSE"=poly_mse)
-```
-
-**Q:** Which model should we pick? [**A: Linear model, since lower test MSE**]{.fragment}
+<br>
 
 ::: {.fragment}
 
-**Q:** What's actually going on in this situation? **A: The Bias-Variance Trade-off!**
+**Q:** Which model should we pick? [**A: Linear model, since lower test MSE**]{.fragment}
+
+:::
+
+::: {.fragment}
+
+**Q:** What's actually going on in this situation? [**A: The Bias-Variance Trade-off!**]{.fragment}
 
 :::
 
@@ -482,7 +465,8 @@ Suppose we consider various models to predict $Y$, each of increasing complexity
 
 ```{r}
 #| fig-align: "center"
-#| out-height: "70%"
+#| echo: false
+#| out-width: "60%"
 include_graphics("img/ucurve_ISLR.png")
 ```
 
@@ -582,30 +566,6 @@ Can't do anything about this!
 We want a sufficiently complex model that doesn't overfit training data.
 
   - How we *actually do this* is a major theme of this course!!
-
-:::
-
-# Recap
-
-## Recap
-
-::: {.nonincremental}
-
-Today, we...
-
-  - Contrasted **prediction vs. inference, (non-)parametric methods, (un)supervised learning, and regression vs. classification problems**
-
-  - **Mean Squared Error (MSE)** - Common metric of measuring error in a model
-
-  - Fit models on "training data", compare on "testing data"
-
-  - **Bias-Variance Trade-off** - to minimize MSE, we must balance minimizing model bias and variance
-
-For next time, please:
-
-1) Complete readings
-
-2) Start HW 3 (due Friday) and work on resubmissions
 
 :::
 
