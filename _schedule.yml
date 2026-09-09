@@ -54,7 +54,7 @@ scheduled-docs:
               href: slides/stat243_wk02fri.qmd
       resources:
         - 'For Wednesday: Read <a href="https://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/">this blog post</a> and Section 2.2 (through 2.2.2, but not beyond) of ISLR.'
-        - 'For Friday: TBD'
+        - 'For Friday: ISLR Chapter 3.1'
     - week: 3
       days:
         - topic: "Linear Models II"
