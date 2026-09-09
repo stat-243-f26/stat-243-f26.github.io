@@ -57,7 +57,7 @@ scheduled-docs:
         - 'For Friday: TBD'
     - week: 3
       days:
-        - topic: "Linear Models II  (and Quiz I)"
+        - topic: "Linear Models II"
           display-date: Monday, Sep 14
           date: 9/14/26
           docs:
@@ -69,7 +69,7 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/stat243_wk03wed.qmd
-        - topic: "Lab 2: Linear Models"
+        - topic: "Lab 2: Linear Models (and Quiz I)"
           display-date: Friday, Sep 18
           date: 9/18/26
           docs:
