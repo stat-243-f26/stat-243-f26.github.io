@@ -745,81 +745,54 @@ Y = f(X)+\epsilon
 <p>The U-curve for test MSE is a result of competition between two sources of error in a model</p>
 <div class="fragment">
 <p>Expected test MSE can be decomposed as the sum of 3 quantities: <span class="math display">\[
-\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
+\mathrm{E} \left[ ( y_0 - \hat{f}(x_0))^2 \right]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
 \]</span></p>
 </div>
 <ul>
-<li class="fragment"><p>Here <span class="math inline">\(\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]\)</span> denotes expected test MSE <strong>at</strong> <span class="math inline">\(x_0\)</span>, if many models for <span class="math inline">\(f\)</span> were built using a variety of random training data sets containing <span class="math inline">\(x_0\)</span></p></li>
+<li class="fragment"><p>Here <span class="math inline">\(\mathrm{E} \left[ ( y_0 - \hat{f}(x_0))^2 \right]\)</span> denotes expected test MSE <strong>at</strong> <span class="math inline">\(x_0\)</span>, if many models for <span class="math inline">\(f\)</span> were built using a variety of random training data sets containing <span class="math inline">\(x_0\)</span></p></li>
 <li class="fragment"><p>Total expected test MSE is obtained by averaging across all possible <span class="math inline">\(x_0\)</span> in the test set.</p></li>
 <li class="fragment"><p>A proof is given in Section 7.3 of <em>The Elements of Statistical Learning</em>.</p></li>
 <li class="fragment"><p>To minimize <span class="math inline">\(\mathrm{MSE}\)</span>, we need to <em>simultaneously</em> minimize both variance and bias.</p></li>
 </ul>
 </section>
-<section id="mse-decomposition-1" class="slide level2">
-<h2>MSE Decomposition</h2>
-<p>The U-curve for test MSE is a result of competition between two sources of error in a model</p>
-<p>Expected test MSE can be decomposed as the sum of 3 quantities: <span class="math display">\[
-\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
-\]</span></p>
-<div class="fragment">
-<ol type="1">
-<li class="fragment"><strong>(Squared) Bias</strong> – <span class="math inline">\(\left[\mathrm{Bias}(\hat{f}(x_0))\right]^2\)</span> By “Bias”, we mean <span class="math inline">\(E[ \hat{f} (x_0) - f (x_0) ]\)</span></li>
-</ol>
-</div>
-<div class="fragment">
-<ol start="2" type="1">
-<li class="fragment"><strong>Variance</strong> – <span class="math inline">\(\mathrm{Var}(\hat{f}(x_0))\)</span></li>
-</ol>
-</div>
-<div class="fragment">
-<ol start="3" type="1">
-<li class="fragment"><strong>Irreducible Error Variance</strong> – <span class="math inline">\(\mathrm{Var}(\epsilon)\)</span> Can’t do anything about this!</li>
-</ol>
-</div>
-<div class="fragment">
-<p><strong>Takeaway:</strong> To minimize MSE, we need to balance minimizing bias AND variance.</p>
-</div>
-</section>
 <section id="bias-and-variance" class="slide level2">
 <h2>Bias and Variance</h2>
-<p><strong>Bias</strong> is amount by which model estimates, <span class="math inline">\(\hat{f}(x_0)\)</span>, differ from the truth, <span class="math inline">\(f(x_0)\)</span>.</p>
 <ul>
-<li><p>Bias produced when assumed model doesn’t match reality</p></li>
-<li><p>Simple models: Generally high bias</p></li>
-<li><p>Complex models: Generally low bias</p></li>
-</ul>
-<div class="fragment">
-<p><strong>Variance</strong> is amount of variability in <span class="math inline">\(\hat{f}(x_0)\)</span> across training sets</p>
+<li class="fragment"><strong>Variance</strong> refers to the amount of variability in <span class="math inline">\(\hat{f}(x_0)\)</span> across random training sets containing <span class="math inline">\(x_0\)</span>
 <ul>
-<li><p>Simple models: Generally low variance</p></li>
-<li><p>Complex models: Generally high variance</p></li>
+<li class="fragment">What type of models tend to have low/high variance?</li>
+</ul></li>
+<li class="fragment"><strong>Bias</strong> refers to amount by which <span class="math inline">\(\hat{f}(x_0)\)</span> differs from the true value of <span class="math inline">\(f(x_0)\)</span>, on average across random training sets.
+<ul>
+<li class="fragment">Bias is produced by the difference between model shape assumptions and reality</li>
+<li class="fragment">What type of models tend to have low/high bias?</li>
+</ul></li>
 </ul>
-</div>
 </section>
 <section id="bias-variance-trade-off-1" class="slide level2">
-<h2>Bias-Variance Trade-off</h2>
-<p><strong>Q:</strong> What happens as we pick more complex models?</p>
-<ul>
-<li><p>As complexity increases, we tend to “overfit” model to training data.</p></li>
-<li><p>Bias decreases and variance increases</p></li>
-</ul>
-<div class="fragment">
-<p>We want a sufficiently complex model that doesn’t overfit training data.</p>
-<ul>
-<li>How we <em>actually do this</em> is a major theme of this course!!</li>
-</ul>
-</div>
-</section>
-<section id="bias-variance-trade-off-2" class="slide level2">
 <h2>Bias-Variance Trade-off</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
+</div>
+</section>
+<section id="bias-variance-trade-off-2" class="slide level2">
+<h2>Bias-Variance Trade-off</h2>
+<p><strong>Q:</strong> What happens as we pick more complex models?</p>
+<ul>
+<li class="fragment"><p>As complexity increases, we tend to “overfit” model to training data.</p></li>
+<li class="fragment"><p>Bias decreases and variance increases</p></li>
+</ul>
+<div class="fragment">
+<p>We want a sufficiently complex model that doesn’t overfit training data.</p>
+<ul>
+<li>How we <em>actually do this</em> is a major theme of this course!</li>
+</ul>
 </div>
 </section>
 <section id="next-time" class="slide level2">

@@ -613,35 +613,28 @@
     "href": "slides/stat243_wk02wed.html#mse-decomposition",
     "title": "Stat 243",
     "section": "MSE Decomposition",
-    "text": "MSE Decomposition\nThe U-curve for test MSE is a result of competition between two sources of error in a model\n\nExpected test MSE can be decomposed as the sum of 3 quantities: \\[\n\\mathrm{E} \\Big[ ( y_0 - \\hat{f}(x_0))^2 \\big]  = \\left[\\mathrm{Bias}(\\hat{f}(x_0))\\right]^2 + \\mathrm{Var}(\\hat{f}(x_0)) +  \\mathrm{Var}(\\epsilon)\n\\]\n\n\nHere \\(\\mathrm{E} \\Big[ ( y_0 - \\hat{f}(x_0))^2 \\big]\\) denotes expected test MSE at \\(x_0\\), if many models for \\(f\\) were built using a variety of random training data sets containing \\(x_0\\)\nTotal expected test MSE is obtained by averaging across all possible \\(x_0\\) in the test set.\nA proof is given in Section 7.3 of The Elements of Statistical Learning.\nTo minimize \\(\\mathrm{MSE}\\), we need to simultaneously minimize both variance and bias."
-  },
-  {
-    "objectID": "slides/stat243_wk02wed.html#mse-decomposition-1",
-    "href": "slides/stat243_wk02wed.html#mse-decomposition-1",
-    "title": "Stat 243",
-    "section": "MSE Decomposition",
-    "text": "MSE Decomposition\nThe U-curve for test MSE is a result of competition between two sources of error in a model\nExpected test MSE can be decomposed as the sum of 3 quantities: \\[\n\\mathrm{E} \\Big[ ( y_0 - \\hat{f}(x_0))^2 \\big]  = \\left[\\mathrm{Bias}(\\hat{f}(x_0))\\right]^2 + \\mathrm{Var}(\\hat{f}(x_0)) +  \\mathrm{Var}(\\epsilon)\n\\]\n\n\n(Squared) Bias – \\(\\left[\\mathrm{Bias}(\\hat{f}(x_0))\\right]^2\\) By “Bias”, we mean \\(E[ \\hat{f} (x_0) - f (x_0) ]\\)\n\n\n\n\nVariance – \\(\\mathrm{Var}(\\hat{f}(x_0))\\)\n\n\n\n\nIrreducible Error Variance – \\(\\mathrm{Var}(\\epsilon)\\) Can’t do anything about this!\n\n\n\nTakeaway: To minimize MSE, we need to balance minimizing bias AND variance."
+    "text": "MSE Decomposition\nThe U-curve for test MSE is a result of competition between two sources of error in a model\n\nExpected test MSE can be decomposed as the sum of 3 quantities: \\[\n\\mathrm{E} \\left[ ( y_0 - \\hat{f}(x_0))^2 \\right]  = \\left[\\mathrm{Bias}(\\hat{f}(x_0))\\right]^2 + \\mathrm{Var}(\\hat{f}(x_0)) +  \\mathrm{Var}(\\epsilon)\n\\]\n\n\nHere \\(\\mathrm{E} \\left[ ( y_0 - \\hat{f}(x_0))^2 \\right]\\) denotes expected test MSE at \\(x_0\\), if many models for \\(f\\) were built using a variety of random training data sets containing \\(x_0\\)\nTotal expected test MSE is obtained by averaging across all possible \\(x_0\\) in the test set.\nA proof is given in Section 7.3 of The Elements of Statistical Learning.\nTo minimize \\(\\mathrm{MSE}\\), we need to simultaneously minimize both variance and bias."
   },
   {
     "objectID": "slides/stat243_wk02wed.html#bias-and-variance",
     "href": "slides/stat243_wk02wed.html#bias-and-variance",
     "title": "Stat 243",
     "section": "Bias and Variance",
-    "text": "Bias and Variance\nBias is amount by which model estimates, \\(\\hat{f}(x_0)\\), differ from the truth, \\(f(x_0)\\).\n\nBias produced when assumed model doesn’t match reality\nSimple models: Generally high bias\nComplex models: Generally low bias\n\n\nVariance is amount of variability in \\(\\hat{f}(x_0)\\) across training sets\n\nSimple models: Generally low variance\nComplex models: Generally high variance"
+    "text": "Bias and Variance\n\nVariance refers to the amount of variability in \\(\\hat{f}(x_0)\\) across random training sets containing \\(x_0\\)\n\nWhat type of models tend to have low/high variance?\n\nBias refers to amount by which \\(\\hat{f}(x_0)\\) differs from the true value of \\(f(x_0)\\), on average across random training sets.\n\nBias is produced by the difference between model shape assumptions and reality\nWhat type of models tend to have low/high bias?"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#bias-variance-trade-off-1",
     "href": "slides/stat243_wk02wed.html#bias-variance-trade-off-1",
     "title": "Stat 243",
     "section": "Bias-Variance Trade-off",
-    "text": "Bias-Variance Trade-off\nQ: What happens as we pick more complex models?\n\nAs complexity increases, we tend to “overfit” model to training data.\nBias decreases and variance increases\n\n\nWe want a sufficiently complex model that doesn’t overfit training data.\n\nHow we actually do this is a major theme of this course!!"
+    "text": "Bias-Variance Trade-off"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#bias-variance-trade-off-2",
     "href": "slides/stat243_wk02wed.html#bias-variance-trade-off-2",
     "title": "Stat 243",
     "section": "Bias-Variance Trade-off",
-    "text": "Bias-Variance Trade-off"
+    "text": "Bias-Variance Trade-off\nQ: What happens as we pick more complex models?\n\nAs complexity increases, we tend to “overfit” model to training data.\nBias decreases and variance increases\n\n\nWe want a sufficiently complex model that doesn’t overfit training data.\n\nHow we actually do this is a major theme of this course!"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#next-time",

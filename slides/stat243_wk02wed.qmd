@@ -738,13 +738,13 @@ The U-curve for test MSE is a result of competition between two sources of error
 
 Expected test MSE can be decomposed as the sum of 3 quantities:
 $$
-\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
+\mathrm{E} \left[ ( y_0 - \hat{f}(x_0))^2 \right]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
 $$
 
 :::
 
 
-- Here $\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]$ denotes expected test MSE **at** $x_0$, if many models for $f$ were built using a variety of random training data sets containing $x_0$
+- Here $\mathrm{E} \left[ ( y_0 - \hat{f}(x_0))^2 \right]$ denotes expected test MSE **at** $x_0$, if many models for $f$ were built using a variety of random training data sets containing $x_0$
 
 - Total expected test MSE is obtained by averaging across all possible $x_0$ in the test set.
 
@@ -753,94 +753,24 @@ $$
 - To minimize $\mathrm{MSE}$, we need to *simultaneously* minimize both variance and bias.
 
 
-## MSE Decomposition
-
-The U-curve for test MSE is a result of competition between two sources of error in a model
-
-Expected test MSE can be decomposed as the sum of 3 quantities:
-$$
-\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
-$$
-
-
-
-::: {.fragment}
-
-1) **(Squared) Bias** -- $\left[\mathrm{Bias}(\hat{f}(x_0))\right]^2$
-By "Bias", we mean $E[ \hat{f} (x_0) - f (x_0) ]$
-
-:::
-
-::: {.fragment}
-
-2) **Variance** -- $\mathrm{Var}(\hat{f}(x_0))$
-
-:::
-
-::: {.fragment}
-
-3) **Irreducible Error Variance** -- $\mathrm{Var}(\epsilon)$
-Can't do anything about this!
-
-:::
-
-::: {.fragment}
-
-**Takeaway:** To minimize MSE, we need to balance minimizing bias AND variance.
-
-:::
-
 
 ## Bias and Variance
 
-::: {.nonincremental}
+- **Variance** refers to the amount of variability in $\hat{f}(x_0)$ across random training sets containing $x_0$
+    - What type of models tend to have low/high variance?
 
-**Bias** is amount by which model estimates, $\hat{f}(x_0)$, differ from the truth, $f(x_0)$.
 
-  - Bias produced when assumed model doesn't match reality
+- **Bias** refers to amount by which $\hat{f}(x_0)$ differs from the true value of $f(x_0)$, on average across random training sets.
+    - Bias is produced by the difference between model shape assumptions and reality
+    - What type of models tend to have low/high bias?
 
-  - Simple models: Generally high bias
-
-  - Complex models: Generally low bias
-
-:::
-
-::: {.fragment .nonincremental}
-
-**Variance** is amount of variability in $\hat{f}(x_0)$ across training sets
-
-  - Simple models: Generally low variance
-
-  - Complex models: Generally high variance
-
-:::
-
-## Bias-Variance Trade-off
-
-::: {.nonincremental}
-
-**Q:** What happens as we pick more complex models?
-
-  - As complexity increases, we tend to "overfit" model to training data.
-
-  - Bias decreases and variance increases
-
-:::
-
-::: {.fragment .nonincremental}
-
-We want a sufficiently complex model that doesn't overfit training data.
-
-  - How we *actually do this* is a major theme of this course!!
-
-:::
 
 
 ## Bias-Variance Trade-off
 
 ```{r}
-#| out-width: "80%"
 #| echo: false
+#| out-width: "100%"
 flexibility <- 1:10
 Irreducible <- 1
 Var <- 1.5^flexibility/15
@@ -860,6 +790,28 @@ data.frame(flexibility, Var, Bias_sq, MSE) %>% pivot_longer(!flexibility, names_
        y = NULL,
        color = NULL)
 ```
+
+
+## Bias-Variance Trade-off
+
+
+**Q:** What happens as we pick more complex models?
+
+  - As complexity increases, we tend to "overfit" model to training data.
+
+  - Bias decreases and variance increases
+
+
+
+::: {.fragment .nonincremental}
+
+We want a sufficiently complex model that doesn't overfit training data.
+
+  - How we *actually do this* is a major theme of this course!
+
+:::
+
+
 
 
 
