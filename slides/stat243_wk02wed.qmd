@@ -163,42 +163,213 @@ ggplot(data,aes(x=Age,y=Hours))+geom_point(size=6,alpha=0.7)+theme_minimal(base_
 
 
 
-# Assessing Accuracy
+# Supervised Learning
 
-## Example: Adelie Penguins
+## Supervised Learning
 
-We want to **predict** Body Mass ($Y$) based on Bill Length ($X$), based on a sample of $n=50$ Adelie penguins.
+- In the supervised learning regression, we observe the values of a *quantitative* response $Y$, as well as $p$ many predictors $X_1, \dots, X_p$ (these may be quantitative or categorical)
+
+::: {.fragment .nonincremental}
+
+- We assume there is a certain relationship between response and predictors:
+$$
+Y = f(X_1, \dots, X_p) + \epsilon
+$$
+
+:::
+
+- The function $f$ is called the **model** or **regression function** and the random variable $\epsilon$ is the **error** term
+
+
+- The function $f$ represents our best estimate of the value of $Y$ given $X$, or the expected value of $Y$ given $X$ (sometimes written: $E[Y \vert X]$)
+
+
+
+## Estimating $f$
+
+- In practice, we will never know the **true** formula for $f$.
+- Goal of stat learning is to estimate $f$, given sample data for $X_1, \dots, X_p$ and $Y$.
+- Our estimate for the the true model $f$ is called the **fitted** model $\hat f$.
+- How we estimate $f$ will depend on our research goals:
+
+:::: {.columns}
+
+::: {.column width='45%' .fragment .nonincremental}
+
+
+1. Make **predictions** about the values of $Y$ using $X_1, \dots , X_p$
+   - Very interested in finding $\hat f$ that makes accurate predictions for $Y$
+   - Less interested in the learning the true form of $f$
+
+:::
+
+::: {.column width='10%'}
+:::
+
+::: {.column width='45%' .fragment .nonincremental}
+
+2. Make **inferences** about relationship between $Y$ and $X_1, \dots , X_p$
+   - Very interested in learning the true form of $f$
+   - Less interested in finding $\hat f$ that makes accurate predictions for $Y$
+
+:::
+
+::::
+
+## An Example
+
+Consider two quantitative variables $X$ and $Y$
+
+- Suppose, in truth, $Y = 1 + 2X + \epsilon$, where $\epsilon \sim N(\mu = 0, \sigma = 0.25)$.
+
 
 
 ```{r}
 #| echo: false
-set.seed(0)
-adelie <- penguins %>% filter(species=="Adelie")
-which_train <- sample(1:nrow(adelie),50)
-adelie <- adelie[which_train,]
-ggplot(adelie,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +theme_bw(base_size=18) +
-  labs(title="Sample of n=50 Adelie Penguins",x="Bill Length",y="Body Mass")
+set.seed(123)
+n <- 30
+X = runif(n, 0, 1 )
+E = rnorm(n, 0, .25)
+Y = 2*X + 1 + E
+df<-data.frame(X,Y)
+
+mod <- lm(Y ~ X, data = df)
+int <- mod$coefficients[1]
+slope <- mod$coefficients[2]
 ```
 
+::: {.fragment .nonincremental}
 
+- The true model is $f(x) = 1 + 2x$.
 
-
-
-*Note: This is prediction, supervised learning, and a regression problem*
-
-::: {.fragment}
-
-**Q:** How would you model this relationship? (*Parametric vs. Non-Parametric?*)
+```{r}
+#| fig-align: 'center'
+#| fig-height: 3
+#| fig-width: 6
+#| out-width: "75%"
+#| echo: false
+df %>% ggplot(aes(x = X, y = Y)) + geom_abline(slope = 2, intercept = 1) +
+  geom_abline(slope = 2, intercept = 1, alpha = .1, size = 30)+
+  annotate(geom = "text", x = 0.125, y = 2.5, label = expression(f(x) == 1 + 2*x), size = 5)+
+  xlim(c(0,1)) +
+  ylim(c(0.75,3.5)) + 
+  labs(x = "X", y = "Y")
+```
 
 :::
 
+## An Example
+
+Consider two quantitative variables $X$ and $Y$
+
+::: {.nonincremental}
+
+- Suppose, in truth, $Y = 1 + 2X + \epsilon$, where $\epsilon \sim N(\mu = 0, \sigma = 0.25)$.
+
+- But data $Y$ will not always lie on this line:
+
+:::
+
+```{r}
+#| fig-align: 'center'
+#| fig-height: 3
+#| fig-width: 6
+#| out-width: "75%"
+#| echo: false
+df %>% ggplot(aes(x = X, y = Y)) + geom_abline(slope = 2, intercept = 1, color = "red", size = 1) +
+  geom_abline(slope = 2, intercept = 1, alpha = .1, size = 30)+
+  geom_point()+
+  annotate(geom = "text", x = 0.125, y = 2.5, label = expression(Y == 1 + 2*X + epsilon), size = 5)+
+  xlim(c(0,1)) +
+  ylim(c(0.75,3.5))
+```
+
+## An Example
+
+Consider two quantitative variables $X$ and $Y$
+
+::: {.nonincremental}
+
+- In reality, we won't know the true model.
+
+- We only have the observed data
+
+:::
+
+```{r}
+#| fig-align: 'center'
+#| fig-height: 3
+#| fig-width: 6
+#| out-width: "75%"
+#| echo: false
+df %>% ggplot(aes(x = X, y = Y)) +
+  # geom_abline(slope = 2, intercept = 1) +
+#  geom_abline(slope = 2, intercept = 1, alpha = .1, size = 30)+
+  geom_point()+
+  annotate(geom = "text", x = 0.125, y = 2.5, label = expression(f(X) == "???"), size = 5)+
+  xlim(c(0,1)) +
+  ylim(c(0.75,3.5))
+```
+
+## An Example
+
+Consider two quantitative variables $X$ and $Y$
+
+::: {.nonincremental}
+
+- Instead, we create an estimate $\hat f$ based on data
+
+- Here, we use least squares regression (minimizing MSE) to estimate $f$
+
+:::
+
+```{r}
+#| fig-align: 'center'
+#| fig-height: 3
+#| fig-width: 6
+#| out-width: "75%"
+#| echo: false
+df %>% ggplot(aes(x = X, y = Y)) +
+  # geom_abline(slope = 2, intercept = 1) +
+#  geom_abline(slope = 2, intercept = 1, alpha = .1, size = 30)+
+  geom_point()+
+  annotate(geom = "text", x = 0.125, y = 2.5, label = expression(hat(f)(X) == 1.14 + 1.77*X), size = 5)+
+  geom_smooth(method = "lm", se = F)+
+  xlim(c(0,1)) +
+  ylim(c(0.75,3.5))
+```
+
+## An Example
+
+Consider two quantitative variables $X$ and $Y$
+
+::: {.nonincremental}
+
+- Our estimated model is $\hat f(x) = 1.14 + 1.77x$
+
+- Which is close to the true model of $f(x) = 1 + 2x$
+
+:::
+
+```{r}
+#| fig-align: 'center'
+#| fig-height: 3
+#| fig-width: 6
+#| out-width: "75%"
+#| echo: false
+df %>% ggplot(aes(x = X, y = Y)) +
+   geom_abline(slope = 2, intercept = 1, color = "red", size = 1) +
+#  geom_abline(slope = 2, intercept = 1, alpha = .1, size = 30)+
+  geom_point()+
+  annotate(geom = "text", x = 0.125, y = 2.5, label = expression(hat(f)(X) == 1.14 + 1.77*X), size = 5, color = "blue")+
+  geom_smooth(method = "lm", se = F)+
+  annotate(geom = "text", x = 0.125, y = 3, label = expression(f(X) == 1 + 2*X), size = 5, color = "red")+
+  xlim(c(0,1)) +
+  ylim(c(0.75,3.5))
+```
+
 
 ## Types of Error
-
-
-:::: .columns
-
-::: {.column width='60%'}
 
 There are two sources of error in a **model**,
 $$
@@ -213,24 +384,15 @@ $$
   \text{Error} = Y - \hat{Y} = \underbrace{(f - \hat{f})}_{\text{Reducible}} + \underbrace{\epsilon}_{\text{irreducible}}
 $$
 
-:::
-
-::: {.column width='40%'}
 
 ::: {.fragment .nonincremental}
 
 1. **Reducible error:** in the form of our estimate $\hat{f}$ for $f$.
-    + [We usually lower Reducible error by **increasing the sample size**]{.fragment}
 
-2. **Irreducible error:** in the form of $\epsilon$
-    + [We usually **cannot** lower Irreducible error]{.fragment}
-
+2. **Irreducible error:** in the form of $\epsilon$.
 
 :::
 
-:::
-
-::::
 
 ## Quality of a Model
 
@@ -312,27 +474,23 @@ If we have training and test data, we can:
 
 :::
 
-## Returning to Penguins
 
-We want to predict Body Mass ($Y$) over future penguins based on Bill Length ($X$).
 
-We have a random sample of $n=50$ penguins.
+## An Example
 
-::: {.fragment}
+- Suppose we have 50 observations on a quantitative response $Y$ and quantitative predictor $X$
 
-**Q:** How might we split our data into training and test sets?
-
-:::
+- We plan to use 70% of our data (35 observations) as a training set and the remaining 30% of the data (15 observations) as a test set.
 
 ::: {.fragment .nonincremental}
 
-**A:** Randomly split data in two halves:
+- We will fit three models:
 
-  - $n=25$ "training" observations
+  1. A linear model; low flexibility
 
-  - $n=25$ "testing" observations
+  2. A quintic model; medium flexibility
 
-Let's demonstrate this process!
+  3. A degree 15 model; high flexibility
 
 :::
 
@@ -340,193 +498,271 @@ Let's demonstrate this process!
 
 ```{r}
 #| echo: false
-set.seed(241)
-which_train <- sample(1:50,25)
-adelie_train <- adelie[which_train,]
-adelie_test <- adelie[-which_train,]
+set.seed(11)
+X <- runif(35, 0,10)
+Y <- -(1/10)*(X-1)*(X-10)+2 + rnorm(35, 0, 0.5)
+my_df <- data.frame(X,Y)
 ```
-
-::: {.smaller}
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 6
-#| out-width: "65%"
-#
-#
-ggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
-  theme_bw(base_size=15) + labs(title="Training Data",x="Bill Length",y="Body Mass")
+g_train_pts <- my_df %>% ggplot(aes(x = X, y = Y))+labs(title = "Training Data") +
+  geom_point()+
+  xlim(c(0,10))+
+  ylim(c(0,5))
+g_train_pts
 ```
 
-:::
+- Data follows a non-linear trend
 
-## Model 1 {.smaller}
+## Model 1, 2, and 3
+
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 6
-#| out-width: "65%"
-#| message: false
-ggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
-  theme_bw(base_size=15) + labs(title="Training Data",x="Bill Length",y="Body Mass") +
-  geom_smooth( method = "lm" , se = F)
+g_train <- my_df %>% ggplot( aes(x = X, y = Y)) + geom_point() +
+  labs(title = "Training Data") +
+  geom_smooth( method = "lm" , se = FALSE) +
+  geom_smooth( method = "lm" ,formula = y ~ poly(x, 5), se = FALSE, color = "red")+
+    geom_smooth( method = "lm" ,formula = y ~ poly(x, 15), se = FALSE, color = "orange")+  xlim(c(0,10))+
+  ylim(c(0,5))
+
+g_train
 ```
 
-## Model 1 and 2 {.smaller}
+
+
+- We build a [linear]{style="color: #0000FF;"}, [quintic]{style="color: #FF0000;"}, and [17th degree polynomial]{style="color: #FFA500;"} model
+
+
+## MSE Computation: Training Data
+
+Now, we can compute the **training** MSE for these models:
 
 ```{r}
-#| echo: false
-#| fig-height: 4
-#| fig-width: 6
-#| out-width: "65%"
-#| message: false
-ggplot(adelie_train,aes(x=bill_length_mm,y=body_mass_g))+geom_point() +
-  theme_bw(base_size=15) + labs(title="Training Data",x="Bill Length",y="Body Mass") +
-  geom_smooth( method = "lm" , se = F) +
-  geom_smooth( method = "lm" ,formula = y ~ poly(x, 7), se = F, color = "red")
+lin_mod <- lm(Y ~ X, data = my_df)
+lin_pred_train <- predict(lin_mod, my_df)
+
+quintic_mod <- lm(Y ~ poly(X, degree = 5), data = my_df)
+quintic_pred_train <- predict(quintic_mod, my_df)
+
+poly_mod <- lm(Y ~ poly(X, degree = 15), data = my_df)
+poly_pred_train <- predict(poly_mod, my_df)
+
+get_MSE <- function(actual, pred){
+  mean((actual - pred)^2)
+}
+
+lin_mse_train <- get_MSE(my_df$Y, lin_pred_train)
+quintic_mse_train <- get_MSE(my_df$Y, quintic_pred_train)
+poly_mse_train <- get_MSE(my_df$Y, poly_pred_train)
 ```
 
-## Training MSE
+
+## MSE Computation: Training Data
+
+Now, we can compute the **training** MSE for these models:
 
 ```{r}
-#| echo: true
-# Training linear model
-lin_mod <- lm(body_mass_g ~ bill_length_mm, data = adelie_train)
-lin_pred <-predict(lin_mod, adelie_train)
-
-# Training polynomial model
-poly_mod <- lm(body_mass_g ~ poly(bill_length_mm, degree = 5), data = adelie_train)
-poly_pred <- predict(poly_mod, adelie_train)
-
-# MSE linear model
-mean((adelie_train$body_mass_g - lin_pred)^2)
-# MSE polynomial model
-mean((adelie_train$body_mass_g - poly_pred)^2)
+data.frame(
+  model = c("Linear", "Quintic", "Poly"),
+  MSE = c(lin_mse_train, quintic_mse_train, poly_mse_train)
+)
 ```
-
-
-
 
 ## Test Set
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 6
-#| out-width: "65%"
-train_test <- adelie_train %>%
-  mutate(dataset = "training") %>%
-  bind_rows(adelie_test %>% mutate(dataset = "testing"))
-ggplot() + 
-  geom_point(data = adelie_train, 
-             aes(x = bill_length_mm, y = body_mass_g)) +
-    geom_point(data = train_test, 
-             aes(x = bill_length_mm, y = body_mass_g, color = dataset)) +
-  scale_color_manual(values = c("magenta3", "black")) + 
-  theme_bw(base_size=15) + 
-  labs(title="Testing Data",x="Bill Length",y="Body Mass") + 
-  theme(legend.position = "bottom")
+set.seed(1111)
+X_test <- runif(15, 0,10)
+Y_test <- -(1/10)*(X_test-1)*(X_test-10)+2 + rnorm(15, 0, 0.5)
+test_df <- data.frame(X = X_test, Y = Y_test)
 ```
 
-## Test Set with models 
-
 ```{r}
-#| fig-height: 4
-#| fig-width: 6
-#| out-width: "65%"
-#| message: false
+#| fig-height: 6
+#| fig-width: 10
+#| out-width: "90%"
 #| echo: false
-ggplot(adelie_test,aes(x=bill_length_mm,y=body_mass_g))+geom_point(color = "magenta3") +
-  theme_bw(base_size=15) + labs(title="Testing Data",x="Bill Length",y="Body Mass") +
-  geom_smooth(data = adelie_train, method = "lm" , se = F) +
-  geom_smooth(data = adelie_train, method = "lm" ,formula = y ~ poly(x, 7), se = F, color = "red")
+library(gridExtra)
+g_test_pts <-  ggplot( ) +
+  geom_point(data = test_df, aes(x = X, y = Y))+labs(title = "Test Data")+  xlim(c(0,10))+
+  ylim(c(0,5))
+  #geom_smooth(data = scores, aes(x= mid, y = final), method = "lm" , se = FALSE) +
+  #geom_smooth(data = scores, aes(x= mid, y = final),  method = "lm" ,formula = y ~ poly(x, 3), se = FALSE, color = "red")
+grid.arrange(g_train_pts, g_test_pts, ncol = 2)
 ```
 
-## Test MSE
+- Test data generated from same model as training data
+
+## Test Set with Models
+
 
 ```{r}
-#| echo: true
-# Training linear model
-lin_mod <- lm(body_mass_g ~ bill_length_mm, data = adelie_train)
-lin_pred <-predict(lin_mod, adelie_test)
+#| echo: false
+ g_test <- ggplot( ) +
+  geom_point(data = test_df, aes(x = X, y = Y))+labs(title = "Test Data")+
+  geom_smooth(data = my_df, aes(x= X, y = Y), method = "lm" , se = FALSE) +
+  geom_smooth(data = my_df, aes(x= X, y = Y),  method = "lm" ,formula = y ~ poly(x, 5), se = FALSE, color = "red") +
+  geom_smooth(data = my_df, aes(x= X, y = Y),  method = "lm" ,formula = y ~ poly(x, 15), se = FALSE, color = "orange")+  xlim(c(0,10))+
+  ylim(c(0,5))
 
-# Training polynomial model
-poly_mod <- lm(body_mass_g ~ poly(bill_length_mm, degree = 5), data = adelie_train)
-poly_pred <- predict(poly_mod, adelie_test)
-
-# MSE linear model
-mean((adelie_test$body_mass_g - lin_pred)^2)
-# MSE polynomial model
-mean((adelie_test$body_mass_g - poly_pred)^2)
+g_test
 ```
 
-<br>
+- Models built on training data are plotted on test data
 
-::: {.fragment}
 
-**Q:** Which model should we pick? [**A: Linear model, since lower test MSE**]{.fragment}
+## MSE Computation: Testing Data
+
+Now, we can compute the **test** MSE for these models:
+
+```{r}
+lin_mod <- lm(Y ~ X, data = my_df)
+lin_pred <- predict(lin_mod, test_df)
+
+quintic_mod <- lm(Y ~ poly(X, degree = 5), data = my_df)
+quintic_pred <- predict(quintic_mod, test_df)
+
+poly_mod <- lm(Y ~ poly(X, degree = 15), data = my_df)
+poly_pred <- predict(poly_mod, test_df)
+
+get_MSE <- function(actual, pred){
+  mean((actual - pred)^2)
+}
+
+lin_mse <- get_MSE(test_df$Y, lin_pred)
+quintic_mse <- get_MSE(test_df$Y, quintic_pred)
+poly_mse <- get_MSE(test_df$Y, poly_pred)
+```
+
+
+## MSE Computation: Testing Data
+
+Now, we can compute the **test** MSE for these models:
+
+```{r}
+data.frame(
+  model = c("Linear", "Quintic", "Poly"),
+  MSE = c(lin_mse, quintic_mse, poly_mse)
+)
+```
+
+
+::: {.fragment .fade-up .midi .center}
+
+Best model?
 
 :::
 
-::: {.fragment}
 
-**Q:** What's actually going on in this situation? [**A: The Bias-Variance Trade-off!**]{.fragment}
+
+## Test vs Train
+
+```{r}
+#| fig-height: 6
+#| fig-width: 10
+#| echo: false
+#| out-width: "90%"
+grid.arrange(g_train, g_test, ncol = 2)
+```
+
+- The 15th degree poly model fits the training data well. But doesn't do as well on test data.
+
+## Train vs Test MSE
+
+:::: {.columns}
+
+::: {.column width="35%"}
+
+```{r}
+#| echo: false
+data.frame(model = c("Linear", "Quintic", "Poly"), 'Train MSE' = c(lin_mse_train, quintic_mse_train, poly_mse_train), 'Test MSE' = c(lin_mse, quintic_mse, poly_mse) ) %>% kable(digits = 3)
+```
 
 :::
-
-# Bias-Variance Trade-off
-
-## Training vs Test MSE
-
-::: {.nonincremental}
-
-Suppose we consider various models to predict $Y$, each of increasing complexity.
-
-  - What happens to training and test MSE as model complexity increases?
-
-:::
-
-:::: {.columns .fragment}
 
 ::: {.column width="60%"}
 
 ```{r}
-#| fig-align: "center"
+#| fig-height: 6
+#| fig-width: 6
+#| out-width: "90%"
 #| echo: false
-#| out-width: "60%"
-include_graphics("img/ucurve_ISLR.png")
+cols <- c("1" = "blue", "5" = "red", "15" =  "orange")
+
+data.frame(
+  model = c("Linear", "Quintic", "Poly"),
+  'Train MSE' = c(lin_mse_train, quintic_mse_train, poly_mse_train),
+  'Test MSE' = c(lin_mse, quintic_mse, poly_mse),
+  flexibility = c(1, 5, 15)) %>%
+  select(-model) %>%
+  pivot_longer(!flexibility, names_to = "Set", values_to = "MSE") %>%
+  ggplot(aes(x = flexibility, y = MSE, linetype = Set)) +
+  geom_point(aes(color = as.factor(flexibility)) , size = 2, show.legend = F) +
+  geom_smooth(se = F, color = "black") +
+  scale_color_manual(values = cols)+
+  labs(color = NULL, title = "Model Flexibility vs MSE")+
+  geom_hline(yintercept = 0.25, color = "darkgray", size = 1) +
+  annotate(geom = "text", label = "Irreducible Error", y = .35, x = 12) +
+  theme(legend.position = "bottom")
 ```
-
-:::
-
-::: {.column width="38%" .nonincremental}
-
-Figure 2.9 from *ISLR*
-
-  - GRAY: Training MSE
-
-  - RED: Test MSE
-
-  - X-axis is model complexity
 
 :::
 
 ::::
 
+# Bias-Variance Trade-off
+
+## Training vs Test MSE
+
+Suppose we consider a variety of model shapes to predict $Y$, with each model of increasing flexibility / complexity.
+
+
+- What happens to the training MSE and the test MSE as model flexibility / complexity increases?
+    - As model flexibility / complexity increases, training MSE will decrease, but test MSE might not.
+
+- Flexible / complex models may **overfit** data, meaning they fit patterns from the random error (noise), rather than the true model (signal)
+    - This leads to low train MSE, but high test MSE
+
+- On the other hand, inflexible / simple models may be too rigid to fit the true pattern (lack the fidelity to convey signal)
+    - This may lead to high train MSE and high test MSE
+
+
 ## MSE Decomposition
 
-U-Curve for Test MSE is a result of competition between two sources of model error.
+The U-curve for test MSE is a result of competition between two sources of error in a model
 
-::: {.fragment}
+::: {.fragment .nonincremental}
 
-**Expected Test MSE at $x_0$**
+Expected test MSE can be decomposed as the sum of 3 quantities:
 $$
 \mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
 $$
 
 :::
+
+
+- Here $\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]$ denotes expected test MSE **at** $x_0$, if many models for $f$ were built using a variety of random training data sets containing $x_0$
+
+- Total expected test MSE is obtained by averaging across all possible $x_0$ in the test set.
+
+- A proof is given in Section 7.3 of *The Elements of Statistical Learning*.
+
+- To minimize $\mathrm{MSE}$, we need to *simultaneously* minimize both variance and bias.
+
+
+## MSE Decomposition
+
+The U-curve for test MSE is a result of competition between two sources of error in a model
+
+Expected test MSE can be decomposed as the sum of 3 quantities:
+$$
+\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
+$$
+
+
 
 ::: {.fragment}
 
@@ -554,6 +790,7 @@ Can't do anything about this!
 
 :::
 
+
 ## Bias and Variance
 
 ::: {.nonincremental}
@@ -578,7 +815,7 @@ Can't do anything about this!
 
 :::
 
-## The Trade-off
+## Bias-Variance Trade-off
 
 ::: {.nonincremental}
 
@@ -599,10 +836,45 @@ We want a sufficiently complex model that doesn't overfit training data.
 :::
 
 
+## Bias-Variance Trade-off
+
+```{r}
+#| out-width: "80%"
+#| echo: false
+flexibility <- 1:10
+Irreducible <- 1
+Var <- 1.5^flexibility/15
+
+Bias_sq <- .5^flexibility*2+.25
+
+MSE <- Bias_sq + Var + Irreducible
+
+data.frame(flexibility, Var, Bias_sq, MSE) %>% pivot_longer(!flexibility, names_to = "Component", values_to = "Size") %>%
+  ggplot(aes(x = flexibility, y = Size, color = Component)) +
+  geom_point(size = 2)+
+  geom_line(size = 1)+
+  geom_hline(color = "darkgray", yintercept = 1)+
+  annotate(geom = "text", label = "Irreducible Error", x = 9, y = 1.25, size = 3) +
+  labs(title = "Bias-Variance Trade-off",
+       x = "Flexibility",
+       y = NULL,
+       color = NULL)
+```
+
+
+
 
 ## Next Time
 
 - Linear regression
+
+
+
+
+
+
+
+
 
 
 

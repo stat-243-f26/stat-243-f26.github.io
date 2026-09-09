@@ -286,31 +286,147 @@
 </div></div>
 </section></section>
 <section>
-<section id="assessing-accuracy" class="title-slide slide level1 center">
-<h1>Assessing Accuracy</h1>
+<section id="supervised-learning" class="title-slide slide level1 center">
+<h1>Supervised Learning</h1>
 
 </section>
-<section id="example-adelie-penguins" class="slide level2">
-<h2>Example: Adelie Penguins</h2>
-<p>We want to <strong>predict</strong> Body Mass (<span class="math inline">\(Y\)</span>) based on Bill Length (<span class="math inline">\(X\)</span>), based on a sample of <span class="math inline">\(n=50\)</span> Adelie penguins.</p>
+<section id="supervised-learning-1" class="slide level2">
+<h2>Supervised Learning</h2>
+<ul>
+<li class="fragment">In the supervised learning regression, we observe the values of a <em>quantitative</em> response <span class="math inline">\(Y\)</span>, as well as <span class="math inline">\(p\)</span> many predictors <span class="math inline">\(X_1, \dots, X_p\)</span> (these may be quantitative or categorical)</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>We assume there is a certain relationship between response and predictors: <span class="math display">\[
+Y = f(X_1, \dots, X_p) + \epsilon
+\]</span></li>
+</ul>
+</div>
+<ul>
+<li class="fragment"><p>The function <span class="math inline">\(f\)</span> is called the <strong>model</strong> or <strong>regression function</strong> and the random variable <span class="math inline">\(\epsilon\)</span> is the <strong>error</strong> term</p></li>
+<li class="fragment"><p>The function <span class="math inline">\(f\)</span> represents our best estimate of the value of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span>, or the expected value of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span> (sometimes written: <span class="math inline">\(E[Y \vert X]\)</span>)</p></li>
+</ul>
+</section>
+<section id="estimating-f" class="slide level2">
+<h2>Estimating <span class="math inline">\(f\)</span></h2>
+<ul>
+<li class="fragment">In practice, we will never know the <strong>true</strong> formula for <span class="math inline">\(f\)</span>.</li>
+<li class="fragment">Goal of stat learning is to estimate <span class="math inline">\(f\)</span>, given sample data for <span class="math inline">\(X_1, \dots, X_p\)</span> and <span class="math inline">\(Y\)</span>.</li>
+<li class="fragment">Our estimate for the the true model <span class="math inline">\(f\)</span> is called the <strong>fitted</strong> model <span class="math inline">\(\hat f\)</span>.</li>
+<li class="fragment">How we estimate <span class="math inline">\(f\)</span> will depend on our research goals:</li>
+</ul>
+<div class="columns">
+<div class="column fragment" style="width:45%;">
+<ol type="1">
+<li>Make <strong>predictions</strong> about the values of <span class="math inline">\(Y\)</span> using <span class="math inline">\(X_1, \dots , X_p\)</span>
+<ul>
+<li>Very interested in finding <span class="math inline">\(\hat f\)</span> that makes accurate predictions for <span class="math inline">\(Y\)</span></li>
+<li>Less interested in the learning the true form of <span class="math inline">\(f\)</span></li>
+</ul></li>
+</ol>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column fragment" style="width:45%;">
+<ol start="2" type="1">
+<li>Make <strong>inferences</strong> about relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1, \dots , X_p\)</span>
+<ul>
+<li>Very interested in learning the true form of <span class="math inline">\(f\)</span></li>
+<li>Less interested in finding <span class="math inline">\(\hat f\)</span> that makes accurate predictions for <span class="math inline">\(Y\)</span></li>
+</ul></li>
+</ol>
+</div></div>
+</section>
+<section id="an-example" class="slide level2">
+<h2>An Example</h2>
+<p>Consider two quantitative variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></p>
+<ul>
+<li class="fragment">Suppose, in truth, <span class="math inline">\(Y = 1 + 2X + \epsilon\)</span>, where <span class="math inline">\(\epsilon \sim N(\mu = 0, \sigma = 0.25)\)</span>.</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>The true model is <span class="math inline">\(f(x) = 1 + 2x\)</span>.</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><em>Note: This is prediction, supervised learning, and a regression problem</em></p>
-<div class="fragment">
-<p><strong>Q:</strong> How would you model this relationship? (<em>Parametric vs.&nbsp;Non-Parametric?</em>)</p>
+</div>
+</section>
+<section id="an-example-1" class="slide level2">
+<h2>An Example</h2>
+<p>Consider two quantitative variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></p>
+<ul>
+<li><p>Suppose, in truth, <span class="math inline">\(Y = 1 + 2X + \epsilon\)</span>, where <span class="math inline">\(\epsilon \sim N(\mu = 0, \sigma = 0.25)\)</span>.</p></li>
+<li><p>But data <span class="math inline">\(Y\)</span> will not always lie on this line:</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="an-example-2" class="slide level2">
+<h2>An Example</h2>
+<p>Consider two quantitative variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></p>
+<ul>
+<li><p>In reality, we won’t know the true model.</p></li>
+<li><p>We only have the observed data</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="an-example-3" class="slide level2">
+<h2>An Example</h2>
+<p>Consider two quantitative variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></p>
+<ul>
+<li><p>Instead, we create an estimate <span class="math inline">\(\hat f\)</span> based on data</p></li>
+<li><p>Here, we use least squares regression (minimizing MSE) to estimate <span class="math inline">\(f\)</span></p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="an-example-4" class="slide level2">
+<h2>An Example</h2>
+<p>Consider two quantitative variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></p>
+<ul>
+<li><p>Our estimated model is <span class="math inline">\(\hat f(x) = 1.14 + 1.77x\)</span></p></li>
+<li><p>Which is close to the true model of <span class="math inline">\(f(x) = 1 + 2x\)</span></p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="types-of-error" class="slide level2">
 <h2>Types of Error</h2>
-<div class=".columns">
-<div class="column" style="width:60%;">
 <p>There are two sources of error in a <strong>model</strong>, <span class="math display">\[
 \hat{Y} = \hat{f}(X)
 \]</span> for the <strong>true relationship</strong>, <span class="math display">\[
@@ -319,20 +435,12 @@ Y = f(X)+\epsilon
 <p><span class="math display">\[
   \text{Error} = Y - \hat{Y} = \underbrace{(f - \hat{f})}_{\text{Reducible}} + \underbrace{\epsilon}_{\text{irreducible}}
 \]</span></p>
-</div><div class="column" style="width:40%;">
 <div class="fragment">
 <ol type="1">
-<li><strong>Reducible error:</strong> in the form of our estimate <span class="math inline">\(\hat{f}\)</span> for <span class="math inline">\(f\)</span>.
-<ul>
-<li><span class="fragment">We usually lower Reducible error by <strong>increasing the sample size</strong></span></li>
-</ul></li>
-<li><strong>Irreducible error:</strong> in the form of <span class="math inline">\(\epsilon\)</span>
-<ul>
-<li><span class="fragment">We usually <strong>cannot</strong> lower Irreducible error</span></li>
-</ul></li>
+<li><p><strong>Reducible error:</strong> in the form of our estimate <span class="math inline">\(\hat{f}\)</span> for <span class="math inline">\(f\)</span>.</p></li>
+<li><p><strong>Irreducible error:</strong> in the form of <span class="math inline">\(\epsilon\)</span>.</p></li>
 </ol>
 </div>
-</div></div>
 </section>
 <section id="quality-of-a-model" class="slide level2">
 <h2>Quality of a Model</h2>
@@ -392,80 +500,88 @@ Y = f(X)+\epsilon
 </ol>
 </div>
 </section>
-<section id="returning-to-penguins" class="slide level2">
-<h2>Returning to Penguins</h2>
-<p>We want to predict Body Mass (<span class="math inline">\(Y\)</span>) over future penguins based on Bill Length (<span class="math inline">\(X\)</span>).</p>
-<p>We have a random sample of <span class="math inline">\(n=50\)</span> penguins.</p>
-<div class="fragment">
-<p><strong>Q:</strong> How might we split our data into training and test sets?</p>
-</div>
-<div class="fragment">
-<p><strong>A:</strong> Randomly split data in two halves:</p>
+<section id="an-example-5" class="slide level2">
+<h2>An Example</h2>
 <ul>
-<li><p><span class="math inline">\(n=25\)</span> “training” observations</p></li>
-<li><p><span class="math inline">\(n=25\)</span> “testing” observations</p></li>
+<li class="fragment"><p>Suppose we have 50 observations on a quantitative response <span class="math inline">\(Y\)</span> and quantitative predictor <span class="math inline">\(X\)</span></p></li>
+<li class="fragment"><p>We plan to use 70% of our data (35 observations) as a training set and the remaining 30% of the data (15 observations) as a test set.</p></li>
 </ul>
-<p>Let’s demonstrate this process!</p>
+<div class="fragment">
+<ul>
+<li><p>We will fit three models:</p>
+<ol type="1">
+<li><p>A linear model; low flexibility</p></li>
+<li><p>A quintic model; medium flexibility</p></li>
+<li><p>A degree 15 model; high flexibility</p></li>
+</ol></li>
+</ul>
 </div>
 </section>
 <section id="training-set" class="slide level2">
 <h2>Training Set</h2>
-<div class="smaller">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
+<ul>
+<li class="fragment">Data follows a non-linear trend</li>
+</ul>
 </section>
-<section id="model-1" class="slide level2 smaller">
-<h2>Model 1</h2>
+<section id="model-1-2-and-3" class="slide level2">
+<h2>Model 1, 2, and 3</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
+<ul>
+<li class="fragment">We build a <span style="color: #0000FF;">linear</span>, <span style="color: #FF0000;">quintic</span>, and <span style="color: #FFA500;">17th degree polynomial</span> model</li>
+</ul>
 </section>
-<section id="model-1-and-2" class="slide level2 smaller">
-<h2>Model 1 and 2</h2>
+<section id="mse-computation-training-data" class="slide level2">
+<h2>MSE Computation: Training Data</h2>
+<p>Now, we can compute the <strong>training</strong> MSE for these models:</p>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
-</figure>
-</div>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a>lin_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> my_df)</span>
+<span id="cb1-2"><a aria-label="2"></a>lin_pred_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(lin_mod, my_df)</span>
+<span id="cb1-3"><a aria-label="3"></a></span>
+<span id="cb1-4"><a aria-label="4"></a>quintic_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> <span class="fu">poly</span>(X, <span class="at">degree =</span> <span class="dv">5</span>), <span class="at">data =</span> my_df)</span>
+<span id="cb1-5"><a aria-label="5"></a>quintic_pred_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(quintic_mod, my_df)</span>
+<span id="cb1-6"><a aria-label="6"></a></span>
+<span id="cb1-7"><a aria-label="7"></a>poly_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> <span class="fu">poly</span>(X, <span class="at">degree =</span> <span class="dv">15</span>), <span class="at">data =</span> my_df)</span>
+<span id="cb1-8"><a aria-label="8"></a>poly_pred_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(poly_mod, my_df)</span>
+<span id="cb1-9"><a aria-label="9"></a></span>
+<span id="cb1-10"><a aria-label="10"></a>get_MSE <span class="ot">&lt;-</span> <span class="cf">function</span>(actual, pred){</span>
+<span id="cb1-11"><a aria-label="11"></a>  <span class="fu">mean</span>((actual <span class="sc">-</span> pred)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb1-12"><a aria-label="12"></a>}</span>
+<span id="cb1-13"><a aria-label="13"></a></span>
+<span id="cb1-14"><a aria-label="14"></a>lin_mse_train <span class="ot">&lt;-</span> <span class="fu">get_MSE</span>(my_df<span class="sc">$</span>Y, lin_pred_train)</span>
+<span id="cb1-15"><a aria-label="15"></a>quintic_mse_train <span class="ot">&lt;-</span> <span class="fu">get_MSE</span>(my_df<span class="sc">$</span>Y, quintic_pred_train)</span>
+<span id="cb1-16"><a aria-label="16"></a>poly_mse_train <span class="ot">&lt;-</span> <span class="fu">get_MSE</span>(my_df<span class="sc">$</span>Y, poly_pred_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="training-mse" class="slide level2">
-<h2>Training MSE</h2>
+<section id="mse-computation-training-data-1" class="slide level2">
+<h2>MSE Computation: Training Data</h2>
+<p>Now, we can compute the <strong>training</strong> MSE for these models:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Training linear model</span></span>
-<span id="cb1-2"><a aria-label="2"></a>lin_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> bill_length_mm, <span class="at">data =</span> adelie_train)</span>
-<span id="cb1-3"><a aria-label="3"></a>lin_pred <span class="ot">&lt;-</span><span class="fu">predict</span>(lin_mod, adelie_train)</span>
-<span id="cb1-4"><a aria-label="4"></a></span>
-<span id="cb1-5"><a aria-label="5"></a><span class="co"># Training polynomial model</span></span>
-<span id="cb1-6"><a aria-label="6"></a>poly_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> <span class="fu">poly</span>(bill_length_mm, <span class="at">degree =</span> <span class="dv">5</span>), <span class="at">data =</span> adelie_train)</span>
-<span id="cb1-7"><a aria-label="7"></a>poly_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(poly_mod, adelie_train)</span>
-<span id="cb1-8"><a aria-label="8"></a></span>
-<span id="cb1-9"><a aria-label="9"></a><span class="co"># MSE linear model</span></span>
-<span id="cb1-10"><a aria-label="10"></a><span class="fu">mean</span>((adelie_train<span class="sc">$</span>body_mass_g <span class="sc">-</span> lin_pred)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb2-2"><a aria-label="2"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"Linear"</span>, <span class="st">"Quintic"</span>, <span class="st">"Poly"</span>),</span>
+<span id="cb2-3"><a aria-label="3"></a>  <span class="at">MSE =</span> <span class="fu">c</span>(lin_mse_train, quintic_mse_train, poly_mse_train)</span>
+<span id="cb2-4"><a aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 143573.9</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="co"># MSE polynomial model</span></span>
-<span id="cb3-2"><a aria-label="2"></a><span class="fu">mean</span>((adelie_train<span class="sc">$</span>body_mass_g <span class="sc">-</span> poly_pred)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 103889.4</code></pre>
+<pre><code>    model        MSE
+1  Linear 0.67718601
+2 Quintic 0.08622626
+3    Poly 0.07137541</code></pre>
 </div>
 </div>
 </section>
@@ -475,53 +591,131 @@ Y = f(X)+\epsilon
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+<ul>
+<li class="fragment">Test data generated from same model as training data</li>
+</ul>
 </section>
 <section id="test-set-with-models" class="slide level2">
-<h2>Test Set with models</h2>
+<h2>Test Set with Models</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
+<ul>
+<li class="fragment">Models built on training data are plotted on test data</li>
+</ul>
 </section>
-<section id="test-mse" class="slide level2">
-<h2>Test MSE</h2>
+<section id="mse-computation-testing-data" class="slide level2">
+<h2>MSE Computation: Testing Data</h2>
+<p>Now, we can compute the <strong>test</strong> MSE for these models:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Training linear model</span></span>
-<span id="cb5-2"><a aria-label="2"></a>lin_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> bill_length_mm, <span class="at">data =</span> adelie_train)</span>
-<span id="cb5-3"><a aria-label="3"></a>lin_pred <span class="ot">&lt;-</span><span class="fu">predict</span>(lin_mod, adelie_test)</span>
-<span id="cb5-4"><a aria-label="4"></a></span>
-<span id="cb5-5"><a aria-label="5"></a><span class="co"># Training polynomial model</span></span>
-<span id="cb5-6"><a aria-label="6"></a>poly_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> <span class="fu">poly</span>(bill_length_mm, <span class="at">degree =</span> <span class="dv">5</span>), <span class="at">data =</span> adelie_train)</span>
-<span id="cb5-7"><a aria-label="7"></a>poly_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(poly_mod, adelie_test)</span>
-<span id="cb5-8"><a aria-label="8"></a></span>
-<span id="cb5-9"><a aria-label="9"></a><span class="co"># MSE linear model</span></span>
-<span id="cb5-10"><a aria-label="10"></a><span class="fu">mean</span>((adelie_test<span class="sc">$</span>body_mass_g <span class="sc">-</span> lin_pred)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a>lin_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> my_df)</span>
+<span id="cb4-2"><a aria-label="2"></a>lin_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(lin_mod, test_df)</span>
+<span id="cb4-3"><a aria-label="3"></a></span>
+<span id="cb4-4"><a aria-label="4"></a>quintic_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> <span class="fu">poly</span>(X, <span class="at">degree =</span> <span class="dv">5</span>), <span class="at">data =</span> my_df)</span>
+<span id="cb4-5"><a aria-label="5"></a>quintic_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(quintic_mod, test_df)</span>
+<span id="cb4-6"><a aria-label="6"></a></span>
+<span id="cb4-7"><a aria-label="7"></a>poly_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> <span class="fu">poly</span>(X, <span class="at">degree =</span> <span class="dv">15</span>), <span class="at">data =</span> my_df)</span>
+<span id="cb4-8"><a aria-label="8"></a>poly_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(poly_mod, test_df)</span>
+<span id="cb4-9"><a aria-label="9"></a></span>
+<span id="cb4-10"><a aria-label="10"></a>get_MSE <span class="ot">&lt;-</span> <span class="cf">function</span>(actual, pred){</span>
+<span id="cb4-11"><a aria-label="11"></a>  <span class="fu">mean</span>((actual <span class="sc">-</span> pred)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb4-12"><a aria-label="12"></a>}</span>
+<span id="cb4-13"><a aria-label="13"></a></span>
+<span id="cb4-14"><a aria-label="14"></a>lin_mse <span class="ot">&lt;-</span> <span class="fu">get_MSE</span>(test_df<span class="sc">$</span>Y, lin_pred)</span>
+<span id="cb4-15"><a aria-label="15"></a>quintic_mse <span class="ot">&lt;-</span> <span class="fu">get_MSE</span>(test_df<span class="sc">$</span>Y, quintic_pred)</span>
+<span id="cb4-16"><a aria-label="16"></a>poly_mse <span class="ot">&lt;-</span> <span class="fu">get_MSE</span>(test_df<span class="sc">$</span>Y, poly_pred)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="mse-computation-testing-data-1" class="slide level2">
+<h2>MSE Computation: Testing Data</h2>
+<p>Now, we can compute the <strong>test</strong> MSE for these models:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb5-2"><a aria-label="2"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"Linear"</span>, <span class="st">"Quintic"</span>, <span class="st">"Poly"</span>),</span>
+<span id="cb5-3"><a aria-label="3"></a>  <span class="at">MSE =</span> <span class="fu">c</span>(lin_mse, quintic_mse, poly_mse)</span>
+<span id="cb5-4"><a aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 117857.7</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a><span class="co"># MSE polynomial model</span></span>
-<span id="cb7-2"><a aria-label="2"></a><span class="fu">mean</span>((adelie_test<span class="sc">$</span>body_mass_g <span class="sc">-</span> poly_pred)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10083784</code></pre>
+<pre><code>    model       MSE
+1  Linear 1.2809403
+2 Quintic 0.3264478
+3    Poly 1.8224322</code></pre>
 </div>
 </div>
-<p><br></p>
-<div class="fragment">
-<p><strong>Q:</strong> Which model should we pick? <span class="fragment"><strong>A: Linear model, since lower test MSE</strong></span></p>
+<div class="fragment fade-up midi center">
+<p>Best model?</p>
 </div>
-<div class="fragment">
-<p><strong>Q:</strong> What’s actually going on in this situation? <span class="fragment"><strong>A: The Bias-Variance Trade-off!</strong></span></p>
+</section>
+<section id="test-vs-train" class="slide level2">
+<h2>Test vs Train</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-19-1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
 </div>
+</div>
+</div>
+<ul>
+<li class="fragment">The 15th degree poly model fits the training data well. But doesn’t do as well on test data.</li>
+</ul>
+</section>
+<section id="train-vs-test-mse" class="slide level2">
+<h2>Train vs Test MSE</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">model</th>
+<th style="text-align: right;">Train.MSE</th>
+<th style="text-align: right;">Test.MSE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Linear</td>
+<td style="text-align: right;">0.677</td>
+<td style="text-align: right;">1.281</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Quintic</td>
+<td style="text-align: right;">0.086</td>
+<td style="text-align: right;">0.326</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Poly</td>
+<td style="text-align: right;">0.071</td>
+<td style="text-align: right;">1.822</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-21-1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 </section></section>
 <section>
 <section id="bias-variance-trade-off" class="title-slide slide level1 center">
@@ -530,38 +724,43 @@ Y = f(X)+\epsilon
 </section>
 <section id="training-vs-test-mse" class="slide level2">
 <h2>Training vs Test MSE</h2>
-<p>Suppose we consider various models to predict <span class="math inline">\(Y\)</span>, each of increasing complexity.</p>
+<p>Suppose we consider a variety of model shapes to predict <span class="math inline">\(Y\)</span>, with each model of increasing flexibility / complexity.</p>
 <ul>
-<li>What happens to training and test MSE as model complexity increases?</li>
-</ul>
-<div class="columns fragment">
-<div class="column" style="width:60%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/ucurve_ISLR.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:38%;">
-<p>Figure 2.9 from <em>ISLR</em></p>
+<li class="fragment">What happens to the training MSE and the test MSE as model flexibility / complexity increases?
 <ul>
-<li><p>GRAY: Training MSE</p></li>
-<li><p>RED: Test MSE</p></li>
-<li><p>X-axis is model complexity</p></li>
+<li class="fragment">As model flexibility / complexity increases, training MSE will decrease, but test MSE might not.</li>
+</ul></li>
+<li class="fragment">Flexible / complex models may <strong>overfit</strong> data, meaning they fit patterns from the random error (noise), rather than the true model (signal)
+<ul>
+<li class="fragment">This leads to low train MSE, but high test MSE</li>
+</ul></li>
+<li class="fragment">On the other hand, inflexible / simple models may be too rigid to fit the true pattern (lack the fidelity to convey signal)
+<ul>
+<li class="fragment">This may lead to high train MSE and high test MSE</li>
+</ul></li>
 </ul>
-</div></div>
 </section>
 <section id="mse-decomposition" class="slide level2">
 <h2>MSE Decomposition</h2>
-<p>U-Curve for Test MSE is a result of competition between two sources of model error.</p>
+<p>The U-curve for test MSE is a result of competition between two sources of error in a model</p>
 <div class="fragment">
-<p><strong>Expected Test MSE at <span class="math inline">\(x_0\)</span></strong> <span class="math display">\[
+<p>Expected test MSE can be decomposed as the sum of 3 quantities: <span class="math display">\[
 \mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
 \]</span></p>
 </div>
+<ul>
+<li class="fragment"><p>Here <span class="math inline">\(\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]\)</span> denotes expected test MSE <strong>at</strong> <span class="math inline">\(x_0\)</span>, if many models for <span class="math inline">\(f\)</span> were built using a variety of random training data sets containing <span class="math inline">\(x_0\)</span></p></li>
+<li class="fragment"><p>Total expected test MSE is obtained by averaging across all possible <span class="math inline">\(x_0\)</span> in the test set.</p></li>
+<li class="fragment"><p>A proof is given in Section 7.3 of <em>The Elements of Statistical Learning</em>.</p></li>
+<li class="fragment"><p>To minimize <span class="math inline">\(\mathrm{MSE}\)</span>, we need to <em>simultaneously</em> minimize both variance and bias.</p></li>
+</ul>
+</section>
+<section id="mse-decomposition-1" class="slide level2">
+<h2>MSE Decomposition</h2>
+<p>The U-curve for test MSE is a result of competition between two sources of error in a model</p>
+<p>Expected test MSE can be decomposed as the sum of 3 quantities: <span class="math display">\[
+\mathrm{E} \Big[ ( y_0 - \hat{f}(x_0))^2 \big]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
+\]</span></p>
 <div class="fragment">
 <ol type="1">
 <li class="fragment"><strong>(Squared) Bias</strong> – <span class="math inline">\(\left[\mathrm{Bias}(\hat{f}(x_0))\right]^2\)</span> By “Bias”, we mean <span class="math inline">\(E[ \hat{f} (x_0) - f (x_0) ]\)</span></li>
@@ -597,8 +796,8 @@ Y = f(X)+\epsilon
 </ul>
 </div>
 </section>
-<section id="the-trade-off" class="slide level2">
-<h2>The Trade-off</h2>
+<section id="bias-variance-trade-off-1" class="slide level2">
+<h2>Bias-Variance Trade-off</h2>
 <p><strong>Q:</strong> What happens as we pick more complex models?</p>
 <ul>
 <li><p>As complexity increases, we tend to “overfit” model to training data.</p></li>
@@ -609,6 +808,18 @@ Y = f(X)+\epsilon
 <ul>
 <li>How we <em>actually do this</em> is a major theme of this course!!</li>
 </ul>
+</div>
+</section>
+<section id="bias-variance-trade-off-2" class="slide level2">
+<h2>Bias-Variance Trade-off</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk02wed_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="next-time" class="slide level2">
