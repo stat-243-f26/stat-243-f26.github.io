@@ -438,14 +438,14 @@
     "href": "slides/stat243_wk02wed.html#warm-up-part-1",
     "title": "Stat 243",
     "section": "Warm Up (Part 1)",
-    "text": "Warm Up (Part 1)\nFor each of the following scenarios, identify if it is primarily a…\n\n\n\nPrediction or Inference task\nParametric or Non-Parametric method\n\n\n\nSupervised or Unsupervised problem\nRegression or Classification problem\n\n\n\n\n\nA biologist wants to determine how strongly certain genes are correlated with breast cancer to improve early detection DNA tests. They will fit a multiple linear regression model based on DNA sequencing data of people with and without breast cancer.\n\n\n\nResearchers at Zillow (a real estate app) want to predict which users actually want to buy a home vs. simply browse fancy mansions. They will train a neural network using data provided by users, their browsing habits, and other user data harvested from website “cookies”."
+    "text": "Warm Up (Part 1)\nFor each of the following scenarios, identify if it is primarily a…\n\n\n\nPrediction or Inference task\nParametric or Non-Parametric method\n\n\n\nSupervised or Unsupervised problem\nRegression or Classification problem\n\n\n\n\n\nA biologist wants to determine how strongly certain genes are correlated with breast cancer to improve early detection DNA tests. They will fit a multiple linear regression model based on DNA sequencing data of people with and without breast cancer.\n\n\n\nResearchers at Zillow (a real estate app) want to predict which users actually want to buy a home vs. simply browse fancy mansions. They will train a neural network using data provided by users, their browsing habits, and other user data harvested from website “cookies”.\n\n\n\n\n\n−+\n03:00"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#warm-up-part-2",
     "href": "slides/stat243_wk02wed.html#warm-up-part-2",
     "title": "Stat 243",
     "section": "Warm Up (Part 2)",
-    "text": "Warm Up (Part 2)\n\n\nInsomnia Cookies wants to better understand their customers, so they conduct a small survey and ask customers their age (\\(X_1\\)) and hours worked per week (\\(X_2\\)).\n\nWhat can Insomnia Cookies infer about their customers?\nLabel each “cluster”.\nDetermine whether this is supervised or unsupervised learning, and explain why."
+    "text": "Warm Up (Part 2)\n\n\nInsomnia Cookies wants to better understand their customers, so they conduct a small survey and ask customers their age (\\(X_1\\)) and hours worked per week (\\(X_2\\)).\n\nWhat can Insomnia Cookies infer about their customers?\nLabel each “cluster”.\nDetermine whether this is supervised or unsupervised learning, and explain why.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n−+\n02:00"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#supervised-learning-1",
@@ -466,7 +466,7 @@
     "href": "slides/stat243_wk02wed.html#an-example",
     "title": "Stat 243",
     "section": "An Example",
-    "text": "An Example\nConsider two quantitative variables \\(X\\) and \\(Y\\)\n\nSuppose, in truth, \\(Y = 1 + 2X + \\epsilon\\), where \\(\\epsilon \\sim N(\\mu = 0, \\sigma = 0.25)\\).\n\n\n\nThe true model is \\(f(x) = 1 + 2x\\)."
+    "text": "An Example\nConsider two quantitative variables \\(X\\) and \\(Y\\)\n\nSuppose, in truth, \\(Y = 1 + 2X + \\epsilon\\), where \\(\\epsilon \\sim N(\\mu = 0, \\sigma = 0.25)\\).\nThe true model is \\(f(x) = 1 + 2x\\)."
   },
   {
     "objectID": "slides/stat243_wk02wed.html#an-example-1",
@@ -508,14 +508,14 @@
     "href": "slides/stat243_wk02wed.html#quality-of-a-model",
     "title": "Stat 243",
     "section": "Quality of a Model",
-    "text": "Quality of a Model\nWhen given a modeling question, we can conceive of many possible models.\n\nHow do we measure quality of a model?\n\nDevise a quantitative measurement of model error.\nSelect the model that minimizes this measure of error.\n\n\n\nFor regression, the most common measure of error is the Mean Squared Error (MSE): \\[\n\\mathrm{MSE}(\\hat{f}) = \\frac{1}{n}\\sum_{i=1}^n \\Big(y_i - \\hat{f}(x_i) \\Big)^2,\n\\] where \\(\\hat{f}\\) is the model, \\(x_i\\) are the observed predictor values, and \\(y_i\\) are the corresponding observed response values.\nRecall: other options like MAE and MZOL are popular for particular applications or regression and classification."
+    "text": "Quality of a Model\nWhen given a modeling question, we can conceive of many possible models.\n\nHow should we measure quality of a model?\n\n\n\nDevise a quantitative measurement of model error.\nSelect the model that minimizes this measure of error.\n\n\n\nFor regression, the most common measure of error is the Mean Squared Error (MSE): \\[\n\\mathrm{MSE}(\\hat{f}) = \\frac{1}{n}\\sum_{i=1}^n \\Big(y_i - \\hat{f}(x_i) \\Big)^2,\n\\] where \\(\\hat{f}\\) is the model, \\(x_i\\) are the observed predictor values, and \\(y_i\\) are the corresponding observed response values.\nRecall: other options like MAE and MZOL are popular for particular applications or regression and classification."
   },
   {
     "objectID": "slides/stat243_wk02wed.html#mean-squared-error-mse",
     "href": "slides/stat243_wk02wed.html#mean-squared-error-mse",
     "title": "Stat 243",
     "section": "Mean Squared Error (MSE)",
-    "text": "Mean Squared Error (MSE)\n\\[\n\\mathrm{MSE}(\\hat{f}) = \\frac{1}{n}\\sum_{i=1}^n \\Big(y_i - \\hat{f}(x_i) \\Big)^2\n\\]\nQ: Under what circumstances is MSE small?\n\n\nA: When the (reducible + irreducible) error is small!\n\n\n\nQ: What could go wrong if we try to minimize \\(\\mathrm{MSE}\\) on observed data?\n\nHint: Consider prediction with new penguins\n\n\n\n\nA: We could make a model too specific to our observed data that doesn’t generalize to new, unobserved data (i.e., overfitting)"
+    "text": "Mean Squared Error (MSE)\n\\[\n\\mathrm{MSE}(\\hat{f}) = \\frac{1}{n}\\sum_{i=1}^n \\Big(y_i - \\hat{f}(x_i) \\Big)^2\n\\]\nQ: Under what circumstances is MSE small?\n\n\nA: When the (reducible + irreducible) error is small!\n\n\n\nQ: What could go wrong if we try to minimize \\(\\mathrm{MSE}\\) on observed data?\n\nHint: Consider prediction with new data\n\n\n\n\nA: We could make a model too specific to our observed data that doesn’t generalize to new, unobserved data (i.e., overfitting)"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#training-and-test-data-for-prediction-problems",
@@ -557,7 +557,7 @@
     "href": "slides/stat243_wk02wed.html#mse-computation-training-data-1",
     "title": "Stat 243",
     "section": "MSE Computation: Training Data",
-    "text": "MSE Computation: Training Data\nNow, we can compute the training MSE for these models:\n\ndata.frame(\n  model = c(\"Linear\", \"Quintic\", \"Poly\"),\n  MSE = c(lin_mse_train, quintic_mse_train, poly_mse_train)\n)\n\n    model        MSE\n1  Linear 0.67718601\n2 Quintic 0.08622626\n3    Poly 0.07137541"
+    "text": "MSE Computation: Training Data\nNow, we can compute the training MSE for these models:\n\ndata.frame(\n  model = c(\"Linear\", \"Quintic\", \"Poly\"),\n  MSE = round(c(lin_mse_train, quintic_mse_train, poly_mse_train), 3)\n)\n\n    model   MSE\n1  Linear 0.677\n2 Quintic 0.086\n3    Poly 0.071\n\n\n\nBest model?"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#test-set",
@@ -585,7 +585,7 @@
     "href": "slides/stat243_wk02wed.html#mse-computation-testing-data-1",
     "title": "Stat 243",
     "section": "MSE Computation: Testing Data",
-    "text": "MSE Computation: Testing Data\nNow, we can compute the test MSE for these models:\n\ndata.frame(\n  model = c(\"Linear\", \"Quintic\", \"Poly\"),\n  MSE = c(lin_mse, quintic_mse, poly_mse)\n)\n\n    model       MSE\n1  Linear 1.2809403\n2 Quintic 0.3264478\n3    Poly 1.8224322\n\n\n\nBest model?"
+    "text": "MSE Computation: Testing Data\nNow, we can compute the test MSE for these models:\n\ndata.frame(\n  model = c(\"Linear\", \"Quintic\", \"Poly\"),\n  MSE = round(c(lin_mse, quintic_mse, poly_mse), 3)\n)\n\n    model   MSE\n1  Linear 1.281\n2 Quintic 0.326\n3    Poly 1.822\n\n\n\nBest model?"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#test-vs-train",

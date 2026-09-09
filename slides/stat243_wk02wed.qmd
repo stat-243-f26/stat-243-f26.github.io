@@ -130,6 +130,12 @@ For each of the following scenarios, identify if it is primarily a...
 
 ::::
 
+```{r}
+#| echo: false
+countdown::countdown(3)
+```
+
+
 ## Warm Up (Part 2)
 
 :::: {.columns}
@@ -162,12 +168,18 @@ ggplot(data,aes(x=Age,y=Hours))+geom_point(size=6,alpha=0.7)+theme_minimal(base_
 ::::
 
 
+```{r}
+#| echo: false
+countdown::countdown(2)
+```
+
+
 
 # Supervised Learning
 
 ## Supervised Learning
 
-- In the supervised learning regression, we observe the values of a *quantitative* response $Y$, as well as $p$ many predictors $X_1, \dots, X_p$ (these may be quantitative or categorical)
+- In the [supervised]{style="color: #0000FF;"} learning [regression]{style="color: #B069DB;"}, we observe the values of a [quantitative]{style="color: #B069DB;"} [response]{style="color: #0000FF;"} $Y$, as well as $p$ many predictors $X_1, \dots, X_p$ (these may be quantitative or categorical)
 
 ::: {.fragment .nonincremental}
 
@@ -221,7 +233,7 @@ $$
 Consider two quantitative variables $X$ and $Y$
 
 - Suppose, in truth, $Y = 1 + 2X + \epsilon$, where $\epsilon \sim N(\mu = 0, \sigma = 0.25)$.
-
+- The true model is $f(x) = 1 + 2x$.
 
 
 ```{r}
@@ -238,9 +250,10 @@ int <- mod$coefficients[1]
 slope <- mod$coefficients[2]
 ```
 
+
+
 ::: {.fragment .nonincremental}
 
-- The true model is $f(x) = 1 + 2x$.
 
 ```{r}
 #| fig-align: 'center'
@@ -398,9 +411,12 @@ $$
 
 When given a modeling question, we can conceive of **many possible models**.
 
-::: {.fragment .nonincremental}
 
-How do we measure **quality of a model?**
+::: {.fragment .fade-up .midi .center}
+How should we measure **quality of a model?**
+:::
+
+::: {.fragment .nonincremental}
 
 1) Devise a quantitative measurement of model error.
 
@@ -440,7 +456,7 @@ $$
 
 **Q:** What could go wrong if we try to minimize $\mathrm{MSE}$ on observed data?
 
-  - Hint: Consider prediction with new penguins
+  - Hint: Consider prediction with new data
 
 :::
 
@@ -566,9 +582,16 @@ Now, we can compute the **training** MSE for these models:
 ```{r}
 data.frame(
   model = c("Linear", "Quintic", "Poly"),
-  MSE = c(lin_mse_train, quintic_mse_train, poly_mse_train)
+  MSE = round(c(lin_mse_train, quintic_mse_train, poly_mse_train), 3)
 )
 ```
+
+
+::: {.fragment .fade-up .midi .center}
+
+Best model?
+
+:::
 
 ## Test Set
 
@@ -645,7 +668,7 @@ Now, we can compute the **test** MSE for these models:
 ```{r}
 data.frame(
   model = c("Linear", "Quintic", "Poly"),
-  MSE = c(lin_mse, quintic_mse, poly_mse)
+  MSE = round(c(lin_mse, quintic_mse, poly_mse), 3)
 )
 ```
 
@@ -805,9 +828,9 @@ data.frame(flexibility, Var, Bias_sq, MSE) %>% pivot_longer(!flexibility, names_
 
 ::: {.fragment .nonincremental}
 
-We want a sufficiently complex model that doesn't overfit training data.
+We want a **sufficiently complex model that doesn't overfit** training data.
 
-  - How we *actually do this* is a major theme of this course!
+  - How we **actually do this** is a major theme of this course!
 
 :::
 
