@@ -235,7 +235,14 @@
     "href": "slides/stat243_wk02fri.html#measuring-model-accuracy-alphabet-soup-1",
     "title": "Stat 243",
     "section": "Measuring Model Accuracy (Alphabet Soup)",
-    "text": "Measuring Model Accuracy (Alphabet Soup)\nThe following (closely related) measures are used to assess accuracy of a linear model:\n\n\nThe coefficient of determination \\(R^2\\) \\[\nR^2 = 1- \\frac{\\sum_{i=1}^n(y_i - \\hat y_i)^2}{\\sum_{i=1}^n(y_i - \\bar y)^2} = 1 - \\frac{\\textrm{RSS}}{\\textrm{TSS}}\n\\]\n\\(R^2\\) is the proportion of variation in the response explained by the model.\n\n\n\n\nAdjusted \\(R^2\\)\n\n\\[\\begin{align*}\n\\mbox{adj} R^2 &= 1- \\frac{\\sum_{i=1}^2 (y - \\hat{y})^2}{\\sum_{i=1}^n (y - \\bar{y})^2} \\left(\\frac{n - 1}{n - p - 1} \\right) = 1 - \\frac{\\textrm{RSS}}{\\textrm{TSS}} \\left(\\frac{n - 1}{n - p - 1} \\right)\n\\end{align*}\\]\nwhere \\(p\\) is the number of explanatory variables in the model.\n\n\nQ: Why might we prefer \\(R^2\\) over adjusted \\(R^2\\) or vice verse?"
+    "text": "Measuring Model Accuracy (Alphabet Soup)\nThe following (closely related) measures are used to assess accuracy of a linear model:\n\n\nThe coefficient of determination \\(R^2\\) \\[\nR^2 = 1- \\frac{\\sum_{i=1}^n(y_i - \\hat y_i)^2}{\\sum_{i=1}^n(y_i - \\bar y)^2} = 1 - \\frac{\\textrm{RSS}}{\\textrm{TSS}}\n\\]\n\\(R^2\\) is the proportion of variation in the response explained by the model.\n\n\n\n\nAdjusted \\(R^2\\)\n\n\\[\\begin{align*}\n\\mbox{adj} R^2 &= 1- \\frac{\\sum_{i=1}^2 (y - \\hat{y})^2}{\\sum_{i=1}^n (y - \\bar{y})^2} \\left(\\frac{n - 1}{n - p - 1} \\right) = 1 - \\frac{\\textrm{RSS}}{\\textrm{TSS}} \\left(\\frac{n - 1}{n - p - 1} \\right)\n\\end{align*}\\]\nwhere \\(p\\) is the number of explanatory variables in the model."
+  },
+  {
+    "objectID": "slides/stat243_wk02fri.html#measuring-model-accuracy-alphabet-soup-2",
+    "href": "slides/stat243_wk02fri.html#measuring-model-accuracy-alphabet-soup-2",
+    "title": "Stat 243",
+    "section": "Measuring Model Accuracy (Alphabet Soup)",
+    "text": "Measuring Model Accuracy (Alphabet Soup)\nThe following (closely related) measures are used to assess accuracy of a linear model:\n\\[\nR^2 = 1- \\frac{\\sum_{i=1}^n(y_i - \\hat y_i)^2}{\\sum_{i=1}^n(y_i - \\bar y)^2} = 1 - \\frac{\\textrm{RSS}}{\\textrm{TSS}}\n\\]\n\\[\\begin{align*}\n\\mbox{adj} R^2 &= 1- \\frac{\\sum_{i=1}^2 (y - \\hat{y})^2}{\\sum_{i=1}^n (y - \\bar{y})^2} \\left(\\frac{n - 1}{n - p - 1} \\right) = 1 - \\frac{\\textrm{RSS}}{\\textrm{TSS}} \\left(\\frac{n - 1}{n - p - 1} \\right)\n\\end{align*}\\]\nwhere \\(p\\) is the number of explanatory variables in the model.\n\n\nQ: Why might we prefer \\(R^2\\) over adjusted \\(R^2\\) or vice versa?"
   },
   {
     "objectID": "slides/stat243_wk02fri.html#next-week",

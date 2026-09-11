@@ -655,8 +655,20 @@ R^2 = 1- \frac{\sum_{i=1}^n(y_i - \hat y_i)^2}{\sum_{i=1}^n(y_i - \bar y)^2} = 1
 \end{align*}\]</span></p>
 <p>where <span class="math inline">\(p\)</span> is the number of explanatory variables in the model.</p>
 </div>
+</section>
+<section id="measuring-model-accuracy-alphabet-soup-2" class="slide level2">
+<h2>Measuring Model Accuracy (Alphabet Soup)</h2>
+<p>The following (closely related) measures are used to assess accuracy of a linear model:</p>
+<p><span class="math display">\[
+R^2 = 1- \frac{\sum_{i=1}^n(y_i - \hat y_i)^2}{\sum_{i=1}^n(y_i - \bar y)^2} = 1 - \frac{\textrm{RSS}}{\textrm{TSS}}
+\]</span></p>
+<p><span class="math display">\[\begin{align*}
+\mbox{adj} R^2 &amp;= 1- \frac{\sum_{i=1}^2 (y - \hat{y})^2}{\sum_{i=1}^n (y - \bar{y})^2} \left(\frac{n - 1}{n - p - 1} \right) = 1 - \frac{\textrm{RSS}}{\textrm{TSS}} \left(\frac{n - 1}{n - p - 1} \right)
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(p\)</span> is the number of explanatory variables in the model.</p>
+<p><br></p>
 <ul>
-<li class="fragment"><strong>Q:</strong> Why might we prefer <span class="math inline">\(R^2\)</span> over adjusted <span class="math inline">\(R^2\)</span> or vice verse?</li>
+<li><strong>Q:</strong> Why might we prefer <span class="math inline">\(R^2\)</span> over adjusted <span class="math inline">\(R^2\)</span> or vice versa?</li>
 </ul>
 </section>
 <section id="next-week" class="slide level2">

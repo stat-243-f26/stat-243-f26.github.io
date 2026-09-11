@@ -812,8 +812,36 @@ where $p$ is the number of explanatory variables in the model.
 :::
 
 
-- **Q:** Why might we prefer $R^2$ over adjusted $R^2$ or vice verse?
 
+
+## Measuring Model Accuracy (Alphabet Soup)
+
+The following (closely related) measures are used to assess accuracy of a linear model:
+
+
+$$
+R^2 = 1- \frac{\sum_{i=1}^n(y_i - \hat y_i)^2}{\sum_{i=1}^n(y_i - \bar y)^2} = 1 - \frac{\textrm{RSS}}{\textrm{TSS}}
+$$
+
+
+
+
+
+
+\begin{align*}
+\mbox{adj} R^2 &= 1- \frac{\sum_{i=1}^2 (y - \hat{y})^2}{\sum_{i=1}^n (y - \bar{y})^2} \left(\frac{n - 1}{n - p - 1} \right) = 1 - \frac{\textrm{RSS}}{\textrm{TSS}} \left(\frac{n - 1}{n - p - 1} \right) 
+\end{align*}
+
+where $p$ is the number of explanatory variables in the model.
+
+<br>
+
+
+::: {.nonincremental}
+
+- **Q:** Why might we prefer $R^2$ over adjusted $R^2$ or vice versa?
+
+:::
 
 
 ## Next Week
