@@ -715,6 +715,13 @@ data.frame(model = c("Linear", "Quintic", "Poly"), 'Train MSE' = c(lin_mse_train
 #| echo: false
 cols <- c("1" = "blue", "5" = "red", "15" =  "orange")
 
+# saveRDS(data.frame(
+#   model = c("Linear", "Quintic", "Poly"),
+#   'Train MSE' = c(lin_mse_train, quintic_mse_train, poly_mse_train),
+#   'Test MSE' = c(lin_mse, quintic_mse, poly_mse),
+#   flexibility = c(1, 5, 15)), 
+#   file = "data/poly_mse.rds")
+
 data.frame(
   model = c("Linear", "Quintic", "Poly"),
   'Train MSE' = c(lin_mse_train, quintic_mse_train, poly_mse_train),

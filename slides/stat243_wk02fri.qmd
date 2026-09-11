@@ -1,0 +1,832 @@
+---
+pagetitle: "Linear Regression I"
+editor: source
+format:
+  revealjs:
+    html-math-method: mathjax
+    chalkboard: true
+    incremental: true
+    theme: [default, custom.scss]
+    height: 900
+    width: 1600
+    slide-number: c
+    auto-stretch: false
+    callout-appearance: simple
+    pdf-max-pages-per-slide: 2
+    menu:
+      side: right
+      numbers: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.retina = 3, fig.align = 'center')
+library(knitr)
+library(tidyverse)
+library(palmerpenguins)
+```
+
+::::: columns
+::: {.column .center width="60%"}
+![](img/tidymodels.png){width="90%"}
+:::
+
+::: {.column .center width="40%"}
+<br>
+
+[Linear Regression]{.custom-title}
+
+<br> <br> <br> <br> <br> 
+
+[Grayson White]{.custom-subtitle}
+
+[Stat 243 <br> Week 2 \| Fall 2026]{.custom-subtitle}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+
+
+## Goals for Today (and next time)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Today:**
+
+-   Wrap up the bias-variance trade-off from last time.
+-   Start linear regression.
+
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Next Week:**
+
+-   More linear regression!
+
+
+:::
+
+:::
+
+::::
+
+# Recall from last time
+
+## Train vs Test MSE
+
+:::: {.columns}
+
+::: {.column width="35%"}
+
+```{r}
+#| echo: false
+readRDS("data/poly_mse.rds") %>% select(-flexibility) %>% kable(digits = 3)
+```
+
+:::
+
+::: {.column width="60%"}
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6
+#| out-width: "90%"
+#| echo: false
+cols <- c("1" = "blue", "5" = "red", "15" =  "orange")
+
+readRDS("data/poly_mse.rds") %>%
+  select(-model) %>%
+  pivot_longer(!flexibility, names_to = "Set", values_to = "MSE") %>%
+  ggplot(aes(x = flexibility, y = MSE, linetype = Set)) +
+  geom_point(aes(color = as.factor(flexibility)) , size = 2, show.legend = F) +
+  geom_smooth(se = F, color = "black") +
+  scale_color_manual(values = cols)+
+  labs(color = NULL, title = "Model Flexibility vs MSE")+
+  geom_hline(yintercept = 0.25, color = "darkgray", size = 1) +
+  annotate(geom = "text", label = "Irreducible Error", y = .35, x = 12) +
+  theme(legend.position = "bottom")
+```
+
+:::
+
+::::
+
+# Bias-Variance Trade-off
+
+## Training vs Test MSE
+
+Suppose we consider a variety of model shapes to predict $Y$, with each model of increasing flexibility / complexity.
+
+
+- What happens to the training MSE and the test MSE as model flexibility / complexity increases?
+    - As model flexibility / complexity increases, training MSE will decrease, but test MSE might not.
+
+- Flexible / complex models may **overfit** data, meaning they fit patterns from the random error (noise), rather than the true model (signal)
+    - This leads to low train MSE, but high test MSE
+
+- On the other hand, inflexible / simple models may be too rigid to fit the true pattern (lack the fidelity to convey signal)
+    - This may lead to high train MSE and high test MSE
+
+
+## MSE Decomposition
+
+The U-curve for test MSE is a result of competition between two sources of error in a model
+
+::: {.fragment .nonincremental}
+
+Expected test MSE can be decomposed as the sum of 3 quantities:
+$$
+\mathrm{E} \left[ ( y_0 - \hat{f}(x_0))^2 \right]  = \left[\mathrm{Bias}(\hat{f}(x_0))\right]^2 + \mathrm{Var}(\hat{f}(x_0)) +  \mathrm{Var}(\epsilon)
+$$
+
+:::
+
+
+- Here $\mathrm{E} \left[ ( y_0 - \hat{f}(x_0))^2 \right]$ denotes expected test MSE **at** $x_0$, if many models for $f$ were built using a variety of random training data sets containing $x_0$
+
+- Total expected test MSE is obtained by averaging across all possible $x_0$ in the test set.
+
+- A proof is given in Section 7.3 of *The Elements of Statistical Learning*.
+
+- To minimize $\mathrm{MSE}$, we need to *simultaneously* minimize both variance and bias.
+
+
+
+## Bias and Variance
+
+- **Variance** refers to the amount of variability in $\hat{f}(x_0)$ across random training sets containing $x_0$
+    - What type of models tend to have low/high variance?
+
+
+- **Bias** refers to amount by which $\hat{f}(x_0)$ differs from the true value of $f(x_0)$, on average across random training sets.
+    - Bias is produced by the difference between model shape assumptions and reality
+    - What type of models tend to have low/high bias?
+
+
+
+## Bias-Variance Trade-off
+
+```{r}
+#| echo: false
+#| out-width: "100%"
+flexibility <- 1:10
+Irreducible <- 1
+Var <- 1.5^flexibility/15
+
+Bias_sq <- .5^flexibility*2+.25
+
+MSE <- Bias_sq + Var + Irreducible
+
+data.frame(flexibility, Var, Bias_sq, MSE) %>% pivot_longer(!flexibility, names_to = "Component", values_to = "Size") %>%
+  ggplot(aes(x = flexibility, y = Size, color = Component)) +
+  geom_point(size = 2)+
+  geom_line(size = 1)+
+  geom_hline(color = "darkgray", yintercept = 1)+
+  annotate(geom = "text", label = "Irreducible Error", x = 9, y = 1.25, size = 3) +
+  labs(title = "Bias-Variance Trade-off",
+       x = "Flexibility",
+       y = NULL,
+       color = NULL)
+```
+
+
+## Bias-Variance Trade-off
+
+
+**Q:** What happens as we pick more complex models?
+
+  - As complexity increases, we tend to "overfit" model to training data.
+
+  - Bias decreases and variance increases
+
+
+
+::: {.fragment .nonincremental}
+
+We want a **sufficiently complex model that doesn't overfit** training data.
+
+  - How we **actually do this** is a major theme of this course!
+
+:::
+
+
+# Linear Regression
+
+
+
+
+## Linear Regression
+
+- Suppose we have one or more predictors $(x_1, x_2, \dots , x_p)$ and a *quantitative* response variable $y$, and that
+$$
+y = f(x_1, \dots, x_p) + \epsilon
+$$
+
+::: {.fragment}
+
+- The function $f$ could theoretically take many forms. But the simplest form assumes $f$ is a linear function:
+$$
+f(x_1, x_2, \dots , x_p) = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p
+$$
+
+:::
+
+::: {.fragment}
+
+  - Note: a change in $f$ is constant per unit change in any of the inputs.
+
+:::
+
+## (Simple) Linear Regression
+
+If $Y$ depends on only 1 predictor $X$, then the linear model reduces to
+
+$$
+ y = f(x) = \beta_0 + \beta_1 x + \epsilon
+$$
+
+
+
+- We'll use **Simple Linear Regression** (SLR) to build intuition about all linear models
+
+
+
+## Approximations and Estimates
+
+- In reality, the relationship $f$ between $Y$ and $x_1, \dots, x_p$ may not be linear
+
+- But many functions can be well-approximated by linear ones (especially when inputs are restricted to a small range)
+
+
+- But **even if $f$ is truly linear**, we still have problems: We do not know the parameters of the linear model.
+
+::: {.fragment .nonincremental}
+
+- Based on data, we estimate the parameters to create an estimated linear model
+
+$$
+\hat{y} = \hat{f}(x_1,~\cdots,~x_p) = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \dots + \hat{\beta}_px_p
+$$
+
+:::
+
+- So we are **estimating** an **approximation** to a relationship between response and predictors.
+
+
+
+
+## SLR Review
+
+```{r}
+#| echo: false
+poverty <- read_csv("data/states.csv") %>% rename(Graduates = "grad_rate", Poverty = "poverty")
+```
+
+Consider the relationship between a state's high school grad rate $y$ and its poverty rate $x$.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.fragment}
+
+```{r}
+#| fig-align: "center"
+#| fig-height: 4
+#| fig-width: 4
+#| out-width: "90%"
+#| echo: false
+library(ggthemes)
+ggplot(data = poverty, aes(y = Graduates, x = Poverty)) +
+  geom_point(color="darkblue") +
+  labs(title = "State-by-State Graduation and Poverty Rates",
+       y = "High School Graduation Rate, Y",
+       x = "Poverty Rate, X",
+       caption = "Poverty rate based 2020 US Census, obtained from US Census website \n Grad rate based 2018-19 school year, obtained from NCES website") +
+  theme_tufte()
+```
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+- Suppose we want to model $y$ as a function of $x$
+
+
+
+::: {.fragment .nonincremental}
+
+- Let's assume a linear relationship
+$$
+y = \beta_0 + \beta_1 x + \epsilon
+$$
+
+:::
+
+
+
+- Fitted Model: $$ \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x = 90 -0.4 x$$
+
+:::
+
+::::
+
+## SLR Review
+
+```{r}
+#| echo: false
+poverty <- read_csv("data/states.csv") %>% rename(Graduates = "grad_rate", Poverty = "poverty")
+```
+
+```{r}
+#| include: false
+library(moderndive)
+score_model <- lm(Graduates ~ Poverty, data = poverty)
+b0 <- score_model$coefficients[1]
+b1 <- score_model$coefficients[2]
+```
+
+Consider the relationship between a state's high school grad rate $y$ and its poverty rate $x$.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-align: "center"
+#| fig-height: 4
+#| fig-width: 4
+#| out-width: "90%"
+#| echo: false
+
+ggplot(data = poverty, aes(y = Graduates, x = Poverty)) +
+  geom_point(color="darkblue") +
+  labs(title = "State-by-State Graduation and Poverty Rates",
+       y = "High School Graduation Rate, Y",
+       x = "Poverty Rate, X",
+       caption = "Poverty rate based 2020 US Census, obtained from US Census website \n Grad rate based 2018-19 school year, obtained from NCES website") +
+  theme_tufte() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+:::
+
+::: {.column width="50%" .nonincremental}
+
+- Suppose we want to model $y$ as a function of $x$
+
+
+::: {.nonincremental}
+
+- Let's assume a linear relationship
+$$
+y = \beta_0 + \beta_1 x + \epsilon
+$$
+
+:::
+
+- Fitted Model: $$ \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x = 90 -0.4 x$$
+
+:::
+
+::::
+
+## Model Predictions
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-align: "center"
+#| fig-height: 4
+#| fig-width: 4
+#| out-width: "90%"
+#| echo: false
+or_x <- poverty %>% filter(state == "Oregon") %>% pull(Poverty)
+or_y <- poverty %>% filter(state == "Oregon") %>% pull(Graduates)
+
+ggplot(data = poverty, aes(y = Graduates, x = Poverty)) +
+  geom_point(color="darkblue") +
+  geom_smooth(method = "lm", se = FALSE) +
+  annotate(geom="text", x=or_x, y=(or_y + 1), label="OR",
+              color="black", size = 3)+
+  geom_point(x = or_x, y = or_y, color = "red" ) +
+  labs(title = "State-by-State Graduation and Poverty Rates",
+       y = "High School Graduation Rate, Y",
+       x = "Poverty Rate, X",
+       caption = "Poverty rate based 2020 US Census, obtained from US Census website \n Grad rate based 2018-19 school year, obtained from NCES website") +
+  theme_tufte()
+```
+
+:::
+
+::: {.column width="50%"}
+
+- Model:
+$$\hat{y} =  90 	-  0.4\cdot x $$
+
+::: {.fragment}
+
+- Oregon has a poverty rate of `r or_x`. What does the model predict is Oregon's graduation rate?
+
+:::
+
+::: {.fragment}
+
+$$
+\hat{y} = 90 - 0.4 \cdot 14 = 84.4
+$$
+
+:::
+
+
+- How should we interpret this prediction?
+
+:::
+
+::::
+
+
+## Coefficient Interpretation
+
+\begin{align*}
+  \hat{y} &= \hat{\beta}_0 + \hat{\beta}_1 \times x_{povertyrate} \\
+   &= 90 - 0.4 \times x_{povertyrate}
+\end{align*}
+
+We need to be precise and careful when interpreting estimated coefficients! 
+  
+-   **Intercept:** We **expect/predict** $y$ to be $\hat{\beta}_0$ **on average** when $x = 0$.
+
+-   **Slope:** For a one-unit increase in $x$, we **expect/predict** $y$ to change by $\hat{\beta}_1$ units **on average**.
+
+:::{.fragment}
+
+**These interpretations are non-specific to the context of our model, but when we are interpreting coefficients, we always need to interpret the coefficients in context**
+
+:::
+
+
+------------------------------------------------------------------------
+
+## Coefficient Interpretation: In Context
+
+\begin{align*}
+  \hat{y} &= \hat{\beta}_0 + \hat{\beta}_1 \times x_{povertyrate} \\
+   &= 90 - 0.4 \times x_{povertyrate}
+\end{align*}
+
+-   **Intercept:** We **expect/predict** a state's graduation rate to be 90% **on average** when their poverty rate is 0.
+
+-   **Slope:** For a one-unit increase in poverty rate, we **expect/predict** the graduation rate of a state to decrease by 0.4% **on average**.
+
+
+
+------------------------------------------------------------------------
+
+## Model Predictions
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-align: "center"
+#| fig-height: 4
+#| fig-width: 4
+#| out-width: "90%"
+#| echo: false
+or_y_hat <- b0+b1*or_x
+
+ggplot(data = poverty, aes(y = Graduates, x = Poverty)) +
+  geom_point(color="darkblue") +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_point(x = or_x, y = or_y_hat, color = "magenta" ) +
+  geom_point(x = or_x, y = or_y, color = "red" ) +
+  annotate(geom="text", x=or_x, y=(or_y + 1), label="OR",
+              color="black", size = 3)+
+  geom_segment(x = or_x, xend = or_x, y = or_y_hat, yend = or_y,
+               linetype = "dashed", size = .25,  color = "red") +
+  labs(title = "State-by-State Graduation and Poverty Rates",
+       y = "High School Graduation Rate, Y",
+       x = "Poverty Rate, X",
+       caption = "Poverty rate based 2020 US Census, obtained from US Census website \n Grad rate based 2018-19 school year, obtained from NCES website") +
+  theme_tufte()
+```
+
+:::
+
+::: {.column width="50%" .nonincremental}
+
+- Model:
+$$\hat{Y} =  90 	-  0.4\cdot X $$
+
+::: {.nonincremental}
+
+- Oregon has a poverty rate of `r or_x`. What does the model predict is Oregon's graduation rate?
+$$
+\hat{Y} = 90 - 0.4 \cdot 14 = 84.4
+$$
+
+:::
+
+- **But Oregon's actual graduation rate is `r or_y`, not 84.4**
+
+:::
+
+::::
+
+
+
+
+## Residuals
+
+- **Residuals** are the leftover variation in the data after accounting for model fit.
+
+- Each observation $(X_i, Y_i)$ has its own residual $e_i$, which is the difference between the observed ($Y_i$) and predicted ($\hat{Y}_i$) value:
+$$e_i = Y_i - \hat{Y}_i$$
+
+
+
+:::: {.columns}
+
+::: {.column width='60%' .fragment}
+
+```{r}
+#| echo: false
+povertylm <- poverty %>%
+  mutate(predicted = predict(score_model), residuals = residuals(score_model))
+```
+
+
+```{r}
+#| fig-align: "center"
+#| fig-height: 4.55
+#| fig-width: 10
+#| out-width: "80%"
+#| echo: false
+ggplot(data = povertylm, aes(y = Graduates, x = Poverty)) +
+  geom_point(color="darkblue") +
+  geom_smooth(method = "lm", se = FALSE, size = .75 ) +
+  geom_point(aes( y = predicted), shape = 1, alpha = .5 ) +
+  geom_segment(aes(xend = Poverty, yend = predicted), alpha = .75) +
+  geom_segment( x = or_x, xend = or_x, y = or_y_hat, yend = or_y , alpha = .75, color = "red") +
+  annotate(geom="text", x=or_x+0.5, y=(or_y), label="e = -4.4",
+              color="black", size = 4) +
+  labs(title = "State-by-State Graduation and Poverty Rates, with Residual Heights",
+       y = "High School Graduation Rate, Y",
+       x = "Poverty Rate, X") +
+  theme_tufte()
+```
+
+:::
+
+::: {.column width='40%'}
+
+- Oregon's residual is
+$$e = Y - \hat{Y} = 80 - 84.4  = -4.4$$
+
+:::
+
+::::
+
+## Residual Plot
+
+To visualize the degree of accuracy of a linear model, we use residual plots:
+
+```{r}
+#| fig-align: "center"
+#| fig-height: 4.55
+#| fig-width: 10
+#| out-width: "60%"
+#| echo: false
+ggplot(data = povertylm, aes(y = residuals, x = Poverty)) +
+  geom_point(color="darkblue") +
+  geom_smooth(method = "lm", se = FALSE, size = .75 ) +
+  geom_segment(aes(xend = Poverty, y = 0, yend = residuals), alpha = .75) +
+  labs(title = "Residual Plot for Graduation and Poverty Rates",
+       y = "Residuals for Graduation Rate",
+       x = "Poverty Rate, X") +
+  theme_tufte()
+```
+
+
+- Points preserve original $x$-position, but with $y$-position equal to residual.
+
+
+
+## Residual Plot
+
+To visualize the degree of accuracy of a linear model, we use residual plots:
+
+```{r}
+#| fig-align: "center"
+#| fig-height: 4.55
+#| fig-width: 10
+#| out-width: "60%"
+#| echo: false
+ggplot(data = povertylm, aes(y = residuals, x = Poverty)) +
+  geom_point(color="darkblue") +
+  geom_smooth(method = "lm", se = FALSE, size = .75 ) +
+  geom_segment(aes(xend = Poverty, y = 0, yend = residuals), alpha = .75) +
+  geom_segment( x = or_x, xend = or_x, y = 0, yend = (or_y - or_y_hat) , alpha = .75, color = "red") +
+  annotate(geom="text", x=or_x, y=(or_y - or_y_hat - 1), label="OR",
+              color="black", size = 4) +
+  labs(title = "Residual Plot for Graduation and Poverty Rates",
+       y = "Residuals for Graduation Rate",
+       x = "Poverty Rate, X") +
+  theme_tufte()
+```
+
+::: {.nonincremental}
+
+- Points preserve original $x$-position, but with $y$-position equal to residual.
+
+:::
+
+## Residual Plot
+
+In many cases, it is more convenient to look at the residual plot of residuals vs **fitted values** (instead of vs $X$)
+
+::: {.fragment}
+
+```{r}
+#| fig-align: "center"
+#| fig-height: 4.55
+#| fig-width: 10
+#| out-width: "60%"
+#| echo: false
+ggplot(data = povertylm, aes(y = residuals, x = predicted)) +
+  geom_point(color="darkblue") +
+  geom_smooth(method = "lm", se = FALSE, size = .75 ) +
+  annotate(geom="text", x=or_y_hat, y=(or_y - or_y_hat + 1), label="OR",color="black", size = 4) +
+  annotate(geom ="point", x=or_y_hat, y=(or_y - or_y_hat), color="red", size = 4)+
+  labs(title = "Residual Plot for Graduation and Poverty Rates",
+       y = "Residuals for Graduation Rate, e",
+       x = expression(paste("Predicted Grad Rate, ", hat(y)))) +
+  theme_tufte()
+```
+
+:::
+
+
+
+- This residual plot can still be used to determine accuracy of model, but can be used when we have more than 1 predictor.
+
+
+
+## Residual Sum of Squares
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- Define the **Residual Sum of Squares** (RSS) as
+$$
+\mathrm{RSS} = \sum_{i=1}^n (y_i - \hat y_i)^2 = e_1^2 + \dots + e_n^2
+$$
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+
+- **Q:** How is $\mathrm{RSS}$ related to $\mathrm{MSE}$?
+    - **A:**  $\mathrm{RSS} = n \cdot \mathrm{MSE}$.
+    
+:::
+
+::::
+
+
+
+::: {.fragment}
+
+- Using calculus or linear algebra, we can show that $\mathrm{RSS}$ is minimized when
+$$
+\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n(x_i - \bar{x})^2} \qquad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}
+$$
+
+:::
+
+- We prove this in **Math 392**!
+
+
+## Residual Sum of Squares
+
+
+Since 
+
+$$
+\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n(x_i - \bar{x})^2} \qquad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}
+$$
+
+minimizes the RSS, the least squares regression line has the lowest **training MSE** among all linear models.
+
+
+
+- **Q:** Does this mean it has the lowest **test MSE** among linear models?
+    - **A:** No, as we will see later with *penalized regression* (Ch 6, ISLR)
+    
+
+
+
+
+## Measuring Model Accuracy (Alphabet Soup)
+
+The following (closely related) measures are used to assess accuracy of a linear model:
+
+::: {.fragment}
+
+- Residual Sum of Squares, Mean Squared Error and Root Mean Squared Error:
+$$
+ \textrm{RSS} =  \sum_{i =1}^n (y_i - \hat y_i)^2 \qquad \textrm{training MSE}  = \frac{\textrm{RSS}}{n} \qquad \textrm{RMSE} = \sqrt{\textrm{MSE}}
+$$
+
+:::
+
+::: {.fragment}
+
+- Residual Standard Error (RSE or $\hat \sigma$)
+$$
+\hat \sigma = \textrm{RSE} = \sqrt{\frac{1}{n-p - 1}\textrm{RSS}} = \sqrt{\frac{n}{n-p-1}} \textrm{RMSE}
+$$
+
+  - RSE is an estimate of the standard deviation $\sigma$ of model error $\epsilon$
+
+  - RSE measures the *typical* size of model errors
+  
+  - Note that $p = 1$ for simple linear regression.
+
+:::
+
+
+## Measuring Model Accuracy (Alphabet Soup)
+
+The following (closely related) measures are used to assess accuracy of a linear model:
+
+::: {.fragment}
+
+- The coefficient of determination $R^2$
+$$
+R^2 = 1- \frac{\sum_{i=1}^n(y_i - \hat y_i)^2}{\sum_{i=1}^n(y_i - \bar y)^2} = 1 - \frac{\textrm{RSS}}{\textrm{TSS}}
+$$
+
+- $R^2$ is the proportion of variation in the response explained by the model.
+
+:::
+
+::: {.fragment .nonincremental}
+
+- Adjusted $R^2$ 
+
+\begin{align*}
+\mbox{adj} R^2 &= 1- \frac{\sum_{i=1}^2 (y - \hat{y})^2}{\sum_{i=1}^n (y - \bar{y})^2} \left(\frac{n - 1}{n - p - 1} \right) = 1 - \frac{\textrm{RSS}}{\textrm{TSS}} \left(\frac{n - 1}{n - p - 1} \right) 
+\end{align*}
+
+where $p$ is the number of explanatory variables in the model.
+
+:::
+
+
+- **Q:** Why might we prefer $R^2$ over adjusted $R^2$ or vice verse?
+
+
+
+## Next Week
+
+- Inference for linear models
+- Linear model diagnostic plots
+- Multiple linear regression (MLR)
+- Extensions of MLR
+
+
+
+
+
+
+
+

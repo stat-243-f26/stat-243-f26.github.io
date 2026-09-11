@@ -70,193 +70,179 @@
     "text": "Footnotes\n\n\nThis Code of Conduct is adapted from the Contributor Covenant, version 2.0.↩︎"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#goals-for-today-and-next-time",
-    "href": "slides/stat243_wk01wed.html#goals-for-today-and-next-time",
+    "objectID": "slides/stat243_wk02fri.html#goals-for-today-and-next-time",
+    "href": "slides/stat243_wk02fri.html#goals-for-today-and-next-time",
     "title": "Stat 243",
     "section": "Goals for Today (and next time)",
-    "text": "Goals for Today (and next time)\n\n\n\nToday:\n\nGuess the age of Reed math / stats / cs faculty\nStart to think about quantifying error\n\n\n\n\nFriday (lab):\n\nTechnologies, Data, and Stat Learning Methods"
+    "text": "Goals for Today (and next time)\n\n\n\nToday:\n\nWrap up the bias-variance trade-off from last time.\nStart linear regression.\n\n\n\n\nNext Week:\n\nMore linear regression!"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#before-we-get-started-pre-lab-assignment",
-    "href": "slides/stat243_wk01wed.html#before-we-get-started-pre-lab-assignment",
+    "objectID": "slides/stat243_wk02fri.html#train-vs-test-mse",
+    "href": "slides/stat243_wk02fri.html#train-vs-test-mse",
     "title": "Stat 243",
-    "section": "Before we get started: Pre-lab assignment",
-    "text": "Before we get started: Pre-lab assignment\nBefore Thursday 9/3 (tomorrow) at noon, please do the following:\n \n\nWe’ll use GitHub for our class, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to https://github.com/ and sign up for one. Once you’ve signed up for an account, please add it to the Google Sheet so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet."
+    "section": "Train vs Test MSE",
+    "text": "Train vs Test MSE\n\n\n\n\n\n\n\nmodel\nTrain.MSE\nTest.MSE\n\n\n\n\nLinear\n0.677\n1.281\n\n\nQuintic\n0.086\n0.326\n\n\nPoly\n0.071\n1.822"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#the-rules",
-    "href": "slides/stat243_wk01wed.html#the-rules",
+    "objectID": "slides/stat243_wk02fri.html#training-vs-test-mse",
+    "href": "slides/stat243_wk02fri.html#training-vs-test-mse",
     "title": "Stat 243",
-    "section": "The Rules",
-    "text": "The Rules\nI will display photos from 8 current and former math/stats faculty:\n\nGoal: Estimate the age of each faculty member (at the time the picture was taken)\nNote: None of these pictures were taken this year!\n\n\nWork in groups of 2-3 to develop a consistent method for estimating age.\nRecord your estimates for each faculty member on paper and submit it to me."
+    "section": "Training vs Test MSE",
+    "text": "Training vs Test MSE\nSuppose we consider a variety of model shapes to predict \\(Y\\), with each model of increasing flexibility / complexity.\n\nWhat happens to the training MSE and the test MSE as model flexibility / complexity increases?\n\nAs model flexibility / complexity increases, training MSE will decrease, but test MSE might not.\n\nFlexible / complex models may overfit data, meaning they fit patterns from the random error (noise), rather than the true model (signal)\n\nThis leads to low train MSE, but high test MSE\n\nOn the other hand, inflexible / simple models may be too rigid to fit the true pattern (lack the fidelity to convey signal)\n\nThis may lead to high train MSE and high test MSE"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#photo-1",
-    "href": "slides/stat243_wk01wed.html#photo-1",
+    "objectID": "slides/stat243_wk02fri.html#mse-decomposition",
+    "href": "slides/stat243_wk02fri.html#mse-decomposition",
     "title": "Stat 243",
-    "section": "Photo 1",
-    "text": "Photo 1"
+    "section": "MSE Decomposition",
+    "text": "MSE Decomposition\nThe U-curve for test MSE is a result of competition between two sources of error in a model\n\nExpected test MSE can be decomposed as the sum of 3 quantities: \\[\n\\mathrm{E} \\left[ ( y_0 - \\hat{f}(x_0))^2 \\right]  = \\left[\\mathrm{Bias}(\\hat{f}(x_0))\\right]^2 + \\mathrm{Var}(\\hat{f}(x_0)) +  \\mathrm{Var}(\\epsilon)\n\\]\n\n\nHere \\(\\mathrm{E} \\left[ ( y_0 - \\hat{f}(x_0))^2 \\right]\\) denotes expected test MSE at \\(x_0\\), if many models for \\(f\\) were built using a variety of random training data sets containing \\(x_0\\)\nTotal expected test MSE is obtained by averaging across all possible \\(x_0\\) in the test set.\nA proof is given in Section 7.3 of The Elements of Statistical Learning.\nTo minimize \\(\\mathrm{MSE}\\), we need to simultaneously minimize both variance and bias."
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#photo-2",
-    "href": "slides/stat243_wk01wed.html#photo-2",
+    "objectID": "slides/stat243_wk02fri.html#bias-and-variance",
+    "href": "slides/stat243_wk02fri.html#bias-and-variance",
     "title": "Stat 243",
-    "section": "Photo 2",
-    "text": "Photo 2"
+    "section": "Bias and Variance",
+    "text": "Bias and Variance\n\nVariance refers to the amount of variability in \\(\\hat{f}(x_0)\\) across random training sets containing \\(x_0\\)\n\nWhat type of models tend to have low/high variance?\n\nBias refers to amount by which \\(\\hat{f}(x_0)\\) differs from the true value of \\(f(x_0)\\), on average across random training sets.\n\nBias is produced by the difference between model shape assumptions and reality\nWhat type of models tend to have low/high bias?"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#photo-3",
-    "href": "slides/stat243_wk01wed.html#photo-3",
+    "objectID": "slides/stat243_wk02fri.html#bias-variance-trade-off-1",
+    "href": "slides/stat243_wk02fri.html#bias-variance-trade-off-1",
     "title": "Stat 243",
-    "section": "Photo 3",
-    "text": "Photo 3"
+    "section": "Bias-Variance Trade-off",
+    "text": "Bias-Variance Trade-off"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#photo-4",
-    "href": "slides/stat243_wk01wed.html#photo-4",
+    "objectID": "slides/stat243_wk02fri.html#bias-variance-trade-off-2",
+    "href": "slides/stat243_wk02fri.html#bias-variance-trade-off-2",
     "title": "Stat 243",
-    "section": "Photo 4",
-    "text": "Photo 4"
+    "section": "Bias-Variance Trade-off",
+    "text": "Bias-Variance Trade-off\nQ: What happens as we pick more complex models?\n\nAs complexity increases, we tend to “overfit” model to training data.\nBias decreases and variance increases\n\n\nWe want a sufficiently complex model that doesn’t overfit training data.\n\nHow we actually do this is a major theme of this course!"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#photo-5",
-    "href": "slides/stat243_wk01wed.html#photo-5",
+    "objectID": "slides/stat243_wk02fri.html#linear-regression-1",
+    "href": "slides/stat243_wk02fri.html#linear-regression-1",
     "title": "Stat 243",
-    "section": "Photo 5",
-    "text": "Photo 5"
+    "section": "Linear Regression",
+    "text": "Linear Regression\n\nSuppose we have one or more predictors \\((x_1, x_2, \\dots , x_p)\\) and a quantitative response variable \\(y\\), and that \\[\ny = f(x_1, \\dots, x_p) + \\epsilon\n\\]\n\n\n\nThe function \\(f\\) could theoretically take many forms. But the simplest form assumes \\(f\\) is a linear function: \\[\nf(x_1, x_2, \\dots , x_p) = \\beta_0 + \\beta_1 x_1 + \\dots + \\beta_p x_p\n\\]\n\n\n\n\nNote: a change in \\(f\\) is constant per unit change in any of the inputs."
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#photo-6",
-    "href": "slides/stat243_wk01wed.html#photo-6",
+    "objectID": "slides/stat243_wk02fri.html#simple-linear-regression",
+    "href": "slides/stat243_wk02fri.html#simple-linear-regression",
     "title": "Stat 243",
-    "section": "Photo 6",
-    "text": "Photo 6"
+    "section": "(Simple) Linear Regression",
+    "text": "(Simple) Linear Regression\nIf \\(Y\\) depends on only 1 predictor \\(X\\), then the linear model reduces to\n\\[\ny = f(x) = \\beta_0 + \\beta_1 x + \\epsilon\n\\]\n\nWe’ll use Simple Linear Regression (SLR) to build intuition about all linear models"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#photo-7",
-    "href": "slides/stat243_wk01wed.html#photo-7",
+    "objectID": "slides/stat243_wk02fri.html#approximations-and-estimates",
+    "href": "slides/stat243_wk02fri.html#approximations-and-estimates",
     "title": "Stat 243",
-    "section": "Photo 7",
-    "text": "Photo 7"
+    "section": "Approximations and Estimates",
+    "text": "Approximations and Estimates\n\nIn reality, the relationship \\(f\\) between \\(Y\\) and \\(x_1, \\dots, x_p\\) may not be linear\nBut many functions can be well-approximated by linear ones (especially when inputs are restricted to a small range)\nBut even if \\(f\\) is truly linear, we still have problems: We do not know the parameters of the linear model.\n\n\n\nBased on data, we estimate the parameters to create an estimated linear model\n\n\\[\n\\hat{y} = \\hat{f}(x_1,~\\cdots,~x_p) = \\hat{\\beta}_0 + \\hat{\\beta}_1 x_1 + \\dots + \\hat{\\beta}_px_p\n\\]\n\n\nSo we are estimating an approximation to a relationship between response and predictors."
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#photo-8",
-    "href": "slides/stat243_wk01wed.html#photo-8",
+    "objectID": "slides/stat243_wk02fri.html#slr-review",
+    "href": "slides/stat243_wk02fri.html#slr-review",
     "title": "Stat 243",
-    "section": "Photo 8",
-    "text": "Photo 8"
+    "section": "SLR Review",
+    "text": "SLR Review\nConsider the relationship between a state’s high school grad rate \\(y\\) and its poverty rate \\(x\\).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSuppose we want to model \\(y\\) as a function of \\(x\\)\n\n\n\nLet’s assume a linear relationship \\[\ny = \\beta_0 + \\beta_1 x + \\epsilon\n\\]\n\n\n\nFitted Model: \\[ \\hat{y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 x = 90 -0.4 x\\]"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#all-photos",
-    "href": "slides/stat243_wk01wed.html#all-photos",
+    "objectID": "slides/stat243_wk02fri.html#slr-review-1",
+    "href": "slides/stat243_wk02fri.html#slr-review-1",
     "title": "Stat 243",
-    "section": "All Photos",
-    "text": "All Photos\nAs we wait for groups to guess ages, complete the reflection worksheet."
+    "section": "SLR Review",
+    "text": "SLR Review\nConsider the relationship between a state’s high school grad rate \\(y\\) and its poverty rate \\(x\\).\n\n\n\n\n\n\n\n\n\n\n\n\n\nSuppose we want to model \\(y\\) as a function of \\(x\\)\n\n\nLet’s assume a linear relationship \\[\ny = \\beta_0 + \\beta_1 x + \\epsilon\n\\]\n\n\nFitted Model: \\[ \\hat{y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 x = 90 -0.4 x\\]"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#reflection-modeling-questions",
-    "href": "slides/stat243_wk01wed.html#reflection-modeling-questions",
+    "objectID": "slides/stat243_wk02fri.html#model-predictions",
+    "href": "slides/stat243_wk02fri.html#model-predictions",
     "title": "Stat 243",
-    "section": "Reflection: Modeling Questions",
-    "text": "Reflection: Modeling Questions\n\nWhat explicit features are you analyzing?\nHow do you convert these features to numerical estimates?\nHow do you resolve differences in opinion among group members?"
+    "section": "Model Predictions",
+    "text": "Model Predictions\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel: \\[\\hat{y} =  90     -  0.4\\cdot x \\]\n\n\n\nOregon has a poverty rate of 14. What does the model predict is Oregon’s graduation rate?\n\n\n\n\\[\n\\hat{y} = 90 - 0.4 \\cdot 14 = 84.4\n\\]\n\n\nHow should we interpret this prediction?"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#reflection-definitional-questions",
-    "href": "slides/stat243_wk01wed.html#reflection-definitional-questions",
+    "objectID": "slides/stat243_wk02fri.html#coefficient-interpretation",
+    "href": "slides/stat243_wk02fri.html#coefficient-interpretation",
     "title": "Stat 243",
-    "section": "Reflection: Definitional Questions",
-    "text": "Reflection: Definitional Questions\n\nIs the activity supervised or unsupervised?\n\nSupervised\n\nDoes it represent a classification or regression problem?\n\nRegression\n\nAre you interested primarily in prediction or inference?\n\nPrediction\n\nAre you using parametric or non-parametric methods?\n\nEither would have worked!"
+    "section": "Coefficient Interpretation",
+    "text": "Coefficient Interpretation\n\\[\\begin{align*}\n  \\hat{y} &= \\hat{\\beta}_0 + \\hat{\\beta}_1 \\times x_{povertyrate} \\\\\n   &= 90 - 0.4 \\times x_{povertyrate}\n\\end{align*}\\]\nWe need to be precise and careful when interpreting estimated coefficients!\n\nIntercept: We expect/predict \\(y\\) to be \\(\\hat{\\beta}_0\\) on average when \\(x = 0\\).\nSlope: For a one-unit increase in \\(x\\), we expect/predict \\(y\\) to change by \\(\\hat{\\beta}_1\\) units on average.\n\n\nThese interpretations are non-specific to the context of our model, but when we are interpreting coefficients, we always need to interpret the coefficients in context"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#reflection-conceptual-questions",
-    "href": "slides/stat243_wk01wed.html#reflection-conceptual-questions",
+    "objectID": "slides/stat243_wk02fri.html#coefficient-interpretation-in-context",
+    "href": "slides/stat243_wk02fri.html#coefficient-interpretation-in-context",
     "title": "Stat 243",
-    "section": "Reflection: Conceptual Questions",
-    "text": "Reflection: Conceptual Questions\n\nWhat are some sources of “error” in your estimates?\nHow can we quantify the error in your estimates?\nHow should we assess the overall accuracy of a group’s predictions?\nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
+    "section": "Coefficient Interpretation: In Context",
+    "text": "Coefficient Interpretation: In Context\n\\[\\begin{align*}\n  \\hat{y} &= \\hat{\\beta}_0 + \\hat{\\beta}_1 \\times x_{povertyrate} \\\\\n   &= 90 - 0.4 \\times x_{povertyrate}\n\\end{align*}\\]\n\nIntercept: We expect/predict a state’s graduation rate to be 90% on average when their poverty rate is 0.\nSlope: For a one-unit increase in poverty rate, we expect/predict the graduation rate of a state to decrease by 0.4% on average."
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#returning-to-conceptual-questions",
-    "href": "slides/stat243_wk01wed.html#returning-to-conceptual-questions",
+    "objectID": "slides/stat243_wk02fri.html#model-predictions-1",
+    "href": "slides/stat243_wk02fri.html#model-predictions-1",
     "title": "Stat 243",
-    "section": "Returning to conceptual questions",
-    "text": "Returning to conceptual questions\n\nWhat are some sources of “error” in your estimates?\nHow can we quantify the error in your estimates?\nHow should we assess the overall accuracy of a group’s predictions?\nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
+    "section": "Model Predictions",
+    "text": "Model Predictions\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel: \\[\\hat{Y} =  90     -  0.4\\cdot X \\]\n\n\nOregon has a poverty rate of 14. What does the model predict is Oregon’s graduation rate? \\[\n\\hat{Y} = 90 - 0.4 \\cdot 14 = 84.4\n\\]\n\n\nBut Oregon’s actual graduation rate is 80, not 84.4"
   },
   {
-    "objectID": "slides/stat243_wk01wed.html#next-time",
-    "href": "slides/stat243_wk01wed.html#next-time",
+    "objectID": "slides/stat243_wk02fri.html#residuals",
+    "href": "slides/stat243_wk02fri.html#residuals",
     "title": "Stat 243",
-    "section": "Next Time",
-    "text": "Next Time\n\nLab 1: Technologies, Data, and Stat Learning Methods\n\n\n\nRemember, before Thursday 9/3 (tomorrow) at noon, please do the following:\n\n\nWe’ll use GitHub for our class, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to https://github.com/ and sign up for one. Once you’ve signed up for an account, please add it to the Google Sheet so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet."
+    "section": "Residuals",
+    "text": "Residuals\n\nResiduals are the leftover variation in the data after accounting for model fit.\nEach observation \\((X_i, Y_i)\\) has its own residual \\(e_i\\), which is the difference between the observed (\\(Y_i\\)) and predicted (\\(\\hat{Y}_i\\)) value: \\[e_i = Y_i - \\hat{Y}_i\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOregon’s residual is \\[e = Y - \\hat{Y} = 80 - 84.4  = -4.4\\]"
   },
   {
-    "objectID": "readings/readings_wk01wed.html",
-    "href": "readings/readings_wk01wed.html",
-    "title": "Stat 243: Suggested readings for January 28, 2026",
-    "section": "",
-    "text": "Before coming to lecture today, please read the following material:"
-  },
-  {
-    "objectID": "readings/readings_wk01wed.html#reading",
-    "href": "readings/readings_wk01wed.html#reading",
-    "title": "Stat 243: Suggested readings for January 28, 2026",
-    "section": "",
-    "text": "Before coming to lecture today, please read the following material:"
-  },
-  {
-    "objectID": "labs/lab_instructions.html",
-    "href": "labs/lab_instructions.html",
-    "title": "Instructions for Accessing Math 243 Labs",
-    "section": "",
-    "text": "In order to access the lab each week, you’ll have to follow these steps. Here, we detail the process of opening RStudio and “cloning” a GitHub repository to get the lab materials. “Cloning”, in this case, means making a copy of my a folder I’ve uploaded with all files and data needed so that you can complete the lab. Anyways, here are the steps:\n\nOpen RStudio.\nIn the Projects dropdown (typically upper right) of RStudio, click the “Project: (None)” button1. Then, click “New Project…”.\n\n\n\n\n\n\nThe project button\n\n\n\n\n\n\n\n\nSelecting “New Project…”\n\n\n\n\n\nA pop-up will appear to ask how you’d like to create the project. You’ll need to click “Version Control” and the “Git” to access the lab materials. After you’ve clicked “Version Control” and “Git”, add the link to the lab materials in the “Repository URL” section:2\nhttps://github.com/stat-243-f26/lab01.git\nFinally, give the Project Directory the name “lab01”\n\n\n\n\n\n\nSelecting Version Control from the pop-up\n\n\n\n\n\n\n\n\nHow things should look after you’ve added the link and project name\n\n\n\n\n\nPress “Create Project”. If all has gone well, you should see “lab01” in the top right corner of RStudio, and some new files for the lab in the bottom right corner of RStudio.\n\n\n\n\n\n\nThe Create Project button\n\n\n\n\n\n\n\n\nA successful cloning of the lab!\n\n\n\n\n\nOpen lab01_yourname.qmd. This is the Quarto document that you’ll complete the lab in. You can (and should) rename this file to include your actual name by checking the box next to the file, clicking “Rename”, and modifying the text to include your name, e.g. lab01_graysonwhite.qmd, rather than lab01_yourname.qmd.\n\nWe’ve also provided a gif of steps 3-6 to help minimize confusion in these steps:\n\n\n\nSteps 3-6, via gif"
-  },
-  {
-    "objectID": "labs/lab_instructions.html#accessing-this-lab",
-    "href": "labs/lab_instructions.html#accessing-this-lab",
-    "title": "Instructions for Accessing Math 243 Labs",
-    "section": "",
-    "text": "In order to access the lab each week, you’ll have to follow these steps. Here, we detail the process of opening RStudio and “cloning” a GitHub repository to get the lab materials. “Cloning”, in this case, means making a copy of my a folder I’ve uploaded with all files and data needed so that you can complete the lab. Anyways, here are the steps:\n\nOpen RStudio.\nIn the Projects dropdown (typically upper right) of RStudio, click the “Project: (None)” button1. Then, click “New Project…”.\n\n\n\n\n\n\nThe project button\n\n\n\n\n\n\n\n\nSelecting “New Project…”\n\n\n\n\n\nA pop-up will appear to ask how you’d like to create the project. You’ll need to click “Version Control” and the “Git” to access the lab materials. After you’ve clicked “Version Control” and “Git”, add the link to the lab materials in the “Repository URL” section:2\nhttps://github.com/stat-243-f26/lab01.git\nFinally, give the Project Directory the name “lab01”\n\n\n\n\n\n\nSelecting Version Control from the pop-up\n\n\n\n\n\n\n\n\nHow things should look after you’ve added the link and project name\n\n\n\n\n\nPress “Create Project”. If all has gone well, you should see “lab01” in the top right corner of RStudio, and some new files for the lab in the bottom right corner of RStudio.\n\n\n\n\n\n\nThe Create Project button\n\n\n\n\n\n\n\n\nA successful cloning of the lab!\n\n\n\n\n\nOpen lab01_yourname.qmd. This is the Quarto document that you’ll complete the lab in. You can (and should) rename this file to include your actual name by checking the box next to the file, clicking “Rename”, and modifying the text to include your name, e.g. lab01_graysonwhite.qmd, rather than lab01_yourname.qmd.\n\nWe’ve also provided a gif of steps 3-6 to help minimize confusion in these steps:\n\n\n\nSteps 3-6, via gif"
-  },
-  {
-    "objectID": "labs/lab_instructions.html#footnotes",
-    "href": "labs/lab_instructions.html#footnotes",
-    "title": "Instructions for Accessing Math 243 Labs",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nIf you’re already in a project, this button will show that projects name. This shouldn’t be the case for the first lab, but will likely be the case for the remaining labs.↩︎\nThis link will always be the same, but updated for the lab number, e.g. https://github.com/stat-243-f26/lab02.git for lab 2, https://github.com/stat-243-f26/lab10.git for lab 10, etc. You won’t be able to access these projects until the day that the lab is released, though.↩︎"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
+    "objectID": "slides/stat243_wk02fri.html#residual-plot",
+    "href": "slides/stat243_wk02fri.html#residual-plot",
     "title": "Stat 243",
-    "section": "",
-    "text": "Statistical Learning\n\nStat 243 Reed College, Fall 2026\n\n\n\n\n\n\n  Week 1\n  \n  \n\n  \n    \n    Monday, Aug 31\n    \n    \n    Course Introduction\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 2\n    \n    \n    Activity\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 4\n    \n    \n    Lab 1: Intro\n    \n      \n        \n          Lab 1\n        \n      \n        \n          Lab Instructions\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      Join Slack\n    \n      Gradescope course entry code: 68V7B3\n    \n  \n  \n  \n  \n\n  Week 2\n  \n  \n\n  \n    \n    Monday, Sep 7\n    \n    \n    No Class: Holiday\n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 9\n    \n    \n    Assessing Accuracy\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 11\n    \n    \n    Linear Models I\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Wednesday: Read this blog post and Section 2.2 (through 2.2.2, but not beyond) of ISLR.\n    \n      For Friday: ISLR Chapter 3.1\n    \n  \n  \n  \n  \n\n  Week 3\n  \n  \n\n  \n    \n    Monday, Sep 14\n    \n    \n    Linear Models II\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 16\n    \n    \n    Linear Models III\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 18\n    \n    \n    Lab 2: Linear Models (and Quiz I)\n    \n      \n        \n          Lab 2\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 4\n  \n  \n\n  \n    \n    Monday, Sep 21\n    \n    \n    Cross Validation\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 23\n    \n    \n    Bootstrapping\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 25\n    \n    \n    Lab 3: Resampling Methods (and Quiz 2)\n    \n      \n        \n          Lab 3\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 5\n  \n  \n\n  \n    \n    Monday, Sep 28\n    \n    \n    Penalized Regression: Ridge\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 30\n    \n    \n    Penalized Regression: LASSO\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 1 9:00am\n    \n    \n    Lab 4: Penalized Regression (and Quiz 3)\n    \n      \n        \n          Lab 4\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 6\n  \n  \n\n  \n    \n    Monday, Oct 5\n    \n    \n    Generalized Linear Models\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 7\n    \n    \n    Generalized Linear Models: Counts\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 8 9:00am\n    \n    \n    Lab 5: GLM Regression (and Quiz 4)\n    \n      \n        \n          Lab 5\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 7\n  \n  \n\n  \n    \n    Monday, Oct 12\n    \n    \n    Classification with GLMs\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 14\n    \n    \n    More classification with GLMs\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    Lab 6: GLM Classification (and Quiz 5)\n    \n      \n        \n          Lab 6\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week Fall Break\n  \n  \n\n  \n    \n    Saturday, Oct 17 - Sunday, Oct 25\n    \n    \n    No Class\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 8\n  \n  \n\n  \n    \n    Monday, Oct 26\n    \n    \n    kNN\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 28\n    \n    \n    Classification Trees\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 30\n    \n    \n    Lab 7: Nonparametric Classification (and Quiz 6)\n    \n      \n        \n          Lab 7\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 9\n  \n  \n\n  \n    \n    Monday, Nov 2\n    \n    \n    Regression Trees I\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 4\n    \n    \n    Regression Trees II\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 6\n    \n    \n    Lab 8: Trees (and Quiz 7)\n    \n      \n        \n          Lab 8\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 10\n  \n  \n\n  \n    \n    Monday, Nov 9\n    \n    \n    Bagging\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 11\n    \n    \n    Boosting\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 13\n    \n    \n    Lab 9: Ensemble Trees (and Quiz 8)\n    \n      \n        \n          Lab 9\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 11\n  \n  \n\n  \n    \n    Monday, Nov 16\n    \n    \n    k-Means clustering\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 18\n    \n    \n    Hierarchical clustering\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 20\n    \n    \n    Lab 10: Clustering (and Quiz 9)\n    \n      \n        \n          Lab 10\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 12\n  \n  \n\n  \n    \n    Monday, Nov 23\n    \n    \n    Selected Topics\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 25\n    \n    \n    Selected Topics\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    No class: Holiday\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 13\n  \n  \n\n  \n    \n    Monday, Nov 30\n    \n    \n    Selected Topics\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 2\n    \n    \n    Selected Topics\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Dec 4\n    \n    \n    Project Work Day\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 14\n  \n  \n\n  \n    \n    Monday, Dec 7\n    \n    \n    Selected Topics / Project Presentations\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 9\n    \n    \n    Project Presentations\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\nNo matching items"
+    "section": "Residual Plot",
+    "text": "Residual Plot\nTo visualize the degree of accuracy of a linear model, we use residual plots:\n\n\n\n\n\n\n\n\n\n\nPoints preserve original \\(x\\)-position, but with \\(y\\)-position equal to residual."
   },
   {
-    "objectID": "labs/lab01_setup.html#introduction",
-    "href": "labs/lab01_setup.html#introduction",
-    "title": "Technologies, Data, and Stat Learning Methods",
-    "section": "Introduction",
-    "text": "Introduction\nR is a wonderful programming language that we will frequently use in our course to visualize and tidy data, create programs to assist computations, create data models, and perform statistical inference. It is free, open-source, and has a large community of users who care about statistics and data science.\nTo begin, note that there are 3 closely related computer processes that we will work with: R, RStudio (or Positron), and Quarto. It’s worth taking a moment to distinguish between them.\n\nR is a programming language, which can be accessed by typing particular commands into the console or at the command prompt.\nRStudio and Positron are integrated development environments (IDEs), and provides a clean user interface for writing and executing R code. IDEs are the main tool we will use to interact with the R language.\nQuarto is a file type we’ll use to write R code and text (similar to .docx, but for programming!). It can record R code, text, and graphical outputs. One of the easiest ways to share your results with others is to distribute your Quarto (or .qmd) file. It’s a “one-stop shop” of statistical work!\n\nRStudio comes in two varieties: RStudio Desktop and RStudio Server. The desktop version is a program you can install on your personal computer, and uses your computer’s resources to perform calculations. For class purposes, we highly recommend RStudio Desktop (or Positron, the newer IDE from Posit that is also available in a Desktop version)."
+    "objectID": "slides/stat243_wk02fri.html#residual-plot-1",
+    "href": "slides/stat243_wk02fri.html#residual-plot-1",
+    "title": "Stat 243",
+    "section": "Residual Plot",
+    "text": "Residual Plot\nTo visualize the degree of accuracy of a linear model, we use residual plots:\n\n\n\n\n\n\n\n\n\n\nPoints preserve original \\(x\\)-position, but with \\(y\\)-position equal to residual."
   },
   {
-    "objectID": "labs/lab01_setup.html#problem-1-setup",
-    "href": "labs/lab01_setup.html#problem-1-setup",
-    "title": "Technologies, Data, and Stat Learning Methods",
-    "section": "Problem 1: Setup",
-    "text": "Problem 1: Setup\n\npart a: GitHub\nWe’ll use GitHub for collaboration and portfolio building, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to https://github.com/ and sign up for one. Once you’ve signed up for an account, please add it to the Google Sheet so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet.\n\n\npart b: R and RStudio (or Positron!)\nWe’ll use R and RStudio/Positron for computing in this class. R is a statistical programming language, while RStudio and Positron are Integrated Development Environments (IDEs) that allow you to run R, view files, view R code output, and much more! Reed has an RStudio Server where you can run R and RStudio in the cloud, but for this class I would recommend a local installation of both R and RStudio. Positron is a new IDE from Posit (the company that makes RStudio) you are welcomed and encouraged to try out Positron, although I may not be able to provide as good of problem solving for any issues related to your IDE if you use Positron. Positron seems to be the hot new thing, and I imagine in the next ~5 years we will see a steep decline of RStudio use in favor of Positron for R users and data scientists.\nTo install R and RStudio, follow the directions from Posit’s website.\nTo install Positron, see this link from Posit’s website.\nNote: always make sure to have R installed before installing your IDE.\n\n\npart c: Connect git, GitHub and RStudio (or Positron)\nThese instructions are based on pieces of Happy git with R, in particular chapters 6, 7, and 9. Depending on your computer, setup, or just luck, this step can become difficult/frustrating. If you are having trouble with this step, please ask for help!\nIn order to have your computer talk with GitHub, you’ll need to install git on your computer. Sometimes, git is already installed on your computer, and you can check it by running\nwhich git\nin a Terminal or shell window. If you have git installed, you should see something like “/usr/bin/git” returned to you. If you don’t have git installed, you might see something like “git: command not found” or nothing at all. If you have git installed, congrats! If not, follow the steps in Happy git with R, Chapter 6 to install git.\n\n\nNOTICE: PARTS d, e, and f are OPTIONAL!\nIf you would like to set up your GitHub account with your computer, complete steps d, e, and f. This will not be relevant to our class, though, so it is entirely optional. You are welcome to come to office hours for help completing steps d, e, and f. \nIn order to get everyone set up in a reasonable amount of time during lab, we recommend skipping these steps for now. You are welcome to return to them after our in-class lab time.\n\n\npart d: Introduce yourself to git\nNext, up you have to introduce yourself to git. Again, following Happy git with R, in Chapter 7 we can run the following in an R session/console\n\n## install if needed (do this exactly once):\n## install.packages(\"usethis\")\n\nlibrary(usethis)\nuse_git_config(user.name = \"Jane Doe\", user.email = \"jane@example.org\")\n\nwhere Jane Doe is replaced with your full name and jane@example.org is replaced with the email you used to sign up for GitHub.\nNext, you’ll have to authenticate yourself (i.e., give your computer permission to make changes to GitHub projects when you ask it to). To do this, run the following in an R session/console:\n\nusethis::create_github_token()\n\nThis should open a new browser window where you can create your token. I often set no expiration date and check all of the boxes, but that is up to you. Note that when your token expires you’ll have to make a new one if you’re still using the same computer. Now, your token is created (it will start with “ghp_”)! Copy it down somewhere so that you don’t lose it.\nThe final step is to run\n\n## install if needed (do this exactly once):\n## install.packages(\"gitcreds\")\n\ngitcreds::gitcreds_set()\n\nand then enter the token when prompted. If also this has gone well, you are set!\nUnless… you’re running Linux. If you’re running Linux, I am happy to help you get git working correctly, but I’d say the first step is to read and follow Danielle Navarro’s blog post, in addition to the steps above.\n\n\npart e: testing\nTo make sure everything is working correctly, run\n\ngitcreds::gitcreds_get()\n\nin an R session/console. You should see something like\n&lt;gitcreds&gt;\n  protocol: https\n  host    : github.com\n  username: PersonalAccessToken\n  password: &lt;-- hidden --&gt;\nbut if you see\nError in throw(new_error(\"gitcreds_no_credentials\", url = url)) : \n  Could not find any credentials\nsomething has gone wrong.\n\n\npart f: congrats!\nIf you’ve made it this far, congrats! You’ve successfully set up git, GitHub, and your IDE on your local machine! We’ll spend time in class during week 2 talking about how to use all of these tools, but for now you are good to go.\nIf you’ve had trouble with any of these steps, please come to office hours so that we can debug and get you set up."
+    "objectID": "slides/stat243_wk02fri.html#residual-plot-2",
+    "href": "slides/stat243_wk02fri.html#residual-plot-2",
+    "title": "Stat 243",
+    "section": "Residual Plot",
+    "text": "Residual Plot\nIn many cases, it is more convenient to look at the residual plot of residuals vs fitted values (instead of vs \\(X\\))\n\n\n\n\n\n\n\n\n\n\n\n\nThis residual plot can still be used to determine accuracy of model, but can be used when we have more than 1 predictor."
   },
   {
-    "objectID": "labs/lab01_setup.html#problems-2-and-beyond",
-    "href": "labs/lab01_setup.html#problems-2-and-beyond",
-    "title": "Technologies, Data, and Stat Learning Methods",
-    "section": "Problems 2 and beyond",
-    "text": "Problems 2 and beyond\nIn order to access the next problems, clone the following repo:\nhttps://github.com/stat-243-f26/lab01.git\nFor instructions on cloning a repo, see Lab Instructions\nFrom there, you can answer the questions and then Render the document to submit the PDF to Gradescope."
+    "objectID": "slides/stat243_wk02fri.html#residual-sum-of-squares",
+    "href": "slides/stat243_wk02fri.html#residual-sum-of-squares",
+    "title": "Stat 243",
+    "section": "Residual Sum of Squares",
+    "text": "Residual Sum of Squares\n\n\n\nDefine the Residual Sum of Squares (RSS) as \\[\n\\mathrm{RSS} = \\sum_{i=1}^n (y_i - \\hat y_i)^2 = e_1^2 + \\dots + e_n^2\n\\]\n\n\n\n\n\nQ: How is \\(\\mathrm{RSS}\\) related to \\(\\mathrm{MSE}\\)?\n\nA: \\(\\mathrm{RSS} = n \\cdot \\mathrm{MSE}\\).\n\n\n\n\n\nUsing calculus or linear algebra, we can show that \\(\\mathrm{RSS}\\) is minimized when \\[\n\\hat{\\beta}_1 = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i - \\bar{y})}{\\sum_{i=1}^n(x_i - \\bar{x})^2} \\qquad \\hat{\\beta}_0 = \\bar{y} - \\hat{\\beta}_1 \\bar{x}\n\\]\n\n\n\nWe prove this in Math 392!"
   },
   {
-    "objectID": "office_hours.html",
-    "href": "office_hours.html",
-    "title": "Office Hours",
-    "section": "",
-    "text": "Please stop by to introduce yourself or ask some questions about the course!\nWe offer two types of office hours for Stat 243:\n\nInstructor office hours, which occur in Library 386.\nCourse Assistant office hours, which occur in ETC 105B.\n\nInstructor office hours are a great place to ask questions about the content or course in general. They’re also a great place to get help on problems that you are stuck on.\nCourse Assistant office hours are a great place to work on your assignments with fellow students and seek the help of the course assistants whenever you get stuck.\nFurther, each Reed student is entitled to one hour of individual tutoring per course per week. You can sign up for individual tutoring in iris.\nBelow is the schedule of office hours for the week. We will update this calendar in case office hours need to change times or locations."
+    "objectID": "slides/stat243_wk02fri.html#residual-sum-of-squares-1",
+    "href": "slides/stat243_wk02fri.html#residual-sum-of-squares-1",
+    "title": "Stat 243",
+    "section": "Residual Sum of Squares",
+    "text": "Residual Sum of Squares\nSince\n\\[\n\\hat{\\beta}_1 = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i - \\bar{y})}{\\sum_{i=1}^n(x_i - \\bar{x})^2} \\qquad \\hat{\\beta}_0 = \\bar{y} - \\hat{\\beta}_1 \\bar{x}\n\\]\nminimizes the RSS, the least squares regression line has the lowest training MSE among all linear models.\n\nQ: Does this mean it has the lowest test MSE among linear models?\n\nA: No, as we will see later with penalized regression (Ch 6, ISLR)"
+  },
+  {
+    "objectID": "slides/stat243_wk02fri.html#measuring-model-accuracy-alphabet-soup",
+    "href": "slides/stat243_wk02fri.html#measuring-model-accuracy-alphabet-soup",
+    "title": "Stat 243",
+    "section": "Measuring Model Accuracy (Alphabet Soup)",
+    "text": "Measuring Model Accuracy (Alphabet Soup)\nThe following (closely related) measures are used to assess accuracy of a linear model:\n\n\nResidual Sum of Squares, Mean Squared Error and Root Mean Squared Error: \\[\n\\textrm{RSS} =  \\sum_{i =1}^n (y_i - \\hat y_i)^2 \\qquad \\textrm{training MSE}  = \\frac{\\textrm{RSS}}{n} \\qquad \\textrm{RMSE} = \\sqrt{\\textrm{MSE}}\n\\]\n\n\n\n\nResidual Standard Error (RSE or \\(\\hat \\sigma\\)) \\[\n\\hat \\sigma = \\textrm{RSE} = \\sqrt{\\frac{1}{n-p - 1}\\textrm{RSS}} = \\sqrt{\\frac{n}{n-p-1}} \\textrm{RMSE}\n\\]\n\nRSE is an estimate of the standard deviation \\(\\sigma\\) of model error \\(\\epsilon\\)\nRSE measures the typical size of model errors\nNote that \\(p = 1\\) for simple linear regression."
+  },
+  {
+    "objectID": "slides/stat243_wk02fri.html#measuring-model-accuracy-alphabet-soup-1",
+    "href": "slides/stat243_wk02fri.html#measuring-model-accuracy-alphabet-soup-1",
+    "title": "Stat 243",
+    "section": "Measuring Model Accuracy (Alphabet Soup)",
+    "text": "Measuring Model Accuracy (Alphabet Soup)\nThe following (closely related) measures are used to assess accuracy of a linear model:\n\n\nThe coefficient of determination \\(R^2\\) \\[\nR^2 = 1- \\frac{\\sum_{i=1}^n(y_i - \\hat y_i)^2}{\\sum_{i=1}^n(y_i - \\bar y)^2} = 1 - \\frac{\\textrm{RSS}}{\\textrm{TSS}}\n\\]\n\\(R^2\\) is the proportion of variation in the response explained by the model.\n\n\n\n\nAdjusted \\(R^2\\)\n\n\\[\\begin{align*}\n\\mbox{adj} R^2 &= 1- \\frac{\\sum_{i=1}^2 (y - \\hat{y})^2}{\\sum_{i=1}^n (y - \\bar{y})^2} \\left(\\frac{n - 1}{n - p - 1} \\right) = 1 - \\frac{\\textrm{RSS}}{\\textrm{TSS}} \\left(\\frac{n - 1}{n - p - 1} \\right)\n\\end{align*}\\]\nwhere \\(p\\) is the number of explanatory variables in the model.\n\n\nQ: Why might we prefer \\(R^2\\) over adjusted \\(R^2\\) or vice verse?"
+  },
+  {
+    "objectID": "slides/stat243_wk02fri.html#next-week",
+    "href": "slides/stat243_wk02fri.html#next-week",
+    "title": "Stat 243",
+    "section": "Next Week",
+    "text": "Next Week\n\nInference for linear models\nLinear model diagnostic plots\nMultiple linear regression (MLR)\nExtensions of MLR"
   },
   {
     "objectID": "slides/stat243_wk01mon.html#goals-for-today-and-next-time",
@@ -425,6 +411,195 @@
     "title": "Stat 243",
     "section": "Next Time",
     "text": "Next Time\n\nAn activity"
+  },
+  {
+    "objectID": "office_hours.html",
+    "href": "office_hours.html",
+    "title": "Office Hours",
+    "section": "",
+    "text": "Please stop by to introduce yourself or ask some questions about the course!\nWe offer two types of office hours for Stat 243:\n\nInstructor office hours, which occur in Library 386.\nCourse Assistant office hours, which occur in ETC 105B.\n\nInstructor office hours are a great place to ask questions about the content or course in general. They’re also a great place to get help on problems that you are stuck on.\nCourse Assistant office hours are a great place to work on your assignments with fellow students and seek the help of the course assistants whenever you get stuck.\nFurther, each Reed student is entitled to one hour of individual tutoring per course per week. You can sign up for individual tutoring in iris.\nBelow is the schedule of office hours for the week. We will update this calendar in case office hours need to change times or locations."
+  },
+  {
+    "objectID": "labs/lab01_setup.html#introduction",
+    "href": "labs/lab01_setup.html#introduction",
+    "title": "Technologies, Data, and Stat Learning Methods",
+    "section": "Introduction",
+    "text": "Introduction\nR is a wonderful programming language that we will frequently use in our course to visualize and tidy data, create programs to assist computations, create data models, and perform statistical inference. It is free, open-source, and has a large community of users who care about statistics and data science.\nTo begin, note that there are 3 closely related computer processes that we will work with: R, RStudio (or Positron), and Quarto. It’s worth taking a moment to distinguish between them.\n\nR is a programming language, which can be accessed by typing particular commands into the console or at the command prompt.\nRStudio and Positron are integrated development environments (IDEs), and provides a clean user interface for writing and executing R code. IDEs are the main tool we will use to interact with the R language.\nQuarto is a file type we’ll use to write R code and text (similar to .docx, but for programming!). It can record R code, text, and graphical outputs. One of the easiest ways to share your results with others is to distribute your Quarto (or .qmd) file. It’s a “one-stop shop” of statistical work!\n\nRStudio comes in two varieties: RStudio Desktop and RStudio Server. The desktop version is a program you can install on your personal computer, and uses your computer’s resources to perform calculations. For class purposes, we highly recommend RStudio Desktop (or Positron, the newer IDE from Posit that is also available in a Desktop version)."
+  },
+  {
+    "objectID": "labs/lab01_setup.html#problem-1-setup",
+    "href": "labs/lab01_setup.html#problem-1-setup",
+    "title": "Technologies, Data, and Stat Learning Methods",
+    "section": "Problem 1: Setup",
+    "text": "Problem 1: Setup\n\npart a: GitHub\nWe’ll use GitHub for collaboration and portfolio building, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to https://github.com/ and sign up for one. Once you’ve signed up for an account, please add it to the Google Sheet so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet.\n\n\npart b: R and RStudio (or Positron!)\nWe’ll use R and RStudio/Positron for computing in this class. R is a statistical programming language, while RStudio and Positron are Integrated Development Environments (IDEs) that allow you to run R, view files, view R code output, and much more! Reed has an RStudio Server where you can run R and RStudio in the cloud, but for this class I would recommend a local installation of both R and RStudio. Positron is a new IDE from Posit (the company that makes RStudio) you are welcomed and encouraged to try out Positron, although I may not be able to provide as good of problem solving for any issues related to your IDE if you use Positron. Positron seems to be the hot new thing, and I imagine in the next ~5 years we will see a steep decline of RStudio use in favor of Positron for R users and data scientists.\nTo install R and RStudio, follow the directions from Posit’s website.\nTo install Positron, see this link from Posit’s website.\nNote: always make sure to have R installed before installing your IDE.\n\n\npart c: Connect git, GitHub and RStudio (or Positron)\nThese instructions are based on pieces of Happy git with R, in particular chapters 6, 7, and 9. Depending on your computer, setup, or just luck, this step can become difficult/frustrating. If you are having trouble with this step, please ask for help!\nIn order to have your computer talk with GitHub, you’ll need to install git on your computer. Sometimes, git is already installed on your computer, and you can check it by running\nwhich git\nin a Terminal or shell window. If you have git installed, you should see something like “/usr/bin/git” returned to you. If you don’t have git installed, you might see something like “git: command not found” or nothing at all. If you have git installed, congrats! If not, follow the steps in Happy git with R, Chapter 6 to install git.\n\n\nNOTICE: PARTS d, e, and f are OPTIONAL!\nIf you would like to set up your GitHub account with your computer, complete steps d, e, and f. This will not be relevant to our class, though, so it is entirely optional. You are welcome to come to office hours for help completing steps d, e, and f. \nIn order to get everyone set up in a reasonable amount of time during lab, we recommend skipping these steps for now. You are welcome to return to them after our in-class lab time.\n\n\npart d: Introduce yourself to git\nNext, up you have to introduce yourself to git. Again, following Happy git with R, in Chapter 7 we can run the following in an R session/console\n\n## install if needed (do this exactly once):\n## install.packages(\"usethis\")\n\nlibrary(usethis)\nuse_git_config(user.name = \"Jane Doe\", user.email = \"jane@example.org\")\n\nwhere Jane Doe is replaced with your full name and jane@example.org is replaced with the email you used to sign up for GitHub.\nNext, you’ll have to authenticate yourself (i.e., give your computer permission to make changes to GitHub projects when you ask it to). To do this, run the following in an R session/console:\n\nusethis::create_github_token()\n\nThis should open a new browser window where you can create your token. I often set no expiration date and check all of the boxes, but that is up to you. Note that when your token expires you’ll have to make a new one if you’re still using the same computer. Now, your token is created (it will start with “ghp_”)! Copy it down somewhere so that you don’t lose it.\nThe final step is to run\n\n## install if needed (do this exactly once):\n## install.packages(\"gitcreds\")\n\ngitcreds::gitcreds_set()\n\nand then enter the token when prompted. If also this has gone well, you are set!\nUnless… you’re running Linux. If you’re running Linux, I am happy to help you get git working correctly, but I’d say the first step is to read and follow Danielle Navarro’s blog post, in addition to the steps above.\n\n\npart e: testing\nTo make sure everything is working correctly, run\n\ngitcreds::gitcreds_get()\n\nin an R session/console. You should see something like\n&lt;gitcreds&gt;\n  protocol: https\n  host    : github.com\n  username: PersonalAccessToken\n  password: &lt;-- hidden --&gt;\nbut if you see\nError in throw(new_error(\"gitcreds_no_credentials\", url = url)) : \n  Could not find any credentials\nsomething has gone wrong.\n\n\npart f: congrats!\nIf you’ve made it this far, congrats! You’ve successfully set up git, GitHub, and your IDE on your local machine! We’ll spend time in class during week 2 talking about how to use all of these tools, but for now you are good to go.\nIf you’ve had trouble with any of these steps, please come to office hours so that we can debug and get you set up."
+  },
+  {
+    "objectID": "labs/lab01_setup.html#problems-2-and-beyond",
+    "href": "labs/lab01_setup.html#problems-2-and-beyond",
+    "title": "Technologies, Data, and Stat Learning Methods",
+    "section": "Problems 2 and beyond",
+    "text": "Problems 2 and beyond\nIn order to access the next problems, clone the following repo:\nhttps://github.com/stat-243-f26/lab01.git\nFor instructions on cloning a repo, see Lab Instructions\nFrom there, you can answer the questions and then Render the document to submit the PDF to Gradescope."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Stat 243",
+    "section": "",
+    "text": "Statistical Learning\n\nStat 243 Reed College, Fall 2026\n\n\n\n\n\n\n  Week 1\n  \n  \n\n  \n    \n    Monday, Aug 31\n    \n    \n    Course Introduction\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 2\n    \n    \n    Activity\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 4\n    \n    \n    Lab 1: Intro\n    \n      \n        \n          Lab 1\n        \n      \n        \n          Lab Instructions\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      Join Slack\n    \n      Gradescope course entry code: 68V7B3\n    \n  \n  \n  \n  \n\n  Week 2\n  \n  \n\n  \n    \n    Monday, Sep 7\n    \n    \n    No Class: Holiday\n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 9\n    \n    \n    Assessing Accuracy\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 11\n    \n    \n    Linear Models I\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Wednesday: Read this blog post and Section 2.2 (through 2.2.2, but not beyond) of ISLR.\n    \n      For Friday: ISLR Chapter 3.1\n    \n  \n  \n  \n  \n\n  Week 3\n  \n  \n\n  \n    \n    Monday, Sep 14\n    \n    \n    Linear Models II\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 16\n    \n    \n    Linear Models III\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 18\n    \n    \n    Lab 2: Linear Models (and Quiz I)\n    \n      \n        \n          Lab 2\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 4\n  \n  \n\n  \n    \n    Monday, Sep 21\n    \n    \n    Cross Validation\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 23\n    \n    \n    Bootstrapping\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 25\n    \n    \n    Lab 3: Resampling Methods (and Quiz 2)\n    \n      \n        \n          Lab 3\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 5\n  \n  \n\n  \n    \n    Monday, Sep 28\n    \n    \n    Penalized Regression: Ridge\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 30\n    \n    \n    Penalized Regression: LASSO\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 1 9:00am\n    \n    \n    Lab 4: Penalized Regression (and Quiz 3)\n    \n      \n        \n          Lab 4\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 6\n  \n  \n\n  \n    \n    Monday, Oct 5\n    \n    \n    Generalized Linear Models\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 7\n    \n    \n    Generalized Linear Models: Counts\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 8 9:00am\n    \n    \n    Lab 5: GLM Regression (and Quiz 4)\n    \n      \n        \n          Lab 5\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 7\n  \n  \n\n  \n    \n    Monday, Oct 12\n    \n    \n    Classification with GLMs\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 14\n    \n    \n    More classification with GLMs\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    Lab 6: GLM Classification (and Quiz 5)\n    \n      \n        \n          Lab 6\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week Fall Break\n  \n  \n\n  \n    \n    Saturday, Oct 17 - Sunday, Oct 25\n    \n    \n    No Class\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 8\n  \n  \n\n  \n    \n    Monday, Oct 26\n    \n    \n    kNN\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 28\n    \n    \n    Classification Trees\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 30\n    \n    \n    Lab 7: Nonparametric Classification (and Quiz 6)\n    \n      \n        \n          Lab 7\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 9\n  \n  \n\n  \n    \n    Monday, Nov 2\n    \n    \n    Regression Trees I\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 4\n    \n    \n    Regression Trees II\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 6\n    \n    \n    Lab 8: Trees (and Quiz 7)\n    \n      \n        \n          Lab 8\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 10\n  \n  \n\n  \n    \n    Monday, Nov 9\n    \n    \n    Bagging\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 11\n    \n    \n    Boosting\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 13\n    \n    \n    Lab 9: Ensemble Trees (and Quiz 8)\n    \n      \n        \n          Lab 9\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 11\n  \n  \n\n  \n    \n    Monday, Nov 16\n    \n    \n    k-Means clustering\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 18\n    \n    \n    Hierarchical clustering\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 20\n    \n    \n    Lab 10: Clustering (and Quiz 9)\n    \n      \n        \n          Lab 10\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 12\n  \n  \n\n  \n    \n    Monday, Nov 23\n    \n    \n    Selected Topics\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 25\n    \n    \n    Selected Topics\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    No class: Holiday\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 13\n  \n  \n\n  \n    \n    Monday, Nov 30\n    \n    \n    Selected Topics\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 2\n    \n    \n    Selected Topics\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Dec 4\n    \n    \n    Project Work Day\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 14\n  \n  \n\n  \n    \n    Monday, Dec 7\n    \n    \n    Selected Topics / Project Presentations\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 9\n    \n    \n    Project Presentations\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\nNo matching items"
+  },
+  {
+    "objectID": "labs/lab_instructions.html",
+    "href": "labs/lab_instructions.html",
+    "title": "Instructions for Accessing Math 243 Labs",
+    "section": "",
+    "text": "In order to access the lab each week, you’ll have to follow these steps. Here, we detail the process of opening RStudio and “cloning” a GitHub repository to get the lab materials. “Cloning”, in this case, means making a copy of my a folder I’ve uploaded with all files and data needed so that you can complete the lab. Anyways, here are the steps:\n\nOpen RStudio.\nIn the Projects dropdown (typically upper right) of RStudio, click the “Project: (None)” button1. Then, click “New Project…”.\n\n\n\n\n\n\nThe project button\n\n\n\n\n\n\n\n\nSelecting “New Project…”\n\n\n\n\n\nA pop-up will appear to ask how you’d like to create the project. You’ll need to click “Version Control” and the “Git” to access the lab materials. After you’ve clicked “Version Control” and “Git”, add the link to the lab materials in the “Repository URL” section:2\nhttps://github.com/stat-243-f26/lab01.git\nFinally, give the Project Directory the name “lab01”\n\n\n\n\n\n\nSelecting Version Control from the pop-up\n\n\n\n\n\n\n\n\nHow things should look after you’ve added the link and project name\n\n\n\n\n\nPress “Create Project”. If all has gone well, you should see “lab01” in the top right corner of RStudio, and some new files for the lab in the bottom right corner of RStudio.\n\n\n\n\n\n\nThe Create Project button\n\n\n\n\n\n\n\n\nA successful cloning of the lab!\n\n\n\n\n\nOpen lab01_yourname.qmd. This is the Quarto document that you’ll complete the lab in. You can (and should) rename this file to include your actual name by checking the box next to the file, clicking “Rename”, and modifying the text to include your name, e.g. lab01_graysonwhite.qmd, rather than lab01_yourname.qmd.\n\nWe’ve also provided a gif of steps 3-6 to help minimize confusion in these steps:\n\n\n\nSteps 3-6, via gif"
+  },
+  {
+    "objectID": "labs/lab_instructions.html#accessing-this-lab",
+    "href": "labs/lab_instructions.html#accessing-this-lab",
+    "title": "Instructions for Accessing Math 243 Labs",
+    "section": "",
+    "text": "In order to access the lab each week, you’ll have to follow these steps. Here, we detail the process of opening RStudio and “cloning” a GitHub repository to get the lab materials. “Cloning”, in this case, means making a copy of my a folder I’ve uploaded with all files and data needed so that you can complete the lab. Anyways, here are the steps:\n\nOpen RStudio.\nIn the Projects dropdown (typically upper right) of RStudio, click the “Project: (None)” button1. Then, click “New Project…”.\n\n\n\n\n\n\nThe project button\n\n\n\n\n\n\n\n\nSelecting “New Project…”\n\n\n\n\n\nA pop-up will appear to ask how you’d like to create the project. You’ll need to click “Version Control” and the “Git” to access the lab materials. After you’ve clicked “Version Control” and “Git”, add the link to the lab materials in the “Repository URL” section:2\nhttps://github.com/stat-243-f26/lab01.git\nFinally, give the Project Directory the name “lab01”\n\n\n\n\n\n\nSelecting Version Control from the pop-up\n\n\n\n\n\n\n\n\nHow things should look after you’ve added the link and project name\n\n\n\n\n\nPress “Create Project”. If all has gone well, you should see “lab01” in the top right corner of RStudio, and some new files for the lab in the bottom right corner of RStudio.\n\n\n\n\n\n\nThe Create Project button\n\n\n\n\n\n\n\n\nA successful cloning of the lab!\n\n\n\n\n\nOpen lab01_yourname.qmd. This is the Quarto document that you’ll complete the lab in. You can (and should) rename this file to include your actual name by checking the box next to the file, clicking “Rename”, and modifying the text to include your name, e.g. lab01_graysonwhite.qmd, rather than lab01_yourname.qmd.\n\nWe’ve also provided a gif of steps 3-6 to help minimize confusion in these steps:\n\n\n\nSteps 3-6, via gif"
+  },
+  {
+    "objectID": "labs/lab_instructions.html#footnotes",
+    "href": "labs/lab_instructions.html#footnotes",
+    "title": "Instructions for Accessing Math 243 Labs",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nIf you’re already in a project, this button will show that projects name. This shouldn’t be the case for the first lab, but will likely be the case for the remaining labs.↩︎\nThis link will always be the same, but updated for the lab number, e.g. https://github.com/stat-243-f26/lab02.git for lab 2, https://github.com/stat-243-f26/lab10.git for lab 10, etc. You won’t be able to access these projects until the day that the lab is released, though.↩︎"
+  },
+  {
+    "objectID": "readings/readings_wk01wed.html",
+    "href": "readings/readings_wk01wed.html",
+    "title": "Stat 243: Suggested readings for January 28, 2026",
+    "section": "",
+    "text": "Before coming to lecture today, please read the following material:"
+  },
+  {
+    "objectID": "readings/readings_wk01wed.html#reading",
+    "href": "readings/readings_wk01wed.html#reading",
+    "title": "Stat 243: Suggested readings for January 28, 2026",
+    "section": "",
+    "text": "Before coming to lecture today, please read the following material:"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#goals-for-today-and-next-time",
+    "href": "slides/stat243_wk01wed.html#goals-for-today-and-next-time",
+    "title": "Stat 243",
+    "section": "Goals for Today (and next time)",
+    "text": "Goals for Today (and next time)\n\n\n\nToday:\n\nGuess the age of Reed math / stats / cs faculty\nStart to think about quantifying error\n\n\n\n\nFriday (lab):\n\nTechnologies, Data, and Stat Learning Methods"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#before-we-get-started-pre-lab-assignment",
+    "href": "slides/stat243_wk01wed.html#before-we-get-started-pre-lab-assignment",
+    "title": "Stat 243",
+    "section": "Before we get started: Pre-lab assignment",
+    "text": "Before we get started: Pre-lab assignment\nBefore Thursday 9/3 (tomorrow) at noon, please do the following:\n \n\nWe’ll use GitHub for our class, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to https://github.com/ and sign up for one. Once you’ve signed up for an account, please add it to the Google Sheet so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet."
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#the-rules",
+    "href": "slides/stat243_wk01wed.html#the-rules",
+    "title": "Stat 243",
+    "section": "The Rules",
+    "text": "The Rules\nI will display photos from 8 current and former math/stats faculty:\n\nGoal: Estimate the age of each faculty member (at the time the picture was taken)\nNote: None of these pictures were taken this year!\n\n\nWork in groups of 2-3 to develop a consistent method for estimating age.\nRecord your estimates for each faculty member on paper and submit it to me."
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-1",
+    "href": "slides/stat243_wk01wed.html#photo-1",
+    "title": "Stat 243",
+    "section": "Photo 1",
+    "text": "Photo 1"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-2",
+    "href": "slides/stat243_wk01wed.html#photo-2",
+    "title": "Stat 243",
+    "section": "Photo 2",
+    "text": "Photo 2"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-3",
+    "href": "slides/stat243_wk01wed.html#photo-3",
+    "title": "Stat 243",
+    "section": "Photo 3",
+    "text": "Photo 3"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-4",
+    "href": "slides/stat243_wk01wed.html#photo-4",
+    "title": "Stat 243",
+    "section": "Photo 4",
+    "text": "Photo 4"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-5",
+    "href": "slides/stat243_wk01wed.html#photo-5",
+    "title": "Stat 243",
+    "section": "Photo 5",
+    "text": "Photo 5"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-6",
+    "href": "slides/stat243_wk01wed.html#photo-6",
+    "title": "Stat 243",
+    "section": "Photo 6",
+    "text": "Photo 6"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-7",
+    "href": "slides/stat243_wk01wed.html#photo-7",
+    "title": "Stat 243",
+    "section": "Photo 7",
+    "text": "Photo 7"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#photo-8",
+    "href": "slides/stat243_wk01wed.html#photo-8",
+    "title": "Stat 243",
+    "section": "Photo 8",
+    "text": "Photo 8"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#all-photos",
+    "href": "slides/stat243_wk01wed.html#all-photos",
+    "title": "Stat 243",
+    "section": "All Photos",
+    "text": "All Photos\nAs we wait for groups to guess ages, complete the reflection worksheet."
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#reflection-modeling-questions",
+    "href": "slides/stat243_wk01wed.html#reflection-modeling-questions",
+    "title": "Stat 243",
+    "section": "Reflection: Modeling Questions",
+    "text": "Reflection: Modeling Questions\n\nWhat explicit features are you analyzing?\nHow do you convert these features to numerical estimates?\nHow do you resolve differences in opinion among group members?"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#reflection-definitional-questions",
+    "href": "slides/stat243_wk01wed.html#reflection-definitional-questions",
+    "title": "Stat 243",
+    "section": "Reflection: Definitional Questions",
+    "text": "Reflection: Definitional Questions\n\nIs the activity supervised or unsupervised?\n\nSupervised\n\nDoes it represent a classification or regression problem?\n\nRegression\n\nAre you interested primarily in prediction or inference?\n\nPrediction\n\nAre you using parametric or non-parametric methods?\n\nEither would have worked!"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#reflection-conceptual-questions",
+    "href": "slides/stat243_wk01wed.html#reflection-conceptual-questions",
+    "title": "Stat 243",
+    "section": "Reflection: Conceptual Questions",
+    "text": "Reflection: Conceptual Questions\n\nWhat are some sources of “error” in your estimates?\nHow can we quantify the error in your estimates?\nHow should we assess the overall accuracy of a group’s predictions?\nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#returning-to-conceptual-questions",
+    "href": "slides/stat243_wk01wed.html#returning-to-conceptual-questions",
+    "title": "Stat 243",
+    "section": "Returning to conceptual questions",
+    "text": "Returning to conceptual questions\n\nWhat are some sources of “error” in your estimates?\nHow can we quantify the error in your estimates?\nHow should we assess the overall accuracy of a group’s predictions?\nIn what other circumstances do people (or companies, or algorithms) predict age based on photos or physical appearance? Is that ethical?"
+  },
+  {
+    "objectID": "slides/stat243_wk01wed.html#next-time",
+    "href": "slides/stat243_wk01wed.html#next-time",
+    "title": "Stat 243",
+    "section": "Next Time",
+    "text": "Next Time\n\nLab 1: Technologies, Data, and Stat Learning Methods\n\n\n\nRemember, before Thursday 9/3 (tomorrow) at noon, please do the following:\n\n\nWe’ll use GitHub for our class, so each of you need to have a GitHub profile. If you don’t have a GitHub profile already, go to https://github.com/ and sign up for one. Once you’ve signed up for an account, please add it to the Google Sheet so that I can add you to the stat-243-f26 organization. Note: you’ll need to be logged in to your Reed Google account to edit the Google Sheet."
   },
   {
     "objectID": "slides/stat243_wk02wed.html#goals-for-today-and-next-time",
