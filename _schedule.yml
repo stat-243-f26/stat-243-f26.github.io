@@ -69,14 +69,16 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/stat243_wk03wed.qmd
-        - topic: "Lab 2: Linear Models (and Quiz I)"
+        - topic: "Lab 2: Linear Models IV (and Quiz I)"
           display-date: Friday, Sep 18
           date: 9/18/26
           docs:
             - type: Lab 2
               href: labs/lab02.qmd
-      # resources:
-      #   - 'Some text'
+      resources:
+        - 'For Monday: none'
+        - 'For Wednesday: Read ISLR Chapters 3.2 and 3.3'
+        - 'For Friday: none'
     - week: 4
       days:
         - topic: "Cross Validation"

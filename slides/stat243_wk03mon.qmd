@@ -1,0 +1,747 @@
+---
+pagetitle: "Linear Regression II"
+editor: source
+format:
+  revealjs:
+    html-math-method: mathjax
+    chalkboard: true
+    incremental: true
+    theme: [default, custom.scss]
+    height: 900
+    width: 1600
+    slide-number: c
+    auto-stretch: false
+    callout-appearance: simple
+    pdf-max-pages-per-slide: 2
+    menu:
+      side: right
+      numbers: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.retina = 3, fig.align = 'center')
+library(knitr)
+library(tidyverse)
+library(palmerpenguins)
+library(cowplot)
+```
+
+::::: columns
+::: {.column .center width="55%"}
+![](img/tidymodels.png){width="90%"}
+:::
+
+::: {.column .center width="45%"}
+<br>
+
+[Linear Regression II]{.custom-title}
+
+<br> <br> <br> <br> <br> 
+
+[Grayson White]{.custom-subtitle}
+
+[Stat 243 <br> Week 3 \| Fall 2026]{.custom-subtitle}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+
+
+## Goals for this week (and next time)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Today:**
+
+-   Regression diagnostics
+-   Diagnostics activity
+
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**This Week:**
+
+-   More linear regression:
+    - Inference for regression (W)
+    - categorical predictors (W)
+    - multiple linear regression (W)
+    - linear regression extensions (F)
+
+-   Quiz on Lab 1 (F)
+
+
+:::
+
+:::
+
+::::
+
+
+
+
+
+## (Parametric) Statistical Learning
+
+<br><br><br>
+
+$$
+y = f(x) + \epsilon
+$$
+
+<br><br><br>
+
+**Goal:**
+
+-   Determine a reasonable form for $f()$. (Ex: Line, curve, ...)
+
+-   Estimate $f()$ with $\hat{f}()$ using the data.
+
+-   Generate predicted values: $\hat y = \hat{f}(x)$.
+
+------------------------------------------------------------------------
+
+
+### Simple Linear Regression Model
+
+$$
+y = \beta_o + \beta_1 x + \epsilon
+$$
+
+Consider this model when:
+
+-   Response variable $(y)$: quantitative
+
+-   Explanatory variable $(x)$: quantitative
+
+    -   Have only ONE explanatory variable.
+
+-   AND, $f()$ can be approximated by a line.
+
+-   Need to determine the best **estimates** of $\beta_o$ and $\beta_1$.
+
+------------------------------------------------------------------------
+
+#### Distinguishing between the **population** and the **sample**
+
+::::: columns
+::: column
+$$ 
+y = \beta_o + \beta_1 x + \epsilon
+$$
+
+::: {.nonincremental}
+
+-   Parameters:
+    -   Based on the **population**
+    -   Unknown then if don't have data on the whole population
+    -   EX: $\beta_o$ and $\beta_1$
+    
+:::
+
+
+:::
+
+::: {.column .fragment}
+$$
+\hat{y} = \hat{ \beta}_o + \hat{\beta}_1 x
+$$
+
+::: {.nonincremental}
+
+-   Statistics:
+    -   Based on the **sample** data
+    -   Known
+    -   Usually estimate a population parameter
+    -   EX: $\hat{\beta}_o$ and $\hat{\beta}_1$
+    
+:::
+
+
+:::
+:::::
+
+------------------------------------------------------------------------
+
+### New dataset: [The Ultimate Halloween Candy Power Ranking](https://web.archive.org/web/20200420162003/https://fivethirtyeight.com/videos/the-ultimate-halloween-candy-power-ranking/)
+
+> "The social contract of Halloween is simple: Provide adequate treats to costumed masses, or be prepared for late-night tricks from those dissatisfied with your offer. To help you avoid that type of vengeance, and to help you make good decisions at the supermarket this weekend, we wanted to figure out what Halloween candy people most prefer. So we devised an experiment: Pit dozens of fun-sized candy varietals against one another, and let the wisdom of the crowd decide which one was best." -- Walt Hickey
+
+> "While we don't know who exactly voted, we do know this: 8,371 different IP addresses voted on about 269,000 randomly generated matchups. So, not a scientific survey or anything, but a good sample of what candy people like."
+
+------------------------------------------------------------------------
+
+### Example: [The Ultimate Halloween Candy Power Ranking](https://web.archive.org/web/20200420162003/https://fivethirtyeight.com/videos/the-ultimate-halloween-candy-power-ranking/)
+
+```{r, echo = FALSE, out.width='80%'}
+knitr::include_graphics("img/candy_ex.png")
+```
+
+------------------------------------------------------------------------
+
+### Example: [The Ultimate Halloween Candy Power Ranking](https://web.archive.org/web/20200420162003/https://fivethirtyeight.com/videos/the-ultimate-halloween-candy-power-ranking/)
+
+```{r}
+candy <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/candy-power-ranking/candy-data.csv") %>%
+  mutate(pricepercent = pricepercent*100)
+
+glimpse(candy)
+
+```
+
+------------------------------------------------------------------------
+
+
+
+### New Modeling Goal
+
+New modeling goal: **predict win percentage by using the price percentage variable**.
+
+```{r}
+#| output-location: column
+ggplot(data = candy, 
+       mapping = aes(x = pricepercent,
+                     y = winpercent)) +
+  geom_point(alpha = 0.6, size = 4, 
+             color = "chocolate4") +
+  geom_smooth(method = "lm", se = FALSE,
+              color = "deeppink2")
+```
+
+------------------------------------------------------------------------
+
+### Constructing the Simple Linear Regression Model in R
+
+We can use the `lm()` function to construct the simple linear regression model in R. 
+
+::: {.fragment}
+
+```{r, R.options=list(pillar.sigfig = 5)}
+mod <- lm(winpercent ~ pricepercent, data = candy)
+
+library(moderndive)
+get_regression_table(mod)
+```
+
+:::
+
+:::{.fragment}
+What is the fitted model form? 
+:::
+
+:::{.fragment}
+\begin{align*}
+  \hat{y} &= \hat{\beta_o} + \hat{\beta_1} \times x_{pricepercent} \\
+   &= 41.979 + 0.178 \times x_{pricepercent}
+\end{align*}
+::: 
+
+:::{.fragment}
+How do we interpret the coefficients?
+:::
+
+
+------------------------------------------------------------------------
+
+### Prediction
+
+```{r}
+new_cases <- data.frame(pricepercent = c(25, 85, 150))
+predict(mod, newdata = new_cases)
+```
+
+-   We didn't have any treats in our sample with a price percentage of 85%. Can we still make this prediction?
+    -   Called **interpolation**
+
+<br>
+
+-   We didn't have any treats in our sample with a price percentage of 150%. Can we still make this prediction?
+    -   Called **extrapolation**
+
+------------------------------------------------------------------------
+
+### Cautions
+
+::::: columns
+::: column
+-   Careful to only predict values within the range of $x$ values in the sample.
+
+-   Make sure to investigate **outliers**: observations that fall far from the cloud of points.
+    - High leverage points
+:::
+
+::: column
+```{r, echo = FALSE}
+set.seed(13681)
+x <- c(runif(50, 0, 10))
+y1 <- c(3 + 1*x + rnorm(50, 0))
+dat1 <- data_frame(x = c(x, 20), y = c(y1, 20))
+x2 <- c(x, 20)
+y2 <- c(y1, 5)
+dat <- data_frame(x = x2, y = y2) 
+p1 <- ggplot(dat, aes(x, y)) + geom_point() + 
+  stat_smooth(method = "lm", se = FALSE, color = "turquoise4", linewidth = 2) +
+  stat_smooth(method = "lm", se = FALSE, data = dat[-51,], color = "deeppink3", linewidth = 2)
+p2 <- ggplot(dat1, aes(x, y)) + geom_point() + 
+  stat_smooth(method = "lm", se = FALSE, color = "turquoise4", linewidth = 2) +
+  stat_smooth(method = "lm", se = FALSE, data = dat[-51,], color = "deeppink3", linewidth = 2)
+plot_grid(p1, p2, ncol = 2)
+```
+:::
+:::::
+
+
+------------------------------------------------------------------------
+
+### A closer look at our model
+
+```{r, R.options=list(pillar.sigfig = 5)}
+get_regression_table(mod)
+```
+
+
+\begin{align*}
+  \hat{y} &= \hat{\beta_o} + \hat{\beta_1} \times x_{pricepercent} \\
+   &= 41.979 + 0.178 \times x_{pricepercent}
+\end{align*}
+
+
+:::{.fragment}
+What assumptions have we made?
+:::
+
+
+------------------------------------------------------------------------
+
+
+## Linear Regression Assumptions
+
+
+We can *always* find the line of best fit to explore data, but...
+
+
+:::{.fragment}
+**To make accurate predictions or inferences, certain conditions should be met.**
+:::
+
+
+::: {.fragment}
+
+\begin{align*}
+
+y &= \beta_o + \beta_1 + x + \epsilon \\
+\epsilon &\sim \mathcal{N}(0,~ \sigma^2)
+
+\end{align*}    
+
+
+:::
+
+
+- Mathematically, all linear regression assumptions are encoded in the above equation. 
+
+- However, we can break them down into four easy to remember mnemonics.
+
+
+
+------------------------------------------------------------------------
+
+
+## Linear Regression Assumptions
+
+
+\begin{align*}
+
+y &= \beta_o + \beta_1 + x + \epsilon \\
+\epsilon &\sim \mathcal{N}(0,~ \sigma^2)
+
+\end{align*}    
+
+
+::: {.nonincremental}
+
+1. **Linearity:** The relationship between explanatory and response variables must be approximately linear
+
+    - Mathematically: $y = \beta_0 + \beta_1 x + \epsilon$ where $\mathbb{E}(\epsilon \ | \ x) = 0$
+
+    - Check using scatterplot of data, or residual plot
+
+
+:::
+
+
+
+------------------------------------------------------------------------
+
+
+## Linear Regression Assumptions
+
+
+\begin{align*}
+
+y &= \beta_o + \beta_1 + x + \epsilon \\
+\epsilon &\sim \mathcal{N}(0,~ \sigma^2)
+
+\end{align*}
+
+
+
+::: {.nonincremental}
+
+
+2. **Independence:** The observations should be independent of one another.
+
+    - Mathematically: $\epsilon_i$ and $\epsilon_j$ are independent (given $x$)
+    - Can check by considering data context, and
+    - by looking at residual scatterplots too
+
+:::
+
+
+
+
+------------------------------------------------------------------------
+
+
+## Linear Regression Assumptions
+
+
+\begin{align*}
+
+y &= \beta_o + \beta_1 + x + \epsilon \\
+\epsilon &\sim \mathcal{N}(0,~ \sigma^2)
+
+\end{align*}    
+
+
+::: {.nonincremental}
+
+
+3. **Normality:** The distribution of residuals should be *approximately* bell-shaped, unimodal, symmetric, and centered at 0 at every "slice" of the explanatory variable
+
+    - Mathematically: $\epsilon \ | \ x \sim N(0, \sigma^2)$
+    - Simple check: look at histogram of residuals
+    - Better to use a "Q-Q plot" 
+
+
+:::
+
+
+
+------------------------------------------------------------------------
+
+
+## Linear Regression Assumptions
+
+
+\begin{align*}
+
+y &= \beta_o + \beta_1 + x + \epsilon \\
+\epsilon &\sim \mathcal{N}(0,~ \sigma^2)
+
+\end{align*}    
+
+
+::: {.nonincremental}
+
+
+4. **Equal Variability:** Variance of residuals should be roughly constant across data set. Also called "homoscedasticity". Models that violate this assumption are sometimes called "heteroscedastic"
+    
+    - Mathematically: $\mbox{Var}(\epsilon \ | \ x) = \sigma^2$ for constant $\sigma^2$
+    - Check using residual plot.
+
+
+:::
+
+
+
+------------------------------------------------------------------------
+
+
+
+
+## A cute way to remember this: **"LINE"**
+
+:::{.nonincremental}
+1. **L**inearity: The relationship between explanatory and response variables must be approximately linear
+    
+2. **I**ndependence: The observations should be independent of one another.
+
+3. **N**ormality: The distribution of residuals should be *approximately* bell-shaped, unimodal, symmetric, and centered at 0 at every "slice" of the explanatory variable
+
+4. **E**qual Variability: Variance of residuals should be roughly constant across data set. Also called "homoscedasticity". Models that violate this assumption are sometimes called "heteroscedastic"
+
+:::  
+
+
+## Assessing conditions: diagnostics plots
+
+::::{.columns}
+
+::: {.column width=50%}
+
+In order to assess if we've met the described conditions, we will utilize four common **diagnostics plots**: 
+
+-   Residual vs. fitted plot (i.e. 'residual plot')
+    - for assessing linearity, independence, and equal variability
+-   Normal Q-Q plot
+    - for assessing normality
+-   Residual histogram
+    - for assessing normality
+-   Residual vs. leverage plot
+    - for assessing the influence of outliers 
+    
+:::
+
+:::{.column width=5%}
+
+:::
+
+:::{.column width=45%}
+
+:::{.fragment}
+    
+In order to make these plots, we'll use the `gglm` (grammer of graphics for linear model diagnostics) package.
+
+![](https://raw.githubusercontent.com/graysonwhite/gglm/master/figs/gglm.webp){width=50% fig-align='center'}
+
+
+```{r}
+# Run the below code (without the '#') once
+# install.packages("gglm") 
+# Then load with:
+library(gglm)
+```
+
+:::
+
+:::
+
+::::
+
+## Recall out simple linear regression model
+
+```{r}
+mod <- lm(winpercent ~ pricepercent, data = candy)
+```
+
+
+```{r}
+#| echo: false
+ggplot(data = candy, 
+       mapping = aes(x = pricepercent,
+                     y = winpercent)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "deeppink2")
+```
+
+:::{.fragment}
+Let's check if this meets the **LINE** assumptions
+:::
+
+
+## Residual vs. fitted plot
+
+```{r}
+ggplot(mod) + 
+  stat_fitted_resid()
+```
+
+-   Linearity: `r emo::ji("check")`
+
+-   Independence: `r emo::ji("check")`
+
+-   Equal Variability: `r emo::ji("check")`
+
+
+## Checking normality: residual histogram
+
+
+```{r}
+ggplot(mod) + 
+  stat_resid_hist(bins = 15)
+```
+
+-   Normality: `r emo::ji("thinking")`
+    - Looks pretty good! 
+    - We'll look at a Q-Q plot to further assess!
+
+## Checking normality: Q-Q plot
+
+```{r}
+ggplot(mod) + 
+  stat_normal_qq()
+```
+
+-   Normality: `r emo::ji("check")`
+
+
+
+## Checking outliers: Residuals vs. leverage plot
+
+```{r}
+ggplot(mod) + 
+  stat_resid_leverage()
+```
+
+-   Looks pretty good! `r emo::ji("star_struck")`
+
+# Now let's look at some models that violate these assumptions...
+
+## New model
+
+Predicting miles per gallon from engine displacement
+
+```{r}
+data(mtcars)
+ggplot(mtcars, aes(x = disp, y = mpg)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+## New model
+
+```{r}
+mpg_mod <- lm(formula = mpg ~ disp, data = mtcars)
+
+get_regression_table(mpg_mod)
+```
+
+
+## Diagnostics: residual vs. fitted plot
+
+```{r}
+ggplot(mpg_mod) + 
+  stat_fitted_resid()
+```
+
+-   Linearity: `r emo::ji("x")`
+
+-   Independence: `r emo::ji("x")`
+
+-   Equal Variability: `r emo::ji("question")`
+
+## Checking normality
+
+:::: {.columns}
+
+::: {.column width=50%}
+
+```{r}
+ggplot(mpg_mod) + 
+  stat_resid_hist(bins = 10)
+```
+
+:::
+
+
+::: {.column width=50%}
+
+```{r}
+ggplot(mpg_mod) + 
+  stat_normal_qq(alpha = 1)
+```
+
+:::
+
+::::
+
+-   Normality: Not horrible, but surely could be better!
+
+## Another example: high leverage points
+
+Remember the example from last time:
+
+```{r}
+#| echo: false
+set.seed(13681)
+x <- c(runif(50, 0, 10))
+y1 <- c(3 + 1*x + rnorm(50, 0))
+dat1 <- data_frame(x = c(x, 20), y = c(y1, 20))
+x2 <- c(x, 20)
+y2 <- c(y1, 5)
+dat <- data_frame(x = x2, y = y2) 
+ggplot(dat, aes(x, y)) + geom_point() + 
+  stat_smooth(method = "lm", se = FALSE, color = "turquoise4", linewidth = 2) +
+ stat_smooth(method = "lm", se = FALSE, data = dat[-51,], color = "deeppink3", linewidth = 2)
+```
+
+:::{.fragment}
+What do diagnostics look like when we fit the teal model?
+:::
+
+## Diagnosing the model
+
+```{r}
+teal_mod <- lm(y ~ x, dat)
+ggplot(teal_mod) + 
+  stat_fitted_resid()
+```
+
+-   In this case, can already see the outlier in the residual vs fitted plot. 
+
+
+## Residual vs. leverage
+
+```{r}
+teal_mod <- lm(y ~ x, dat)
+ggplot(teal_mod) + 
+  stat_resid_leverage()
+```
+
+## What to do with high leverage points? 
+
+-   Depends on **context**
+-   It may be reasonable to remove them and refit the model
+
+
+::: {.fragment}
+
+```{r}
+dat_no_outlier <- dat %>%
+  filter(x < 15)
+
+pink_mod <- lm(y ~ x, dat_no_outlier)
+```
+
+:::
+
+
+## A shortcut for diagnosing: `gglm::gglm()`
+
+You can see many of the diagnostic plots at once with the `gglm()` function from the `gglm` package. 
+
+Let's use that function to diagnose the pink model
+
+:::{.fragment}
+
+```{r}
+gglm(pink_mod)
+```
+
+:::
+
+
+
+
+
+
+

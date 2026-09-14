@@ -1,0 +1,958 @@
+---
+pagetitle: "Linear Regression III"
+editor: source
+format:
+  revealjs:
+    html-math-method: mathjax
+    chalkboard: true
+    incremental: true
+    theme: [default, custom.scss]
+    height: 900
+    width: 1600
+    slide-number: c
+    auto-stretch: false
+    callout-appearance: simple
+    pdf-max-pages-per-slide: 2
+    menu:
+      side: right
+      numbers: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.retina = 3, fig.align = 'center')
+library(knitr)
+library(tidyverse)
+library(palmerpenguins)
+library(cowplot)
+```
+
+::::: columns
+::: {.column .center width="55%"}
+![](img/tidymodels.png){width="90%"}
+:::
+
+::: {.column .center width="45%"}
+<br>
+
+[Linear Regression III]{.custom-title}
+
+<br> <br> <br> <br> <br> 
+
+[Grayson White]{.custom-subtitle}
+
+[Stat 243 <br> Week 3 \| Fall 2026]{.custom-subtitle}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+
+
+## Goals for this week (and next time)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Today:**
+
+-   Inference for regression
+-   Categorical predictors
+-   Multiple linear regression
+
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Next time:**
+
+-   Quiz on Lab 1 (20 mins)
+-   Linear regression extensions (30 mins)
+-   Lab 2 released
+
+
+:::
+
+:::
+
+::::
+
+
+
+# Inference for Linear Models
+
+## Statistical Inference
+
+- **Goal**: Use *statistics* calculated from data to make estimates about unknown *parameters*
+
+- **Parameters**: $\beta_0$, $\beta_1$
+
+- **Statistics**: $\hat{\beta}_0$, $\hat{\beta}_1$
+
+- **Tools**: confidence intervals, hypothesis tests
+
+- **The Problems**: Our model will change if built using a different random sample. So in addition to estimates, we need to know about variability
+
+
+
+
+## The Confidence Interval 
+
+- Confidence Intervals give estimates **and** express an amount of uncertainty we have about those estimates
+
+::: {.fragment .nonincremental}
+
+- A $C$-level confidence interval for a parameter $\theta$ using the statistic $\hat{\theta}$ takes the form
+
+$$
+\hat{\theta} \pm t^*_C \cdot \widehat{\mathrm{SE}}(\hat{\theta})
+$$
+
+:::
+
+
+- The value $t^*_C$ is the $1 - (1-C)/2$ quantile for the sampling distribution of $\hat{\theta}$
+    - i.e. if $\hat{\theta}$ is approximately Normally distributed and $C = .95$, then $t^*_C \approx 2$.
+
+- The value $\widehat{\mathrm{SE}}(\hat{\theta})$ is the estimated standard error of $\hat{\theta}$, or the estimated standard deviation of the sampling distribution
+
+
+## Common Regression Assumptions
+
+In order to use simple linear regression for inference, we require the **LINE** assumptions.
+
+:::{.nonincremental}
+1. **Linearity**: The relationship between explanatory and response variables must be approximately linear
+    
+2. **Independence**: The observations should be independent of one another.
+
+3. **Normality**: The distribution of residuals should be *approximately* bell-shaped, unimodal, symmetric, and centered at 0 at every "slice" of the explanatory variable
+
+4. **Equal Variability**: Variance of residuals should be roughly constant across data set. Also called "homoscedasticity". Models that violate this assumption are sometimes called "heteroscedastic"
+
+:::  
+
+::: {.fragment .fade-up .midi .center}
+
+If one or more of these conditions do not hold, our predictions may not be accurate and we should be skeptical of inferential claims.
+
+:::
+
+## The Sampling Distribution of $\hat{\beta}_1$
+
+Assume the following true model:
+$$
+f(x) = 12 + 0.7  x; \quad \epsilon \sim N(0, 4)
+$$
+
+::: {.fragment}
+
+```{r}
+#| output-location: column
+#| fig-height: 6
+#| fig-width: 6
+set.seed(145)
+n <- 60
+beta_0 <- 12
+beta_1 <- .7
+sigma <- 2
+x <- rnorm(n, mean = 20, sd = 3)
+f_mean <- beta_0 + beta_1*x
+y <- f_mean + rnorm(n, mean = 0, sd = sigma)
+
+my_data <- data.frame(x,y)
+
+ggplot(my_data,
+       aes(x = x, y = y)) + 
+  geom_abline(slope = beta_1, 
+              intercept = 12) +
+  geom_point(color = "steelblue") +
+  geom_abline(slope = beta_1, 
+              intercept = 12,
+              color = "goldenrod",
+              size = 1) +
+  theme_bw() +
+  annotate("text", x = 26, y = 29, label = "f(x)", color = "goldenrod",parse = T) +
+  labs(title = "Simulated Data from true model")
+```
+
+:::
+
+## The Sampling Distribution of $\hat{\beta}_1$
+
+Assume the following true model:
+$$
+f(x) = 12 + 0.7  x; \quad \epsilon \sim N(0, 4)
+$$
+
+```{r}
+#| output-location: column
+#| fig-height: 6
+#| fig-width: 6
+ggplot(my_data, 
+       aes(x = x, y = y)) +
+  geom_abline(slope = beta_1,
+              intercept = 12,
+              color = "goldenrod",
+              size = 1) +
+  geom_point(color = "steelblue")+
+  geom_smooth(method = "lm",
+              se = F,
+              color = "black") +
+  theme_bw() +
+  annotate("text", x = 26, y = 29, label = "f(x)", color = "goldenrod", parse = T) +
+  annotate("text", x = 26, y = 32.5, label = "hat(f)(x)", color = "black", parse = T) +
+  labs(title = "Estimate for f based on 1 simulation")
+```
+
+## The Sampling Distribution of $\hat{\beta}_1$
+
+Assume the following true model:
+$$
+f(x) = 12 + 0.7  x; \quad \epsilon \sim N(0, 4)
+$$
+
+```{r}
+#| output-location: column
+set.seed(1020)
+it <- 1000
+slope <- rep(NA, times = it)
+intercept <- rep(NA, times = it)
+for(i in 1:it) {
+  x <- rnorm(n, mean = 20, sd = 3)
+  f_mean <- beta_0 + beta_1 * x
+  y <- f_mean + rnorm(n, mean = 0, sd = sigma)
+  slope[i] <- lm(y ~ x)$coef[[2]]
+  intercept[i] <- lm(y ~ x)$coef[[1]]
+}
+many_mods <- data.frame(slope, intercept)
+
+ggplot(my_data, 
+       aes(x = x, y = y)) +
+  geom_point(color = "steelblue") +
+  geom_abline(data = many_mods, 
+              slope = slope, 
+              intercept = intercept, 
+              alpha = .02) +
+  geom_smooth(method = "lm",
+              se = F,
+              color = "black") +
+  geom_abline(slope = beta_1,
+              intercept = 12,
+              color = "goldenrod",
+              size = 1) +
+  theme_bw() +
+  labs(title = "Estimates for f based on 1000 simulations")
+```
+
+## The Sampling Distribution of $\hat{\beta}_1$
+
+```{r}
+#| echo: false
+ggplot(many_mods, aes(x = slope))+geom_histogram(binwidth = 0.04, fill = "steelblue", color ="white")+theme_bw()+
+  labs(x = expression(hat(beta)[1]),
+       title =expression(paste("Sampling distribution of ", hat(beta)[1]))) + 
+  xlim(.4, 1)
+```
+
+## The Sampling Distribution of $\hat{\beta}_1$
+
+```{r}
+#| echo: false
+ggplot(many_mods, aes(x = slope ))+geom_histogram(binwidth = 0.04, fill = "steelblue", color ="white")+theme_bw()+
+  geom_vline(xintercept = 0.7, color = "goldenrod", size = 2)+
+  labs(x = expression(hat(beta)[1]),
+       title =expression(paste("Sampling distribution of ", hat(beta)[1]))) + 
+  xlim(.4, 1)
+```
+
+## The Sampling Distribution of $\hat{\beta}_1$
+
+```{r}
+#| echo: false
+t <- seq(from = .4, to = 1, length.out = 100)
+z <- 1000*.04*dnorm(t, mean =beta_1 , sd = sqrt(sigma^2/sum((x-mean(x))^2)))
+my_norm<-data.frame(t,z)
+
+ggplot(many_mods, aes(x = slope ))+geom_histogram(binwidth = 0.04, fill = "steelblue", color ="white")+theme_bw()+
+  geom_vline(xintercept = 0.7, color = "goldenrod", size = 2)+
+  geom_line(data = my_norm, aes(x = t, y = z), size = 1)+
+  labs(x = expression(hat(beta)[1]),
+       title =expression(paste("Sampling distribution of ", hat(beta)[1])),
+       y = "count") 
+```
+
+## The Sampling Distribution of $\hat{\beta}_1$
+
+The Sampling Distribution has the following characteristics:
+
+1. Centered at $\beta_1$, i.e. $\mathbb{E}(\hat{\beta}_1) = \beta_1$.
+
+2. $\mbox{Var}(\hat{\beta}_1) = \frac{\sigma^2}{S_{XX}}$.
+    - where $S_{XX} = \sum_{i = 1}^n (x_i - \bar{x})^2$
+  
+3. $\hat{\beta}_1 | X \sim N (\beta_1, \frac{\sigma^2}{S_{XX}})$.
+
+
+::: {.fragment .fade-up .midi .center}
+
+**Who cares?**
+
+:::
+
+- We need facts about the sampling distribution to do two main tasks:
+    - build confidence intervals, and
+    - perform hypothesis tests.
+
+
+## Building a confidence interval
+
+We'd like to use the sampling distribution to build a CI for $\beta$:
+
+$$
+\hat{\beta} \pm t^*_C \cdot \widehat{\mathrm{SE}}(\hat{\beta})
+$$
+
+- Our best estimate of $\beta_1$ is $\hat{\beta}_1$ (since the expected value $\hat \beta_1$ is $\beta_1$)
+
+- However, we need to estimate $\mbox{SE}(\hat\beta)$. How to do this? 
+
+- Use the sampling distribution!! (*Why can't we?*)
+
+- In reality we never have access to the true sampling distribution. Instead we approximate it by: 
+    - Assuming it follows a distributional form, or
+    - Using simulation (e.g., the bootstrap)
+
+
+## Building a confidence interval for $\hat{\beta}_1$
+
+::: {.nonincremental}
+
+- In reality we never have access to the true sampling distribution. Instead we approximate it by: 
+    - Assuming it follows a distributional form, or
+    - Using simulation (bootstrap)
+
+:::
+
+:::: {.columns}
+
+::: {.column}
+
+**Distributional assumptions**
+
+
+$$\widehat{\mbox{SE}}(\hat{\beta}_1) = \frac{\hat \sigma}{\sqrt{\sum_{i=1}^n(x_i - \bar x)^2}}$$
+
+
+- For linear regression, reasonable if we (1) meet the LINE conditions, and (2) have a sample size >30. 
+
+:::
+
+::: {.column .fragment}
+
+
+**Simulation (bootstrap)**
+
+Use the percentile or standard error method to estimate $\mbox{SE}(\hat\beta_1)$ from estimates of $\beta_1$ from many bootstrap samples. 
+
+- For linear regression, reasonable if we (1) meet Linearity and Independence, and (2) have a sample size >30. 
+
+
+:::
+
+::::
+
+
+## Performing a hypothesis test for $\hat{\beta}_1$ 
+
+
+Suppose we are interested in testing the claim that the slope is zero.
+
+$$
+H_0: \beta_1 = 0 \qquad \textrm{vs} \quad H_A: \beta_1 \ne 0
+$$
+
+- Two options: use **simulation** (permutation), or make **distributional assumptions**. 
+
+
+
+:::: {.columns style="font-size: 0.75em;"}
+
+::: {.column .fragment}
+
+**Distributional assumptions**
+
+
+Consider the statistic $t$ given by
+$$
+t = \frac{\hat{\beta}_1}{\widehat{\mbox{SE}}(\hat{\beta}_1)}
+$$
+
+- $t \sim t(\mbox{df} = n-2)$ and $SE(\hat{\beta}_1)$ calculated the same as in the CI.
+
+- For linear regression, reasonable if we (1) meet the LINE conditions, and (2) have a sample size >30. 
+
+:::
+
+::: {.column .fragment}
+
+
+**Simulation (permutation)**
+
+Use the percentile or standard error method to estimate $\mbox{SE}(\hat\beta_1)$ from estimates of $\beta_1$ from many permutations of your original dataset. 
+
+- For linear regression, reasonable if we meet Linearity and Independence. No sample size restriction
+
+
+:::
+
+::::
+
+
+
+# Categorical Predictors
+
+------------------------------------------------------------------------
+
+### What About A Categorical Explanatory Variable?
+
+-   Response variable $(y)$: quantitative
+
+-   Have 1 categorical explanatory variable $(x)$ with two categories.
+
+-   Model form:
+
+::: fragment
+$$ 
+\begin{align}
+y &= \beta_o + \beta_1 x + \epsilon
+\end{align}
+$$
+:::
+
+-   First, need to convert the categories of $x$ to numbers.
+
+------------------------------------------------------------------------
+
+### Example: Halloween Candy
+
+```{r}
+candy <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/candy-power-ranking/candy-data.csv")
+glimpse(candy)
+```
+
+What might be a good categorical explanatory variable of `winpercent`?
+
+------------------------------------------------------------------------
+
+### Exploratory Data Analysis
+
+Before building the model, let's explore and visualize the data!
+
+-   What `dplyr` functions should I use to find the mean and sd of `winpercent` by the categories of `chocolate`?
+
+-   What graph should we use to visualize the `winpercent` scores by `chocolate`?
+
+------------------------------------------------------------------------
+
+### Exploratory Data Analysis
+
+```{r}
+# Summarize
+candy %>%
+  group_by(chocolate) %>%
+  summarize(count = n(),
+            mean_win = mean(winpercent), 
+            sd_win = sd(winpercent))
+```
+
+------------------------------------------------------------------------
+
+### Exploratory Data Analysis
+
+```{r}
+#| output-location: column
+
+ggplot(candy, aes(x = factor(chocolate), 
+                   y = winpercent, 
+                  fill = factor(chocolate))) +
+  geom_boxplot() +
+  stat_summary(fun = mean,
+               geom = "point",
+               color = "yellow",
+               size = 4) +
+  guides(fill = "none") +
+  scale_fill_manual(values =
+                      c("0" = "deeppink",
+                        "1" = "chocolate4")) +
+  scale_x_discrete(labels = c("No", "Yes"),
+                   name =
+          "Does the candy contain chocolate?")
+```
+
+------------------------------------------------------------------------
+
+
+### Fit the Linear Regression Model
+
+Model Form:
+
+$$ 
+\begin{align}
+y &= \beta_o + \beta_1 x + \epsilon
+\end{align}
+$$
+
+When $x = 0$: [$\qquad y = \beta_o + \epsilon$]{.fragment}
+
+<br>
+
+When $x = 1$: [$\qquad y = \beta_o + \beta_1 + \epsilon$]{.fragment}
+
+::: {.fragment}
+
+```{r}
+mod <- lm(winpercent ~ chocolate, data = candy)
+library(moderndive)
+get_regression_table(mod)
+```
+
+:::
+
+------------------------------------------------------------------------
+
+### Notes
+
+-   When the explanatory variable is categorical, $\beta_o$ and $\beta_1$ no longer represent the intercept and slope.
+
+-   Now $\beta_o$ represents the (population) mean of the response variable when $x = 0$.
+
+-   And, $\beta_1$ represents the change in the (population) mean response going from $x = 0$ to $x = 1$.
+
+-   Can also do prediction:
+
+::: fragment
+```{r}
+new_candy <- data.frame(chocolate = c(0, 1))
+predict(mod, newdata = new_candy)
+```
+:::
+
+
+
+
+------------------------------------------------------------------------
+
+
+
+## New example: Palmer Penguins
+
+```{r}
+library(palmerpenguins)
+```
+
+
+
+![](img/penguins.png){fig-align="center"}
+
+
+## Take a look at the data
+
+```{r}
+glimpse(penguins)
+```
+
+We'd like to predict a penguin's bill length based on their species.
+
+**Response variable**?
+
+**Explanatory variable**?
+
+## Exploratory data analysis
+
+:::: {.columns}
+
+::: {.column width=50%}
+
+```{r}
+penguins %>%
+  group_by(species) %>%
+  summarize(
+    avg_bill_length = mean(bill_length_mm,
+                           na.rm = TRUE)
+    )
+```
+
+:::
+
+:::{.column width=50%}
+
+```{r}
+ggplot(penguins, 
+       aes(x = species,
+           y = bill_length_mm, 
+           fill = species)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("steelblue",
+                               "goldenrod", 
+                               "plum3")) +
+  guides(fill = "none") +
+  theme_bw()
+```
+
+
+:::
+
+::::
+
+:::{.fragment}
+How do we handle more than 2 groups???
+:::
+
+
+# Boardwork
+
+------------------------------------------------------------------------
+
+
+## Fit the model in R
+
+:::{.fragment}
+$$
+y = \beta_o + \beta_1 x_{species:Chinstrap} + \beta_2 x_{species:Gentoo} + \epsilon
+$$
+:::
+
+:::{.fragment}
+
+```{r}
+penguin_mod <- lm(bill_length_mm ~ species, penguins)
+get_regression_table(penguin_mod)
+```
+
+:::
+
+
+
+
+:::{.fragment}
+\begin{align*}
+\hat{y} &= \hat{\beta}_o + \hat{\beta}_1 \cdot x_{species:Chinstrap} + \hat{\beta}_2 \cdot x_{species:Gentoo} \\
+ &= 38.8 + 10.0 \cdot x_{species:Chinstrap} + 8.71 \cdot x_{species:Gentoo}
+\end{align*}
+:::
+
+
+:::{.fragment}
+Coefficient interpretation?
+:::
+
+
+------------------------------------------------------------------------
+
+
+# Multiple Linear Regression
+
+------------------------------------------------------------------------
+
+### Before:
+
+We predicted a penguin's bill length based on their species.
+
+::: {.fragment}
+
+
+```{r}
+#| output-location: column
+
+ggplot(penguins, aes(x = species, y = bill_length_mm, fill = species)) +
+  geom_boxplot() + 
+  scale_fill_manual(values = c("steelblue",
+                               "goldenrod", 
+                               "plum3")) +
+  stat_summary(fun = mean, 
+               geom = "point", 
+               size = 3,
+               color = "deeppink") + 
+  guides(fill = "none") +
+  theme_bw()
+```
+
+
+:::
+
+-   Pink dots represent the mean value in each group. 
+-   For the single categorical variable model, those pink dots are the predicted values for each group. 
+
+------------------------------------------------------------------------
+
+### Now: 
+
+We'll incorporate bill depth for prediction!
+
+::: {.fragment}
+
+
+```{r}
+#| output-location: column
+
+ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm)) +
+  geom_point(size = 2) + 
+  geom_smooth(method = "lm", se = FALSE, color = "red") + 
+  theme_bw()
+```
+
+
+:::
+
+-   A moderate negative relationship between bill length and bill depth! 
+-   Does this make sense?
+
+------------------------------------------------------------------------
+
+![](img/culmen_depth.png){fig-align='center'}
+
+
+------------------------------------------------------------------------
+
+### What if we include both explanatory variables? 
+
+::: {.fragment}
+
+
+```{r}
+#| output-location: column
+
+ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm, color = species)) +
+  geom_point(size = 2) + 
+  geom_smooth(inherit.aes = FALSE, 
+              mapping = aes(x = bill_depth_mm,
+                            y = bill_length_mm),
+              method = "lm",
+              se = FALSE,
+              color = "red") + 
+  geom_parallel_slopes(se = FALSE) + 
+  scale_color_manual(values = c("steelblue",
+                               "goldenrod", 
+                               "plum3")) +
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+
+:::
+
+-   **Negative** relationships between bill depth and bill length overall.
+-   **Positive** relationships between bill depth and bill length when accounting for species! 
+-   **What is going on here??**
+-   This is a case of **Simpson's Paradox**. 
+
+------------------------------------------------------------------------
+
+### Three candidate models
+
+:::: {.columns}
+
+::: {.column width=50%}
+
+```{r}
+species_mod <- lm(bill_length_mm ~ species, penguins)
+get_regression_table(species_mod) %>%
+  select(term, estimate)
+```
+
+<br>
+
+::: {.fragment}
+
+```{r}
+depth_mod <- lm(bill_length_mm ~ bill_depth_mm, penguins)
+get_regression_table(depth_mod) %>%
+  select(term, estimate)
+```
+
+:::
+
+:::
+
+::: {.column width=50%}
+
+<br>
+
+::: {.fragment}
+
+```{r}
+both_mod <- lm(bill_length_mm ~ bill_depth_mm + species, penguins)
+get_regression_table(both_mod) %>%
+  select(term, estimate)
+```
+
+:::
+
+:::
+
+::::
+
+-   **Coefficient interpretations**?
+
+------------------------------------------------------------------------
+
+### Interpreting the Multiple Regression Equation
+
+```{r}
+get_regression_table(both_mod)
+```
+:::{.fragment}
+
+$$
+\hat{y}= 13.2 + 1.39 \cdot x_{\textrm{Bill Depth}} + 9.94 \cdot  x_{\textrm{Species:Chinstrap}} + 13.4 \cdot x_{\textrm{Species:Gentoo}}
+$$
+
+:::
+
+-   **Slope Coefficient on Quantitative Variable:** The *expected/predicted* change in response variable, *on average*, per unit increase in the explanatory variable, *holding all other variables constant*.
+    -   Example: We expect a 1.394mm increase in bill length for every 1mm increase in bill depth, on average, after holding species constant.
+
+
+------------------------------------------------------------------------
+
+### Interpreting the Multiple Regression Equation
+
+```{r}
+get_regression_table(both_mod)
+```
+
+
+$$
+\hat{y}= 13.2 + 1.39 \cdot x_{\textrm{Bill Depth}} + 9.94 \cdot  x_{\textrm{Species:Chinstrap}} + 13.4 \cdot x_{\textrm{Species:Gentoo}}
+$$
+
+
+    
+-   **Intercept Coefficient:** The *expected/predicted* value of the response, *on average*, when all explanatory variables are *set to 0*.
+    -   What does setting species to 0 mean in this context?
+
+
+------------------------------------------------------------------------
+
+## Returning to our MLR model
+
+
+```{r}
+#| output-location: column
+
+ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm, color = species)) +
+  geom_point(size = 2) + 
+  geom_parallel_slopes(se = FALSE) + 
+  scale_color_manual(values = c("steelblue",
+                               "goldenrod", 
+                               "plum3")) +
+  theme_bw() 
+```
+
+**Are equal slopes a reasonable assumption here?**
+
+## Different Slopes Model
+
+
+```{r}
+#| output-location: column
+
+ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm, color = species)) +
+  geom_point(size = 2) + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  scale_color_manual(values = c("steelblue",
+                               "goldenrod", 
+                               "plum3")) +
+  theme_bw() 
+```
+
+-   **Equal slopes** models force the relationship between quantitative predictors and the response variable to be the same for each group in the model.
+
+-   In contrast, **different slopes** models allow for **different relationships** between quantitative predictors and the response variable for each group in the model. 
+
+-   How can we allow our model to have different slopes? 
+
+## Contrasting model forms
+
+Recall the equal slopes model:
+
+$$
+y = \beta_o + \beta_1 \cdot x_{\textrm{Bill Depth}} + \beta_2 \cdot  x_{\textrm{Species:Chinstrap}} + \beta_3 \cdot x_{\textrm{Species:Gentoo}} + \epsilon
+$$
+
+<br>
+
+:::{.fragment}
+
+How can we allow the slopes to vary? 
+
+:::
+
+::: {.fragment}
+
+$$
+y = \beta_o + \beta_1 \cdot x_{\textrm{Bill Depth}} + \beta_2 \cdot  x_{\textrm{Species:Chinstrap}} + \beta_3 \cdot x_{\textrm{Species:Gentoo}} + \\
+\beta_4 \cdot x_{\textrm{Bill Depth}} \cdot x_{\textrm{Species:Chinstrap}} + \beta_5 \cdot x_{\textrm{Bill Depth}} \cdot x_{\textrm{Species:Gentoo}} + \epsilon 
+$$
+
+:::
+
+-   **Coefficient interpretation?**
+
+## Different Slopes Model in R
+
+```{r}
+same_slope <- lm(bill_length_mm ~ bill_depth_mm + species, penguins)
+
+diff_slope <- lm(bill_length_mm ~ bill_depth_mm * species, penguins)
+```
+
+:::{.fragment}
+
+```{r}
+get_regression_table(same_slope)
+```
+
+:::
+
+<br>
+
+:::{.fragment}
+
+```{r}
+get_regression_table(diff_slope)
+```
+
+:::
+
+
+
+------------------------------------------------------------------------
+
+
+## How to assess which model is best? 
+
+
+-   Train-test split, check which minimizes MSE, bias, MAE, ...
+
+
+
+
+
+
+
