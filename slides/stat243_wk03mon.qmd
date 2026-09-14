@@ -604,142 +604,217 @@ ggplot(mod) +
 
 -   Looks pretty good! `r emo::ji("star_struck")`
 
-# Now let's look at some models that violate these assumptions...
 
-## New model
-
-Predicting miles per gallon from engine displacement
-
-```{r}
-data(mtcars)
-ggplot(mtcars, aes(x = disp, y = mpg)) + 
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE)
-```
-
-## New model
-
-```{r}
-mpg_mod <- lm(formula = mpg ~ disp, data = mtcars)
-
-get_regression_table(mpg_mod)
-```
-
-
-## Diagnostics: residual vs. fitted plot
-
-```{r}
-ggplot(mpg_mod) + 
-  stat_fitted_resid()
-```
-
--   Linearity: `r emo::ji("x")`
-
--   Independence: `r emo::ji("x")`
-
--   Equal Variability: `r emo::ji("question")`
-
-## Checking normality
-
-:::: {.columns}
-
-::: {.column width=50%}
-
-```{r}
-ggplot(mpg_mod) + 
-  stat_resid_hist(bins = 10)
-```
-
-:::
-
-
-::: {.column width=50%}
-
-```{r}
-ggplot(mpg_mod) + 
-  stat_normal_qq(alpha = 1)
-```
-
-:::
-
-::::
-
--   Normality: Not horrible, but surely could be better!
-
-## Another example: high leverage points
-
-Remember the example from last time:
-
-```{r}
-#| echo: false
-set.seed(13681)
-x <- c(runif(50, 0, 10))
-y1 <- c(3 + 1*x + rnorm(50, 0))
-dat1 <- data_frame(x = c(x, 20), y = c(y1, 20))
-x2 <- c(x, 20)
-y2 <- c(y1, 5)
-dat <- data_frame(x = x2, y = y2) 
-ggplot(dat, aes(x, y)) + geom_point() + 
-  stat_smooth(method = "lm", se = FALSE, color = "turquoise4", linewidth = 2) +
- stat_smooth(method = "lm", se = FALSE, data = dat[-51,], color = "deeppink3", linewidth = 2)
-```
-
-:::{.fragment}
-What do diagnostics look like when we fit the teal model?
-:::
-
-## Diagnosing the model
-
-```{r}
-teal_mod <- lm(y ~ x, dat)
-ggplot(teal_mod) + 
-  stat_fitted_resid()
-```
-
--   In this case, can already see the outlier in the residual vs fitted plot. 
-
-
-## Residual vs. leverage
-
-```{r}
-teal_mod <- lm(y ~ x, dat)
-ggplot(teal_mod) + 
-  stat_resid_leverage()
-```
-
-## What to do with high leverage points? 
-
--   Depends on **context**
--   It may be reasonable to remove them and refit the model
-
+## Diagnostic shortcut: `gglm::gglm()`
 
 ::: {.fragment}
 
 ```{r}
-dat_no_outlier <- dat %>%
-  filter(x < 15)
-
-pink_mod <- lm(y ~ x, dat_no_outlier)
+gglm(mod)
 ```
 
 :::
 
 
-## A shortcut for diagnosing: `gglm::gglm()`
+# Now let's simulate some data...
 
-You can see many of the diagnostic plots at once with the `gglm()` function from the `gglm` package. 
 
-Let's use that function to diagnose the pink model
-
-:::{.fragment}
+## A valid model 
 
 ```{r}
-gglm(pink_mod)
+set.seed(794)
+n <- 80
+x <- runif(n)
+beta_1 <- 3.5
+sigma <- .6
+y <- beta_1 * x + rnorm(n, sd = sigma)
+df <- data.frame(x, y)
+m1 <- lm(y ~ x, data = df)
+```
+
+
+## A valid model
+
+
+```{r}
+ggplot(df, aes(x = x, y = y)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+
+## A valid model
+
+```{r}
+gglm(m1)
+```
+
+
+## What can break? 
+
+
+1. Unbiased estimation of $\hat\beta$
+
+2. Accurate assessment of $\mbox{SE}(\hat\beta)$
+    - p-values and hypothesis tests
+    - CIs
+    
+## Checking for breaks 
+
+```{r}
+it <- 5000
+beta_hats <- rep(NA, it)
+capture <- rep(FALSE, it)
+for(i in 1:it) {
+  y <- beta_1 * x + rnorm(n, sd = sigma)
+  m <- lm(y ~ x)
+  beta_hats[i] <- m$coef[2]
+  ci <- confint(m)[2, ]
+  capture[i] <- (ci[1] < beta_1 & beta_1 < ci[2])
+}
+```
+
+
+## Checking for breaks
+
+
+```{r}
+#| output-location: column
+ggplot(data.frame(beta_hat = beta_hats), aes(x = beta_hat)) + 
+  geom_histogram() + 
+  geom_vline(xintercept = beta_1, color = "tomato")
+```
+
+
+::: {.fragment .nonincremental}
+
+- Bias in $\hat\beta$'s?
+
+```{r}
+mean(beta_hats) - beta_1
 ```
 
 :::
 
 
+::: {.fragment .nonincremental}
+
+- Accurate assessment of $\mbox{SE}(\hat\beta)$
+
+```{r}
+mean(capture)
+```
+
+:::
+
+
+# Let's break something
+
+
+## Non-constant variance
+
+```{r}
+set.seed(794)
+n <- 80
+x <- runif(n)
+y <- beta_1 * x + rnorm(n, sd = .93 * x)
+df <- data.frame(x, y)
+m1 <- lm(y ~ x, data = df)
+```
+
+
+## Non-constant variance
+
+```{r}
+ggplot(df, aes(x = x, y = y)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+
+
+## Non-constant variance 
+
+```{r}
+gglm(m1)
+```
+
+
+
+
+## Checking for breaks 
+
+```{r}
+it <- 5000
+beta_hats <- rep(NA, it)
+capture <- rep(FALSE, it)
+for(i in 1:it) {
+  y <- beta_1 * x + rnorm(n, sd = .93 * x)
+  m <- lm(y ~ x)
+  beta_hats[i] <- m$coef[2]
+  ci <- confint(m)[2, ]
+  capture[i] <- (ci[1] < beta_1 & beta_1 < ci[2])
+}
+```
+
+
+## Checking for breaks
+
+
+```{r}
+#| output-location: column
+ggplot(data.frame(beta_hat = beta_hats), 
+       aes(x = beta_hat)) + 
+  geom_histogram() + 
+  geom_vline(xintercept = beta_1, color = "tomato")
+```
+
+
+::: {.fragment .nonincremental}
+
+- Bias in $\hat\beta$'s?
+
+```{r}
+mean(beta_hats) - beta_1
+```
+
+:::
+
+
+::: {.fragment .nonincremental}
+
+- Accurate assessment of $\mbox{SE}(\hat\beta)$
+
+```{r}
+mean(capture)
+```
+
+:::
+
+
+## Activity
+
+With a partner (there needs to be one computer between you), choose one of the following components of the linear model to break, then assess what goes wrong.
+
+
+::: {.nonincremental}
+
+1. Normality of errors
+2. Independence of errors
+3. Linear trend in mean function
+
+:::
+
+You can build off the code used in these slides.
+
+
+
+## Next time
+
+
+- Inference for regression 
+- categorical predictors 
+- multiple linear regression 
 
 
 

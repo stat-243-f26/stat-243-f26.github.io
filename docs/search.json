@@ -168,67 +168,102 @@
     "text": "Checking outliers: Residuals vs. leverage plot\n\nggplot(mod) + \n  stat_resid_leverage()\n\n\n\n\n\n\n\n\n\nLooks pretty good! 🤩"
   },
   {
-    "objectID": "slides/stat243_wk03mon.html#new-model",
-    "href": "slides/stat243_wk03mon.html#new-model",
+    "objectID": "slides/stat243_wk03mon.html#diagnostic-shortcut-gglmgglm",
+    "href": "slides/stat243_wk03mon.html#diagnostic-shortcut-gglmgglm",
     "title": "Stat 243",
-    "section": "New model",
-    "text": "New model\nPredicting miles per gallon from engine displacement\n\ndata(mtcars)\nggplot(mtcars, aes(x = disp, y = mpg)) + \n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE)"
+    "section": "Diagnostic shortcut: gglm::gglm()",
+    "text": "Diagnostic shortcut: gglm::gglm()\n\n\ngglm(mod)"
   },
   {
-    "objectID": "slides/stat243_wk03mon.html#new-model-1",
-    "href": "slides/stat243_wk03mon.html#new-model-1",
+    "objectID": "slides/stat243_wk03mon.html#a-valid-model",
+    "href": "slides/stat243_wk03mon.html#a-valid-model",
     "title": "Stat 243",
-    "section": "New model",
-    "text": "New model\n\nmpg_mod &lt;- lm(formula = mpg ~ disp, data = mtcars)\n\nget_regression_table(mpg_mod)\n\n# A tibble: 2 × 7\n  term      estimate std_error statistic p_value lower_ci upper_ci\n  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 intercept   29.6       1.23      24.1        0   27.1     32.1  \n2 disp        -0.041     0.005     -8.75       0   -0.051   -0.032"
+    "section": "A valid model",
+    "text": "A valid model\n\nset.seed(794)\nn &lt;- 80\nx &lt;- runif(n)\nbeta_1 &lt;- 3.5\nsigma &lt;- .6\ny &lt;- beta_1 * x + rnorm(n, sd = sigma)\ndf &lt;- data.frame(x, y)\nm1 &lt;- lm(y ~ x, data = df)"
   },
   {
-    "objectID": "slides/stat243_wk03mon.html#diagnostics-residual-vs.-fitted-plot",
-    "href": "slides/stat243_wk03mon.html#diagnostics-residual-vs.-fitted-plot",
+    "objectID": "slides/stat243_wk03mon.html#a-valid-model-1",
+    "href": "slides/stat243_wk03mon.html#a-valid-model-1",
     "title": "Stat 243",
-    "section": "Diagnostics: residual vs. fitted plot",
-    "text": "Diagnostics: residual vs. fitted plot\n\nggplot(mpg_mod) + \n  stat_fitted_resid()\n\n\n\n\n\n\n\n\n\nLinearity: ❌\nIndependence: ❌\nEqual Variability: ❓"
+    "section": "A valid model",
+    "text": "A valid model\n\nggplot(df, aes(x = x, y = y)) + \n  geom_point() + \n  geom_smooth(method = \"lm\", se = FALSE)"
   },
   {
-    "objectID": "slides/stat243_wk03mon.html#checking-normality",
-    "href": "slides/stat243_wk03mon.html#checking-normality",
+    "objectID": "slides/stat243_wk03mon.html#a-valid-model-2",
+    "href": "slides/stat243_wk03mon.html#a-valid-model-2",
     "title": "Stat 243",
-    "section": "Checking normality",
-    "text": "Checking normality\n\n\n\nggplot(mpg_mod) + \n  stat_resid_hist(bins = 10)\n\n\n\n\n\n\n\n\n\n\nggplot(mpg_mod) + \n  stat_normal_qq(alpha = 1)\n\n\n\n\n\n\n\n\n\n\nNormality: Not horrible, but surely could be better!"
+    "section": "A valid model",
+    "text": "A valid model\n\ngglm(m1)"
   },
   {
-    "objectID": "slides/stat243_wk03mon.html#another-example-high-leverage-points",
-    "href": "slides/stat243_wk03mon.html#another-example-high-leverage-points",
+    "objectID": "slides/stat243_wk03mon.html#what-can-break",
+    "href": "slides/stat243_wk03mon.html#what-can-break",
     "title": "Stat 243",
-    "section": "Another example: high leverage points",
-    "text": "Another example: high leverage points\nRemember the example from last time:\n\n\n\n\n\n\n\n\n\n\nWhat do diagnostics look like when we fit the teal model?"
+    "section": "What can break?",
+    "text": "What can break?\n\nUnbiased estimation of \\(\\hat\\beta\\)\nAccurate assessment of \\(\\mbox{SE}(\\hat\\beta)\\)\n\np-values and hypothesis tests\nCIs"
   },
   {
-    "objectID": "slides/stat243_wk03mon.html#diagnosing-the-model",
-    "href": "slides/stat243_wk03mon.html#diagnosing-the-model",
+    "objectID": "slides/stat243_wk03mon.html#checking-for-breaks",
+    "href": "slides/stat243_wk03mon.html#checking-for-breaks",
     "title": "Stat 243",
-    "section": "Diagnosing the model",
-    "text": "Diagnosing the model\n\nteal_mod &lt;- lm(y ~ x, dat)\nggplot(teal_mod) + \n  stat_fitted_resid()\n\n\n\n\n\n\n\n\n\nIn this case, can already see the outlier in the residual vs fitted plot."
+    "section": "Checking for breaks",
+    "text": "Checking for breaks\n\nit &lt;- 5000\nbeta_hats &lt;- rep(NA, it)\ncapture &lt;- rep(FALSE, it)\nfor(i in 1:it) {\n  y &lt;- beta_1 * x + rnorm(n, sd = sigma)\n  m &lt;- lm(y ~ x)\n  beta_hats[i] &lt;- m$coef[2]\n  ci &lt;- confint(m)[2, ]\n  capture[i] &lt;- (ci[1] &lt; beta_1 & beta_1 &lt; ci[2])\n}"
   },
   {
-    "objectID": "slides/stat243_wk03mon.html#residual-vs.-leverage",
-    "href": "slides/stat243_wk03mon.html#residual-vs.-leverage",
+    "objectID": "slides/stat243_wk03mon.html#checking-for-breaks-1",
+    "href": "slides/stat243_wk03mon.html#checking-for-breaks-1",
     "title": "Stat 243",
-    "section": "Residual vs. leverage",
-    "text": "Residual vs. leverage\n\nteal_mod &lt;- lm(y ~ x, dat)\nggplot(teal_mod) + \n  stat_resid_leverage()"
+    "section": "Checking for breaks",
+    "text": "Checking for breaks\n\n\nggplot(data.frame(beta_hat = beta_hats), aes(x = beta_hat)) + \n  geom_histogram() + \n  geom_vline(xintercept = beta_1, color = \"tomato\")\n\n\n\n\n\n\n\n\n\n\n\nBias in \\(\\hat\\beta\\)’s?\n\n\nmean(beta_hats) - beta_1\n\n[1] 0.000283525\n\n\n\n\n\nAccurate assessment of \\(\\mbox{SE}(\\hat\\beta)\\)\n\n\nmean(capture)\n\n[1] 0.9482"
   },
   {
-    "objectID": "slides/stat243_wk03mon.html#what-to-do-with-high-leverage-points",
-    "href": "slides/stat243_wk03mon.html#what-to-do-with-high-leverage-points",
+    "objectID": "slides/stat243_wk03mon.html#non-constant-variance",
+    "href": "slides/stat243_wk03mon.html#non-constant-variance",
     "title": "Stat 243",
-    "section": "What to do with high leverage points?",
-    "text": "What to do with high leverage points?\n\nDepends on context\nIt may be reasonable to remove them and refit the model\n\n\n\ndat_no_outlier &lt;- dat %&gt;%\n  filter(x &lt; 15)\n\npink_mod &lt;- lm(y ~ x, dat_no_outlier)"
+    "section": "Non-constant variance",
+    "text": "Non-constant variance\n\nset.seed(794)\nn &lt;- 80\nx &lt;- runif(n)\ny &lt;- beta_1 * x + rnorm(n, sd = .93 * x)\ndf &lt;- data.frame(x, y)\nm1 &lt;- lm(y ~ x, data = df)"
   },
   {
-    "objectID": "slides/stat243_wk03mon.html#a-shortcut-for-diagnosing-gglmgglm",
-    "href": "slides/stat243_wk03mon.html#a-shortcut-for-diagnosing-gglmgglm",
+    "objectID": "slides/stat243_wk03mon.html#non-constant-variance-1",
+    "href": "slides/stat243_wk03mon.html#non-constant-variance-1",
     "title": "Stat 243",
-    "section": "A shortcut for diagnosing: gglm::gglm()",
-    "text": "A shortcut for diagnosing: gglm::gglm()\nYou can see many of the diagnostic plots at once with the gglm() function from the gglm package.\nLet’s use that function to diagnose the pink model\n\n\ngglm(pink_mod)"
+    "section": "Non-constant variance",
+    "text": "Non-constant variance\n\nggplot(df, aes(x = x, y = y)) + \n  geom_point() + \n  geom_smooth(method = \"lm\", se = FALSE)"
+  },
+  {
+    "objectID": "slides/stat243_wk03mon.html#non-constant-variance-2",
+    "href": "slides/stat243_wk03mon.html#non-constant-variance-2",
+    "title": "Stat 243",
+    "section": "Non-constant variance",
+    "text": "Non-constant variance\n\ngglm(m1)"
+  },
+  {
+    "objectID": "slides/stat243_wk03mon.html#checking-for-breaks-2",
+    "href": "slides/stat243_wk03mon.html#checking-for-breaks-2",
+    "title": "Stat 243",
+    "section": "Checking for breaks",
+    "text": "Checking for breaks\n\nit &lt;- 5000\nbeta_hats &lt;- rep(NA, it)\ncapture &lt;- rep(FALSE, it)\nfor(i in 1:it) {\n  y &lt;- beta_1 * x + rnorm(n, sd = .93 * x)\n  m &lt;- lm(y ~ x)\n  beta_hats[i] &lt;- m$coef[2]\n  ci &lt;- confint(m)[2, ]\n  capture[i] &lt;- (ci[1] &lt; beta_1 & beta_1 &lt; ci[2])\n}"
+  },
+  {
+    "objectID": "slides/stat243_wk03mon.html#checking-for-breaks-3",
+    "href": "slides/stat243_wk03mon.html#checking-for-breaks-3",
+    "title": "Stat 243",
+    "section": "Checking for breaks",
+    "text": "Checking for breaks\n\n\nggplot(data.frame(beta_hat = beta_hats), \n       aes(x = beta_hat)) + \n  geom_histogram() + \n  geom_vline(xintercept = beta_1, color = \"tomato\")\n\n\n\n\n\n\n\n\n\n\n\nBias in \\(\\hat\\beta\\)’s?\n\n\nmean(beta_hats) - beta_1\n\n[1] -0.004152782\n\n\n\n\n\nAccurate assessment of \\(\\mbox{SE}(\\hat\\beta)\\)\n\n\nmean(capture)\n\n[1] 0.9106"
+  },
+  {
+    "objectID": "slides/stat243_wk03mon.html#activity",
+    "href": "slides/stat243_wk03mon.html#activity",
+    "title": "Stat 243",
+    "section": "Activity",
+    "text": "Activity\nWith a partner (there needs to be one computer between you), choose one of the following components of the linear model to break, then assess what goes wrong.\n\nNormality of errors\nIndependence of errors\nLinear trend in mean function\n\nYou can build off the code used in these slides."
+  },
+  {
+    "objectID": "slides/stat243_wk03mon.html#next-time",
+    "href": "slides/stat243_wk03mon.html#next-time",
+    "title": "Stat 243",
+    "section": "Next time",
+    "text": "Next time\n\nInference for regression\ncategorical predictors\nmultiple linear regression"
   },
   {
     "objectID": "slides/stat243_wk02wed.html#goals-for-today-and-next-time",
