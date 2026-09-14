@@ -88,35 +88,35 @@
     "href": "slides/stat243_wk03mon.html#linear-regression-assumptions",
     "title": "Stat 243",
     "section": "Linear Regression Assumptions",
-    "text": "Linear Regression Assumptions\nWe can always find the line of best fit to explore data, but…\n\nTo make accurate predictions or inferences, certain conditions should be met.\n\n\n\\[\\begin{align*}\n\ny &= \\beta_o + \\beta_1 + x + \\epsilon \\\\\n\\epsilon &\\sim \\mathcal{N}(0,~ \\sigma^2)\n\n\\end{align*}\\]\n\n\nMathematically, all linear regression assumptions are encoded in the above equation.\nHowever, we can break them down into four easy to remember mnemonics."
+    "text": "Linear Regression Assumptions\nWe can always find the line of best fit to explore data, but…\n\nTo make accurate predictions or inferences, certain conditions should be met.\n\n\n\\[\\begin{align*}\n\ny &= \\beta_o + \\beta_1 + x + \\epsilon \\\\\n\\epsilon &\\overset{\\mbox{ind}}{\\sim} \\mathcal{N}(0,~ \\sigma^2)\n\n\\end{align*}\\]\n\n\nMathematically, all linear regression assumptions are encoded in the above equation.\nHowever, we can break them down into four easy to remember mnemonics."
   },
   {
     "objectID": "slides/stat243_wk03mon.html#linear-regression-assumptions-1",
     "href": "slides/stat243_wk03mon.html#linear-regression-assumptions-1",
     "title": "Stat 243",
     "section": "Linear Regression Assumptions",
-    "text": "Linear Regression Assumptions\n\\[\\begin{align*}\n\ny &= \\beta_o + \\beta_1 + x + \\epsilon \\\\\n\\epsilon &\\sim \\mathcal{N}(0,~ \\sigma^2)\n\n\\end{align*}\\]\n\nLinearity: The relationship between explanatory and response variables must be approximately linear\n\nMathematically: \\(y = \\beta_0 + \\beta_1 x + \\epsilon\\) where \\(\\mathbb{E}(\\epsilon \\ | \\ x) = 0\\)\nCheck using scatterplot of data, or residual plot"
+    "text": "Linear Regression Assumptions\n\\[\\begin{align*}\n\ny &= \\beta_o + \\beta_1 + x + \\epsilon \\\\\n\\epsilon &\\overset{\\mbox{ind}}{\\sim} \\mathcal{N}(0,~ \\sigma^2)\n\n\\end{align*}\\]\n\nLinearity: The relationship between explanatory and response variables must be approximately linear\n\nMathematically: \\(y = \\beta_0 + \\beta_1 x + \\epsilon\\) where \\(\\mathbb{E}(\\epsilon \\ | \\ x) = 0\\)\nCheck using scatterplot of data, or residual plot"
   },
   {
     "objectID": "slides/stat243_wk03mon.html#linear-regression-assumptions-2",
     "href": "slides/stat243_wk03mon.html#linear-regression-assumptions-2",
     "title": "Stat 243",
     "section": "Linear Regression Assumptions",
-    "text": "Linear Regression Assumptions\n\\[\\begin{align*}\n\ny &= \\beta_o + \\beta_1 + x + \\epsilon \\\\\n\\epsilon &\\sim \\mathcal{N}(0,~ \\sigma^2)\n\n\\end{align*}\\]\n\nIndependence: The observations should be independent of one another.\n\nMathematically: \\(\\epsilon_i\\) and \\(\\epsilon_j\\) are independent (given \\(x\\))\nCan check by considering data context, and\nby looking at residual scatterplots too"
+    "text": "Linear Regression Assumptions\n\\[\\begin{align*}\n\ny &= \\beta_o + \\beta_1 + x + \\epsilon \\\\\n\\epsilon &\\overset{\\mbox{ind}}{\\sim} \\mathcal{N}(0,~ \\sigma^2)\n\n\\end{align*}\\]\n\nIndependence: The observations should be independent of one another.\n\nMathematically: \\(\\epsilon_i\\) and \\(\\epsilon_j\\) are independent (given \\(x\\))\nCan check by considering data context, and\nby looking at residual scatterplots too"
   },
   {
     "objectID": "slides/stat243_wk03mon.html#linear-regression-assumptions-3",
     "href": "slides/stat243_wk03mon.html#linear-regression-assumptions-3",
     "title": "Stat 243",
     "section": "Linear Regression Assumptions",
-    "text": "Linear Regression Assumptions\n\\[\\begin{align*}\n\ny &= \\beta_o + \\beta_1 + x + \\epsilon \\\\\n\\epsilon &\\sim \\mathcal{N}(0,~ \\sigma^2)\n\n\\end{align*}\\]\n\nNormality: The distribution of residuals should be approximately bell-shaped, unimodal, symmetric, and centered at 0 at every “slice” of the explanatory variable\n\nMathematically: \\(\\epsilon \\ | \\ x \\sim N(0, \\sigma^2)\\)\nSimple check: look at histogram of residuals\nBetter to use a “Q-Q plot”"
+    "text": "Linear Regression Assumptions\n\\[\\begin{align*}\n\ny &= \\beta_o + \\beta_1 + x + \\epsilon \\\\\n\\epsilon &\\overset{\\mbox{ind}}{\\sim} \\mathcal{N}(0,~ \\sigma^2)\n\n\\end{align*}\\]\n\nNormality: The distribution of residuals should be approximately bell-shaped, unimodal, symmetric, and centered at 0 at every “slice” of the explanatory variable\n\nMathematically: \\(\\epsilon \\ | \\ x \\sim N(0, \\sigma^2)\\)\nSimple check: look at histogram of residuals\nBetter to use a “Q-Q plot”"
   },
   {
     "objectID": "slides/stat243_wk03mon.html#linear-regression-assumptions-4",
     "href": "slides/stat243_wk03mon.html#linear-regression-assumptions-4",
     "title": "Stat 243",
     "section": "Linear Regression Assumptions",
-    "text": "Linear Regression Assumptions\n\\[\\begin{align*}\n\ny &= \\beta_o + \\beta_1 + x + \\epsilon \\\\\n\\epsilon &\\sim \\mathcal{N}(0,~ \\sigma^2)\n\n\\end{align*}\\]\n\nEqual Variability: Variance of residuals should be roughly constant across data set. Also called “homoscedasticity”. Models that violate this assumption are sometimes called “heteroscedastic”\n\nMathematically: \\(\\mbox{Var}(\\epsilon \\ | \\ x) = \\sigma^2\\) for constant \\(\\sigma^2\\)\nCheck using residual plot."
+    "text": "Linear Regression Assumptions\n\\[\\begin{align*}\n\ny &= \\beta_o + \\beta_1 + x + \\epsilon \\\\\n\\epsilon &\\overset{\\mbox{ind}}{\\sim} \\mathcal{N}(0,~ \\sigma^2)\n\n\\end{align*}\\]\n\nEqual Variability: Variance of residuals should be roughly constant across data set. Also called “homoscedasticity”. Models that violate this assumption are sometimes called “heteroscedastic”\n\nMathematically: \\(\\mbox{Var}(\\epsilon \\ | \\ x) = \\sigma^2\\) for constant \\(\\sigma^2\\)\nCheck using residual plot."
   },
   {
     "objectID": "slides/stat243_wk03mon.html#a-cute-way-to-remember-this-line",

@@ -348,7 +348,7 @@ We can *always* find the line of best fit to explore data, but...
 \begin{align*}
 
 y &= \beta_o + \beta_1 + x + \epsilon \\
-\epsilon &\sim \mathcal{N}(0,~ \sigma^2)
+\epsilon &\overset{\mbox{ind}}{\sim} \mathcal{N}(0,~ \sigma^2)
 
 \end{align*}    
 
@@ -371,7 +371,7 @@ y &= \beta_o + \beta_1 + x + \epsilon \\
 \begin{align*}
 
 y &= \beta_o + \beta_1 + x + \epsilon \\
-\epsilon &\sim \mathcal{N}(0,~ \sigma^2)
+\epsilon &\overset{\mbox{ind}}{\sim} \mathcal{N}(0,~ \sigma^2)
 
 \end{align*}    
 
@@ -398,7 +398,7 @@ y &= \beta_o + \beta_1 + x + \epsilon \\
 \begin{align*}
 
 y &= \beta_o + \beta_1 + x + \epsilon \\
-\epsilon &\sim \mathcal{N}(0,~ \sigma^2)
+\epsilon &\overset{\mbox{ind}}{\sim} \mathcal{N}(0,~ \sigma^2)
 
 \end{align*}
 
@@ -427,7 +427,7 @@ y &= \beta_o + \beta_1 + x + \epsilon \\
 \begin{align*}
 
 y &= \beta_o + \beta_1 + x + \epsilon \\
-\epsilon &\sim \mathcal{N}(0,~ \sigma^2)
+\epsilon &\overset{\mbox{ind}}{\sim} \mathcal{N}(0,~ \sigma^2)
 
 \end{align*}    
 
@@ -455,7 +455,7 @@ y &= \beta_o + \beta_1 + x + \epsilon \\
 \begin{align*}
 
 y &= \beta_o + \beta_1 + x + \epsilon \\
-\epsilon &\sim \mathcal{N}(0,~ \sigma^2)
+\epsilon &\overset{\mbox{ind}}{\sim} \mathcal{N}(0,~ \sigma^2)
 
 \end{align*}    
 
