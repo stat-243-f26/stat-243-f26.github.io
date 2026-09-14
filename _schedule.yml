@@ -73,6 +73,8 @@ scheduled-docs:
           display-date: Friday, Sep 18
           date: 9/18/26
           docs:
+            - type: Slides
+              href: slides/stat243_wk03fri.qmd
             - type: Lab 2
               href: labs/lab02.qmd
       resources:
