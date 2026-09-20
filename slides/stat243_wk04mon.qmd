@@ -1,5 +1,5 @@
 ---
-pagetitle: "Cross Validation"
+pagetitle: "Linear Regression Wrap-Up"
 editor: source
 format:
   revealjs:
@@ -43,7 +43,7 @@ library(cowplot)
 ::: {.column .center width="45%"}
 <br>
 
-[Cross Validation]{.custom-title}
+[Linear Regression V]{.custom-title}
 
 <br> <br> <br> <br> <br> 
 
@@ -67,8 +67,10 @@ library(cowplot)
 
 **Today:**
 
--   Wrap up linear regression
--   Start cross validation
+-   Linear regression Wrap-up
+      - Curved relationships
+      - Variable transformations
+      - Model selection
 
 :::
 
@@ -80,7 +82,7 @@ library(cowplot)
 
 **Wednesday:**
 
--   Bootstrapping
+-   Cross Validation
 
 
 :::
@@ -94,6 +96,8 @@ library(cowplot)
 # Linear Regression Wrap-Up
 
 ------------------------------------------------------------------------
+
+
 
 
 ### Linear Regression
@@ -395,16 +399,282 @@ But why is it called **linear** regression if the model also handles for curved 
 
 
 
-# Cross Validation
+
+# New topic: variable transformations in linear regression
 
 ------------------------------------------------------------------------
+
+## Example: Truck Prices
+
+Can we use the age of a truck to predict what its price should be?
+
+Consider a random sample of 43 pickup trucks between 1994 and 2008:
+
+```{r}
+pickups <- read_csv("http://andrewpbray.github.io/data/pickup.csv") %>%
+  filter(year >= 1994)
+
+head(pickups, n = 10)
+```
+
+
+## Exploratory data analysis
+
+```{r}
+ggplot(pickups, aes(x = year, y = price)) +
+  geom_point(col = "steelblue")
+```
+
+- Modeling ideas? 
+
+
+
+## Simple Linear Regression
+
+```{r}
+ggplot(pickups, aes(x = year, y = price)) +
+  geom_point(color = "steelblue") + 
+  geom_smooth(method = "lm", se = FALSE, color = "red")
+```
+
+
+## Linear Regression with a 2nd degree polynomial
+
+```{r}
+ggplot(pickups, aes(x = year, y = price)) +
+  geom_point(color = "steelblue") + 
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, color = "red")
+```
+
+
+
+## Simple Linear Model
+
+```{r}
+truck_mod <- lm(price ~ year, data = pickups)
+summary(truck_mod)
+```
+
+## Diagnostics
+
+```{r}
+library(gglm)
+gglm(truck_mod, theme = ggplot2::theme_bw())
+```
+
+- Residuals appear normally distributed.
+
+- But data suggests a non-linear relationship
+
+- Two observations appear influential.
+
+- There is evidence of non-constant variance in the residuals.
+
+
+## Linear Regression with 2nd degree polynomial
+
+
+```{r}
+truck_poly_mod <- lm(price ~ poly(year, degree = 2, raw = TRUE),
+                     data = pickups)
+summary(truck_poly_mod)
+```
+
+## Diagnostics
+
+```{r}
+gglm(truck_poly_mod, theme = ggplot2::theme_bw())
+```
+
+- Thoughts? 
+    - Still looks like we have non-equal variability of residuals? 
+    - And one high-leverage point.
+
+
+
+## Transformations {.smaller}
+
+If the diagnostic plots look bad, try to transform variables by applying functions.
+
+
+- When the response variable spans multiple orders of magnitude, models are often non-linear and residuals often have non-constant variance.
+
+
+
+::: {.fragment .nonincremental}
+
+  - These variables often benefit from a log-transformation
+$$
+Y_t = \log(Y)
+$$
+
+:::
+
+::: {.fragment}
+
+```{r}
+#| echo: true
+pickups$log_price <- log(pickups$price)
+```
+
+```{r}
+#| fig-height: 2
+#| fig-width: 6
+#| out-width: "70%"
+theme_set(theme_bw())
+p1 <- ggplot(pickups, aes(x = price)) +
+  geom_histogram(fill = "steelblue",color = "white", bins = 15)
+
+p2 <- ggplot(pickups, aes(x = log_price)) +
+  geom_histogram(fill = "steelblue", color ="white", bins = 15)
+
+patchwork::wrap_plots(p1, p2)
+```
+
+:::
+
+
+
+- *Note:* It's fine that price is not Normally distributed
+
+  - The linear model only requires that **residuals** be Normally distributed
+
+
+## Log-transformed linear model
+
+```{r}
+ggplot(pickups, aes(x = year, y = log_price)) +
+  geom_point(col = "steelblue") +
+  geom_smooth(method = "lm", se = FALSE, col = "red")
+```
+
+```{r}
+#| echo: true
+truck_log_mod <- lm(log_price ~ year, data = pickups)
+summary(truck_log_mod)$coef
+```
+
+## Poll: Interpretation
+
+The slope coefficient in the log-linear model was $0.13$. Which of the following interpretations are correct? Select all that apply
+
+1. Increasing year by $1$ increases price by approximately $0.13$.
+
+2. Increasing year by $1$ produces a relative increase in price of approximately $e^{.13}$.
+
+3. Increasing year by $1$ increases the log-price by approximately $0.13$.
+
+4. Increasing year by $\ln (1)$ increases price by approximately $0.13$.
+
+## Model Accuracy {.smaller}
+
+The $R^2$ and RSE values for the log and original models
+
+```{r}
+data.frame(model = c("log", "simple linear regression", "poly degree 2"),
+           r.sq = c(summary(truck_log_mod)$r.sq, 
+                    summary(truck_mod)$r.sq,
+                    summary(truck_poly_mod)$r.sq),
+           rse = c(summary(truck_log_mod)$sigma,
+                   summary(truck_mod)$sigma,
+                   summary(truck_poly_mod)$sigma))
+```
+
+
+- The log model has slight improvement in $R^2$. And has massive improvement in RSE...
+    - Or does it? (Recall that RSE depends on the units of $Y$)
+    - We need to transform predicted values from log model back into original scale
+
+
+::: {.fragment}
+
+```{r}
+#| echo: true
+pred_price <- exp(truck_log_mod$fitted.values)
+RSS <- sum((pickups$price - pred_price)^2)
+RSE <- sqrt(RSS/(42-2))
+RSE
+```
+
+:::
+
+## Diagnostics
+
+```{r}
+#| output-location: column
+gglm(truck_log_mod, theme = ggplot2::theme_bw())
+```
+
+- The residuals from this model appear less normal
+
+- But the quadratic trend is now less apparent.
+
+- There are no influential points
+
+- The variance has been stabilized
+
+## Transformations summary
+
+- If a linear model fit to the raw data leads to questionable residual plots, consider transformations.
+    - Count data and prices often benefit from transformations.
+    - The natural log and the square root are the most common, but you can use any
+transformation you like.
+
+- Transformations may change model interpretations.
+
+- Non-constant variance is a serious problem but it can sometimes be solved by transforming the response.
+
+- Transformations can also fix non-linearity
+
+
+
+# New topic: variable selection
+
+
+## Improving Model Accuracy
+
+What do we do when the full model is inaccurate on test data (i.e. high test MSE)?
+
+::: {.fragment .nonincremental}
+
+- Remove redundant variables strongly correlated with each other
+
+- Remove spurious variables that aren't linearly related with response
+
+
+Two common methods of identifying extraneous predictors:
+
+:::
+
+::: {.fragment .nonincremental}
+
+
+1. **Backwards Elimination**:
+
+    - Start with the full model, remove the variable with highest $p$-value, and refit. Continue to do so until all p-values are small, or accuracy ceases to improve.
+
+:::
+
+::: {.fragment .nonincremental}
+
+2. **Forward Selection**:
+
+    - Start with the null model, create $p$ many SLR models (one for each predictor), and select the one with best accuracy. Repeat with this new model, creating $p-1$ two predictor models (one for each remaining predictor). Continue until accuracy ceases to improve.
+
+:::
+
+
+- Is it possible that none of these models will have the best possible accuracy among all subsets of predictors?
+    - Yes. But we'll cover detailed model selection later in the class.
+
+
 
 
 ## Next time
 
 ::: {.nonincremental}
 
--   Bootstrap
+-   Cross validation
 
 :::
 

@@ -83,28 +83,28 @@ scheduled-docs:
         - 'For Friday: none'
     - week: 4
       days:
-        - topic: "Cross Validation"
+        - topic: "Linear Models V"
           display-date: Monday, Sep 21
           date: 9/21/26
           docs:
             - type: Slides
               href: slides/stat243_wk04mon.qmd
-        - topic: "Bootstrapping"
+        - topic: "Cross Validation"
           display-date: Wednesday, Sep 23
           date: 9/23/26
           docs:
             - type: Slides
               href: slides/stat243_wk04wed.qmd
-        - topic: "Lab 3: Resampling Methods (and Quiz 2)"
+        - topic: "Quiz 2. Bootstrapping lecture. Lab 3: Resampling Methods assigned."
           display-date: Friday, Sep 25
           date: 9/25/26
           docs:
             - type: Lab 3
               href: labs/lab03.qmd
       resources:
-        - 'For Monday: ISLR Chapter 5.1'
-        - 'For Wednesday: ISLR Chapter 5.2'
-        - 'For Friday: none'
+        - 'For Monday: none'
+        - 'For Wednesday: ISLR Chapter 5.1'
+        - 'For Friday: ISLR Chapter 5.2'
     - week: 5
       days:
         - topic: "Penalized Regression: Ridge"
