@@ -1,0 +1,417 @@
+---
+pagetitle: "Cross Validation"
+editor: source
+format:
+  revealjs:
+    html-math-method: mathjax
+    chalkboard: true
+    incremental: true
+    theme: [default, custom.scss]
+    height: 900
+    width: 1600
+    slide-number: c
+    auto-stretch: false
+    callout-appearance: simple
+    pdf-max-pages-per-slide: 2
+    menu:
+      side: right
+      numbers: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.retina = 3, fig.align = 'center')
+library(knitr)
+library(tidyverse)
+library(palmerpenguins)
+library(cowplot)
+```
+
+::::: columns
+::: {.column .center width="55%"}
+![](img/tidymodels.png){width="90%"}
+:::
+
+::: {.column .center width="45%"}
+<br>
+
+[Cross Validation]{.custom-title}
+
+<br> <br> <br> <br> <br> 
+
+[Grayson White]{.custom-subtitle}
+
+[Stat 243 <br> Week 4 \| Fall 2026]{.custom-subtitle}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+
+
+## Goals for today (and next time)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Today:**
+
+-   Wrap up linear regression
+-   Start cross validation
+
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Wednesday:**
+
+-   Bootstrapping
+
+
+:::
+
+:::
+
+::::
+
+
+
+# Linear Regression Wrap-Up
+
+------------------------------------------------------------------------
+
+
+### Linear Regression
+
+Model Form:
+
+$$ 
+\begin{align}
+y &= \beta_o + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \epsilon
+\end{align}
+$$
+
+Linear regression is a flexible class of models that allow for:
+
+::: nonincremental
+-   Both quantitative and categorical **explanatory** variables.
+
+-   **Multiple** explanatory variables.
+
+-   **Curved** relationships between the response variable and the explanatory variable.
+
+-   BUT the **response variable is quantitative**.
+:::
+
+------------------------------------------------------------------------
+
+### More time with the `palmerpenguins`!
+
+![](img/penguins.png){fig-align="center"}
+
+
+------------------------------------------------------------------------
+
+### Recap: Regression with the penguins so far
+
+**One Quantitative Variable**
+
+```{r}
+library(palmerpenguins)
+library(moderndive)
+mod <- lm(bill_length_mm ~ bill_depth_mm, data = penguins)
+
+get_regression_table(mod)
+```
+
+------------------------------------------------------------------------
+
+### Recap: Regression with the penguins so far
+
+**One Categorical Variable**
+
+```{r}
+library(palmerpenguins)
+library(moderndive)
+mod <- lm(bill_length_mm ~ species, data = penguins)
+
+get_regression_table(mod)
+```
+
+::: nonincremental
+-   Estimated regression line for $x_2 = 1$:
+
+<br>
+
+-   Estimated regression line for $x_2 = 0$:
+:::
+
+------------------------------------------------------------------------
+
+### Recap: Regression with the penguins so far
+
+**Equal Slopes Model**
+
+```{r}
+library(palmerpenguins)
+library(moderndive)
+mod <- lm(bill_length_mm ~ species + bill_depth_mm, data = penguins)
+
+get_regression_table(mod)
+```
+
+::: nonincremental
+-   Estimated regression line for $x_2 = 1$:
+
+<br>
+
+-   Estimated regression line for $x_2 = 0$:
+:::
+
+------------------------------------------------------------------------
+
+### Recap: Regression with the penguins so far
+
+
+**Different Slopes Model**
+
+```{r}
+library(palmerpenguins)
+library(moderndive)
+mod <- lm(bill_length_mm ~ species*bill_depth_mm, data = penguins)
+
+get_regression_table(mod)
+```
+
+::: nonincremental
+-   Estimated regression line for $x_2 = 1$:
+
+<br>
+
+-   Estimated regression line for $x_2 = 0$:
+:::
+
+
+------------------------------------------------------------------------
+
+### This time: Regression with multiple quantitative predictors
+
+
+:::: {.columns}
+
+::: {.column width=50%}
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point()
+```
+
+:::
+
+::: {.column width=50%}
+
+```{r}
+ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm)) +
+  geom_point()
+```
+
+:::
+
+::::
+
+
+::: {.fragment}
+
+$$
+y = \beta_o + \beta_1x_{\textrm{Bill Depth}} + \beta_2 x_{\textrm{Body Mass}} + \epsilon
+$$
+
+:::
+
+
+------------------------------------------------------------------------
+
+### This time: Regression with multiple quantitative predictors
+
+In R:
+
+```{r}
+mod <- lm(bill_length_mm ~ bill_depth_mm + body_mass_g, penguins)
+get_regression_table(mod)
+```
+
+## Visualizing the best fit plane
+
+```{r}
+options(rgl.useNULL = TRUE)
+options(rgl.printRglwidget = TRUE)
+library(rgl)
+plot3d(x = penguins$bill_depth_mm, y = penguins$body_mass_g, 
+       z = penguins$bill_length_mm, type = "s", col = "goldenrod", size = 1)
+planes3d(a = coef(mod)[2], b = coef(mod)[3], c=-1, d = coef(mod)[1], alpha = .5)
+```
+
+## Least Squares and Prediction
+
+-   Still minimizing the sum of squared residuals (from the plane)
+-   Still predict like usual
+
+:::{.fragment}
+
+```{r}
+pred_dat <- data.frame(bill_depth_mm = c(16, 18),
+                       body_mass_g = c(4000, 5000))
+predict(mod, pred_dat)
+```
+
+:::
+
+------------------------------------------------------------------------
+
+### Switching gears: handling curved relationships
+
+New data context: movie ratings 
+
+```{r}
+library(tidyverse)
+movies <- read_csv("https://www.lock5stat.com/datasets2e/HollywoodMovies.csv")
+
+# Restrict our attention to dramas, horrors, and actions
+movies2 <- movies %>%
+  filter(Genre %in% c("Drama", "Horror", "Action")) %>%
+  drop_na(Genre, AudienceScore, RottenTomatoes)
+glimpse(movies2)
+```
+
+**Response variable:**
+
+**Explanatory variables:**
+
+------------------------------------------------------------------------
+
+### Exploring the Data
+
+```{r}
+#| output-location: column
+
+ggplot(data = movies2,
+       mapping = aes(x = AudienceScore,
+                     y = RottenTomatoes,
+                     color = Genre)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) 
+```
+
+::: nonincremental
+-   Trends?
+
+-   Should we include interaction terms in the model?
+:::
+
+------------------------------------------------------------------------
+
+### Building the Model:
+
+Full model form:
+
+```{r}
+mod <- lm(RottenTomatoes ~ AudienceScore*Genre, data = movies2)
+
+library(moderndive)
+get_regression_table(mod) 
+```
+
+Estimated model for Dramas:
+
+------------------------------------------------------------------------
+
+## Our current model
+
+```{r}
+#| output-location: column
+ggplot(data = movies2,
+       mapping = aes(x = AudienceScore,
+                     y = RottenTomatoes,
+                     color = Genre)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+------------------------------------------------------------------------
+
+## Adding a Curve to your Scatterplot
+
+```{r}
+#| output-location: column
+ggplot(data = movies2,
+       mapping = aes(x = AudienceScore,
+                     y = RottenTomatoes,
+                     color = Genre)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, 
+              formula = y ~ poly(x, degree = 2))
+```
+
+
+------------------------------------------------------------------------
+
+## Fitting the New Model
+
+```{r}
+
+mod2 <- lm(RottenTomatoes ~ poly(AudienceScore, degree = 2, raw = TRUE)*Genre, 
+           data = movies2)
+get_regression_table(mod2) 
+```
+
+------------------------------------------------------------------------
+
+### Linear Regression & Curved Relationships
+
+**Form of the Model:**
+
+$$ 
+\begin{align}
+y &= \beta_o + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \epsilon
+\end{align}
+$$
+
+But why is it called **linear** regression if the model also handles for curved relationship??
+
+
+
+# Cross Validation
+
+------------------------------------------------------------------------
+
+
+## Next time
+
+::: {.nonincremental}
+
+-   Bootstrap
+
+:::
+
+
+
+
+
+
+
+

@@ -101,8 +101,10 @@ scheduled-docs:
           docs:
             - type: Lab 3
               href: labs/lab03.qmd
-      # resources:
-      #   - 'Some text'
+      resources:
+        - 'For Monday: ISLR Chapter 5.1'
+        - 'For Wednesday: ISLR Chapter 5.2'
+        - 'For Friday: none'
     - week: 5
       days:
         - topic: "Penalized Regression: Ridge"
@@ -125,19 +127,19 @@ scheduled-docs:
               href: labs/lab04.qmd
     - week: 6
       days:
-        - topic: "Generalized Linear Models"
+        - topic: "Classification with Generalized Linear Models (GLMs)"
           display-date: Monday, Oct 5
           date: 10/5/26
           docs:
             - type: Slides
               href: slides/stat243_wk06mon.qmd
-        - topic: "Generalized Linear Models: Counts"
+        - topic: "More classification with GLMs"
           display-date: Wednesday, Oct 7
           date: 10/7/26
           docs:
             - type: Slides
               href: slides/stat243_wk06wed.qmd
-        - topic: "Lab 5: GLM Regression (and Quiz 4)"
+        - topic: "Lab 5: Logistic Regression (and Quiz 4)"
           display-date: Thursday, Oct 8 9:00am
           date: 10/8/26
           docs:
@@ -147,19 +149,19 @@ scheduled-docs:
       #   - 'Some text'
     - week: 7
       days:
-        - topic: "Classification with GLMs"
+        - topic: "Classification with kNN"
           display-date: Monday, Oct 12
           date: 10/12/26
           docs:
             - type: Slides
               href: slides/stat243_wk07mon.qmd
-        - topic: "More classification with GLMs"
+        - topic: "More kNN"
           display-date: Wednesday, Oct 14
           date: 10/14/26
           docs:
             - type: Slides
               href: slides/stat243_wk07wed.qmd
-        - topic: "Lab 6: GLM Classification (and Quiz 5)"
+        - topic: "Lab 6: kNN (and Quiz 5)"
           display-date: Friday, Oct 16
           date: 10/16/26
           docs:
@@ -173,7 +175,7 @@ scheduled-docs:
           display-date: Saturday, Oct 17 - Sunday, Oct 25
     - week: 8
       days:
-        - topic: "kNN"
+        - topic: "Regression Trees"
           display-date: Monday, Oct 26
           date: 10/26/26
           docs:
@@ -185,7 +187,7 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/stat243_wk08wed.qmd
-        - topic: "Lab 7: Nonparametric Classification (and Quiz 6)"
+        - topic: "Lab 7: Trees I (and Quiz 6)"
           display-date: Friday, Oct 30
           date: 10/30/26
           docs:
@@ -195,19 +197,19 @@ scheduled-docs:
       #   - 'Some text'
     - week: 9
       days:
-        - topic: "Regression Trees I"
+        - topic: "Regression Trees II"
           display-date: Monday, Nov 2
           date: 11/2/26
           docs:
             - type: Slides
               href: slides/stat243_wk09mon.qmd
-        - topic: "Regression Trees II"
+        - topic: "Regression Trees III"
           display-date: Wednesday, Nov 4
           date: 11/4/26
           docs:
             - type: Slides
               href: slides/stat243_wk09wed.qmd
-        - topic: "Lab 8: Trees (and Quiz 7)"
+        - topic: "Lab 8: Trees II (and Quiz 7)"
           display-date: Friday, Nov 6
           date: 11/6/26
           docs:
@@ -261,13 +263,13 @@ scheduled-docs:
       #   - 'Some text'
     - week: 12
       days:
-        - topic: "Selected Topics"
+        - topic: "GLMs for counts"
           display-date: Monday, Nov 23
           date: 11/23/26
           docs:
             - type: Slides
               href: slides/stat243_wk12mon.qmd
-        - topic: "Selected Topics"
+        - topic: "GLMs for counts"
           display-date: Wednesday, Nov 25
           date: 12/25/26
           docs:
@@ -280,13 +282,13 @@ scheduled-docs:
       #   - 'Some text'
     - week: 13
       days:
-        - topic: "Selected Topics"
+        - topic: "Linear mixed models"
           display-date: Monday, Nov 30
           date: 11/30/26
           docs:
             - type: Slides
               href: slides/stat243_wk13mon.qmd
-        - topic: "Selected Topics"
+        - topic: "Generalized linear mixed models"
           display-date: Wednesday, Dec 2
           date: 12/2/26
           docs:
