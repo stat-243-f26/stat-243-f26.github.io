@@ -125,6 +125,10 @@ scheduled-docs:
           docs:
             - type: Lab 4
               href: labs/lab04.qmd
+      resources:
+        - 'For Monday: ISLR Chapter 6.1 and 6.2'
+        - 'For Wednesday: Review ISLR Chapter 6.2'
+        - 'For Friday: none'
     - week: 6
       days:
         - topic: "Classification with Generalized Linear Models (GLMs)"
@@ -145,8 +149,10 @@ scheduled-docs:
           docs:
             - type: Lab 5
               href: labs/lab05.qmd
-      # resources:
-      #   - 'Some text'
+      resources:
+        - 'For Monday: ISLR Chapter 4.1, 4.2, 4.3'
+        - 'For Wednesday: Review ISLR Chapters 4.1, 4.2, 4.3'
+        - 'For Friday: none'
     - week: 7
       days:
         - topic: "Classification with kNN"
@@ -167,8 +173,10 @@ scheduled-docs:
           docs:
             - type: Lab 6
               href: labs/lab06.qmd
-      # resources:
-      #   - 'Some text'
+      resources:
+        - 'For Monday: TBD'
+        - 'For Wednesday: TBD'
+        - 'For Friday: none'
     - week: Fall Break
       days:
         - topic: "No Class"
