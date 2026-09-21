@@ -606,7 +606,10 @@ get_regression_table(truck_log_mod)
 ```
 
 
-- We expect the log price of a truck to go up by 0.134 for each 1-year increase in its production date, on average.
+- We expect the log price of a truck to go up by 0.134, on average, for each 1-year increase in its production date.
+
+
+
 
 
 
@@ -669,7 +672,7 @@ $$
 
 ::: {.fragment}
 
-In fact, since $\exp(.)$ is convex and by [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality), 
+In fact, since $\exp(.)$ is convex, by [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality), 
 
 $$
 \exp(\mathbb{E}(\log (y_i) ~\vert~ X = x_i)) \leq \mathbb{E}(y_i ~\vert~ X = x_i)

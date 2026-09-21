@@ -193,7 +193,7 @@
     "href": "slides/stat243_wk04mon.html#coefficient-interpretation-for-hatbeta_1",
     "title": "Stat 243",
     "section": "Coefficient interpretation for \\(\\hat\\beta_1\\)?",
-    "text": "Coefficient interpretation for \\(\\hat\\beta_1\\)?\n\nget_regression_table(truck_log_mod)\n\n# A tibble: 2 × 7\n  term      estimate std_error statistic p_value lower_ci upper_ci\n  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 intercept -259.       26.1       -9.91       0 -312.     -206.  \n2 year         0.134     0.013     10.3        0    0.108     0.16\n\n\n\nWe expect the log price of a truck to go up by 0.134 for each 1-year increase in its production date, on average."
+    "text": "Coefficient interpretation for \\(\\hat\\beta_1\\)?\n\nget_regression_table(truck_log_mod)\n\n# A tibble: 2 × 7\n  term      estimate std_error statistic p_value lower_ci upper_ci\n  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 intercept -259.       26.1       -9.91       0 -312.     -206.  \n2 year         0.134     0.013     10.3        0    0.108     0.16\n\n\n\nWe expect the log price of a truck to go up by 0.134, on average, for each 1-year increase in its production date."
   },
   {
     "objectID": "slides/stat243_wk04mon.html#prediction-for-transformed-response",
@@ -207,7 +207,7 @@
     "href": "slides/stat243_wk04mon.html#prediction-for-transformed-response-1",
     "title": "Stat 243",
     "section": "Prediction for transformed response",
-    "text": "Prediction for transformed response\nTransform the predictions?\n\\[\n\\hat y_i = \\exp(\\mathbb{E}(\\log (y_i) ~\\vert~ X = x_i))\n\\]\n\nClose. But results in negative bias. Why?\n\n\n\\[\n\\exp(\\mathbb{E}(\\log (y_i) ~\\vert~ X = x_i)) \\neq \\mathbb{E}(y_i ~\\vert~ X = x_i)\n\\]\n“The exponentiation of the mean of the logs is not the mean of y”\n\n\nIn fact, since \\(\\exp(.)\\) is convex and by Jensen’s inequality,\n\\[\n\\exp(\\mathbb{E}(\\log (y_i) ~\\vert~ X = x_i)) \\leq \\mathbb{E}(y_i ~\\vert~ X = x_i)\n\\]"
+    "text": "Prediction for transformed response\nTransform the predictions?\n\\[\n\\hat y_i = \\exp(\\mathbb{E}(\\log (y_i) ~\\vert~ X = x_i))\n\\]\n\nClose. But results in negative bias. Why?\n\n\n\\[\n\\exp(\\mathbb{E}(\\log (y_i) ~\\vert~ X = x_i)) \\neq \\mathbb{E}(y_i ~\\vert~ X = x_i)\n\\]\n“The exponentiation of the mean of the logs is not the mean of y”\n\n\nIn fact, since \\(\\exp(.)\\) is convex, by Jensen’s inequality,\n\\[\n\\exp(\\mathbb{E}(\\log (y_i) ~\\vert~ X = x_i)) \\leq \\mathbb{E}(y_i ~\\vert~ X = x_i)\n\\]"
   },
   {
     "objectID": "slides/stat243_wk04mon.html#prediction-for-transformed-response-2",
