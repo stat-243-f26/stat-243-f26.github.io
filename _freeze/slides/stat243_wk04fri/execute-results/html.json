@@ -1,0 +1,22 @@
+{
+  "hash": "3c63f8086b392069b979d2f45a99cf58",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\npagetitle: \"The Bootstrap\"\neditor: source\nformat:\n  revealjs:\n    html-math-method: mathjax\n    chalkboard: true\n    incremental: true\n    theme: [default, custom.scss]\n    height: 900\n    width: 1600\n    slide-number: c\n    auto-stretch: false\n    callout-appearance: simple\n    pdf-max-pages-per-slide: 2\n    menu:\n      side: right\n      numbers: true\nexecute:\n  echo: true\n  warning: false\n  message: false\n---\n\n\n\n::::: columns\n::: {.column .center width=\"55%\"}\n![](img/tidymodels.png){width=\"90%\"}\n:::\n\n::: {.column .center width=\"45%\"}\n<br>\n\n[The Bootstrap]{.custom-title}\n\n<br> <br> <br> <br> <br> \n\n[Grayson White]{.custom-subtitle}\n\n[Stat 243 <br> Week 4 \\| Fall 2026]{.custom-subtitle}\n:::\n:::::\n\n\n# Quiz\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\ncountdown::countdown(20)\n```\n\n::: {.cell-output-display}\n\n```{=html}\n<div class=\"countdown\" id=\"timer_fb331357\" data-update-every=\"1\" tabindex=\"0\" style=\"right:0;bottom:0;\">\n<div class=\"countdown-controls\"><button class=\"countdown-bump-down\">&minus;</button><button class=\"countdown-bump-up\">&plus;</button></div>\n<code class=\"countdown-time\"><span class=\"countdown-digits minutes\">20</span><span class=\"countdown-digits colon\">:</span><span class=\"countdown-digits seconds\">00</span></code>\n</div>\n```\n\n:::\n:::\n\n\n------------------------------------------------------------------------\n\n\n\n## Goals for today (and next week)\n\n:::: {.columns}\n\n::: {.column width='50%'}\n\n::: {.nonincremental .fragment}\n\n**Today:**\n\n- Recall some ideas from cross-validation\n- Get started on Lab 3\n\n:::\n\n:::\n\n::: {.column width='50%'}\n\n::: {.nonincremental .fragment}\n\n**Next week:**\n\n-   Discuss bootstrapping and, \n-   Best model selection\n\n\n:::\n\n:::\n\n::::\n\n\n## Warm-up: Cross-Validation\n\n::: {.nonincremental}\n\nSuppose I have three candidate regression models ($M_1$, $M_2$, and $M_3$) to capture daily rainfall in Portland. My estimated test error based on $10$-fold CV suggests that $M_3$ is the best model.\n\n1) State a pro and a con of using $10$-fold CV compared to, say, $20$-fold CV.\n\n2) Explain conceptually why CV is useful for selecting a model. What is *explicitly* being assessed, and what is *implicitly* assessed about the model?\n\n3) Now that I've selected a model, I want to use it to make a prediction for tomorrow's daily rainfall. But I trained the model 10 times during CV....which do I use moving forward?\n\n:::\n\n\n# Lab 3 work time\n\n## Next week\n\n-   Bootstrapping lecture.\n-   Feature selection lecture. \n\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../site_libs/countdown-0.4.0/countdown.css\" rel=\"stylesheet\" />\n<script src=\"../site_libs/countdown-0.4.0/countdown.js\"></script>\n"
+      ],
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

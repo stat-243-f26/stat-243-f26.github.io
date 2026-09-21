@@ -70,6 +70,188 @@
     "text": "Footnotes\n\n\nThis Code of Conduct is adapted from the Contributor Covenant, version 2.0.↩︎"
   },
   {
+    "objectID": "slides/stat243_wk04mon.html#goals-for-today-and-next-time",
+    "href": "slides/stat243_wk04mon.html#goals-for-today-and-next-time",
+    "title": "Stat 243",
+    "section": "Goals for today (and next time)",
+    "text": "Goals for today (and next time)\n\n\n\nToday:\n\nLinear regression Wrap-up\n\nCurved relationships\nVariable transformations\nModel selection\n\n\n\n\n\nWednesday:\n\nCross Validation"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#visualizing-the-best-fit-plane",
+    "href": "slides/stat243_wk04mon.html#visualizing-the-best-fit-plane",
+    "title": "Stat 243",
+    "section": "Visualizing the best fit plane",
+    "text": "Visualizing the best fit plane\n\noptions(rgl.useNULL = TRUE)\noptions(rgl.printRglwidget = TRUE)\nlibrary(rgl)\nplot3d(x = penguins$bill_depth_mm, y = penguins$body_mass_g, \n       z = penguins$bill_length_mm, type = \"s\", col = \"goldenrod\", size = 1)\nplanes3d(a = coef(mod)[2], b = coef(mod)[3], c=-1, d = coef(mod)[1], alpha = .5)"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#least-squares-and-prediction",
+    "href": "slides/stat243_wk04mon.html#least-squares-and-prediction",
+    "title": "Stat 243",
+    "section": "Least Squares and Prediction",
+    "text": "Least Squares and Prediction\n\nStill minimizing the sum of squared residuals (from the plane)\nStill predict like usual\n\n\n\npred_dat &lt;- data.frame(bill_depth_mm = c(16, 18),\n                       body_mass_g = c(4000, 5000))\npredict(mod, pred_dat)\n\n       1        2 \n42.87888 47.44527"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#our-current-model",
+    "href": "slides/stat243_wk04mon.html#our-current-model",
+    "title": "Stat 243",
+    "section": "Our current model",
+    "text": "Our current model\n\n\nggplot(data = movies2,\n       mapping = aes(x = AudienceScore,\n                     y = RottenTomatoes,\n                     color = Genre)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE)"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#adding-a-curve-to-your-scatterplot",
+    "href": "slides/stat243_wk04mon.html#adding-a-curve-to-your-scatterplot",
+    "title": "Stat 243",
+    "section": "Adding a Curve to your Scatterplot",
+    "text": "Adding a Curve to your Scatterplot\n\n\nggplot(data = movies2,\n       mapping = aes(x = AudienceScore,\n                     y = RottenTomatoes,\n                     color = Genre)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE, \n              formula = y ~ poly(x, degree = 2))"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#fitting-the-new-model",
+    "href": "slides/stat243_wk04mon.html#fitting-the-new-model",
+    "title": "Stat 243",
+    "section": "Fitting the New Model",
+    "text": "Fitting the New Model\n\nmod2 &lt;- lm(RottenTomatoes ~ poly(AudienceScore, degree = 2, raw = TRUE)*Genre, \n           data = movies2)\nget_regression_table(mod2) \n\n# A tibble: 9 × 7\n  term                    estimate std_error statistic p_value lower_ci upper_ci\n  &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 intercept                  9.92     14.9       0.668   0.505  -19.3     39.1  \n2 poly(AudienceScore, de…    0.098     0.515     0.191   0.849   -0.916    1.11 \n3 poly(AudienceScore, de…    0.008     0.004     1.79    0.075   -0.001    0.016\n4 Genre: Drama              88.9      24.5       3.62    0       40.6    137.   \n5 Genre: Horror            -23.8      31.1      -0.765   0.445  -84.9     37.3  \n6 poly(AudienceScore, de…   -2.61      0.84     -3.11    0.002   -4.26    -0.956\n7 poly(AudienceScore, de…    0.019     0.007     2.78    0.006    0.006    0.032\n8 poly(AudienceScore, de…    0.574     1.22      0.469   0.639   -1.83     2.98 \n9 poly(AudienceScore, de…   -0.001     0.012    -0.061   0.951   -0.024    0.022"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#example-truck-prices",
+    "href": "slides/stat243_wk04mon.html#example-truck-prices",
+    "title": "Stat 243",
+    "section": "Example: Truck Prices",
+    "text": "Example: Truck Prices\nCan we use the age of a truck to predict what its price should be?\nConsider a random sample of 43 pickup trucks between 1994 and 2008:\n\npickups &lt;- read_csv(\"http://andrewpbray.github.io/data/pickup.csv\") %&gt;%\n  filter(year &gt;= 1994)\n\nhead(pickups, n = 10)\n\n# A tibble: 10 × 4\n    year  miles price make \n   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;\n 1  1994  89000  3800 GMC  \n 2  1995 128500  3900 GMC  \n 3  1995 131000  2500 Ford \n 4  1995 127000  4395 GMC  \n 5  1995 176000  3250 Dodge\n 6  1995 116455  5000 GMC  \n 7  1996  84000  5900 Dodge\n 8  1996  89000  2100 Ford \n 9  1996  79000  5350 Ford \n10  1996 151923  3450 GMC"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#exploratory-data-analysis",
+    "href": "slides/stat243_wk04mon.html#exploratory-data-analysis",
+    "title": "Stat 243",
+    "section": "Exploratory data analysis",
+    "text": "Exploratory data analysis\n\nggplot(pickups, aes(x = year, y = price)) +\n  geom_point(col = \"steelblue\")\n\n\n\n\n\n\n\n\n\nModeling ideas?"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#simple-linear-regression",
+    "href": "slides/stat243_wk04mon.html#simple-linear-regression",
+    "title": "Stat 243",
+    "section": "Simple Linear Regression",
+    "text": "Simple Linear Regression\n\nggplot(pickups, aes(x = year, y = price)) +\n  geom_point(color = \"steelblue\") + \n  geom_smooth(method = \"lm\", se = FALSE, color = \"red\")"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#linear-regression-with-a-2nd-degree-polynomial",
+    "href": "slides/stat243_wk04mon.html#linear-regression-with-a-2nd-degree-polynomial",
+    "title": "Stat 243",
+    "section": "Linear Regression with a 2nd degree polynomial",
+    "text": "Linear Regression with a 2nd degree polynomial\n\nggplot(pickups, aes(x = year, y = price)) +\n  geom_point(color = \"steelblue\") + \n  geom_smooth(method = \"lm\", formula = y ~ poly(x, 2), se = FALSE, color = \"red\")"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#simple-linear-model",
+    "href": "slides/stat243_wk04mon.html#simple-linear-model",
+    "title": "Stat 243",
+    "section": "Simple Linear Model",
+    "text": "Simple Linear Model\n\nlibrary(moderndive)\ntruck_mod &lt;- lm(price ~ year, data = pickups)\nget_regression_table(truck_mod)\n\n# A tibble: 2 × 7\n  term       estimate std_error statistic p_value  lower_ci  upper_ci\n  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 intercept -2278766.   238326.     -9.56       0 -2760440. -1797092.\n2 year          1143.      119.      9.60       0      903.     1384."
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#diagnostics",
+    "href": "slides/stat243_wk04mon.html#diagnostics",
+    "title": "Stat 243",
+    "section": "Diagnostics",
+    "text": "Diagnostics\n\nlibrary(gglm)\ngglm(truck_mod, theme = ggplot2::theme_bw())\n\n\n\n\n\n\n\n\n\n\n\nResiduals appear normally distributed.\nBut data suggests a non-linear relationship.\n\n\n\nThere is evidence of non-constant variance in the residuals."
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#linear-regression-with-2nd-degree-polynomial",
+    "href": "slides/stat243_wk04mon.html#linear-regression-with-2nd-degree-polynomial",
+    "title": "Stat 243",
+    "section": "Linear Regression with 2nd degree polynomial",
+    "text": "Linear Regression with 2nd degree polynomial\n\ntruck_poly_mod &lt;- lm(price ~ poly(year, degree = 2, raw = TRUE),\n                     data = pickups)\nget_regression_table(truck_poly_mod)\n\n# A tibble: 3 × 7\n  term                    estimate std_error statistic p_value lower_ci upper_ci\n  &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 intercept                 3.90e8    1.18e8      3.32   0.002   1.52e8   6.28e8\n2 poly(year, degree = 2,…  -3.91e5    1.17e5     -3.33   0.002  -6.28e5  -1.53e5\n3 poly(year, degree = 2,…   9.80e1    2.94e1      3.34   0.002   3.86e1   1.57e2"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#diagnostics-1",
+    "href": "slides/stat243_wk04mon.html#diagnostics-1",
+    "title": "Stat 243",
+    "section": "Diagnostics",
+    "text": "Diagnostics\n\ngglm(truck_poly_mod, theme = ggplot2::theme_bw())\n\n\n\n\n\n\n\n\n\nThoughts?\n\nStill looks like we have non-equal variability of residuals?\nAnd one high-leverage point."
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#transformations",
+    "href": "slides/stat243_wk04mon.html#transformations",
+    "title": "Stat 243",
+    "section": "Transformations",
+    "text": "Transformations\nIf the diagnostic plots look bad, try to transform variables by applying functions.\n\nWhen the response variable spans multiple orders of magnitude, models are often non-linear and residuals often have non-constant variance.\n\n\n\nThese variables often benefit from a log-transformation: \\(y_i = \\log(y_i)\\)\n\n\n\n\n\nlibrary(patchwork)\npickups$log_price &lt;- log(pickups$price)\n\np1 &lt;- ggplot(pickups, aes(x = price)) +\n  geom_histogram(fill = \"steelblue\",\n                 color = \"white\",\n                 bins = 15)\n\np2 &lt;- ggplot(pickups, aes(x = log_price)) +\n  geom_histogram(fill = \"steelblue\",\n                 color =\"white\", \n                 bins = 15)\n\np1 / p2"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#log-transformed-linear-model",
+    "href": "slides/stat243_wk04mon.html#log-transformed-linear-model",
+    "title": "Stat 243",
+    "section": "Log-transformed linear model",
+    "text": "Log-transformed linear model\n\n\nggplot(pickups, aes(x = year, y = log_price)) +\n  geom_point(col = \"steelblue\") +\n  geom_smooth(method = \"lm\",\n              se = FALSE,\n              color = \"red\")\n\n\n\n\n\n\n\n\n\n\nFit the model in R:\n\ntruck_log_mod &lt;- lm(log_price ~ year, data = pickups)\nget_regression_table(truck_log_mod)\n\n# A tibble: 2 × 7\n  term      estimate std_error statistic p_value lower_ci upper_ci\n  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 intercept -259.       26.1       -9.91       0 -312.     -206.  \n2 year         0.134     0.013     10.3        0    0.108     0.16"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#diagnostics-2",
+    "href": "slides/stat243_wk04mon.html#diagnostics-2",
+    "title": "Stat 243",
+    "section": "Diagnostics",
+    "text": "Diagnostics\n\n\ngglm(truck_log_mod, theme = ggplot2::theme_bw())\n\n\n\n\n\n\n\n\n\n\n\n\nThe residuals from this model appear less normal\nBut the quadratic trend is now less apparent.\n\n\n\nThere are no influential points\nThe variance has been stabilized"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#coefficient-interpretation-for-hatbeta_1",
+    "href": "slides/stat243_wk04mon.html#coefficient-interpretation-for-hatbeta_1",
+    "title": "Stat 243",
+    "section": "Coefficient interpretation for \\(\\hat\\beta_1\\)?",
+    "text": "Coefficient interpretation for \\(\\hat\\beta_1\\)?\n\nget_regression_table(truck_log_mod)\n\n# A tibble: 2 × 7\n  term      estimate std_error statistic p_value lower_ci upper_ci\n  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 intercept -259.       26.1       -9.91       0 -312.     -206.  \n2 year         0.134     0.013     10.3        0    0.108     0.16\n\n\n\nWe expect the log price of a truck to go up by 0.134 for each 1-year increase in its production date, on average."
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#prediction-for-transformed-response",
+    "href": "slides/stat243_wk04mon.html#prediction-for-transformed-response",
+    "title": "Stat 243",
+    "section": "Prediction for transformed response",
+    "text": "Prediction for transformed response\nFor linear regression, we know, for a value \\(x_i\\):\n\\[\n\\hat y_i = \\mathbb{E}(y_i ~\\vert~ X = x_i)\n\\]\nIn English: our predicted value of \\(Y\\) is the expected value (average) of \\(Y\\) given that the value of our predictor \\(X\\) is \\(x_i\\).\n\n\nSo what happens if we log transform \\(y\\)?\n\n\nNow, for a generic value of \\(x_i\\), the regression line represents:\n\\[\n\\mathbb{E}(\\log (y_i) ~\\vert~ X = x_i)\n\\]\n\n\nHow to get \\(\\hat Y\\)?"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#prediction-for-transformed-response-1",
+    "href": "slides/stat243_wk04mon.html#prediction-for-transformed-response-1",
+    "title": "Stat 243",
+    "section": "Prediction for transformed response",
+    "text": "Prediction for transformed response\nTransform the predictions?\n\\[\n\\hat y_i = \\exp(\\mathbb{E}(\\log (y_i) ~\\vert~ X = x_i))\n\\]\n\nClose. But results in negative bias. Why?\n\n\n\\[\n\\exp(\\mathbb{E}(\\log (y_i) ~\\vert~ X = x_i)) \\neq \\mathbb{E}(y_i ~\\vert~ X = x_i)\n\\]\n“The exponentiation of the mean of the logs is not the mean of y”\n\n\nIn fact, since \\(\\exp(.)\\) is convex and by Jensen’s inequality,\n\\[\n\\exp(\\mathbb{E}(\\log (y_i) ~\\vert~ X = x_i)) \\leq \\mathbb{E}(y_i ~\\vert~ X = x_i)\n\\]"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#prediction-for-transformed-response-2",
+    "href": "slides/stat243_wk04mon.html#prediction-for-transformed-response-2",
+    "title": "Stat 243",
+    "section": "Prediction for transformed response",
+    "text": "Prediction for transformed response\nWhat’s this mean in practice?\n\nNeed a bias correction term when applying a transformation to the response variable in linear regression!\n\n\nFor log-transformations, this has been derived (under the assumption that normality and equal-variability of errors have been met):\n\\[\n\\mathbb{E}(y_i ~\\vert~ X = x_i) = \\exp\\left(\\mathbb{E}(\\log(y_i) ~\\vert~ X = x_i) + \\frac{\\sigma^2}{2}\\right)\n\\]\n\n\nSo our corrected prediction is:\n\\[\n\\hat y_i = \\exp\\left(\\hat\\beta_0 + \\hat\\beta_1 x_i + \\frac{\\hat\\sigma^2}{2}\\right)\n\\]"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#prediction-for-transformed-response-3",
+    "href": "slides/stat243_wk04mon.html#prediction-for-transformed-response-3",
+    "title": "Stat 243",
+    "section": "Prediction for transformed response",
+    "text": "Prediction for transformed response\nIn R, for \\(x_i = 2001\\):\n\nNon-transformed prediction:\n\npredict(truck_log_mod, newdata = data.frame(year = 2001))\n\n     1 \n8.9227 \n\n\n\n\nNon-bias-corrected, transformed prediction:\n\nexp(predict(truck_log_mod, newdata = data.frame(year = 2001)))\n\n       1 \n7500.315 \n\n\n\n\nBias-corrected, transformed prediction:\n\nsigma &lt;- summary(truck_log_mod)$sigma\n\nexp(predict(truck_log_mod, newdata = data.frame(year = 2001)) + sigma^2 / 2)\n\n       1 \n7940.099"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#model-accuracy-returning-to-our-three-models",
+    "href": "slides/stat243_wk04mon.html#model-accuracy-returning-to-our-three-models",
+    "title": "Stat 243",
+    "section": "Model Accuracy: returning to our three models",
+    "text": "Model Accuracy: returning to our three models\nThe \\(R^2\\) values for the log transformed and original models\n\n\ndata.frame(\n  model = c(\"log transformed\",\n            \"simple linear regression\",\n            \"poly degree 2\"),\n  R_squared = c(summary(truck_log_mod)$r.sq,\n                summary(truck_mod)$r.sq,\n                summary(truck_poly_mod)$r.sq)\n) %&gt;%\n  kable()\n\n\n\n\n\nmodel\nR_squared\n\n\n\n\nlog transformed\n0.7243830\n\n\nsimple linear regression\n0.6972079\n\n\npoly degree 2\n0.7644604\n\n\n\n\n\n\nThe polynomial model has the best \\(R^2\\). But recall it didn’t meet all model assumptions!\nThe log-transformed model has better \\(R^2\\) than SLR, and met model assumptions.\nWhich is best?\n\nDepends on your goals…"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#transformations-summary",
+    "href": "slides/stat243_wk04mon.html#transformations-summary",
+    "title": "Stat 243",
+    "section": "Transformations summary",
+    "text": "Transformations summary\n\nIf a linear model fit to the raw data leads to questionable residual plots, consider transformations.\n\nCount data and prices often benefit from transformations.\nThe natural log and the square root are the most common, but you can use any transformation you like.\n\nTransformations of \\(y\\) require bias-corrected predictions. Transformations of \\(x\\)’s do not.\nNon-constant variance is a serious problem but it can sometimes be solved by transforming the response (\\(y\\)).\nTransformations can also fix non-linearity"
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#improving-model-accuracy",
+    "href": "slides/stat243_wk04mon.html#improving-model-accuracy",
+    "title": "Stat 243",
+    "section": "Improving Model Accuracy",
+    "text": "Improving Model Accuracy\nWhat do we do when the full model is inaccurate on test data (i.e. high test MSE)?\n\n\nRemove redundant variables strongly correlated with each other\nRemove spurious variables that aren’t linearly related with response\n\nTwo common methods of identifying extraneous predictors:\n\n\n\nBackwards Elimination:\n\nStart with the full model, remove the variable with highest \\(p\\)-value, and refit. Continue to do so until all p-values are small, or accuracy ceases to improve.\n\n\n\n\n\nForward Selection:\n\nStart with the null model, create \\(p\\) many SLR models (one for each predictor), and select the one with best accuracy. Repeat with this new model, creating \\(p-1\\) two predictor models (one for each remaining predictor). Continue until accuracy ceases to improve."
+  },
+  {
+    "objectID": "slides/stat243_wk04mon.html#variable-selection",
+    "href": "slides/stat243_wk04mon.html#variable-selection",
+    "title": "Stat 243",
+    "section": "Variable selection",
+    "text": "Variable selection\n\nThere are lots of ways to do variable selection! Forward and backwards selection are just two intuitive ones.\nWe will spend more time in this class thinking about variable selection for models, but first…\n\n\n\nNext time\n\nCross validation"
+  },
+  {
     "objectID": "slides/stat243_wk03wed.html#goals-for-this-week-and-next-time",
     "href": "slides/stat243_wk03wed.html#goals-for-this-week-and-next-time",
     "title": "Stat 243",
@@ -648,7 +830,7 @@
     "href": "index.html",
     "title": "Stat 243",
     "section": "",
-    "text": "Statistical Learning\n\nStat 243 Reed College, Fall 2026\n\n\n\n\n\n\n  Week 1\n  \n  \n\n  \n    \n    Monday, Aug 31\n    \n    \n    Course Introduction\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 2\n    \n    \n    Activity\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 4\n    \n    \n    Lab 1: Intro\n    \n      \n        \n          Lab 1\n        \n      \n        \n          Lab Instructions\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      Join Slack\n    \n      Gradescope course entry code: 68V7B3\n    \n  \n  \n  \n  \n\n  Week 2\n  \n  \n\n  \n    \n    Monday, Sep 7\n    \n    \n    No Class: Holiday\n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 9\n    \n    \n    Assessing Accuracy\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 11\n    \n    \n    Linear Models I\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Wednesday: Read this blog post and Section 2.2 (through 2.2.2, but not beyond) of ISLR.\n    \n      For Friday: ISLR Chapter 3.1\n    \n  \n  \n  \n  \n\n  Week 3\n  \n  \n\n  \n    \n    Monday, Sep 14\n    \n    \n    Linear Models II\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 16\n    \n    \n    Linear Models III\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 18\n    \n    \n    Lab 2: Linear Models IV (and Quiz I)\n    \n      \n        \n          Slides\n        \n      \n        \n          Lab 2\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Monday: none\n    \n      For Wednesday: Read ISLR Chapters 3.2 and 3.3\n    \n      For Friday: none\n    \n  \n  \n  \n  \n\n  Week 4\n  \n  \n\n  \n    \n    Monday, Sep 21\n    \n    \n    Linear Models V\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 23\n    \n    \n    Cross Validation\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 25\n    \n    \n    Quiz 2. Bootstrapping lecture. Lab 3: Resampling Methods assigned.\n    \n      \n        \n          Lab 3\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Monday: none\n    \n      For Wednesday: ISLR Chapter 5.1\n    \n      For Friday: ISLR Chapter 5.2\n    \n  \n  \n  \n  \n\n  Week 5\n  \n  \n\n  \n    \n    Monday, Sep 28\n    \n    \n    Penalized Regression: Ridge\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 30\n    \n    \n    Penalized Regression: LASSO\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 1 9:00am\n    \n    \n    Lab 4: Penalized Regression (and Quiz 3)\n    \n      \n        \n          Lab 4\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Monday: ISLR Chapter 6.1 and 6.2\n    \n      For Wednesday: Review ISLR Chapter 6.2\n    \n      For Friday: none\n    \n  \n  \n  \n  \n\n  Week 6\n  \n  \n\n  \n    \n    Monday, Oct 5\n    \n    \n    Classification with Generalized Linear Models (GLMs)\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 7\n    \n    \n    More classification with GLMs\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 8 9:00am\n    \n    \n    Lab 5: Logistic Regression (and Quiz 4)\n    \n      \n        \n          Lab 5\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Monday: ISLR Chapter 4.1, 4.2, 4.3\n    \n      For Wednesday: Review ISLR Chapters 4.1, 4.2, 4.3\n    \n      For Friday: none\n    \n  \n  \n  \n  \n\n  Week 7\n  \n  \n\n  \n    \n    Monday, Oct 12\n    \n    \n    Classification with kNN\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 14\n    \n    \n    More kNN\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    Lab 6: kNN (and Quiz 5)\n    \n      \n        \n          Lab 6\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Monday: TBD\n    \n      For Wednesday: TBD\n    \n      For Friday: none\n    \n  \n  \n  \n  \n\n  Week Fall Break\n  \n  \n\n  \n    \n    Saturday, Oct 17 - Sunday, Oct 25\n    \n    \n    No Class\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 8\n  \n  \n\n  \n    \n    Monday, Oct 26\n    \n    \n    Regression Trees\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 28\n    \n    \n    Classification Trees\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 30\n    \n    \n    Lab 7: Trees I (and Quiz 6)\n    \n      \n        \n          Lab 7\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 9\n  \n  \n\n  \n    \n    Monday, Nov 2\n    \n    \n    Regression Trees II\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 4\n    \n    \n    Regression Trees III\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 6\n    \n    \n    Lab 8: Trees II (and Quiz 7)\n    \n      \n        \n          Lab 8\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 10\n  \n  \n\n  \n    \n    Monday, Nov 9\n    \n    \n    Bagging\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 11\n    \n    \n    Boosting\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 13\n    \n    \n    Lab 9: Ensemble Trees (and Quiz 8)\n    \n      \n        \n          Lab 9\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 11\n  \n  \n\n  \n    \n    Monday, Nov 16\n    \n    \n    k-Means clustering\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 18\n    \n    \n    Hierarchical clustering\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 20\n    \n    \n    Lab 10: Clustering (and Quiz 9)\n    \n      \n        \n          Lab 10\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 12\n  \n  \n\n  \n    \n    Monday, Nov 23\n    \n    \n    GLMs for counts\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 25\n    \n    \n    GLMs for counts\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    No class: Holiday\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 13\n  \n  \n\n  \n    \n    Monday, Nov 30\n    \n    \n    Linear mixed models\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 2\n    \n    \n    Generalized linear mixed models\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Dec 4\n    \n    \n    Project Work Day\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 14\n  \n  \n\n  \n    \n    Monday, Dec 7\n    \n    \n    Selected Topics / Project Presentations\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 9\n    \n    \n    Project Presentations\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\nNo matching items"
+    "text": "Statistical Learning\n\nStat 243 Reed College, Fall 2026\n\n\n\n\n\n\n  Week 1\n  \n  \n\n  \n    \n    Monday, Aug 31\n    \n    \n    Course Introduction\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 2\n    \n    \n    Activity\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 4\n    \n    \n    Lab 1: Intro\n    \n      \n        \n          Lab 1\n        \n      \n        \n          Lab Instructions\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      Join Slack\n    \n      Gradescope course entry code: 68V7B3\n    \n  \n  \n  \n  \n\n  Week 2\n  \n  \n\n  \n    \n    Monday, Sep 7\n    \n    \n    No Class: Holiday\n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 9\n    \n    \n    Assessing Accuracy\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 11\n    \n    \n    Linear Models I\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Wednesday: Read this blog post and Section 2.2 (through 2.2.2, but not beyond) of ISLR.\n    \n      For Friday: ISLR Chapter 3.1\n    \n  \n  \n  \n  \n\n  Week 3\n  \n  \n\n  \n    \n    Monday, Sep 14\n    \n    \n    Linear Models II\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 16\n    \n    \n    Linear Models III\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 18\n    \n    \n    Lab 2: Linear Models IV (and Quiz I)\n    \n      \n        \n          Slides\n        \n      \n        \n          Lab 2\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Monday: none\n    \n      For Wednesday: Read ISLR Chapters 3.2 and 3.3\n    \n      For Friday: none\n    \n  \n  \n  \n  \n\n  Week 4\n  \n  \n\n  \n    \n    Monday, Sep 21\n    \n    \n    Linear Models V\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 23\n    \n    \n    Cross Validation\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Sep 25\n    \n    \n    Lab 3: Linear models and cross validation (and Quiz 2)\n    \n      \n        \n          Lab 3\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Monday: none\n    \n      For Wednesday: ISLR Chapter 5.1\n    \n      For Friday: none\n    \n  \n  \n  \n  \n\n  Week 5\n  \n  \n\n  \n    \n    Monday, Sep 28\n    \n    \n    The Bootstrap\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Sep 30\n    \n    \n    Feature selection and model comparison\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 1 9:00am\n    \n    \n    Lab 4: Regression Competition (and Quiz 3)\n    \n      \n        \n          Lab 4\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Monday: ISLR Chapter 5.2\n    \n      For Wednesday: TBD\n    \n      For Friday: none\n    \n  \n  \n  \n  \n\n  Week 6\n  \n  \n\n  \n    \n    Monday, Oct 5\n    \n    \n    Penalized Regression: ridge\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 7\n    \n    \n    Penalized Regression: LASSO\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Thursday, Oct 8 9:00am\n    \n    \n    Lab 5: Penalized Regression (and Quiz 4)\n    \n      \n        \n          Lab 5\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Monday: ISLR Chapter 6.2.1\n    \n      For Wednesday: ISLR Chapter 6.2.2\n    \n      For Friday: none\n    \n  \n  \n  \n  \n\n  Week 7\n  \n  \n\n  \n    \n    Monday, Oct 12\n    \n    \n    Classification with kNN\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 14\n    \n    \n    More kNN\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    Lab 6: kNN (and Quiz 5)\n    \n      \n        \n          Lab 6\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    \n      For Monday: TBD\n    \n      For Wednesday: TBD\n    \n      For Friday: none\n    \n  \n  \n  \n  \n\n  Week Fall Break\n  \n  \n\n  \n    \n    Saturday, Oct 17 - Sunday, Oct 25\n    \n    \n    No Class\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 8\n  \n  \n\n  \n    \n    Monday, Oct 26\n    \n    \n    Classification with Generalized Linear Models (GLMs)\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Oct 28\n    \n    \n    More classification with GLMs\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 30\n    \n    \n    Lab 7: Logistic Regression I (and Quiz 6)\n    \n      \n        \n          Lab 7\n        \n      \n    \n    \n    \n    \n  \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 9\n  \n  \n\n  \n    \n    Monday, Nov 2\n    \n    \n    Regression Trees I\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 4\n    \n    \n    Regression Trees II\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 6\n    \n    \n    Lab 8: Trees (and Quiz 7)\n    \n      \n        \n          Lab 8\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 10\n  \n  \n\n  \n    \n    Monday, Nov 9\n    \n    \n    Bagging\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 11\n    \n    \n    Boosting\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 13\n    \n    \n    Lab 9: Ensemble Trees (and Quiz 8)\n    \n      \n        \n          Lab 9\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 11\n  \n  \n\n  \n    \n    Monday, Nov 16\n    \n    \n    k-Means clustering\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 18\n    \n    \n    Hierarchical clustering\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Nov 20\n    \n    \n    Lab 10: Clustering (and Quiz 9)\n    \n      \n        \n          Lab 10\n        \n      \n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 12\n  \n  \n\n  \n    \n    Monday, Nov 23\n    \n    \n    GLMs for counts\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Nov 25\n    \n    \n    GLMs for counts\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Oct 16\n    \n    \n    No class: Holiday\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 13\n  \n  \n\n  \n    \n    Monday, Nov 30\n    \n    \n    Linear mixed models\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 2\n    \n    \n    Generalized linear mixed models\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Friday, Dec 4\n    \n    \n    Project Work Day\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\n  Week 14\n  \n  \n\n  \n    \n    Monday, Dec 7\n    \n    \n    Selected Topics / Project Presentations\n    \n      \n        \n          Slides\n        \n      \n    \n    \n    \n    \n  \n    \n    Wednesday, Dec 9\n    \n    \n    Project Presentations\n    \n    \n    \n    \n  \n  \n  \n  \n  Readings\n  \n  \n    None this week\n  \n  \n  \n  \n\nNo matching items"
   },
   {
     "objectID": "labs/lab01_setup.html#introduction",
@@ -1239,157 +1421,220 @@
     "text": "Next time\n\nInference for regression\ncategorical predictors\nmultiple linear regression"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#goals-for-today-and-next-time",
-    "href": "slides/stat243_wk04mon.html#goals-for-today-and-next-time",
+    "objectID": "slides/stat243_wk04fri.html#goals-for-today-and-next-week",
+    "href": "slides/stat243_wk04fri.html#goals-for-today-and-next-week",
+    "title": "Stat 243",
+    "section": "Goals for today (and next week)",
+    "text": "Goals for today (and next week)\n\n\n\nToday:\n\nRecall some ideas from cross-validation\nGet started on Lab 3\n\n\n\n\nNext week:\n\nDiscuss bootstrapping and,\nBest model selection"
+  },
+  {
+    "objectID": "slides/stat243_wk04fri.html#warm-up-cross-validation",
+    "href": "slides/stat243_wk04fri.html#warm-up-cross-validation",
+    "title": "Stat 243",
+    "section": "Warm-up: Cross-Validation",
+    "text": "Warm-up: Cross-Validation\nSuppose I have three candidate regression models (\\(M_1\\), \\(M_2\\), and \\(M_3\\)) to capture daily rainfall in Portland. My estimated test error based on \\(10\\)-fold CV suggests that \\(M_3\\) is the best model.\n\nState a pro and a con of using \\(10\\)-fold CV compared to, say, \\(20\\)-fold CV.\nExplain conceptually why CV is useful for selecting a model. What is explicitly being assessed, and what is implicitly assessed about the model?\nNow that I’ve selected a model, I want to use it to make a prediction for tomorrow’s daily rainfall. But I trained the model 10 times during CV….which do I use moving forward?"
+  },
+  {
+    "objectID": "slides/stat243_wk04fri.html#next-week",
+    "href": "slides/stat243_wk04fri.html#next-week",
+    "title": "Stat 243",
+    "section": "Next week",
+    "text": "Next week\n\nBootstrapping lecture.\nFeature selection lecture."
+  },
+  {
+    "objectID": "slides/stat243_wk04wed.html#goals-for-today-and-next-time",
+    "href": "slides/stat243_wk04wed.html#goals-for-today-and-next-time",
     "title": "Stat 243",
     "section": "Goals for today (and next time)",
-    "text": "Goals for today (and next time)\n\n\n\nToday:\n\nLinear regression Wrap-up\n\nCurved relationships\nVariable transformations\nModel selection\n\n\n\n\n\nWednesday:\n\nCross Validation"
+    "text": "Goals for today (and next time)\n\n\n\nToday:\n\nDiscuss model selection\nDefine and discuss resampling and cross-validation\nInvestigate methods of cross-validation (LOOCV and k-fold cv)\nImplement CV in R\n\n\n\n\nFriday:\n\nQuiz 2 on Lab 2 material.\nLab 3 released."
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#visualizing-the-best-fit-plane",
-    "href": "slides/stat243_wk04mon.html#visualizing-the-best-fit-plane",
+    "objectID": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task",
+    "href": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task",
     "title": "Stat 243",
-    "section": "Visualizing the best fit plane",
-    "text": "Visualizing the best fit plane\n\noptions(rgl.useNULL = TRUE)\noptions(rgl.printRglwidget = TRUE)\nlibrary(rgl)\nplot3d(x = penguins$bill_depth_mm, y = penguins$body_mass_g, \n       z = penguins$bill_length_mm, type = \"s\", col = \"goldenrod\", size = 1)\nplanes3d(a = coef(mod)[2], b = coef(mod)[3], c=-1, d = coef(mod)[1], alpha = .5)"
+    "section": "Selecting a good model is a primary task",
+    "text": "Selecting a good model is a primary task\n\nWe can always select a model with tons of predictors, interactions, and non-linear terms.\n\n\\(R^2\\) and training error are guaranteed to improve!\n…we’re also likely to be overfitting.\np-values get larger, confidence intervals wider, interpretations harder, etc.\n\n\n\nSelecting a “parsimonious” model usually lowers test MSE.\n\nPrinciple of Parsimony: The simplest reasonable model is usually the best."
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#least-squares-and-prediction",
-    "href": "slides/stat243_wk04mon.html#least-squares-and-prediction",
+    "objectID": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task-1",
+    "href": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task-1",
     "title": "Stat 243",
-    "section": "Least Squares and Prediction",
-    "text": "Least Squares and Prediction\n\nStill minimizing the sum of squared residuals (from the plane)\nStill predict like usual\n\n\n\npred_dat &lt;- data.frame(bill_depth_mm = c(16, 18),\n                       body_mass_g = c(4000, 5000))\npredict(mod, pred_dat)\n\n       1        2 \n42.87888 47.44527"
+    "section": "Selecting a good model is a primary task",
+    "text": "Selecting a good model is a primary task\nTask: Choose model that retains only “important” predictors (i.e., \\(\\beta_k\\neq0\\))\n\nGenerally good practices:\n\nIf some variables are highly correlated, remove redundant ones\nIf \\(R^2\\) is low, try adding more variables\nIf adding a polynomial term (e.g., \\(X^3\\)), include lower terms too (e.g., \\(X, \\ X^2\\))\nIf adding an interaction (e.g., \\(X_1X_2\\)), include individual terms too (e.g., \\(X_1, \\ X_2\\))\nRe-check diagnostics as you add/remove terms"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#our-current-model",
-    "href": "slides/stat243_wk04mon.html#our-current-model",
+    "objectID": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task-2",
+    "href": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task-2",
     "title": "Stat 243",
-    "section": "Our current model",
-    "text": "Our current model\n\n\nggplot(data = movies2,\n       mapping = aes(x = AudienceScore,\n                     y = RottenTomatoes,\n                     color = Genre)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE)"
+    "section": "Selecting a good model is a primary task",
+    "text": "Selecting a good model is a primary task\nTask: Choose model that retains only “important” predictors (i.e., \\(\\beta_k\\neq0\\))\nGenerally bad practices:\n\nSelecting a model based on p-values (e.g., forward/backward selection)\nAll downstream inferences are invalid; p-values lose all meaning\nThis is an example of “p-hacking,” which is a very big issue in applied research!\n\n\nQ: Is there a more general way of selecting / validating a model?\n\n\nA: Splitting the data into “training” and “test” sets!"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#adding-a-curve-to-your-scatterplot",
-    "href": "slides/stat243_wk04mon.html#adding-a-curve-to-your-scatterplot",
+    "objectID": "slides/stat243_wk04wed.html#example-fuel-economy",
+    "href": "slides/stat243_wk04wed.html#example-fuel-economy",
     "title": "Stat 243",
-    "section": "Adding a Curve to your Scatterplot",
-    "text": "Adding a Curve to your Scatterplot\n\n\nggplot(data = movies2,\n       mapping = aes(x = AudienceScore,\n                     y = RottenTomatoes,\n                     color = Genre)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE, \n              formula = y ~ poly(x, degree = 2))"
+    "section": "Example: Fuel Economy",
+    "text": "Example: Fuel Economy\nThe FuelEconomy data (from the AppliedPredictiveModeling package) contains Fuel Efficiency (FE; in MPG) and other variables for 1107 cars and trucks from 2010\n\ndata taken from the http://fueleconomy.gov website\n\n\n\nlibrary(AppliedPredictiveModeling)\ndata(FuelEconomy)\nglimpse(cars2010)\n\nRows: 1,107\nColumns: 14\n$ EngDispl            &lt;dbl&gt; 4.7, 4.7, 4.2, 4.2, 5.2, 5.2, 2.0, 6.0, 3.0, 3.0, …\n$ NumCyl              &lt;int&gt; 8, 8, 8, 8, 10, 10, 4, 12, 6, 6, 6, 6, 16, 8, 8, 8…\n$ Transmission        &lt;fct&gt; AM6, M6, M6, AM6, AM6, M6, S6, S6, S6, M6, S7, M6,…\n$ FE                  &lt;dbl&gt; 28.0198, 25.6094, 26.8000, 25.0451, 24.8000, 23.90…\n$ AirAspirationMethod &lt;fct&gt; NaturallyAspirated, NaturallyAspirated, NaturallyA…\n$ NumGears            &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 6, 7, 6, 6, 6, 6,…\n$ TransLockup         &lt;dbl&gt; 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0,…\n$ TransCreeperGear    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…\n$ DriveDesc           &lt;fct&gt; TwoWheelDriveRear, TwoWheelDriveRear, AllWheelDriv…\n$ IntakeValvePerCyl   &lt;int&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1,…\n$ ExhaustValvesPerCyl &lt;int&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1,…\n$ CarlineClassDesc    &lt;fct&gt; 2Seaters, 2Seaters, 2Seaters, 2Seaters, 2Seaters, …\n$ VarValveTiming      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,…\n$ VarValveLift        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,…"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#fitting-the-new-model",
-    "href": "slides/stat243_wk04mon.html#fitting-the-new-model",
+    "objectID": "slides/stat243_wk04wed.html#data-exploration",
+    "href": "slides/stat243_wk04wed.html#data-exploration",
     "title": "Stat 243",
-    "section": "Fitting the New Model",
-    "text": "Fitting the New Model\n\nmod2 &lt;- lm(RottenTomatoes ~ poly(AudienceScore, degree = 2, raw = TRUE)*Genre, \n           data = movies2)\nget_regression_table(mod2) \n\n# A tibble: 9 × 7\n  term                    estimate std_error statistic p_value lower_ci upper_ci\n  &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 intercept                  9.92     14.9       0.668   0.505  -19.3     39.1  \n2 poly(AudienceScore, de…    0.098     0.515     0.191   0.849   -0.916    1.11 \n3 poly(AudienceScore, de…    0.008     0.004     1.79    0.075   -0.001    0.016\n4 Genre: Drama              88.9      24.5       3.62    0       40.6    137.   \n5 Genre: Horror            -23.8      31.1      -0.765   0.445  -84.9     37.3  \n6 poly(AudienceScore, de…   -2.61      0.84     -3.11    0.002   -4.26    -0.956\n7 poly(AudienceScore, de…    0.019     0.007     2.78    0.006    0.006    0.032\n8 poly(AudienceScore, de…    0.574     1.22      0.469   0.639   -1.83     2.98 \n9 poly(AudienceScore, de…   -0.001     0.012    -0.061   0.951   -0.024    0.022"
+    "section": "Data Exploration",
+    "text": "Data Exploration\nLet’s consider just numeric variables:\n\n\n\n\n\ncars2010 %&gt;%\n  select_if(is.numeric) %&gt;%\n  cor(cars2010$FE)\n\n                           [,1]\nEngDispl            -0.78739383\nNumCyl              -0.74021798\nFE                   1.00000000\nNumGears            -0.21128488\nTransLockup         -0.27193887\nTransCreeperGear    -0.06962168\nIntakeValvePerCyl    0.28034403\nExhaustValvesPerCyl  0.33565285\nVarValveTiming       0.12495278\nVarValveLift         0.09621127\n\n\n\nVariables highly correlated with FE:\n\nEngine Displacement (EngDispl)\nNumber of Cylinders (NumCyl)"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#example-truck-prices",
-    "href": "slides/stat243_wk04mon.html#example-truck-prices",
+    "objectID": "slides/stat243_wk04wed.html#collinearity",
+    "href": "slides/stat243_wk04wed.html#collinearity",
     "title": "Stat 243",
-    "section": "Example: Truck Prices",
-    "text": "Example: Truck Prices\nCan we use the age of a truck to predict what its price should be?\nConsider a random sample of 43 pickup trucks between 1994 and 2008:\n\npickups &lt;- read_csv(\"http://andrewpbray.github.io/data/pickup.csv\") %&gt;%\n  filter(year &gt;= 1994)\n\nhead(pickups, n = 10)\n\n# A tibble: 10 × 4\n    year  miles price make \n   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;\n 1  1994  89000  3800 GMC  \n 2  1995 128500  3900 GMC  \n 3  1995 131000  2500 Ford \n 4  1995 127000  4395 GMC  \n 5  1995 176000  3250 Dodge\n 6  1995 116455  5000 GMC  \n 7  1996  84000  5900 Dodge\n 8  1996  89000  2100 Ford \n 9  1996  79000  5350 Ford \n10  1996 151923  3450 GMC"
+    "section": "Collinearity",
+    "text": "Collinearity\nDo we want both EngDispl and NumCyl in our model for FE?\n\nEach is strongly correlated with FE…\n\n\n\n…thus, they might be highly collinear:\n\n\n\n\n\n\n\n\n\n\nWe now have a model selection problem: Which variables to include?"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#exploratory-data-analysis",
-    "href": "slides/stat243_wk04mon.html#exploratory-data-analysis",
+    "objectID": "slides/stat243_wk04wed.html#training-and-test-sets",
+    "href": "slides/stat243_wk04wed.html#training-and-test-sets",
     "title": "Stat 243",
-    "section": "Exploratory data analysis",
-    "text": "Exploratory data analysis\n\nggplot(pickups, aes(x = year, y = price)) +\n  geom_point(col = \"steelblue\")\n\n\n\n\n\n\n\n\n\nModeling ideas?"
+    "section": "Training and Test Sets",
+    "text": "Training and Test Sets\nLet’s create a 70-30 training-test split:\n\nset.seed(1)\ntrain_index &lt;- sample(1:nrow(cars2010), 0.7*nrow(cars2010))\ncars_train &lt;- cars2010[train_index,]\ncars_test &lt;- cars2010[-train_index,]\n\n\nWe will fit two models:\n\nfullmod includes all quantitative predictors\nsmallmod will exclude NumCyl, NumGears, IntakeValvePerCy, and VarValveLift"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#simple-linear-regression",
-    "href": "slides/stat243_wk04mon.html#simple-linear-regression",
+    "objectID": "slides/stat243_wk04wed.html#lets-train",
+    "href": "slides/stat243_wk04wed.html#lets-train",
     "title": "Stat 243",
-    "section": "Simple Linear Regression",
-    "text": "Simple Linear Regression\n\nggplot(pickups, aes(x = year, y = price)) +\n  geom_point(color = \"steelblue\") + \n  geom_smooth(method = \"lm\", se = FALSE, color = \"red\")"
+    "section": "Let’s train!",
+    "text": "Let’s train!\nTraining: Fit each model to the training data\n\n\nfullmod &lt;- lm(FE ~ EngDispl + NumCyl + NumGears + TransLockup + \n                TransCreeperGear + IntakeValvePerCyl + ExhaustValvesPerCyl +\n                VarValveTiming + VarValveLift,\n              data = cars_train)\nsmallmod &lt;- lm(FE ~ EngDispl + TransLockup + TransCreeperGear +\n              ExhaustValvesPerCyl + VarValveTiming,\n              data = cars_train)\nround(c(summary(fullmod)$r.sq, summary(smallmod)$r.sq), 3)\n\n[1] 0.628 0.624\n\n\n\nfullmod has a slightly higher \\(R^2\\), but is it really better?"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#linear-regression-with-a-2nd-degree-polynomial",
-    "href": "slides/stat243_wk04mon.html#linear-regression-with-a-2nd-degree-polynomial",
+    "objectID": "slides/stat243_wk04wed.html#and-now-we-test",
+    "href": "slides/stat243_wk04wed.html#and-now-we-test",
     "title": "Stat 243",
-    "section": "Linear Regression with a 2nd degree polynomial",
-    "text": "Linear Regression with a 2nd degree polynomial\n\nggplot(pickups, aes(x = year, y = price)) +\n  geom_point(color = \"steelblue\") + \n  geom_smooth(method = \"lm\", formula = y ~ poly(x, 2), se = FALSE, color = \"red\")"
+    "section": "And now we test!",
+    "text": "And now we test!\nTesting: Calculate MSE on the test set\n\n\nfullmod_preds &lt;- predict(fullmod, cars_test)\nfullmod_mse &lt;- mean( (cars_test$FE - fullmod_preds)^2)\nfullmod_mse\n\n[1] 18.45154\n\n\n\nsmallmod_preds &lt;- predict(smallmod, cars_test)\nsmallmod_mse &lt;- mean( (cars_test$FE - smallmod_preds)^2)\nsmallmod_mse\n\n[1] 18.7632\n\n\n\n\nsmallmod has slightly higher test MSE than fullmod!\n\nCould this be a fluke of our randomly-split test set?"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#simple-linear-model",
-    "href": "slides/stat243_wk04mon.html#simple-linear-model",
+    "objectID": "slides/stat243_wk04wed.html#problems-with-test-sets",
+    "href": "slides/stat243_wk04wed.html#problems-with-test-sets",
     "title": "Stat 243",
-    "section": "Simple Linear Model",
-    "text": "Simple Linear Model\n\ntruck_mod &lt;- lm(price ~ year, data = pickups)\nsummary(truck_mod)\n\n\nCall:\nlm(formula = price ~ year, data = pickups)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-5468.7 -2202.9  -313.6  2096.0  7977.7 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -2278766.2   238325.7  -9.562 6.92e-12 ***\nyear            1143.4      119.1   9.597 6.24e-12 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 3080 on 40 degrees of freedom\nMultiple R-squared:  0.6972,    Adjusted R-squared:  0.6896 \nF-statistic:  92.1 on 1 and 40 DF,  p-value: 6.238e-12"
+    "section": "Problems with Test Sets",
+    "text": "Problems with Test Sets\nQ: What are some problems with this simple Training / Test approach?\n\n\nIf full dataset is small, splitting into training/test further restricts sample size\n\nBoth training and test performance may have high variance.\n\n\n\n\n\nA single randomly-split training set may be unusual \\(\\to\\) Bias in model validation\n\n\n\n\nA single randomly-split test set doesn’t give good estimate for amount of error.\n\n\n\nHow to Improve the Training/Testing Procedure:\n\nCross-Validation (CV):\n\nResample many samples from training data and refit model in each sample.\nAssess model accuracy by “cross-validating” to many test set"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#diagnostics",
-    "href": "slides/stat243_wk04mon.html#diagnostics",
+    "objectID": "slides/stat243_wk04wed.html#k-fold-cross-validation-cv",
+    "href": "slides/stat243_wk04wed.html#k-fold-cross-validation-cv",
     "title": "Stat 243",
-    "section": "Diagnostics",
-    "text": "Diagnostics\n\nlibrary(gglm)\ngglm(truck_mod, theme = ggplot2::theme_bw())\n\n\n\n\n\n\n\n\n\nResiduals appear normally distributed.\nBut data suggests a non-linear relationship\nTwo observations appear influential.\nThere is evidence of non-constant variance in the residuals."
+    "section": "\\(k\\)-fold Cross Validation (CV)",
+    "text": "\\(k\\)-fold Cross Validation (CV)\n\\(k\\)-fold CV: Start by randomly partitioning data into \\(k\\) sets, or folds, of size \\(n/k\\). Then,\n\n\nChoose one subset of size \\(n/k\\) as the validation set\nUse the remaining \\(k-1\\) subsets as the training set to build the model\nCalculate error rate (e.g., MSE) on the validation set\n\n\n\n\nRepeat Steps 1-3 for each validation set\nAverage the error rate computed among the \\(k\\) validation sets"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#linear-regression-with-2nd-degree-polynomial",
-    "href": "slides/stat243_wk04mon.html#linear-regression-with-2nd-degree-polynomial",
+    "objectID": "slides/stat243_wk04wed.html#k-fold-cross-validation-cv-1",
+    "href": "slides/stat243_wk04wed.html#k-fold-cross-validation-cv-1",
     "title": "Stat 243",
-    "section": "Linear Regression with 2nd degree polynomial",
-    "text": "Linear Regression with 2nd degree polynomial\n\ntruck_poly_mod &lt;- lm(price ~ poly(year, degree = 2, raw = TRUE),\n                     data = pickups)\nsummary(truck_poly_mod)\n\n\nCall:\nlm(formula = price ~ poly(year, degree = 2, raw = TRUE), data = pickups)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-5850.2 -1869.7     4.6  1150.9  6624.6 \n\nCoefficients:\n                                      Estimate Std. Error t value Pr(&gt;|t|)   \n(Intercept)                          3.899e+08  1.175e+08   3.318  0.00197 **\npoly(year, degree = 2, raw = TRUE)1 -3.909e+05  1.175e+05  -3.327  0.00192 **\npoly(year, degree = 2, raw = TRUE)2  9.797e+01  2.936e+01   3.337  0.00187 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2751 on 39 degrees of freedom\nMultiple R-squared:  0.7645,    Adjusted R-squared:  0.7524 \nF-statistic: 63.29 on 2 and 39 DF,  p-value: 5.692e-13"
+    "section": "\\(k\\)-fold Cross Validation (CV)",
+    "text": "\\(k\\)-fold Cross Validation (CV)\nThe cross-validation estimate \\(CV_{(k)}\\) for average test MSE is: \\[\nCV_{(k)} = \\frac{1}{k} \\sum_{i =1}^k \\textrm{MSE}_i\n\\] where \\(\\textrm{MSE}_i\\) is test MSE when the \\(i\\)th set, or fold, is used as validation set.\n\nBecause the partitioning into folds is random, \\(CV_{(k)}\\) still has some variability.\n\nBut less than just using a single validation set!\nTo reduce variability further, \\(k\\)-fold CV can be performed multiple times, and the results of \\(CV_{(k)}\\) themselves averaged."
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#diagnostics-1",
-    "href": "slides/stat243_wk04mon.html#diagnostics-1",
+    "objectID": "slides/stat243_wk04wed.html#ex-3-fold-cv",
+    "href": "slides/stat243_wk04wed.html#ex-3-fold-cv",
     "title": "Stat 243",
-    "section": "Diagnostics",
-    "text": "Diagnostics\n\ngglm(truck_poly_mod, theme = ggplot2::theme_bw())\n\n\n\n\n\n\n\n\n\nThoughts?\n\nStill looks like we have non-equal variability of residuals?\nAnd one high-leverage point."
+    "section": "Ex: 3-fold CV",
+    "text": "Ex: 3-fold CV\nConsider 30 training observations below. Colors indicate a random fold allocation."
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#transformations",
-    "href": "slides/stat243_wk04mon.html#transformations",
+    "objectID": "slides/stat243_wk04wed.html#ex-3-fold-cv-1",
+    "href": "slides/stat243_wk04wed.html#ex-3-fold-cv-1",
     "title": "Stat 243",
-    "section": "Transformations",
-    "text": "Transformations\nIf the diagnostic plots look bad, try to transform variables by applying functions.\n\nWhen the response variable spans multiple orders of magnitude, models are often non-linear and residuals often have non-constant variance.\n\n\n\nThese variables often benefit from a log-transformation \\[\nY_t = \\log(Y)\n\\]\n\n\n\n\npickups$log_price &lt;- log(pickups$price)\n\n\ntheme_set(theme_bw())\np1 &lt;- ggplot(pickups, aes(x = price)) +\n  geom_histogram(fill = \"steelblue\",color = \"white\", bins = 15)\n\np2 &lt;- ggplot(pickups, aes(x = log_price)) +\n  geom_histogram(fill = \"steelblue\", color =\"white\", bins = 15)\n\npatchwork::wrap_plots(p1, p2)\n\n\n\n\n\n\n\n\n\n\nNote: It’s fine that price is not Normally distributed\n\nThe linear model only requires that residuals be Normally distributed"
+    "section": "Ex: 3-fold CV",
+    "text": "Ex: 3-fold CV\nEach iteration uses 2 of the folds to build a model, and the remaining fold to assess performance.\n\n\n\n\n\n\n\n\n\nOverall performance is obtained by averaging across iterations."
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#log-transformed-linear-model",
-    "href": "slides/stat243_wk04mon.html#log-transformed-linear-model",
+    "objectID": "slides/stat243_wk04wed.html#cv-in-r-the-vfold_cv-function",
+    "href": "slides/stat243_wk04wed.html#cv-in-r-the-vfold_cv-function",
     "title": "Stat 243",
-    "section": "Log-transformed linear model",
-    "text": "Log-transformed linear model\n\nggplot(pickups, aes(x = year, y = log_price)) +\n  geom_point(col = \"steelblue\") +\n  geom_smooth(method = \"lm\", se = FALSE, col = \"red\")\n\n\n\n\n\n\n\n\n\ntruck_log_mod &lt;- lm(log_price ~ year, data = pickups)\nsummary(truck_log_mod)$coef\n\n                Estimate  Std. Error   t value     Pr(&gt;|t|)\n(Intercept) -258.9980504 26.12294226 -9.914582 2.471946e-12\nyear           0.1338934  0.01305865 10.253239 9.342855e-13"
+    "section": "CV in R: the vfold_cv function",
+    "text": "CV in R: the vfold_cv function\nWe’ll use the vfold_cv function in rsample to perform cross-validation.\n\n\nset.seed(927)\nlibrary(rsample)\nfolds_cars &lt;- vfold_cv(cars2010, v = 10)\n\n\nThis code splits the data into 10 (nearly) equal folds and stores results as a resample object with 2 parts:\n\n\nid, a vector with fold identifiers (i.e “Fold01”, “Fold02”, … )\n\n\n\nfolds_cars$id\n\n [1] \"Fold01\" \"Fold02\" \"Fold03\" \"Fold04\" \"Fold05\" \"Fold06\" \"Fold07\" \"Fold08\"\n [9] \"Fold09\" \"Fold10\"\n\n\n\n\n\n\nsplits, an R list whose elements correspond to each split of the data into \\(k-1\\) training and \\(1\\) validation sets"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#poll-interpretation",
-    "href": "slides/stat243_wk04mon.html#poll-interpretation",
+    "objectID": "slides/stat243_wk04wed.html#cv-in-r-the-vfold_cv-function-1",
+    "href": "slides/stat243_wk04wed.html#cv-in-r-the-vfold_cv-function-1",
     "title": "Stat 243",
-    "section": "Poll: Interpretation",
-    "text": "Poll: Interpretation\nThe slope coefficient in the log-linear model was \\(0.13\\). Which of the following interpretations are correct? Select all that apply\n\nIncreasing year by \\(1\\) increases price by approximately \\(0.13\\).\nIncreasing year by \\(1\\) produces a relative increase in price of approximately \\(e^{.13}\\).\nIncreasing year by \\(1\\) increases the log-price by approximately \\(0.13\\).\nIncreasing year by \\(\\ln (1)\\) increases price by approximately \\(0.13\\)."
+    "section": "CV in R: the vfold_cv function",
+    "text": "CV in R: the vfold_cv function\nPrevious Code:\n\n\nfolds_cars &lt;- vfold_cv(cars2010, v = 10)\n\n\nGet Training Set for a fold: apply analysis to one of the Splits elements.\n\n\nfolds_cars$splits[[1]] %&gt;% analysis() # gets first \"training set\"\nfolds_cars$splits[[2]] %&gt;% analysis() # gets second \"training set\"\n\n\n\nGet Corresponding Test Set: apply assessment to the same Splits element\n\n\nfolds_cars$splits[[1]] %&gt;% assessment() # observations NOT in first \"training set\"\nfolds_cars$splits[[2]] %&gt;% assessment() # observations NOT in second \"training set\""
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#model-accuracy",
-    "href": "slides/stat243_wk04mon.html#model-accuracy",
+    "objectID": "slides/stat243_wk04wed.html#goal-use-cross-validation-to-assess-which-model-is-best",
+    "href": "slides/stat243_wk04wed.html#goal-use-cross-validation-to-assess-which-model-is-best",
     "title": "Stat 243",
-    "section": "Model Accuracy",
-    "text": "Model Accuracy\nThe \\(R^2\\) and RSE values for the log and original models\n\ndata.frame(model = c(\"log\", \"simple linear regression\", \"poly degree 2\"),\n           r.sq = c(summary(truck_log_mod)$r.sq, \n                    summary(truck_mod)$r.sq,\n                    summary(truck_poly_mod)$r.sq),\n           rse = c(summary(truck_log_mod)$sigma,\n                   summary(truck_mod)$sigma,\n                   summary(truck_poly_mod)$sigma))\n\n                     model      r.sq         rse\n1                      log 0.7243830    0.337582\n2 simple linear regression 0.6972079 3079.839269\n3            poly degree 2 0.7644604 2750.967217\n\n\n\nThe log model has slight improvement in \\(R^2\\). And has massive improvement in RSE…\n\nOr does it? (Recall that RSE depends on the units of \\(Y\\))\nWe need to transform predicted values from log model back into original scale\n\n\n\n\npred_price &lt;- exp(truck_log_mod$fitted.values)\nRSS &lt;- sum((pickups$price - pred_price)^2)\nRSE &lt;- sqrt(RSS/(42-2))\nRSE\n\n[1] 2841.049"
+    "section": "Goal: use cross-validation to assess which model is “best”",
+    "text": "Goal: use cross-validation to assess which model is “best”\nSteps:\n\nObtain training set\nFit linear model\nPredict on assessment/validation data\nAssess accuracy\n\n\n\nrsample package did all the splitting for us (step 1)!\n\nBut no model fitting or computing MSE (steps 2 - 4).\nHow to do steps 2 - 4?"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#diagnostics-2",
-    "href": "slides/stat243_wk04mon.html#diagnostics-2",
+    "objectID": "slides/stat243_wk04wed.html#fit-the-all-the-models",
+    "href": "slides/stat243_wk04wed.html#fit-the-all-the-models",
     "title": "Stat 243",
-    "section": "Diagnostics",
-    "text": "Diagnostics\n\n\ngglm(truck_log_mod, theme = ggplot2::theme_bw())\n\n\n\n\n\n\n\n\n\n\nThe residuals from this model appear less normal\nBut the quadratic trend is now less apparent.\nThere are no influential points\nThe variance has been stabilized"
+    "section": "Fit the all the models!",
+    "text": "Fit the all the models!\nWe could do steps 2 -4 “by hand”, e.g.,\n\n\nfull_train_1 &lt;- lm(FE ~ EngDispl + NumCyl + NumGears + TransLockup + \n                TransCreeperGear + IntakeValvePerCyl + ExhaustValvesPerCyl +\n                VarValveTiming + VarValveLift,\n              data = folds_cars$splits[[1]] %&gt;% analysis())\n\nsmall_train_1 &lt;- lm(FE ~ EngDispl + TransLockup + TransCreeperGear +\n              ExhaustValvesPerCyl + VarValveTiming,\n              data = folds_cars$splits[[1]] %&gt;% analysis())\n\nfull_pred_1 &lt;- predict(full_train_1, newdata = folds_cars$splits[[1]] %&gt;% assessment())\n\nsmall_pred_1 &lt;- predict(small_train_1, newdata = folds_cars$splits[[1]] %&gt;% assessment())\n\nMSE_full_1 &lt;- mean( (full_pred_1 - folds_cars$splits[[1]] %&gt;% assessment() %&gt;% pull(FE))^2)\n\nMSE_small_1 &lt;- mean( (small_pred_1 - folds_cars$splits[[1]] %&gt;% assessment() %&gt;% pull(FE))^2)\n\n\n\nNeed to loop over all splits (1, 2, 3, …, 10).\nCould write this into a function() or a for() loop and do it ourselves…\nOr we can use the tidymodels!"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#transformations-summary",
-    "href": "slides/stat243_wk04mon.html#transformations-summary",
+    "objectID": "slides/stat243_wk04wed.html#tidymodels",
+    "href": "slides/stat243_wk04wed.html#tidymodels",
     "title": "Stat 243",
-    "section": "Transformations summary",
-    "text": "Transformations summary\n\nIf a linear model fit to the raw data leads to questionable residual plots, consider transformations.\n\nCount data and prices often benefit from transformations.\nThe natural log and the square root are the most common, but you can use any transformation you like.\n\nTransformations may change model interpretations.\nNon-constant variance is a serious problem but it can sometimes be solved by transforming the response.\nTransformations can also fix non-linearity"
+    "section": "tidymodels",
+    "text": "tidymodels\n\n\n\n\n\nThe tidymodels are a collection of packages built for predictive modeling that maintain consistent syntax across model types.\n\ne.g., fitting a linear regression model and a tree-based regression model (which we’ll learn about after Fall Break) require almost identical code!\n\nLots of really thoughtful built-in functions for predictive modeling.\nDeveloped and maintained by the folks at Posit, who created RStudio and the tidyverse.\nSimon Couch ’21 worked extensively on the tidymodels after graduating from Reed, although now he works on a different team at Posit."
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#improving-model-accuracy",
-    "href": "slides/stat243_wk04mon.html#improving-model-accuracy",
+    "objectID": "slides/stat243_wk04wed.html#fitting-models-with-the-tidymodels",
+    "href": "slides/stat243_wk04wed.html#fitting-models-with-the-tidymodels",
     "title": "Stat 243",
-    "section": "Improving Model Accuracy",
-    "text": "Improving Model Accuracy\nWhat do we do when the full model is inaccurate on test data (i.e. high test MSE)?\n\n\nRemove redundant variables strongly correlated with each other\nRemove spurious variables that aren’t linearly related with response\n\nTwo common methods of identifying extraneous predictors:\n\n\n\nBackwards Elimination:\n\nStart with the full model, remove the variable with highest \\(p\\)-value, and refit. Continue to do so until all p-values are small, or accuracy ceases to improve.\n\n\n\n\n\nForward Selection:\n\nStart with the null model, create \\(p\\) many SLR models (one for each predictor), and select the one with best accuracy. Repeat with this new model, creating \\(p-1\\) two predictor models (one for each remaining predictor). Continue until accuracy ceases to improve.\n\n\n\n\nIs it possible that none of these models will have the best possible accuracy among all subsets of predictors?\n\nYes. But we’ll cover detailed model selection later in the class."
+    "section": "Fitting models with the tidymodels",
+    "text": "Fitting models with the tidymodels\nConsider our smallmod:\n\nsmallmod &lt;- lm(FE ~ EngDispl + TransLockup + TransCreeperGear +\n              ExhaustValvesPerCyl + VarValveTiming,\n              data = cars_train)\n\nWith the tidymodels, we can specify this model form to be fit on many different datasets:\n\n# loads the tidymodels\nlibrary(tidymodels)\n\n# specifies we'd like to do linear regression with the lm() function\nlm_spec &lt;- linear_reg() %&gt;%   \n  set_engine(\"lm\")            \n\n# creates a \"workflow\" to be used on many datasets\n# NOTICE: no data is supplied\nsmallmod_wf &lt;- workflow() %&gt;%\n  add_model(lm_spec) %&gt;%\n  add_formula(FE ~ EngDispl + TransLockup + TransCreeperGear +\n              ExhaustValvesPerCyl + VarValveTiming)"
   },
   {
-    "objectID": "slides/stat243_wk04mon.html#next-time",
-    "href": "slides/stat243_wk04mon.html#next-time",
+    "objectID": "slides/stat243_wk04wed.html#get-results",
+    "href": "slides/stat243_wk04wed.html#get-results",
     "title": "Stat 243",
-    "section": "Next time",
-    "text": "Next time\n\nCross validation"
+    "section": "Get Results",
+    "text": "Get Results\nfit_resamples() fits the workflow on each training set and evaluates it on the matching assessment set.\n\nsmallmod_res &lt;- fit_resamples(\n  smallmod_wf,\n  resamples = folds_cars,\n  metrics = metric_set(rmse)\n)\n\n\ncollect_metrics() collects the metrics calculated on each test set.\n\ncollect_metrics(smallmod_res, summarize = FALSE) \n\n# A tibble: 10 × 5\n   id     .metric .estimator .estimate .config        \n   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;          \n 1 Fold01 rmse    standard        3.96 pre0_mod0_post0\n 2 Fold02 rmse    standard        4.04 pre0_mod0_post0\n 3 Fold03 rmse    standard        4.86 pre0_mod0_post0\n 4 Fold04 rmse    standard        5.03 pre0_mod0_post0\n 5 Fold05 rmse    standard        4.50 pre0_mod0_post0\n 6 Fold06 rmse    standard        4.18 pre0_mod0_post0\n 7 Fold07 rmse    standard        4.98 pre0_mod0_post0\n 8 Fold08 rmse    standard        4.31 pre0_mod0_post0\n 9 Fold09 rmse    standard        4.85 pre0_mod0_post0\n10 Fold10 rmse    standard        4.50 pre0_mod0_post0"
+  },
+  {
+    "objectID": "slides/stat243_wk04wed.html#get-results-1",
+    "href": "slides/stat243_wk04wed.html#get-results-1",
+    "title": "Stat 243",
+    "section": "Get Results",
+    "text": "Get Results\nfit_resamples() fits the workflow on each training set and evaluates it on the matching assessment set.\n\nsmallmod_res &lt;- fit_resamples(\n  smallmod_wf,\n  resamples = folds_cars,\n  metrics = metric_set(rmse)\n)\n\ncollect_metrics() collects the metrics calculated on each test set.\n\ncollect_metrics(smallmod_res) \n\n# A tibble: 1 × 6\n  .metric .estimator  mean     n std_err .config        \n  &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n1 rmse    standard    4.52    10   0.124 pre0_mod0_post0"
+  },
+  {
+    "objectID": "slides/stat243_wk04wed.html#comparing-models",
+    "href": "slides/stat243_wk04wed.html#comparing-models",
+    "title": "Stat 243",
+    "section": "Comparing Models",
+    "text": "Comparing Models\nNow, we can run the same code for our fullmod:\n\nfullmod_wf &lt;- workflow() %&gt;%\n  add_model(lm_spec) %&gt;%\n  add_formula(FE ~ EngDispl + NumCyl + NumGears + TransLockup + \n                TransCreeperGear + IntakeValvePerCyl + ExhaustValvesPerCyl +\n                VarValveTiming + VarValveLift) \n\nfullmod_res &lt;- fit_resamples(\n  fullmod_wf,\n  resamples = folds_cars,\n  metrics = metric_set(rmse)\n)\n\ncollect_metrics(fullmod_res) \n\n# A tibble: 1 × 6\n  .metric .estimator  mean     n std_err .config        \n  &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n1 rmse    standard    4.51    10   0.120 pre0_mod0_post0\n\n\n\n\nNote that we are using the same lm_spec as before."
+  },
+  {
+    "objectID": "slides/stat243_wk04wed.html#comparing-models-1",
+    "href": "slides/stat243_wk04wed.html#comparing-models-1",
+    "title": "Stat 243",
+    "section": "Comparing Models",
+    "text": "Comparing Models\nWhich model is best?\n\ncollect_metrics(fullmod_res) \n\n# A tibble: 1 × 6\n  .metric .estimator  mean     n std_err .config        \n  &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n1 rmse    standard    4.51    10   0.120 pre0_mod0_post0\n\ncollect_metrics(smallmod_res) \n\n# A tibble: 1 × 6\n  .metric .estimator  mean     n std_err .config        \n  &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n1 rmse    standard    4.52    10   0.124 pre0_mod0_post0"
+  },
+  {
+    "objectID": "slides/stat243_wk04wed.html#selecting-the-number-of-folds-k",
+    "href": "slides/stat243_wk04wed.html#selecting-the-number-of-folds-k",
+    "title": "Stat 243",
+    "section": "Selecting the Number of Folds, \\(k\\)",
+    "text": "Selecting the Number of Folds, \\(k\\)\n\nWhat’s the smallest value \\(k\\) can be in \\(k\\)-fold CV? Largest?\n\nA: \\(K\\in\\{2,3,\\dots,n\\}\\)\n\nWhat are some pros and cons of small \\(k\\)?\n\nPro: Easier computation (fewer models to train), but…\nCon: Training data is small: doesn’t reflect true size of training data\n\nWhat are some pros and cons of large \\(k\\)?\n\nCon: Harder computation (many models to train), but…\nPro: Training data is large: reflect true size of training data"
+  },
+  {
+    "objectID": "slides/stat243_wk04wed.html#selecting-the-number-of-folds-k-1",
+    "href": "slides/stat243_wk04wed.html#selecting-the-number-of-folds-k-1",
+    "title": "Stat 243",
+    "section": "Selecting the Number of Folds, \\(k\\)",
+    "text": "Selecting the Number of Folds, \\(k\\)\n\\(k = 10\\) is a common ‘rule of thumb’. But choosing \\(k\\) depends on your data and context!!\n\nIf \\(n\\) is small, \\(k = 10+\\) is generally a good choice,\nIf \\(n\\) is large and computation time is long, \\(k = 5\\) typically does fine."
+  },
+  {
+    "objectID": "slides/stat243_wk04wed.html#next-time",
+    "href": "slides/stat243_wk04wed.html#next-time",
+    "title": "Stat 243",
+    "section": "Next time:",
+    "text": "Next time:\n\nQuiz on Lab 2 content.\nLab 3 released."
   }
 ]

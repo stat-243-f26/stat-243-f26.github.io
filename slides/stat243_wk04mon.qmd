@@ -33,6 +33,7 @@ library(knitr)
 library(tidyverse)
 library(palmerpenguins)
 library(cowplot)
+library(moderndive)
 ```
 
 ::::: columns
@@ -451,8 +452,9 @@ ggplot(pickups, aes(x = year, y = price)) +
 ## Simple Linear Model
 
 ```{r}
+library(moderndive)
 truck_mod <- lm(price ~ year, data = pickups)
-summary(truck_mod)
+get_regression_table(truck_mod)
 ```
 
 ## Diagnostics
@@ -462,13 +464,25 @@ library(gglm)
 gglm(truck_mod, theme = ggplot2::theme_bw())
 ```
 
+
+:::: {.columns .fragment}
+
+
+::: {.column .nonincremental}
+
 - Residuals appear normally distributed.
 
-- But data suggests a non-linear relationship
+- But data suggests a non-linear relationship.
 
-- Two observations appear influential.
+:::
+
+::: {.column .nonincremental}
 
 - There is evidence of non-constant variance in the residuals.
+
+:::
+
+::::
 
 
 ## Linear Regression with 2nd degree polynomial
@@ -477,7 +491,7 @@ gglm(truck_mod, theme = ggplot2::theme_bw())
 ```{r}
 truck_poly_mod <- lm(price ~ poly(year, degree = 2, raw = TRUE),
                      data = pickups)
-summary(truck_poly_mod)
+get_regression_table(truck_poly_mod)
 ```
 
 ## Diagnostics
@@ -492,7 +506,7 @@ gglm(truck_poly_mod, theme = ggplot2::theme_bw())
 
 
 
-## Transformations {.smaller}
+## Transformations
 
 If the diagnostic plots look bad, try to transform variables by applying functions.
 
@@ -503,100 +517,58 @@ If the diagnostic plots look bad, try to transform variables by applying functio
 
 ::: {.fragment .nonincremental}
 
-  - These variables often benefit from a log-transformation
-$$
-Y_t = \log(Y)
-$$
+  - These variables often benefit from a log-transformation: $y_i = \log(y_i)$
 
 :::
 
 ::: {.fragment}
 
 ```{r}
-#| echo: true
+#| output-location: column
+library(patchwork)
 pickups$log_price <- log(pickups$price)
-```
 
-```{r}
-#| fig-height: 2
-#| fig-width: 6
-#| out-width: "70%"
-theme_set(theme_bw())
 p1 <- ggplot(pickups, aes(x = price)) +
-  geom_histogram(fill = "steelblue",color = "white", bins = 15)
+  geom_histogram(fill = "steelblue",
+                 color = "white",
+                 bins = 15)
 
 p2 <- ggplot(pickups, aes(x = log_price)) +
-  geom_histogram(fill = "steelblue", color ="white", bins = 15)
+  geom_histogram(fill = "steelblue",
+                 color ="white", 
+                 bins = 15)
 
-patchwork::wrap_plots(p1, p2)
+p1 / p2
 ```
 
 :::
 
-
-
-- *Note:* It's fine that price is not Normally distributed
-
-  - The linear model only requires that **residuals** be Normally distributed
 
 
 ## Log-transformed linear model
 
 ```{r}
+#| output-location: column
 ggplot(pickups, aes(x = year, y = log_price)) +
   geom_point(col = "steelblue") +
-  geom_smooth(method = "lm", se = FALSE, col = "red")
+  geom_smooth(method = "lm",
+              se = FALSE,
+              color = "red")
 ```
-
-```{r}
-#| echo: true
-truck_log_mod <- lm(log_price ~ year, data = pickups)
-summary(truck_log_mod)$coef
-```
-
-## Poll: Interpretation
-
-The slope coefficient in the log-linear model was $0.13$. Which of the following interpretations are correct? Select all that apply
-
-1. Increasing year by $1$ increases price by approximately $0.13$.
-
-2. Increasing year by $1$ produces a relative increase in price of approximately $e^{.13}$.
-
-3. Increasing year by $1$ increases the log-price by approximately $0.13$.
-
-4. Increasing year by $\ln (1)$ increases price by approximately $0.13$.
-
-## Model Accuracy {.smaller}
-
-The $R^2$ and RSE values for the log and original models
-
-```{r}
-data.frame(model = c("log", "simple linear regression", "poly degree 2"),
-           r.sq = c(summary(truck_log_mod)$r.sq, 
-                    summary(truck_mod)$r.sq,
-                    summary(truck_poly_mod)$r.sq),
-           rse = c(summary(truck_log_mod)$sigma,
-                   summary(truck_mod)$sigma,
-                   summary(truck_poly_mod)$sigma))
-```
-
-
-- The log model has slight improvement in $R^2$. And has massive improvement in RSE...
-    - Or does it? (Recall that RSE depends on the units of $Y$)
-    - We need to transform predicted values from log model back into original scale
 
 
 ::: {.fragment}
 
+**Fit the model in `R`:**
+
+
 ```{r}
-#| echo: true
-pred_price <- exp(truck_log_mod$fitted.values)
-RSS <- sum((pickups$price - pred_price)^2)
-RSE <- sqrt(RSS/(42-2))
-RSE
+truck_log_mod <- lm(log_price ~ year, data = pickups)
+get_regression_table(truck_log_mod)
 ```
 
 :::
+
 
 ## Diagnostics
 
@@ -605,13 +577,203 @@ RSE
 gglm(truck_log_mod, theme = ggplot2::theme_bw())
 ```
 
+:::: {.columns .nonincremental}
+
+
+::: {.column}
+
 - The residuals from this model appear less normal
 
 - But the quadratic trend is now less apparent.
 
+:::
+
+::: {.column}
+
 - There are no influential points
 
 - The variance has been stabilized
+
+:::
+
+::::
+
+
+## Coefficient interpretation for $\hat\beta_1$?
+
+```{r}
+get_regression_table(truck_log_mod)
+```
+
+
+- We expect the log price of a truck to go up by 0.134 for each 1-year increase in its production date, on average.
+
+
+
+## Prediction for transformed response
+
+For linear regression, we know, for a value $x_i$: 
+
+$$
+\hat y_i = \mathbb{E}(y_i ~\vert~ X = x_i)
+$$
+
+In English: our predicted value of $Y$ is the expected value (average) of $Y$ given that the value of our predictor $X$ is $x_i$.
+
+<br>
+
+::: {.fragment}
+
+So what happens if we log transform $y$?
+
+:::
+
+
+::: {.fragment}
+
+Now, for a generic value of $x_i$, the regression line represents:
+
+$$
+\mathbb{E}(\log (y_i) ~\vert~ X = x_i)
+$$
+
+:::
+
+::: {.fragment .fade-up .midi .center}
+
+**How to get $\hat Y$?**
+
+:::
+
+
+## Prediction for transformed response
+
+Transform the predictions?
+
+$$
+\hat y_i = \exp(\mathbb{E}(\log (y_i) ~\vert~ X = x_i)) 
+$$
+
+- Close. But results in negative bias. **Why?**
+
+
+::: {.fragment}
+
+$$
+\exp(\mathbb{E}(\log (y_i) ~\vert~ X = x_i)) \neq \mathbb{E}(y_i ~\vert~ X = x_i)
+$$
+
+"The exponentiation of the mean of the logs is not the mean of y" 
+
+:::
+
+::: {.fragment}
+
+In fact, since $\exp(.)$ is convex and by [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality), 
+
+$$
+\exp(\mathbb{E}(\log (y_i) ~\vert~ X = x_i)) \leq \mathbb{E}(y_i ~\vert~ X = x_i)
+$$
+
+
+:::
+
+
+## Prediction for transformed response
+
+What's this mean in practice? 
+
+- Need a **bias correction term** when applying a transformation to the **response variable** in linear regression! 
+
+::: {.fragment}
+
+For log-transformations, this has been derived (under the assumption that normality and equal-variability of errors have been met):
+
+$$
+\mathbb{E}(y_i ~\vert~ X = x_i) = \exp\left(\mathbb{E}(\log(y_i) ~\vert~ X = x_i) + \frac{\sigma^2}{2}\right)
+$$
+:::
+
+
+::: {.fragment}
+
+So our corrected prediction is:
+
+$$
+\hat y_i = \exp\left(\hat\beta_0 + \hat\beta_1 x_i + \frac{\hat\sigma^2}{2}\right)
+$$
+
+
+:::
+
+
+## Prediction for transformed response
+
+
+In `R`, for $x_i = 2001$:
+
+::: {.fragment}
+
+**Non-transformed prediction**: 
+
+```{r}
+predict(truck_log_mod, newdata = data.frame(year = 2001))
+```
+
+:::
+
+
+::: {.fragment}
+
+**Non-bias-corrected, transformed prediction**:
+
+```{r}
+exp(predict(truck_log_mod, newdata = data.frame(year = 2001)))
+```
+
+:::
+
+
+::: {.fragment}
+
+**Bias-corrected, transformed prediction**:
+
+```{r}
+sigma <- summary(truck_log_mod)$sigma
+
+exp(predict(truck_log_mod, newdata = data.frame(year = 2001)) + sigma^2 / 2)
+```
+
+:::
+
+
+
+
+## Model Accuracy: returning to our three models
+
+The $R^2$ values for the log transformed and original models
+
+```{r}
+#| output-location: column
+data.frame(
+  model = c("log transformed",
+            "simple linear regression",
+            "poly degree 2"),
+  R_squared = c(summary(truck_log_mod)$r.sq,
+                summary(truck_mod)$r.sq,
+                summary(truck_poly_mod)$r.sq)
+) %>%
+  kable()
+  
+```
+
+
+- The polynomial model has the best $R^2$. But recall it didn't meet all model assumptions! 
+- The log-transformed model has better $R^2$ than SLR, and met model assumptions. 
+- Which is best? 
+    - Depends on your goals...
+
+
 
 ## Transformations summary
 
@@ -620,9 +782,9 @@ gglm(truck_log_mod, theme = ggplot2::theme_bw())
     - The natural log and the square root are the most common, but you can use any
 transformation you like.
 
-- Transformations may change model interpretations.
+- Transformations of $y$ require bias-corrected predictions. Transformations of $x$'s do not. 
 
-- Non-constant variance is a serious problem but it can sometimes be solved by transforming the response.
+- Non-constant variance is a serious problem but it can sometimes be solved by transforming the response ($y$).
 
 - Transformations can also fix non-linearity
 
@@ -664,13 +826,18 @@ Two common methods of identifying extraneous predictors:
 :::
 
 
-- Is it possible that none of these models will have the best possible accuracy among all subsets of predictors?
-    - Yes. But we'll cover detailed model selection later in the class.
+## Variable selection
 
 
+-   There are **lots** of ways to do variable selection! Forward and backwards selection are just two intuitive ones. 
 
+-   We will spend more time in this class thinking about variable selection for models, but first...
 
-## Next time
+<br>
+
+::: {.fragment}
+
+### Next time
 
 ::: {.nonincremental}
 
@@ -679,7 +846,7 @@ Two common methods of identifying extraneous predictors:
 :::
 
 
-
+:::
 
 
 

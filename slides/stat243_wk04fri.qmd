@@ -1,0 +1,125 @@
+---
+pagetitle: "The Bootstrap"
+editor: source
+format:
+  revealjs:
+    html-math-method: mathjax
+    chalkboard: true
+    incremental: true
+    theme: [default, custom.scss]
+    height: 900
+    width: 1600
+    slide-number: c
+    auto-stretch: false
+    callout-appearance: simple
+    pdf-max-pages-per-slide: 2
+    menu:
+      side: right
+      numbers: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.retina = 3, fig.align = 'center')
+library(knitr)
+library(tidyverse)
+library(palmerpenguins)
+library(cowplot)
+library(moderndive)
+```
+
+::::: columns
+::: {.column .center width="55%"}
+![](img/tidymodels.png){width="90%"}
+:::
+
+::: {.column .center width="45%"}
+<br>
+
+[The Bootstrap]{.custom-title}
+
+<br> <br> <br> <br> <br> 
+
+[Grayson White]{.custom-subtitle}
+
+[Stat 243 <br> Week 4 \| Fall 2026]{.custom-subtitle}
+:::
+:::::
+
+
+# Quiz
+
+```{r}
+countdown::countdown(20)
+```
+
+------------------------------------------------------------------------
+
+
+
+## Goals for today (and next week)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Today:**
+
+- Recall some ideas from cross-validation
+- Get started on Lab 3
+
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Next week:**
+
+-   Discuss bootstrapping and, 
+-   Best model selection
+
+
+:::
+
+:::
+
+::::
+
+
+## Warm-up: Cross-Validation
+
+::: {.nonincremental}
+
+Suppose I have three candidate regression models ($M_1$, $M_2$, and $M_3$) to capture daily rainfall in Portland. My estimated test error based on $10$-fold CV suggests that $M_3$ is the best model.
+
+1) State a pro and a con of using $10$-fold CV compared to, say, $20$-fold CV.
+
+2) Explain conceptually why CV is useful for selecting a model. What is *explicitly* being assessed, and what is *implicitly* assessed about the model?
+
+3) Now that I've selected a model, I want to use it to make a prediction for tomorrow's daily rainfall. But I trained the model 10 times during CV....which do I use moving forward?
+
+:::
+
+
+# Lab 3 work time
+
+## Next week
+
+-   Bootstrapping lecture.
+-   Feature selection lecture. 
+
+
+

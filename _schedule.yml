@@ -95,7 +95,7 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/stat243_wk04wed.qmd
-        - topic: "Quiz 2. Bootstrapping lecture. Lab 3: Resampling Methods assigned."
+        - topic: "Lab 3: Linear models and cross validation (and Quiz 2)"
           display-date: Friday, Sep 25
           date: 9/25/26
           docs:
@@ -104,54 +104,54 @@ scheduled-docs:
       resources:
         - 'For Monday: none'
         - 'For Wednesday: ISLR Chapter 5.1'
-        - 'For Friday: ISLR Chapter 5.2'
+        - 'For Friday: none'
     - week: 5
       days:
-        - topic: "Penalized Regression: Ridge"
+        - topic: "The Bootstrap"
           display-date: Monday, Sep 28
           date: 9/28/26
           docs:
             - type: Slides
               href: slides/stat243_wk05mon.qmd
-        - topic: "Penalized Regression: LASSO"
+        - topic: "Feature selection and model comparison"
           display-date: Wednesday, Sep 30
           date: 9/30/26
           docs:
             - type: Slides
               href: slides/stat243_wk05wed.qmd
-        - topic: "Lab 4: Penalized Regression (and Quiz 3)"
+        - topic: "Lab 4: Regression Competition (and Quiz 3)"
           display-date: Thursday, Oct 1 9:00am
           date: 10/1/26
           docs:
             - type: Lab 4
               href: labs/lab04.qmd
       resources:
-        - 'For Monday: ISLR Chapter 6.1 and 6.2'
-        - 'For Wednesday: Review ISLR Chapter 6.2'
+        - 'For Monday: ISLR Chapter 5.2'
+        - 'For Wednesday: TBD'
         - 'For Friday: none'
     - week: 6
       days:
-        - topic: "Classification with Generalized Linear Models (GLMs)"
+        - topic: "Penalized Regression: ridge"
           display-date: Monday, Oct 5
           date: 10/5/26
           docs:
             - type: Slides
               href: slides/stat243_wk06mon.qmd
-        - topic: "More classification with GLMs"
+        - topic: "Penalized Regression: LASSO"
           display-date: Wednesday, Oct 7
           date: 10/7/26
           docs:
             - type: Slides
               href: slides/stat243_wk06wed.qmd
-        - topic: "Lab 5: Logistic Regression (and Quiz 4)"
+        - topic: "Lab 5: Penalized Regression (and Quiz 4)"
           display-date: Thursday, Oct 8 9:00am
           date: 10/8/26
           docs:
             - type: Lab 5
               href: labs/lab05.qmd
       resources:
-        - 'For Monday: ISLR Chapter 4.1, 4.2, 4.3'
-        - 'For Wednesday: Review ISLR Chapters 4.1, 4.2, 4.3'
+        - 'For Monday: ISLR Chapter 6.2.1'
+        - 'For Wednesday: ISLR Chapter 6.2.2'
         - 'For Friday: none'
     - week: 7
       days:
@@ -183,41 +183,42 @@ scheduled-docs:
           display-date: Saturday, Oct 17 - Sunday, Oct 25
     - week: 8
       days:
-        - topic: "Regression Trees"
+        - topic: "Classification with Generalized Linear Models (GLMs)"
           display-date: Monday, Oct 26
           date: 10/26/26
           docs:
             - type: Slides
               href: slides/stat243_wk08mon.qmd
-        - topic: "Classification Trees"
+        - topic: "More classification with GLMs"
           display-date: Wednesday, Oct 28
           date: 10/28/26
           docs:
             - type: Slides
               href: slides/stat243_wk08wed.qmd
-        - topic: "Lab 7: Trees I (and Quiz 6)"
+        - topic: "Lab 7: Logistic Regression I (and Quiz 6)"
           display-date: Friday, Oct 30
           date: 10/30/26
           docs:
             - type: Lab 7
               href: labs/lab07.qmd
-      # resources:
-      #   - 'Some text'
+        - 'For Monday: ISLR Chapter 4.1, 4.2, 4.3'
+        - 'For Wednesday: Review ISLR Chapters 4.1, 4.2, 4.3'
+        - 'For Friday: none'
     - week: 9
       days:
-        - topic: "Regression Trees II"
+        - topic: "Regression Trees I"
           display-date: Monday, Nov 2
           date: 11/2/26
           docs:
             - type: Slides
               href: slides/stat243_wk09mon.qmd
-        - topic: "Regression Trees III"
+        - topic: "Regression Trees II"
           display-date: Wednesday, Nov 4
           date: 11/4/26
           docs:
             - type: Slides
               href: slides/stat243_wk09wed.qmd
-        - topic: "Lab 8: Trees II (and Quiz 7)"
+        - topic: "Lab 8: Trees (and Quiz 7)"
           display-date: Friday, Nov 6
           date: 11/6/26
           docs:
