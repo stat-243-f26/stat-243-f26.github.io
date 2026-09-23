@@ -201,6 +201,7 @@ scheduled-docs:
           docs:
             - type: Lab 7
               href: labs/lab07.qmd
+      resources:
         - 'For Monday: ISLR Chapter 4.1, 4.2, 4.3'
         - 'For Wednesday: Review ISLR Chapters 4.1, 4.2, 4.3'
         - 'For Friday: none'
