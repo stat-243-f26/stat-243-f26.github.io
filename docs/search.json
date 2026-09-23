@@ -77,6 +77,13 @@
     "text": "Goals for today (and next time)\n\n\n\nToday:\n\nLinear regression Wrap-up\n\nCurved relationships\nVariable transformations\nModel selection\n\n\n\n\n\nWednesday:\n\nCross Validation"
   },
   {
+    "objectID": "slides/stat243_wk04mon.html#announcements",
+    "href": "slides/stat243_wk04mon.html#announcements",
+    "title": "Stat 243",
+    "section": "Announcements",
+    "text": "Announcements\n\nQuiz 1 return\nOffice hours"
+  },
+  {
     "objectID": "slides/stat243_wk04mon.html#visualizing-the-best-fit-plane",
     "href": "slides/stat243_wk04mon.html#visualizing-the-best-fit-plane",
     "title": "Stat 243",
@@ -1446,28 +1453,28 @@
     "href": "slides/stat243_wk04wed.html#goals-for-today-and-next-time",
     "title": "Stat 243",
     "section": "Goals for today (and next time)",
-    "text": "Goals for today (and next time)\n\n\n\nToday:\n\nDiscuss model selection\nDefine and discuss resampling and cross-validation\nInvestigate methods of cross-validation (LOOCV and k-fold cv)\nImplement CV in R\n\n\n\n\nFriday:\n\nQuiz 2 on Lab 2 material.\nLab 3 released."
+    "text": "Goals for today (and next time)\n\n\n\nToday:\n\nDiscuss model selection\nDefine and discuss resampling and cross-validation\nInvestigate methods of cross-validation (k-fold cv)\nImplement CV in R\n\n\n\n\nFriday:\n\nQuiz 2 on Lab 2 material.\nLab 3 released."
   },
   {
-    "objectID": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task",
-    "href": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task",
+    "objectID": "slides/stat243_wk04wed.html#selecting-a-good-model-is-central-to-this-course",
+    "href": "slides/stat243_wk04wed.html#selecting-a-good-model-is-central-to-this-course",
     "title": "Stat 243",
-    "section": "Selecting a good model is a primary task",
-    "text": "Selecting a good model is a primary task\n\nWe can always select a model with tons of predictors, interactions, and non-linear terms.\n\n\\(R^2\\) and training error are guaranteed to improve!\n…we’re also likely to be overfitting.\np-values get larger, confidence intervals wider, interpretations harder, etc.\n\n\n\nSelecting a “parsimonious” model usually lowers test MSE.\n\nPrinciple of Parsimony: The simplest reasonable model is usually the best."
+    "section": "Selecting a good model is central to this course",
+    "text": "Selecting a good model is central to this course\n\nWe can always select a model with tons of predictors, interactions, and non-linear terms.\n\n\\(R^2\\) and training error are guaranteed to improve!\n…we’re also likely to be overfitting.\np-values get larger, confidence intervals wider, interpretations harder, etc.\n\n\n\nSelecting a “parsimonious” model usually lowers test MSE.\n\nPrinciple of Parsimony: The simplest reasonable model is usually the best."
   },
   {
-    "objectID": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task-1",
-    "href": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task-1",
+    "objectID": "slides/stat243_wk04wed.html#selecting-a-good-model-is-central-to-this-course-1",
+    "href": "slides/stat243_wk04wed.html#selecting-a-good-model-is-central-to-this-course-1",
     "title": "Stat 243",
-    "section": "Selecting a good model is a primary task",
-    "text": "Selecting a good model is a primary task\nTask: Choose model that retains only “important” predictors (i.e., \\(\\beta_k\\neq0\\))\n\nGenerally good practices:\n\nIf some variables are highly correlated, remove redundant ones\nIf \\(R^2\\) is low, try adding more variables\nIf adding a polynomial term (e.g., \\(X^3\\)), include lower terms too (e.g., \\(X, \\ X^2\\))\nIf adding an interaction (e.g., \\(X_1X_2\\)), include individual terms too (e.g., \\(X_1, \\ X_2\\))\nRe-check diagnostics as you add/remove terms"
+    "section": "Selecting a good model is central to this course",
+    "text": "Selecting a good model is central to this course\nTask: Choose model that retains only “important” predictors (i.e., \\(\\beta_k\\neq0\\))\n\nGenerally good practices:\n\nIf some variables are highly correlated, remove redundant ones\nIf \\(R^2\\) is low, try adding more variables\nIf adding a polynomial term (e.g., \\(X^3\\)), include lower terms too (e.g., \\(X, \\ X^2\\))\nIf adding an interaction (e.g., \\(X_1X_2\\)), include individual terms too (e.g., \\(X_1, \\ X_2\\))\nRe-check diagnostics as you add/remove terms"
   },
   {
-    "objectID": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task-2",
-    "href": "slides/stat243_wk04wed.html#selecting-a-good-model-is-a-primary-task-2",
+    "objectID": "slides/stat243_wk04wed.html#selecting-a-good-model-is-central-to-this-course-2",
+    "href": "slides/stat243_wk04wed.html#selecting-a-good-model-is-central-to-this-course-2",
     "title": "Stat 243",
-    "section": "Selecting a good model is a primary task",
-    "text": "Selecting a good model is a primary task\nTask: Choose model that retains only “important” predictors (i.e., \\(\\beta_k\\neq0\\))\nGenerally bad practices:\n\nSelecting a model based on p-values (e.g., forward/backward selection)\nAll downstream inferences are invalid; p-values lose all meaning\nThis is an example of “p-hacking,” which is a very big issue in applied research!\n\n\nQ: Is there a more general way of selecting / validating a model?\n\n\nA: Splitting the data into “training” and “test” sets!"
+    "section": "Selecting a good model is central to this course",
+    "text": "Selecting a good model is central to this course\nTask: Choose model that retains only “important” predictors (i.e., \\(\\beta_k\\neq0\\))\nGenerally bad practices:\n\nSelecting a model based on p-values (e.g., forward/backward selection)\nAll downstream inferences are invalid; p-values lose all meaning\nThis is an example of “p-hacking,” which is a very big issue in applied research!\n\n\nQ: Is there a more general way of selecting / validating a model?\n\n\nA: Splitting the data into “training” and “test” sets!"
   },
   {
     "objectID": "slides/stat243_wk04wed.html#example-fuel-economy",
@@ -1572,7 +1579,21 @@
     "href": "slides/stat243_wk04wed.html#fit-the-all-the-models",
     "title": "Stat 243",
     "section": "Fit the all the models!",
-    "text": "Fit the all the models!\nWe could do steps 2 -4 “by hand”, e.g.,\n\n\nfull_train_1 &lt;- lm(FE ~ EngDispl + NumCyl + NumGears + TransLockup + \n                TransCreeperGear + IntakeValvePerCyl + ExhaustValvesPerCyl +\n                VarValveTiming + VarValveLift,\n              data = folds_cars$splits[[1]] %&gt;% analysis())\n\nsmall_train_1 &lt;- lm(FE ~ EngDispl + TransLockup + TransCreeperGear +\n              ExhaustValvesPerCyl + VarValveTiming,\n              data = folds_cars$splits[[1]] %&gt;% analysis())\n\nfull_pred_1 &lt;- predict(full_train_1, newdata = folds_cars$splits[[1]] %&gt;% assessment())\n\nsmall_pred_1 &lt;- predict(small_train_1, newdata = folds_cars$splits[[1]] %&gt;% assessment())\n\nMSE_full_1 &lt;- mean( (full_pred_1 - folds_cars$splits[[1]] %&gt;% assessment() %&gt;% pull(FE))^2)\n\nMSE_small_1 &lt;- mean( (small_pred_1 - folds_cars$splits[[1]] %&gt;% assessment() %&gt;% pull(FE))^2)\n\n\n\nNeed to loop over all splits (1, 2, 3, …, 10).\nCould write this into a function() or a for() loop and do it ourselves…\nOr we can use the tidymodels!"
+    "text": "Fit the all the models!"
+  },
+  {
+    "objectID": "slides/stat243_wk04wed.html#fit-the-all-the-models-1",
+    "href": "slides/stat243_wk04wed.html#fit-the-all-the-models-1",
+    "title": "Stat 243",
+    "section": "Fit the all the models!",
+    "text": "Fit the all the models!\nWe could do steps 2 -4 “by hand”, e.g.,\n\n\nfull_train_1 &lt;- lm(FE ~ EngDispl + NumCyl + NumGears + TransLockup + \n                TransCreeperGear + IntakeValvePerCyl + ExhaustValvesPerCyl +\n                VarValveTiming + VarValveLift,\n              data = folds_cars$splits[[1]] %&gt;% analysis())\n\nsmall_train_1 &lt;- lm(FE ~ EngDispl + TransLockup + TransCreeperGear +\n              ExhaustValvesPerCyl + VarValveTiming,\n              data = folds_cars$splits[[1]] %&gt;% analysis())\n\nfull_pred_1 &lt;- predict(full_train_1, newdata = folds_cars$splits[[1]] %&gt;% assessment())\n\nsmall_pred_1 &lt;- predict(small_train_1, newdata = folds_cars$splits[[1]] %&gt;% assessment())\n\nRMSE_full_1 &lt;- sqrt(mean( (full_pred_1 - folds_cars$splits[[1]] %&gt;% assessment() %&gt;% pull(FE))^2))\n\nRMSE_small_1 &lt;- sqrt(mean( (small_pred_1 - folds_cars$splits[[1]] %&gt;% assessment() %&gt;% pull(FE))^2))\n\nRMSE_full_1\n\n[1] 3.959213\n\nRMSE_small_1\n\n[1] 3.959354\n\n\n\n\nNeed to loop over all splits (1, 2, 3, …, 10).\nCould write this into a function() or a for() loop and do it ourselves…"
+  },
+  {
+    "objectID": "slides/stat243_wk04wed.html#for-loop-approach",
+    "href": "slides/stat243_wk04wed.html#for-loop-approach",
+    "title": "Stat 243",
+    "section": "For loop approach",
+    "text": "For loop approach\n\nn_folds &lt;- 10\nRMSE_full &lt;- list()\nRMSE_small &lt;- list()\nfor (i in 1:n_folds) {\n  full_train_i &lt;- lm(\n    FE ~ EngDispl + NumCyl + NumGears + TransLockup +\n      TransCreeperGear + IntakeValvePerCyl + ExhaustValvesPerCyl +\n      VarValveTiming + VarValveLift,\n    data = folds_cars$splits[[i]] %&gt;% analysis()\n  )\n  \n  small_train_i &lt;- lm(\n    FE ~ EngDispl + TransLockup + TransCreeperGear +\n      ExhaustValvesPerCyl + VarValveTiming,\n    data = folds_cars$splits[[i]] %&gt;% analysis()\n  )\n  \n  full_pred_i &lt;- predict(full_train_i, newdata = folds_cars$splits[[i]] %&gt;% assessment())\n  \n  small_pred_i &lt;- predict(small_train_i, newdata = folds_cars$splits[[i]] %&gt;% assessment())\n  \n  RMSE_full[[i]] &lt;- sqrt(mean((full_pred_i - folds_cars$splits[[i]] %&gt;% assessment() %&gt;% pull(FE))^2))\n  \n  RMSE_small[[i]] &lt;- sqrt(mean((small_pred_i - folds_cars$splits[[i]] %&gt;% assessment() %&gt;% pull(FE))^2))\n}\n\nmean(unlist(RMSE_full))\n\n[1] 4.508613\n\nmean(unlist(RMSE_small))\n\n[1] 4.520042\n\n\n\nNot super nice code…\nWe can use the tidymodels!"
   },
   {
     "objectID": "slides/stat243_wk04wed.html#tidymodels",
@@ -1586,7 +1607,14 @@
     "href": "slides/stat243_wk04wed.html#fitting-models-with-the-tidymodels",
     "title": "Stat 243",
     "section": "Fitting models with the tidymodels",
-    "text": "Fitting models with the tidymodels\nConsider our smallmod:\n\nsmallmod &lt;- lm(FE ~ EngDispl + TransLockup + TransCreeperGear +\n              ExhaustValvesPerCyl + VarValveTiming,\n              data = cars_train)\n\nWith the tidymodels, we can specify this model form to be fit on many different datasets:\n\n# loads the tidymodels\nlibrary(tidymodels)\n\n# specifies we'd like to do linear regression with the lm() function\nlm_spec &lt;- linear_reg() %&gt;%   \n  set_engine(\"lm\")            \n\n# creates a \"workflow\" to be used on many datasets\n# NOTICE: no data is supplied\nsmallmod_wf &lt;- workflow() %&gt;%\n  add_model(lm_spec) %&gt;%\n  add_formula(FE ~ EngDispl + TransLockup + TransCreeperGear +\n              ExhaustValvesPerCyl + VarValveTiming)"
+    "text": "Fitting models with the tidymodels\nConsider our smallmod.\n\n\n\nsmallmod &lt;- lm(\n  FE ~ EngDispl + TransLockup + TransCreeperGear + \n  ExhaustValvesPerCyl + VarValveTiming,\n  data = cars_train\n)\n\nsmallmod\n\n\nCall:\nlm(formula = FE ~ EngDispl + TransLockup + TransCreeperGear + \n    ExhaustValvesPerCyl + VarValveTiming, data = cars_train)\n\nCoefficients:\n        (Intercept)             EngDispl          TransLockup  \n            53.5896              -4.5647              -0.8766  \n   TransCreeperGear  ExhaustValvesPerCyl       VarValveTiming  \n            -1.5806              -1.7615               1.2568  \n\n\n\nWith the tidymodels:\n\nlibrary(tidymodels)\n\nsmallmod_tidy &lt;- linear_reg() %&gt;%   \n  set_engine(\"lm\")  %&gt;%          \n  fit(FE ~ EngDispl + TransLockup + TransCreeperGear +\n      ExhaustValvesPerCyl + VarValveTiming, \n      data = cars_train) \n\nsmallmod_tidy\n\nparsnip model object\n\n\nCall:\nstats::lm(formula = FE ~ EngDispl + TransLockup + TransCreeperGear + \n    ExhaustValvesPerCyl + VarValveTiming, data = data)\n\nCoefficients:\n        (Intercept)             EngDispl          TransLockup  \n            53.5896              -4.5647              -0.8766  \n   TransCreeperGear  ExhaustValvesPerCyl       VarValveTiming  \n            -1.5806              -1.7615               1.2568"
+  },
+  {
+    "objectID": "slides/stat243_wk04wed.html#fitting-many-models-with-the-tidymodels",
+    "href": "slides/stat243_wk04wed.html#fitting-many-models-with-the-tidymodels",
+    "title": "Stat 243",
+    "section": "Fitting (many) models with the tidymodels",
+    "text": "Fitting (many) models with the tidymodels\nConsider our smallmod:\n\nsmallmod &lt;- lm(FE ~ EngDispl + TransLockup + TransCreeperGear +\n              ExhaustValvesPerCyl + VarValveTiming,\n              data = cars_train)\n\nWith the tidymodels, we can specify this model form to be fit on many different datasets:\n\n# loads the tidymodels\nlibrary(tidymodels)\n\n# specifies we'd like to do linear regression with the lm() function\nlm_spec &lt;- linear_reg() %&gt;%   \n  set_engine(\"lm\")            \n\n# creates a \"workflow\" to be used on many datasets\n# NOTICE: no data is supplied\nsmallmod_wf &lt;- workflow() %&gt;%\n  add_model(lm_spec) %&gt;%\n  add_formula(FE ~ EngDispl + TransLockup + TransCreeperGear +\n              ExhaustValvesPerCyl + VarValveTiming)"
   },
   {
     "objectID": "slides/stat243_wk04wed.html#get-results",

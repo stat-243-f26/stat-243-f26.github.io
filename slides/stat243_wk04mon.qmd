@@ -93,6 +93,15 @@ library(moderndive)
 ::::
 
 
+## Announcements
+
+
+::: {.nonincremental}
+
+-   Quiz 1 return
+-   Office hours
+
+:::
 
 # Linear Regression Wrap-Up
 

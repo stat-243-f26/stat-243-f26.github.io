@@ -222,7 +222,7 @@
 <ul>
 <li><p>Discuss <strong>model selection</strong></p></li>
 <li><p>Define and discuss <strong>resampling</strong> and <strong>cross-validation</strong></p></li>
-<li><p>Investigate methods of cross-validation (<strong>LOOCV and k-fold cv</strong>)</p></li>
+<li><p>Investigate methods of cross-validation (<strong>k-fold cv</strong>)</p></li>
 <li><p>Implement CV in <strong>R</strong></p></li>
 </ul>
 </div>
@@ -241,8 +241,8 @@
 <h1>Model Selection and Validation</h1>
 
 </section>
-<section id="selecting-a-good-model-is-a-primary-task" class="slide level2">
-<h2>Selecting a good model is a primary task</h2>
+<section id="selecting-a-good-model-is-central-to-this-course" class="slide level2">
+<h2>Selecting a good model is central to this course</h2>
 <div class="fragment">
 <p>We can always select a model with <strong>tons</strong> of predictors, interactions, and non-linear terms.</p>
 <ul>
@@ -258,8 +258,8 @@
 </ul>
 </div>
 </section>
-<section id="selecting-a-good-model-is-a-primary-task-1" class="slide level2">
-<h2>Selecting a good model is a primary task</h2>
+<section id="selecting-a-good-model-is-central-to-this-course-1" class="slide level2">
+<h2>Selecting a good model is central to this course</h2>
 <p><strong>Task:</strong> Choose model that retains only “important” predictors (i.e., <span class="math inline">\(\beta_k\neq0\)</span>)</p>
 <div class="fragment">
 <p><strong>Generally good</strong> practices:</p>
@@ -272,8 +272,8 @@
 </ul>
 </div>
 </section>
-<section id="selecting-a-good-model-is-a-primary-task-2" class="slide level2">
-<h2>Selecting a good model is a primary task</h2>
+<section id="selecting-a-good-model-is-central-to-this-course-2" class="slide level2">
+<h2>Selecting a good model is central to this course</h2>
 <p><strong>Task:</strong> Choose model that retains only “important” predictors (i.e., <span class="math inline">\(\beta_k\neq0\)</span>)</p>
 <p><strong>Generally bad</strong> practices:</p>
 <ul>
@@ -623,6 +623,10 @@ CV_{(k)} = \frac{1}{k} \sum_{i =1}^k \textrm{MSE}_i
 </section>
 <section id="fit-the-all-the-models" class="slide level2">
 <h2>Fit the <strong>all</strong> the models!</h2>
+<p><img data-src="img/do-all-the-things-meme-template-full-e9a85cb2.webp"></p>
+</section>
+<section id="fit-the-all-the-models-1" class="slide level2">
+<h2>Fit the <strong>all</strong> the models!</h2>
 <p>We could do steps 2 -4 “by hand”, e.g.,</p>
 <div class="fragment">
 <div class="cell" data-layout-align="center">
@@ -639,15 +643,66 @@ CV_{(k)} = \frac{1}{k} \sum_{i =1}^k \textrm{MSE}_i
 <span id="cb18-11"><a aria-label="11"></a></span>
 <span id="cb18-12"><a aria-label="12"></a>small_pred_1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(small_train_1, <span class="at">newdata =</span> folds_cars<span class="sc">$</span>splits[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> <span class="fu">assessment</span>())</span>
 <span id="cb18-13"><a aria-label="13"></a></span>
-<span id="cb18-14"><a aria-label="14"></a>MSE_full_1 <span class="ot">&lt;-</span> <span class="fu">mean</span>( (full_pred_1 <span class="sc">-</span> folds_cars<span class="sc">$</span>splits[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> <span class="fu">assessment</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(FE))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb18-14"><a aria-label="14"></a>RMSE_full_1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>( (full_pred_1 <span class="sc">-</span> folds_cars<span class="sc">$</span>splits[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> <span class="fu">assessment</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(FE))<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb18-15"><a aria-label="15"></a></span>
-<span id="cb18-16"><a aria-label="16"></a>MSE_small_1 <span class="ot">&lt;-</span> <span class="fu">mean</span>( (small_pred_1 <span class="sc">-</span> folds_cars<span class="sc">$</span>splits[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> <span class="fu">assessment</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(FE))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-16"><a aria-label="16"></a>RMSE_small_1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>( (small_pred_1 <span class="sc">-</span> folds_cars<span class="sc">$</span>splits[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> <span class="fu">assessment</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(FE))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb18-17"><a aria-label="17"></a></span>
+<span id="cb18-18"><a aria-label="18"></a>RMSE_full_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.959213</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a>RMSE_small_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.959354</code></pre>
+</div>
 </div>
 </div>
 <ul>
 <li class="fragment">Need to loop over all splits (1, 2, 3, …, 10).</li>
 <li class="fragment">Could write this into a <code>function()</code> or a <code>for()</code> loop and do it ourselves…</li>
-<li class="fragment">Or we can use the <code>tidymodels</code>!</li>
+</ul>
+</section>
+<section id="for-loop-approach" class="slide level2">
+<h2>For loop approach</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-label="1"></a>n_folds <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb22-2"><a aria-label="2"></a>RMSE_full <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb22-3"><a aria-label="3"></a>RMSE_small <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb22-4"><a aria-label="4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_folds) {</span>
+<span id="cb22-5"><a aria-label="5"></a>  full_train_i <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb22-6"><a aria-label="6"></a>    FE <span class="sc">~</span> EngDispl <span class="sc">+</span> NumCyl <span class="sc">+</span> NumGears <span class="sc">+</span> TransLockup <span class="sc">+</span></span>
+<span id="cb22-7"><a aria-label="7"></a>      TransCreeperGear <span class="sc">+</span> IntakeValvePerCyl <span class="sc">+</span> ExhaustValvesPerCyl <span class="sc">+</span></span>
+<span id="cb22-8"><a aria-label="8"></a>      VarValveTiming <span class="sc">+</span> VarValveLift,</span>
+<span id="cb22-9"><a aria-label="9"></a>    <span class="at">data =</span> folds_cars<span class="sc">$</span>splits[[i]] <span class="sc">%&gt;%</span> <span class="fu">analysis</span>()</span>
+<span id="cb22-10"><a aria-label="10"></a>  )</span>
+<span id="cb22-11"><a aria-label="11"></a>  </span>
+<span id="cb22-12"><a aria-label="12"></a>  small_train_i <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb22-13"><a aria-label="13"></a>    FE <span class="sc">~</span> EngDispl <span class="sc">+</span> TransLockup <span class="sc">+</span> TransCreeperGear <span class="sc">+</span></span>
+<span id="cb22-14"><a aria-label="14"></a>      ExhaustValvesPerCyl <span class="sc">+</span> VarValveTiming,</span>
+<span id="cb22-15"><a aria-label="15"></a>    <span class="at">data =</span> folds_cars<span class="sc">$</span>splits[[i]] <span class="sc">%&gt;%</span> <span class="fu">analysis</span>()</span>
+<span id="cb22-16"><a aria-label="16"></a>  )</span>
+<span id="cb22-17"><a aria-label="17"></a>  </span>
+<span id="cb22-18"><a aria-label="18"></a>  full_pred_i <span class="ot">&lt;-</span> <span class="fu">predict</span>(full_train_i, <span class="at">newdata =</span> folds_cars<span class="sc">$</span>splits[[i]] <span class="sc">%&gt;%</span> <span class="fu">assessment</span>())</span>
+<span id="cb22-19"><a aria-label="19"></a>  </span>
+<span id="cb22-20"><a aria-label="20"></a>  small_pred_i <span class="ot">&lt;-</span> <span class="fu">predict</span>(small_train_i, <span class="at">newdata =</span> folds_cars<span class="sc">$</span>splits[[i]] <span class="sc">%&gt;%</span> <span class="fu">assessment</span>())</span>
+<span id="cb22-21"><a aria-label="21"></a>  </span>
+<span id="cb22-22"><a aria-label="22"></a>  RMSE_full[[i]] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((full_pred_i <span class="sc">-</span> folds_cars<span class="sc">$</span>splits[[i]] <span class="sc">%&gt;%</span> <span class="fu">assessment</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(FE))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb22-23"><a aria-label="23"></a>  </span>
+<span id="cb22-24"><a aria-label="24"></a>  RMSE_small[[i]] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((small_pred_i <span class="sc">-</span> folds_cars<span class="sc">$</span>splits[[i]] <span class="sc">%&gt;%</span> <span class="fu">assessment</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(FE))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb22-25"><a aria-label="25"></a>}</span>
+<span id="cb22-26"><a aria-label="26"></a></span>
+<span id="cb22-27"><a aria-label="27"></a><span class="fu">mean</span>(<span class="fu">unlist</span>(RMSE_full))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.508613</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-label="1"></a><span class="fu">mean</span>(<span class="fu">unlist</span>(RMSE_small))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.520042</code></pre>
+</div>
+</div>
+<ul>
+<li class="fragment"><p>Not super nice code…</p></li>
+<li class="fragment"><p>We can use the <code>tidymodels</code>!</p></li>
 </ul>
 </section>
 <section id="tidymodels" class="slide level2">
@@ -669,43 +724,98 @@ CV_{(k)} = \frac{1}{k} \sum_{i =1}^k \textrm{MSE}_i
 </section>
 <section id="fitting-models-with-the-tidymodels" class="slide level2">
 <h2>Fitting models with the <code>tidymodels</code></h2>
+<p>Consider our <code>smallmod</code>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-label="1"></a>smallmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb26-2"><a aria-label="2"></a>  FE <span class="sc">~</span> EngDispl <span class="sc">+</span> TransLockup <span class="sc">+</span> TransCreeperGear <span class="sc">+</span> </span>
+<span id="cb26-3"><a aria-label="3"></a>  ExhaustValvesPerCyl <span class="sc">+</span> VarValveTiming,</span>
+<span id="cb26-4"><a aria-label="4"></a>  <span class="at">data =</span> cars_train</span>
+<span id="cb26-5"><a aria-label="5"></a>)</span>
+<span id="cb26-6"><a aria-label="6"></a></span>
+<span id="cb26-7"><a aria-label="7"></a>smallmod</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = FE ~ EngDispl + TransLockup + TransCreeperGear + 
+    ExhaustValvesPerCyl + VarValveTiming, data = cars_train)
+
+Coefficients:
+        (Intercept)             EngDispl          TransLockup  
+            53.5896              -4.5647              -0.8766  
+   TransCreeperGear  ExhaustValvesPerCyl       VarValveTiming  
+            -1.5806              -1.7615               1.2568  </code></pre>
+</div>
+</div>
+</div><div class="column fragment" style="width:50%;">
+<p>With the <code>tidymodels</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-label="1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb28-2"><a aria-label="2"></a></span>
+<span id="cb28-3"><a aria-label="3"></a>smallmod_tidy <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span>   </span>
+<span id="cb28-4"><a aria-label="4"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>)  <span class="sc">%&gt;%</span>          </span>
+<span id="cb28-5"><a aria-label="5"></a>  <span class="fu">fit</span>(FE <span class="sc">~</span> EngDispl <span class="sc">+</span> TransLockup <span class="sc">+</span> TransCreeperGear <span class="sc">+</span></span>
+<span id="cb28-6"><a aria-label="6"></a>      ExhaustValvesPerCyl <span class="sc">+</span> VarValveTiming, </span>
+<span id="cb28-7"><a aria-label="7"></a>      <span class="at">data =</span> cars_train) </span>
+<span id="cb28-8"><a aria-label="8"></a></span>
+<span id="cb28-9"><a aria-label="9"></a>smallmod_tidy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>parsnip model object
+
+
+Call:
+stats::lm(formula = FE ~ EngDispl + TransLockup + TransCreeperGear + 
+    ExhaustValvesPerCyl + VarValveTiming, data = data)
+
+Coefficients:
+        (Intercept)             EngDispl          TransLockup  
+            53.5896              -4.5647              -0.8766  
+   TransCreeperGear  ExhaustValvesPerCyl       VarValveTiming  
+            -1.5806              -1.7615               1.2568  </code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="fitting-many-models-with-the-tidymodels" class="slide level2">
+<h2>Fitting (many) models with the <code>tidymodels</code></h2>
 <p>Consider our <code>smallmod</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-label="1"></a>smallmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(FE <span class="sc">~</span> EngDispl <span class="sc">+</span> TransLockup <span class="sc">+</span> TransCreeperGear <span class="sc">+</span></span>
-<span id="cb19-2"><a aria-label="2"></a>              ExhaustValvesPerCyl <span class="sc">+</span> VarValveTiming,</span>
-<span id="cb19-3"><a aria-label="3"></a>              <span class="at">data =</span> cars_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-label="1"></a>smallmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(FE <span class="sc">~</span> EngDispl <span class="sc">+</span> TransLockup <span class="sc">+</span> TransCreeperGear <span class="sc">+</span></span>
+<span id="cb30-2"><a aria-label="2"></a>              ExhaustValvesPerCyl <span class="sc">+</span> VarValveTiming,</span>
+<span id="cb30-3"><a aria-label="3"></a>              <span class="at">data =</span> cars_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>With the <code>tidymodels</code>, we can specify this model form to be fit on many different datasets:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a><span class="co"># loads the tidymodels</span></span>
-<span id="cb20-2"><a aria-label="2"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb20-3"><a aria-label="3"></a></span>
-<span id="cb20-4"><a aria-label="4"></a><span class="co"># specifies we'd like to do linear regression with the lm() function</span></span>
-<span id="cb20-5"><a aria-label="5"></a>lm_spec <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span>   </span>
-<span id="cb20-6"><a aria-label="6"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>)            </span>
-<span id="cb20-7"><a aria-label="7"></a></span>
-<span id="cb20-8"><a aria-label="8"></a><span class="co"># creates a "workflow" to be used on many datasets</span></span>
-<span id="cb20-9"><a aria-label="9"></a><span class="co"># </span><span class="al">NOTICE</span><span class="co">: no data is supplied</span></span>
-<span id="cb20-10"><a aria-label="10"></a>smallmod_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb20-11"><a aria-label="11"></a>  <span class="fu">add_model</span>(lm_spec) <span class="sc">%&gt;%</span></span>
-<span id="cb20-12"><a aria-label="12"></a>  <span class="fu">add_formula</span>(FE <span class="sc">~</span> EngDispl <span class="sc">+</span> TransLockup <span class="sc">+</span> TransCreeperGear <span class="sc">+</span></span>
-<span id="cb20-13"><a aria-label="13"></a>              ExhaustValvesPerCyl <span class="sc">+</span> VarValveTiming) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-label="1"></a><span class="co"># loads the tidymodels</span></span>
+<span id="cb31-2"><a aria-label="2"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb31-3"><a aria-label="3"></a></span>
+<span id="cb31-4"><a aria-label="4"></a><span class="co"># specifies we'd like to do linear regression with the lm() function</span></span>
+<span id="cb31-5"><a aria-label="5"></a>lm_spec <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span>   </span>
+<span id="cb31-6"><a aria-label="6"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>)            </span>
+<span id="cb31-7"><a aria-label="7"></a></span>
+<span id="cb31-8"><a aria-label="8"></a><span class="co"># creates a "workflow" to be used on many datasets</span></span>
+<span id="cb31-9"><a aria-label="9"></a><span class="co"># </span><span class="al">NOTICE</span><span class="co">: no data is supplied</span></span>
+<span id="cb31-10"><a aria-label="10"></a>smallmod_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb31-11"><a aria-label="11"></a>  <span class="fu">add_model</span>(lm_spec) <span class="sc">%&gt;%</span></span>
+<span id="cb31-12"><a aria-label="12"></a>  <span class="fu">add_formula</span>(FE <span class="sc">~</span> EngDispl <span class="sc">+</span> TransLockup <span class="sc">+</span> TransCreeperGear <span class="sc">+</span></span>
+<span id="cb31-13"><a aria-label="13"></a>              ExhaustValvesPerCyl <span class="sc">+</span> VarValveTiming) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="get-results" class="slide level2">
 <h2>Get Results</h2>
 <p><code>fit_resamples()</code> fits the workflow on each training set and evaluates it on the matching assessment set.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-label="1"></a>smallmod_res <span class="ot">&lt;-</span> <span class="fu">fit_resamples</span>(</span>
-<span id="cb21-2"><a aria-label="2"></a>  smallmod_wf,</span>
-<span id="cb21-3"><a aria-label="3"></a>  <span class="at">resamples =</span> folds_cars,</span>
-<span id="cb21-4"><a aria-label="4"></a>  <span class="at">metrics =</span> <span class="fu">metric_set</span>(rmse)</span>
-<span id="cb21-5"><a aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a aria-label="1"></a>smallmod_res <span class="ot">&lt;-</span> <span class="fu">fit_resamples</span>(</span>
+<span id="cb32-2"><a aria-label="2"></a>  smallmod_wf,</span>
+<span id="cb32-3"><a aria-label="3"></a>  <span class="at">resamples =</span> folds_cars,</span>
+<span id="cb32-4"><a aria-label="4"></a>  <span class="at">metrics =</span> <span class="fu">metric_set</span>(rmse)</span>
+<span id="cb32-5"><a aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><code>collect_metrics()</code> collects the metrics calculated on each test set.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-label="1"></a><span class="fu">collect_metrics</span>(smallmod_res, <span class="at">summarize =</span> <span class="cn">FALSE</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-label="1"></a><span class="fu">collect_metrics</span>(smallmod_res, <span class="at">summarize =</span> <span class="cn">FALSE</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 5
    id     .metric .estimator .estimate .config        
@@ -728,15 +838,15 @@ CV_{(k)} = \frac{1}{k} \sum_{i =1}^k \textrm{MSE}_i
 <h2>Get Results</h2>
 <p><code>fit_resamples()</code> fits the workflow on each training set and evaluates it on the matching assessment set.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-label="1"></a>smallmod_res <span class="ot">&lt;-</span> <span class="fu">fit_resamples</span>(</span>
-<span id="cb24-2"><a aria-label="2"></a>  smallmod_wf,</span>
-<span id="cb24-3"><a aria-label="3"></a>  <span class="at">resamples =</span> folds_cars,</span>
-<span id="cb24-4"><a aria-label="4"></a>  <span class="at">metrics =</span> <span class="fu">metric_set</span>(rmse)</span>
-<span id="cb24-5"><a aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-label="1"></a>smallmod_res <span class="ot">&lt;-</span> <span class="fu">fit_resamples</span>(</span>
+<span id="cb35-2"><a aria-label="2"></a>  smallmod_wf,</span>
+<span id="cb35-3"><a aria-label="3"></a>  <span class="at">resamples =</span> folds_cars,</span>
+<span id="cb35-4"><a aria-label="4"></a>  <span class="at">metrics =</span> <span class="fu">metric_set</span>(rmse)</span>
+<span id="cb35-5"><a aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>collect_metrics()</code> collects the metrics calculated on each test set.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-label="1"></a><span class="fu">collect_metrics</span>(smallmod_res) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a aria-label="1"></a><span class="fu">collect_metrics</span>(smallmod_res) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   .metric .estimator  mean     n std_err .config        
@@ -749,19 +859,19 @@ CV_{(k)} = \frac{1}{k} \sum_{i =1}^k \textrm{MSE}_i
 <h2>Comparing Models</h2>
 <p>Now, we can run the same code for our <code>fullmod</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-label="1"></a>fullmod_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a aria-label="2"></a>  <span class="fu">add_model</span>(lm_spec) <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a aria-label="3"></a>  <span class="fu">add_formula</span>(FE <span class="sc">~</span> EngDispl <span class="sc">+</span> NumCyl <span class="sc">+</span> NumGears <span class="sc">+</span> TransLockup <span class="sc">+</span> </span>
-<span id="cb27-4"><a aria-label="4"></a>                TransCreeperGear <span class="sc">+</span> IntakeValvePerCyl <span class="sc">+</span> ExhaustValvesPerCyl <span class="sc">+</span></span>
-<span id="cb27-5"><a aria-label="5"></a>                VarValveTiming <span class="sc">+</span> VarValveLift) </span>
-<span id="cb27-6"><a aria-label="6"></a></span>
-<span id="cb27-7"><a aria-label="7"></a>fullmod_res <span class="ot">&lt;-</span> <span class="fu">fit_resamples</span>(</span>
-<span id="cb27-8"><a aria-label="8"></a>  fullmod_wf,</span>
-<span id="cb27-9"><a aria-label="9"></a>  <span class="at">resamples =</span> folds_cars,</span>
-<span id="cb27-10"><a aria-label="10"></a>  <span class="at">metrics =</span> <span class="fu">metric_set</span>(rmse)</span>
-<span id="cb27-11"><a aria-label="11"></a>)</span>
-<span id="cb27-12"><a aria-label="12"></a></span>
-<span id="cb27-13"><a aria-label="13"></a><span class="fu">collect_metrics</span>(fullmod_res) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a aria-label="1"></a>fullmod_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a aria-label="2"></a>  <span class="fu">add_model</span>(lm_spec) <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a aria-label="3"></a>  <span class="fu">add_formula</span>(FE <span class="sc">~</span> EngDispl <span class="sc">+</span> NumCyl <span class="sc">+</span> NumGears <span class="sc">+</span> TransLockup <span class="sc">+</span> </span>
+<span id="cb38-4"><a aria-label="4"></a>                TransCreeperGear <span class="sc">+</span> IntakeValvePerCyl <span class="sc">+</span> ExhaustValvesPerCyl <span class="sc">+</span></span>
+<span id="cb38-5"><a aria-label="5"></a>                VarValveTiming <span class="sc">+</span> VarValveLift) </span>
+<span id="cb38-6"><a aria-label="6"></a></span>
+<span id="cb38-7"><a aria-label="7"></a>fullmod_res <span class="ot">&lt;-</span> <span class="fu">fit_resamples</span>(</span>
+<span id="cb38-8"><a aria-label="8"></a>  fullmod_wf,</span>
+<span id="cb38-9"><a aria-label="9"></a>  <span class="at">resamples =</span> folds_cars,</span>
+<span id="cb38-10"><a aria-label="10"></a>  <span class="at">metrics =</span> <span class="fu">metric_set</span>(rmse)</span>
+<span id="cb38-11"><a aria-label="11"></a>)</span>
+<span id="cb38-12"><a aria-label="12"></a></span>
+<span id="cb38-13"><a aria-label="13"></a><span class="fu">collect_metrics</span>(fullmod_res) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   .metric .estimator  mean     n std_err .config        
@@ -778,14 +888,14 @@ CV_{(k)} = \frac{1}{k} \sum_{i =1}^k \textrm{MSE}_i
 <h2>Comparing Models</h2>
 <p>Which model is best?</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-label="1"></a><span class="fu">collect_metrics</span>(fullmod_res) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a aria-label="1"></a><span class="fu">collect_metrics</span>(fullmod_res) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   .metric .estimator  mean     n std_err .config        
   &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          
 1 rmse    standard    4.51    10   0.120 pre0_mod0_post0</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-label="1"></a><span class="fu">collect_metrics</span>(smallmod_res) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a aria-label="1"></a><span class="fu">collect_metrics</span>(smallmod_res) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   .metric .estimator  mean     n std_err .config        

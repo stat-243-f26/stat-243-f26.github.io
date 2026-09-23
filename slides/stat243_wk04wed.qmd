@@ -72,7 +72,7 @@ library(moderndive)
 
 - Define and discuss **resampling** and **cross-validation**
 
-- Investigate methods of cross-validation (**LOOCV and k-fold cv**)
+- Investigate methods of cross-validation (**k-fold cv**)
 
 - Implement CV in **R**
 
@@ -100,7 +100,7 @@ library(moderndive)
 # Model Selection and Validation
 
 
-## Selecting a good model is a primary task
+## Selecting a good model is central to this course
 
 ::: {.fragment .nonincremental}
 
@@ -122,7 +122,7 @@ We can always select a model with **tons** of predictors, interactions, and non-
 
 :::
 
-## Selecting a good model is a primary task
+## Selecting a good model is central to this course
 
 **Task:** Choose model that retains only "important" predictors (i.e., $\beta_k\neq0$)
 
@@ -142,7 +142,7 @@ We can always select a model with **tons** of predictors, interactions, and non-
 
 :::
 
-## Selecting a good model is a primary task
+## Selecting a good model is central to this course
 
 **Task:** Choose model that retains only "important" predictors (i.e., $\beta_k\neq0$)
 
@@ -554,6 +554,11 @@ folds_cars$splits[[2]] %>% assessment() # observations NOT in second "training s
 
 :::
 
+
+## Fit the **all** the models!
+
+![](img/do-all-the-things-meme-template-full-e9a85cb2.webp)
+
 ## Fit the **all** the models!
 
 We could do steps 2 -4 "by hand", e.g.,
@@ -574,9 +579,12 @@ full_pred_1 <- predict(full_train_1, newdata = folds_cars$splits[[1]] %>% assess
 
 small_pred_1 <- predict(small_train_1, newdata = folds_cars$splits[[1]] %>% assessment())
 
-MSE_full_1 <- mean( (full_pred_1 - folds_cars$splits[[1]] %>% assessment() %>% pull(FE))^2)
+RMSE_full_1 <- sqrt(mean( (full_pred_1 - folds_cars$splits[[1]] %>% assessment() %>% pull(FE))^2))
 
-MSE_small_1 <- mean( (small_pred_1 - folds_cars$splits[[1]] %>% assessment() %>% pull(FE))^2)
+RMSE_small_1 <- sqrt(mean( (small_pred_1 - folds_cars$splits[[1]] %>% assessment() %>% pull(FE))^2))
+
+RMSE_full_1
+RMSE_small_1
 ```
 
 
@@ -585,7 +593,46 @@ MSE_small_1 <- mean( (small_pred_1 - folds_cars$splits[[1]] %>% assessment() %>%
 
 -   Need to loop over all splits (1, 2, 3, ..., 10). 
 -   Could write this into a `function()` or a `for()` loop and do it ourselves...
--   Or we can use the `tidymodels`!
+
+
+## For loop approach
+
+
+```{r}
+n_folds <- 10
+RMSE_full <- list()
+RMSE_small <- list()
+for (i in 1:n_folds) {
+  full_train_i <- lm(
+    FE ~ EngDispl + NumCyl + NumGears + TransLockup +
+      TransCreeperGear + IntakeValvePerCyl + ExhaustValvesPerCyl +
+      VarValveTiming + VarValveLift,
+    data = folds_cars$splits[[i]] %>% analysis()
+  )
+  
+  small_train_i <- lm(
+    FE ~ EngDispl + TransLockup + TransCreeperGear +
+      ExhaustValvesPerCyl + VarValveTiming,
+    data = folds_cars$splits[[i]] %>% analysis()
+  )
+  
+  full_pred_i <- predict(full_train_i, newdata = folds_cars$splits[[i]] %>% assessment())
+  
+  small_pred_i <- predict(small_train_i, newdata = folds_cars$splits[[i]] %>% assessment())
+  
+  RMSE_full[[i]] <- sqrt(mean((full_pred_i - folds_cars$splits[[i]] %>% assessment() %>% pull(FE))^2))
+  
+  RMSE_small[[i]] <- sqrt(mean((small_pred_i - folds_cars$splits[[i]] %>% assessment() %>% pull(FE))^2))
+}
+
+mean(unlist(RMSE_full))
+mean(unlist(RMSE_small))
+```
+
+
+-   Not super nice code...
+
+-   We can use the `tidymodels`!
 
 
 ## `tidymodels`
@@ -611,8 +658,48 @@ MSE_small_1 <- mean( (small_pred_1 - folds_cars$splits[[1]] %>% assessment() %>%
 ::::
 
 
-
 ## Fitting models with the `tidymodels`
+
+Consider our `smallmod`.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+```{r}
+smallmod <- lm(
+  FE ~ EngDispl + TransLockup + TransCreeperGear + 
+  ExhaustValvesPerCyl + VarValveTiming,
+  data = cars_train
+)
+
+smallmod
+```
+
+:::
+
+::: {.column width='50%' .fragment}
+
+With the `tidymodels`: 
+
+```{r}
+library(tidymodels)
+
+smallmod_tidy <- linear_reg() %>%   
+  set_engine("lm")  %>%          
+  fit(FE ~ EngDispl + TransLockup + TransCreeperGear +
+      ExhaustValvesPerCyl + VarValveTiming, 
+      data = cars_train) 
+
+smallmod_tidy
+```
+
+:::
+
+::::
+
+
+## Fitting (many) models with the `tidymodels`
 
 Consider our `smallmod`:
 
