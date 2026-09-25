@@ -1,0 +1,27 @@
+---
+title: "Linear Regression"
+subtitle: "Stat 243: Lab 3"
+format: html
+editor: source
+toc: false
+---
+
+## Due: Friday, Oct 2nd, 11am PT.
+
+
+## Accessing the lab
+
+In order to access the next problems, clone the following repo: 
+
+
+```
+https://github.com/stat-243-f26/lab03.git
+```
+
+For instructions on cloning a repo, see [Lab Instructions](lab_instructions.qmd)
+
+From there, you can answer the questions and then Render the document to submit the PDF to Gradescope. 
+
+
+
+
