@@ -1,0 +1,692 @@
+---
+pagetitle: "The Bootstrap"
+editor: source
+format:
+  revealjs:
+    html-math-method: mathjax
+    chalkboard: true
+    incremental: true
+    theme: [default, custom.scss]
+    height: 900
+    width: 1600
+    slide-number: c
+    auto-stretch: false
+    callout-appearance: simple
+    pdf-max-pages-per-slide: 2
+    menu:
+      side: right
+      numbers: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.retina = 3, fig.align = 'center')
+library(knitr)
+library(tidyverse)
+library(palmerpenguins)
+library(cowplot)
+library(moderndive)
+```
+
+::::: columns
+::: {.column .center width="55%"}
+![](img/tidymodels.png){width="90%"}
+:::
+
+::: {.column .center width="45%"}
+<br>
+
+[The Bootstrap]{.custom-title}
+
+<br> <br> <br> <br> <br> 
+
+[Grayson White]{.custom-subtitle}
+
+[Stat 243 <br> Week 5 \| Fall 2026]{.custom-subtitle}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+
+
+## Goals for today (and next time)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Today:**
+
+- Discuss the bootstrap for conducting inference
+
+- Implement bootstrapping in R
+
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Next time:**
+
+-   Model and feature selection criteria
+
+
+:::
+
+:::
+
+::::
+
+
+
+# First: choosing folds
+
+(Week 4, Wednesday slides)
+
+# The Bootstrap
+
+## Another resampling method
+
+CV may remind you of another **resampling**: the Bootstrap!
+
+::: {.fragment .nonincremental}
+
+There are differences in methodology and purpose:
+
+  + CV: Model selection, model assessment, predictive accuracy
+
+  + Bootstrap: Conducting inference within a given model
+
+In short: The bootstrap is a super general tool for **approximating sampling distributions**.
+
+:::
+
+## Think-Pair-Share: Sampling Distributions
+
+Suppose we have the following linear regression model:
+$$
+\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \hat \beta_2 X_2 + \hat \beta_3 X_1X_2
+$$
+We would like to conduct inference (e.g., confidence intervals and hypothesis tests) on the parameter $\beta_3$ using the statistic $\hat\beta_3$
+
+::: {.nonincremental}
+
+1. The statistic $\hat\beta_3$ has a sampling distribution. What is a sampling distribution, in your own words?
+
+2. Why can't we directly construct the sampling distribution for $\hat\beta_3$?
+
+3. In regression, under what conditions can we still conduct theory-based (i.e., sampling distribution-based) inference?
+
+:::
+
+```{r}
+#| echo: false
+countdown::countdown(2)
+```
+
+
+## Sampling and Bootstrap Distributions
+
+Recall the **Samping Distribution** of a **Statistic** ($\hat{\theta}$), calculated from a **Sample** of size $n$
+
+::: {.fragment .nonincremental}
+
+- Hypothetically, suppose we drew many random samples of size $n$ from the **population**
+- In each sample, we computed the statistic of interest, $\hat{\theta}$
+
+:::
+
+::: {.fragment .nonincremental}
+
+  - **The distribution of those statistics is the sampling distribution**
+  - **Standard Error:** the standard deviation of the sampling distribution
+
+:::
+
+::: {.fragment .nonincremental}
+
+  - **The Problem:** We can't draw multiple random samples of size $n$!
+
+  - Under certain conditions, we can approximate sampling distributions using statistical theory.
+
+:::
+
+::: {.fragment .fade-up .midi .center}
+
+**Solution**: the bootstrap!
+
+:::
+
+## The Bootstrap
+
+::: {.nonincremental}
+
+**The Bootstrap:**
+
+  - We can *always* draw a **bootstrap sample** of size $n$ by sampling *with replacement* from your original sample $n$ times (i.e., equal to the original sample size)
+
+:::
+
+::: {.fragment .nonincremental}
+
+  - Draw many bootstrap samples, and compute the **statistic of interest** in each
+
+  - The distribution of *those* statistics makes up the **Bootstrap Distribution**
+
+  - Bootstrap distributions can often well-approximate the *variance* of the sampling distribution.
+
+:::
+
+## Example
+
+Let's simulate a sample of data ($n=100$) from:
+$$Y = 1+ 2\cdot X_1 + 3\cdot X_2 + X_1 X_2 + \epsilon \ \ \ \text{where} \ \ \ \epsilon \sim N(0, \text{sd} = 0.5)$$
+
+::: {.fragment}
+
+```{r}
+#| output-location: column-fragment
+#| code-line-numbers: "1-7|9-14"
+set.seed(10101)
+n <- 100
+X1 <- runif(n, 0, 1)
+X2 <- runif(n, 0, 1)
+e <- rnorm(n, 0 ,.5)
+Y <- 1 + 2*X1 + 3*X2 + X1*X2 + e
+d <- data.frame(X1, X2, Y)
+
+ggplot(d, aes(x = X1,
+              y = Y,
+              color = X2)) + 
+  geom_point() +
+  theme_bw() +
+  labs(title = "One Sample from True Model")
+```
+
+
+:::
+
+
+## Model fit to the sample
+
+```{r}
+my_mod <- lm(Y ~ X1*X2, data = d)
+summary(my_mod)$coefficients
+b3 <-  my_mod$coefficients["X1:X2"]
+b3
+```
+
+::: {.fragment .nonincremental}
+
+  - **Reminder:** The true $\beta_3 = 1$
+
+We will compare the Sampling Distribution and Bootstrap Distribution
+
+:::
+
+## Sampling Distribution
+
+To construct the sampling distribution, I generate data from the *true model* many times. Each time, I fit a regression model to the data and save $\hat\beta_3$.
+
+NOTE: In the real world, **we can't do this** because we never know the true model!
+
+::: {.fragment}
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-17|1-6|8-17"
+set.seed(234)
+trials <- 2000 # Number of random samples
+n <- 100 # Size of each random sample
+X1 <- runif(n, 0, 1) # Generate X1 (the same for all sims)
+X2 <- runif(n, 0, 1) # Generate X2 (the same for all sims)
+slopes<-data.frame() #Create empty dataframe for the beta3's
+
+for (i in 1:trials){
+  sim_e <- rnorm(n, 0 ,.5) # Simulate Error
+  sim_Y <- 1 + 2*X1 + 3*X2 + X1*X2 + sim_e # Simulate Y
+  sim_d <- data.frame(X1, X2, sim_Y) # Combine into dataframe
+  sim_mod <- lm(sim_Y ~ X1*X2, data = sim_d) # Run model
+  slopes <- rbind(
+    slopes,
+    data.frame(slope = sim_mod$coefficients["X1:X2"])
+  )
+}
+```
+
+:::
+
+## Sampling Distribution
+
+
+```{r}
+#| output-location: column-fragment
+ggplot(slopes, aes(x = slope)) +
+  geom_histogram(bins = 25, color = "white") + 
+  theme_bw() +
+  labs(title = "Simulated Distribution of Slopes")+
+  geom_vline(xintercept = 1, color = "red", size = 1) +
+  annotate(geom = "text",
+           x = 0, y = 200, size = 8,
+           label = "True Slope",
+           color = "red")
+```
+
+
+
+::: {.fragment}
+
+
+
+```{r}
+#| echo: true
+slopes %>% 
+  summarize(mean_slope = mean(slope),
+            sd_slope = sd(slope))
+```
+
+:::
+
+## One Bootstrap Sample
+
+We have 1 sample:
+
+
+```{r}
+str(d)
+```
+
+
+::: {.fragment .nonincremental}
+
+But we can create a bootstrap sample:
+
+
+```{r}
+#| code-line-numbers: "1-3|2|3"
+set.seed(135)
+boot_indx <- sample(x = 1:n, size = n, replace = TRUE)
+a_bootstrap_sample <- d[boot_indx, ]
+str(a_bootstrap_sample)
+```
+
+
+:::
+
+::: {.fragment .nonincremental}
+
+How many observations from the original sample show up (at least once)?
+
+
+:::
+
+
+::: {.fragment}
+
+```{r}
+length(unique(boot_indx))
+```
+
+:::
+
+## Multiple Bootstrap Samples
+
+Can use the `rsample` package from `tidymodels` to create bootstrap samples
+
+```{r}
+library(rsample)
+bt_resamples <- bootstraps(d, times = 1000) # 1000 samples
+```
+
+::: {.fragment .nonincremental}
+
+The `bootstraps` function (much like the `vfold_cv` function) stores results as a `resample` object with 2 parts:
+
+  - **`id`**, a vector with bootstrap sample identifiers (i.e "Bootstrap0001", "Bootstrap0002", ... )
+
+
+```{r}
+length(bt_resamples$id)
+bt_resamples$id[1:5]
+```
+
+:::
+
+::: {.fragment .nonincremental}
+
+  - **`splits`**, an `R` list that stores the indices of the original data for the bootstrap samples
+
+  
+
+:::
+
+## Multiple Bootstrap Samples
+
+Can look at the individual bootstrap samples by applying the `analysis()` function to items in the `splits` list:
+
+```{r}
+bt_resamples$splits[[1]] %>% 
+  analysis()
+```
+
+
+## Bootstrap Distribution
+
+
+Now, we fit the model on each bootstrap sample and collect the estimated coefficients.
+
+```{r}
+#| cache: true
+#| code-line-numbers: "1-8|10-14|16-17|19"
+library(tidymodels)
+
+lm_spec <- linear_reg() %>%
+  set_engine("lm")
+
+interaction_wf <- workflow() %>%
+  add_model(lm_spec) %>%
+  add_formula(Y ~ X1*X2) 
+
+res <- fit_resamples(
+  interaction_wf,
+  resamples = bt_resamples,
+  control = control_resamples(extract = tidy)
+  )
+
+boot_coefs <- collect_extracts(res) %>%
+  unnest(.extracts) 
+
+boot_coefs
+```
+
+
+## Bootstrap Distribution
+
+
+```{r}
+#| output-location: column
+boot_slope <- boot_coefs %>%
+  filter(term == "`X1:X2`")
+
+ggplot(boot_slope, aes(x = estimate)) +
+  geom_histogram(bins = 25, color = "white") + 
+  theme_bw() +
+  labs(title = "Bootstrap Distribution of Slopes") +
+  geom_vline(xintercept = b3, color = "blue", size = 1) +
+  geom_vline(xintercept = 1, color = "red", size = 1) +
+  annotate(geom = "text",
+           x = 0.5, y = 250, size = 6,
+           label = "True Slope",
+           color = "red")+
+  annotate(geom = "text",
+           x = 3, y = 250, size = 6,
+           label = "Sample Slope", 
+           color = "blue")
+```
+
+```{r}
+boot_slope %>%
+  summarize(
+    mean_slope = mean(estimate), 
+    sd_slope = sd(estimate)
+  )
+```
+
+
+
+## Side-by-Side Comparison
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: "100%"
+#| echo: false
+ggplot(slopes, aes(x = slope))+
+  geom_histogram(bins= 25, color = "white")+theme_bw()+
+  labs(title = "Simulated Distribution of Slopes")+
+  geom_vline(xintercept = 1, color = "red", size  =1)+
+  annotate(geom = "text", x = 0, y = 200, size=8, label = "True Slope", color = "red")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: "100%"
+#| echo: false
+
+boot_slope %>%
+  ggplot(aes(x = estimate)) +
+  geom_histogram(bins = 25, color = "white") + 
+  theme_bw() +
+  labs(title = "Bootstrap Distribution of Slopes") +
+  geom_vline(xintercept = b3, color = "blue", size = 1) +
+  geom_vline(xintercept = 1, color = "red", size = 1) +
+  annotate(geom = "text",
+           x = 0.5, y = 250, size = 6,
+           label = "True Slope",
+           color = "red")+
+  annotate(geom = "text",
+           x = 3, y = 250, size = 6,
+           label = "Sample Slope", 
+           color = "blue")
+
+```
+
+:::
+
+::::
+
+
+Comparison of mean and sd for the bootstrap and sampling distributions:
+
+
+```{r}
+#| echo: false
+rbind(
+  slopes,
+  boot_slope %>% select(estimate) %>% rename(slope = estimate)
+  ) %>%
+  cbind(method = c(rep("sampling",2000),rep("bootstrap",1000))) %>%
+  group_by(method) %>% summarize(mean_slope = mean(slope), sd_slope = sd(slope),
+                                 q.025 = quantile(slope,.025), q.975 = quantile(slope, .975))
+```
+
+
+
+## How do we use this bootstrap distribution?
+
+**Confidence Intervals:** for a $C$-level interval,
+
+
+:::: {.columns}
+
+::: {.fragment .nonincremental .column}
+
+- **Standard Error Method:** Calculate the bootstrap standard error (SE). Then the interval is:
+$$
+\text{Statistic} \pm z^{*}_{C} * \text{SE}
+$$
+  where $z^{*}_{C}$ is the $(\frac{1+C}{2})$th quantile of a standard normal distribution
+
+```{r}
+Bootstrap_SE <- sd(boot_slope$estimate)
+Statistic <- mean(boot_slope$estimate)
+zstar_95 <- qnorm((1+.95)/2, mean = 0, sd = 1)
+c(
+  Statistic - zstar_95*Bootstrap_SE, 
+  Statistic + zstar_95*Bootstrap_SE
+)
+```
+
+:::
+
+::: {.fragment .nonincremental .column}
+
+- **Percentile Method:** use the $(\frac{1-C}{2})$th quantile of the bootstrap distribution for the lower bound, and the  $(\frac{1+C}{2})$th quantile for the upper bound.
+
+```{r}
+c(
+  quantile(boot_slope$estimate, (1 - .95) / 2),
+  quantile(boot_slope$estimate, (1 + .95) / 2)
+)
+```
+
+:::
+
+::::
+
+## How do we use this bootstrap distribution? 
+
+::: {.small}
+
+**Hypothesis Tests:** For a statistic, $\hat{\theta}$, that estimates the parameter, $\theta$, we can test:
+$$
+H_0: \theta = \theta_0 \qquad \qquad H_A: \theta \neq \theta_0 \ \ \ \text{or} \ \ \  \theta < \theta_0  \ \ \ \text{or} \ \ \  \theta > \theta_0
+$$
+by calculating the test statistic:
+$$
+T = \frac{\hat{\theta} - \theta_0}{\text{SE}}
+$$
+and calculating the appropriate p-value based on a standard normal distribution.
+
+:::
+
+::: {.fragment .nonincremental}
+
+**Example**:
+
+$$H_0: \theta = 1 \quad \text{ vs. } \quad H_A: \theta\neq 1$$
+```{r}
+#| echo: true
+Bootstrap_SE <- sd(boot_slope$estimate) # Bootstrap_SE
+Statistic <- mean(boot_slope$estimate) # theta_hat
+Tstatistic <- (Statistic - 1) / Bootstrap_SE # T
+2 * (1 - pnorm(Tstatistic, mean = 0, sd = 1)) # two-sided p-value
+```
+
+:::
+
+## Bootstrapping Other Statistics
+
+So far in 141 and 243, we've bootstrapped regression coefficients and other nice statistics (e.g., sample means).
+
+::: {.fragment .nonincremental}
+
+But bootstrapping works for assessing uncertainty in tons of situations!
+
+  + Joint uncertainty of multiple coefficients at once
+
+  + $R^2$ value of a model
+
+  + Predictions made using a model
+
+  + etc.
+
+:::
+
+::: {.fragment .nonincremental}
+
+The procedure is always the same:
+
+  1. Draw many bootstrap samples.
+
+  2. Compute the statistic of interest in each
+
+  3. Use the bootstrap distribution to approximate the variance of the statistic and thus conduct inference.
+
+:::
+
+## Pros and Cons of the Bootstrap
+
+::: {.nonincremental}
+
+**Pro:** **When data is drawn randomly and independently from the population, bootstrap usually works for inference**
+
+  - Thus, we don't always need to derive theoretical sampling distributions!
+
+:::
+
+::: {.fragment .nonincremental}
+
+  - Also nice: **in linear regression, bootstrap inference works with only Linearity and Independence!** (i.e., don't need Normality or Equal Variance)
+
+:::
+
+::: {.fragment .nonincremental}
+
+  - Bootstrap works for almost any kind of statistic! $R^2$, coefficients, sample means, predictions at a test point, etc.
+
+:::
+
+::: {.fragment .nonincremental}
+
+**Con:** Computationally intensive
+
+  - May not be realistic with very complicated analyses or models (e.g., Neural Networks)
+
+:::
+
+## CV versus Bootstrapping
+
+Both are computationally intensive methods that involve sampling from your data set to learn more about your estimate/model.
+
+
+:::: {.columns}
+
+::: {.fragment .nonincremental .column}
+
+**Cross-validation**: Often used to assess ***predictive accuracy*** (for model assessment and model selection purposes)
+
+  - Partition data into folds
+
+  - Fit model to training folds, predict on test fold
+
+  - Iterate though all possible *folds*
+
+  - Compute aggregate measure of predictive ability
+
+:::
+
+::: {.fragment .nonincremental .column}
+
+**Bootstrapping**: Often used for ***inference***
+
+  - Draw a bootstrap sample of size $n$ from your data *with replacement*.
+
+  - Compute estimate of interest
+
+  - Do this many times, obtaining many bootstrap estimates over many bootstrap samples
+
+  - Consider distribution of bootstrap estimates
+
+:::
+
+::::
+
+
+
+## Next time:
+
+::: {.nonincremental}
+
+  - Model selection and feature selection
+
+:::
