@@ -84,11 +84,11 @@
     "text": "Another resampling method\nCV may remind you of another resampling: the Bootstrap!\n\nThere are differences in methodology and purpose:\n\nCV: Model selection, model assessment, predictive accuracy\nBootstrap: Conducting inference within a given model\n\nIn short: The bootstrap is a super general tool for approximating sampling distributions."
   },
   {
-    "objectID": "slides/stat243_wk05mon.html#think-pair-share-sampling-distributions",
-    "href": "slides/stat243_wk05mon.html#think-pair-share-sampling-distributions",
+    "objectID": "slides/stat243_wk05mon.html#discussion-sampling-distributions",
+    "href": "slides/stat243_wk05mon.html#discussion-sampling-distributions",
     "title": "Stat 243",
-    "section": "Think-Pair-Share: Sampling Distributions",
-    "text": "Think-Pair-Share: Sampling Distributions\nSuppose we have the following linear regression model: \\[\n\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\hat \\beta_2 X_2 + \\hat \\beta_3 X_1X_2\n\\] We would like to conduct inference (e.g., confidence intervals and hypothesis tests) on the parameter \\(\\beta_3\\) using the statistic \\(\\hat\\beta_3\\)\n\nThe statistic \\(\\hat\\beta_3\\) has a sampling distribution. What is a sampling distribution, in your own words?\nWhy can’t we directly construct the sampling distribution for \\(\\hat\\beta_3\\)?\nIn regression, under what conditions can we still conduct theory-based (i.e., sampling distribution-based) inference?\n\n\n\n\n−+\n02:00"
+    "section": "Discussion: Sampling Distributions",
+    "text": "Discussion: Sampling Distributions\nSuppose we have the following linear regression model: \\[\n\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\hat \\beta_2 X_2 + \\hat \\beta_3 X_1X_2\n\\] We would like to conduct inference (e.g., confidence intervals and hypothesis tests) on the parameter \\(\\beta_3\\) using the statistic \\(\\hat\\beta_3\\)\n\nThe statistic \\(\\hat\\beta_3\\) has a sampling distribution. What is a sampling distribution, in your own words?\nWhy can’t we directly construct the sampling distribution for \\(\\hat\\beta_3\\)?\nIn regression, under what conditions can we still conduct theory-based (i.e., sampling distribution-based) inference?\n\n\n\n\n−+\n01:30"
   },
   {
     "objectID": "slides/stat243_wk05mon.html#sampling-and-bootstrap-distributions",
@@ -102,7 +102,7 @@
     "href": "slides/stat243_wk05mon.html#the-bootstrap-1",
     "title": "Stat 243",
     "section": "The Bootstrap",
-    "text": "The Bootstrap\nThe Bootstrap:\n\nWe can always draw a bootstrap sample of size \\(n\\) by sampling with replacement from your original sample \\(n\\) times (i.e., equal to the original sample size)\n\n\n\nDraw many bootstrap samples, and compute the statistic of interest in each\nThe distribution of those statistics makes up the Bootstrap Distribution\nBootstrap distributions can often well-approximate the variance of the sampling distribution."
+    "text": "The Bootstrap\nThe Bootstrap:\n\nWe can always draw a bootstrap sample of size \\(n\\) by sampling with replacement from your original sample \\(n\\) times (i.e., equal to the original sample size)\n\n\n\nDraw many bootstrap samples, and compute the statistic of interest in each\nThe distribution of those statistics makes up the Bootstrap Distribution\nBootstrap distributions can often well-approximate the variability of the sampling distribution."
   },
   {
     "objectID": "slides/stat243_wk05mon.html#example",
@@ -158,7 +158,7 @@
     "href": "slides/stat243_wk05mon.html#bootstrap-distribution",
     "title": "Stat 243",
     "section": "Bootstrap Distribution",
-    "text": "Bootstrap Distribution\nNow, we fit the model on each bootstrap sample and collect the estimated coefficients.\n\nlibrary(tidymodels)\n\nlm_spec &lt;- linear_reg() %&gt;%\n  set_engine(\"lm\")\n\ninteraction_wf &lt;- workflow() %&gt;%\n  add_model(lm_spec) %&gt;%\n  add_formula(Y ~ X1*X2) \n\nres &lt;- fit_resamples(\n  interaction_wf,\n  resamples = bt_resamples,\n  control = control_resamples(extract = tidy)\n  )\n\nboot_coefs &lt;- collect_extracts(res) %&gt;%\n  unnest(.extracts) \n\nboot_coefs\n\n# A tibble: 4,000 × 7\n   id            term        estimate std.error statistic  p.value .config      \n   &lt;chr&gt;         &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        \n 1 Bootstrap0001 (Intercept)     1.29     0.226      5.71 1.27e- 7 pre0_mod0_po…\n 2 Bootstrap0001 X1              1.48     0.409      3.62 4.76e- 4 pre0_mod0_po…\n 3 Bootstrap0001 X2              2.67     0.492      5.43 4.21e- 7 pre0_mod0_po…\n 4 Bootstrap0001 `X1:X2`         1.86     0.845      2.20 3.01e- 2 pre0_mod0_po…\n 5 Bootstrap0002 (Intercept)     1.52     0.213      7.13 1.90e-10 pre0_mod0_po…\n 6 Bootstrap0002 X1              1.14     0.436      2.63 1.01e- 2 pre0_mod0_po…\n 7 Bootstrap0002 X2              2.49     0.444      5.61 1.92e- 7 pre0_mod0_po…\n 8 Bootstrap0002 `X1:X2`         2.17     0.843      2.58 1.15e- 2 pre0_mod0_po…\n 9 Bootstrap0003 (Intercept)     1.29     0.179      7.19 1.41e-10 pre0_mod0_po…\n10 Bootstrap0003 X1              1.59     0.330      4.81 5.54e- 6 pre0_mod0_po…\n# ℹ 3,990 more rows"
+    "text": "Bootstrap Distribution\nNow, we fit the model on each bootstrap sample and collect the estimated coefficients.\n\n\nlibrary(tidymodels)\n\nlm_spec &lt;- linear_reg() %&gt;%\n  set_engine(\"lm\")\n\ninteraction_wf &lt;- workflow() %&gt;%\n  add_model(lm_spec) %&gt;%\n  add_formula(Y ~ X1*X2) \n\nres &lt;- fit_resamples(\n  interaction_wf,\n  resamples = bt_resamples,\n  control = control_resamples(extract = tidy)\n  )\n\nboot_coefs &lt;- collect_extracts(res) %&gt;%\n  unnest(.extracts) \n\nboot_coefs %&gt;%\n  select(-p.value, -.config)\n\n\n# A tibble: 4,000 × 5\n   id            term        estimate std.error statistic\n   &lt;chr&gt;         &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n 1 Bootstrap0001 (Intercept)     1.29     0.226      5.71\n 2 Bootstrap0001 X1              1.48     0.409      3.62\n 3 Bootstrap0001 X2              2.67     0.492      5.43\n 4 Bootstrap0001 `X1:X2`         1.86     0.845      2.20\n 5 Bootstrap0002 (Intercept)     1.52     0.213      7.13\n 6 Bootstrap0002 X1              1.14     0.436      2.63\n 7 Bootstrap0002 X2              2.49     0.444      5.61\n 8 Bootstrap0002 `X1:X2`         2.17     0.843      2.58\n 9 Bootstrap0003 (Intercept)     1.29     0.179      7.19\n10 Bootstrap0003 X1              1.59     0.330      4.81\n# ℹ 3,990 more rows"
   },
   {
     "objectID": "slides/stat243_wk05mon.html#bootstrap-distribution-1",

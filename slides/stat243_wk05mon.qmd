@@ -115,7 +115,7 @@ In short: The bootstrap is a super general tool for **approximating sampling dis
 
 :::
 
-## Think-Pair-Share: Sampling Distributions
+## Discussion: Sampling Distributions
 
 Suppose we have the following linear regression model:
 $$
@@ -135,7 +135,7 @@ We would like to conduct inference (e.g., confidence intervals and hypothesis te
 
 ```{r}
 #| echo: false
-countdown::countdown(2)
+countdown::countdown(1.5)
 ```
 
 
@@ -187,7 +187,7 @@ Recall the **Samping Distribution** of a **Statistic** ($\hat{\theta}$), calcula
 
   - The distribution of *those* statistics makes up the **Bootstrap Distribution**
 
-  - Bootstrap distributions can often well-approximate the *variance* of the sampling distribution.
+  - Bootstrap distributions can often well-approximate the **variability** of the sampling distribution.
 
 :::
 
@@ -248,7 +248,7 @@ NOTE: In the real world, **we can't do this** because we never know the true mod
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "1-17|1-6|8-17"
+#| code-line-numbers: "1-6|8-17"
 set.seed(234)
 trials <- 2000 # Number of random samples
 n <- 100 # Size of each random sample
@@ -391,7 +391,8 @@ Now, we fit the model on each bootstrap sample and collect the estimated coeffic
 
 ```{r}
 #| cache: true
-#| code-line-numbers: "1-8|10-14|16-17|19"
+#| code-line-numbers: "1-8|10-14|16-17|19-20"
+#| output-location: column-fragment
 library(tidymodels)
 
 lm_spec <- linear_reg() %>%
@@ -410,7 +411,8 @@ res <- fit_resamples(
 boot_coefs <- collect_extracts(res) %>%
   unnest(.extracts) 
 
-boot_coefs
+boot_coefs %>%
+  select(-p.value, -.config)
 ```
 
 
