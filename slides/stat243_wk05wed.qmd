@@ -57,6 +57,24 @@ library(moderndive)
 ------------------------------------------------------------------------
 
 
+## Math / Stats / CS Hike!!! 
+
+
+::: {.center}
+
+![](img/hike.png)
+
+:::
+
+This year's annual Math/Stats/CS picnic-hike will take place on Saturday, October 10th, from approximately 9:00am (leave Reed) until approximately 2:00pm (return to Reed). The location of the hike is Tryon Creek State Natural Area (approx 7.5 miles from Reed). 
+
+A boxed lunch will be provided. Hiking trails are available but don't feel like you have to hike - there will be games and other activities available at the picnic tables.
+
+Please use this [link](https://forms.gle/TZiUZPYys3xDnoGS8) to sign-up and order a lunch which the departments will cover.
+
+**Deadline to sign up is Thursday at Noon - 10/01.**
+
+
 
 ## Goals for today (and next time)
 
