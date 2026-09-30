@@ -129,7 +129,7 @@ To compare models on the training set, we can use the following metrics, each of
 
 ::: {.fragment .nonincremental}
 
-- Adjusted $R^2$: Provides unbiased estimate of population $R^2$ and is *slightly* smaller than $R^2$. Best models have largest $\textrm{adj }R^2$
+- Adjusted $R^2$. Best models have largest $\textrm{adj }R^2$
 
 $$
 \textrm{adj }R^2 = 1 - \frac{\textrm{RSS}/(n-d-1)}{\textrm{TSS}/(n-1)}
@@ -139,7 +139,7 @@ $$
 
 ::: {.fragment .nonincremental}
 
-- $C_p$: penalizes training RSS by typical discrepancy between test and training. Best models have smallest $C_p$
+- $C_p$. Best models have smallest $C_p$
 
 $$
 C_p = \frac{1}{n}(\mathrm{RSS} + 2 d \hat{\sigma}^2)
@@ -153,7 +153,7 @@ $$
 
 ::: {.fragment .nonincremental}
 
-- Akaike information criterion (AIC): uses method of maximum likelihood and information theory. Best models have smallest $\textrm{AIC}$
+- Akaike information criterion (AIC). Best models have smallest $\textrm{AIC}$
 
 $$
 \mathrm{AIC} = \frac{1}{n \hat{\sigma}^2}(\mathrm{RSS} + 2  d \hat{\sigma}^2)
@@ -163,7 +163,7 @@ $$
 
 ::: {.fragment .nonincremental}
 
-- Bayesian information criterion (BIC): uses likelihood function and Bayesian posteriors. Best models have smallest $\textrm{BIC}$
+- Bayesian information criterion (BIC). Best models have smallest $\textrm{BIC}$
 
 $$
 \mathrm{BIC} = \frac{1}{n \hat{\sigma}^2}(\mathrm{RSS} + \log(n) d  \hat{\sigma}^2)
@@ -174,6 +174,13 @@ $$
 :::
 
 ::::
+
+
+::: {.fragment}
+
+Here, $\hat\sigma^2$ is the estimated from the **full model** that contains all predictors. 
+
+:::
 
 ## Comparison of Formulas
 
@@ -233,6 +240,7 @@ solTest <- cbind(solTestX, Solubility = solTestY)
 solTrain <- cbind(solTrainX, Solubility = solTrainY)
 solTest <- solTest %>% select(!starts_with("FP"))
 solTrain <- solTrain %>% select(!starts_with("FP"))
+head(solTrain)
 ```
 
 
@@ -539,7 +547,7 @@ map_dfr(list(mod5_res, mod9_res, mod15_res, mod17_res),
 
 :::
 
-- It appears the model with 17 predictors performed best!
+- It appears the model with 15 predictors performed best!
 
 
 
@@ -610,7 +618,6 @@ backward_elim <- regsubsets(Solubility ~ . -NumNonHBonds -NumHydrogen -NumRings,
 ```{r}
 #| echo: false
 #| out-width: "90%"
-
 library(ggtext) 
 metrics <- data.frame(model = 1:17,
   adjr2 = summary(best_subset)$adjr2,
@@ -653,4 +660,64 @@ metrics %>%
 ```
 
 :::
+
+
+## Next time
+
+::: {.nonincremental}
+
+- Quiz
+- Problem Set 4 assigned
+- Proof of MSE = Bias$^2$ + Var
+
+:::
+
+
+## `R` code for creating the plot in the final slide
+
+```{r}
+#| eval: false
+library(ggtext) 
+metrics <- data.frame(model = 1:17,
+  adjr2 = summary(best_subset)$adjr2,
+  rss = summary(best_subset)$rss,
+  cp = summary(best_subset)$cp,
+  bic = summary(best_subset)$bic) %>%
+  rbind(
+    data.frame(model = 1:17,
+        adjr2 = summary(forward_select)$adjr2,
+        rss = summary(forward_select)$rss,
+        cp = summary(forward_select)$cp,
+        bic = summary(forward_select)$bic
+    )
+  ) %>%
+  rbind(
+    data.frame(model = 1:17,
+        adjr2 = summary(backward_elim)$adjr2,
+        rss = summary(backward_elim)$rss,
+        cp = summary(backward_elim)$cp,
+        bic = summary(backward_elim)$bic
+    )
+  ) %>% 
+  mutate(method = rep(c("best", "forward", "backward"), each = 17))
+
+metrics %>%
+  pivot_longer(!c(model, method), names_to =  "var", values_to = "value") %>%
+  ggplot(aes(x = model, y = value, color = method)) + 
+  geom_line(linewidth = .5) + 
+  facet_wrap(~var, scales = "free") + 
+  scale_color_manual(
+    values = c(best = "#0072B2", forward = "#009E73", backward = "#D55E00")
+  ) +
+  theme_bw() +
+  labs(title = "Resulting model selection metrics for 
+    <span style='color:#0072B2;'>best</span>, 
+    <span style='color:#D55E00;'>backward</span>, and
+    <span style='color:#009E73;'>forward</span> variable selection criteria") + 
+  theme(legend.position = "none",
+        plot.title = element_markdown())
+```
+
+
+
 
