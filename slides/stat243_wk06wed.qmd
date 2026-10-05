@@ -1,0 +1,571 @@
+---
+pagetitle: "Penalized Regression: LASSO"
+editor: source
+format:
+  revealjs:
+    html-math-method: mathjax
+    chalkboard: true
+    incremental: true
+    theme: [default, custom.scss]
+    height: 900
+    width: 1600
+    slide-number: c
+    auto-stretch: false
+    callout-appearance: simple
+    pdf-max-pages-per-slide: 2
+    menu:
+      side: right
+      numbers: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.retina = 3, fig.align = 'center')
+library(knitr)
+library(tidyverse)
+library(palmerpenguins)
+library(cowplot)
+library(moderndive)
+library(ggthemes)
+library(ISLR)
+library(rsample)
+```
+
+::::: columns
+::: {.column .center width="55%"}
+![](img/tidymodels.png){width="90%"}
+:::
+
+::: {.column .center width="45%"}
+<br>
+
+[Penalized Regression: LASSO]{.custom-title}
+
+<br> <br>
+
+[Grayson White]{.custom-subtitle}
+
+[Stat 243 <br> Week 6 \| Fall 2026]{.custom-subtitle}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Goals for this week
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Monday:**
+
+- Introduce **penalization** to improve MSE in regression models
+
+- Define and apply **Ridge Regression** in a case study
+
+:::
+
+:::
+
+::: {.column width='50%'}
+
+::: {.nonincremental .fragment}
+
+**Today:**
+
+- Introduce **LASSO** as a **penalization and variable selection** method
+
+- Apply LASSO in a case study
+
+:::
+
+:::
+
+::::
+
+
+
+# The LASSO
+
+## Recall: Least Squares and Ridge Regression
+
+Suppose we've selected a regression model:
+$$Y = \beta_0 + \beta_1X_1 + \dots + \beta_pX_p + \epsilon,\qquad \epsilon \sim N(0,~\sigma^2)$$
+
+:::: {.columns}
+
+::: {.column .fragment .nonincremental}
+
+**Least Squares:** Find $\beta$s that minimize
+$$RSS=\sum_{i=1}^n\Big(Y_i - \hat{Y}_i\ \Big)^2$$
+
+  + Goal of RSS: Make regression line "close to data"
+
+:::
+
+::: {.column .fragment .nonincremental}
+
+**Ridge Regression:** Find $\beta$s that minimize
+$$
+\textrm{RSS} + \underbrace{\lambda\sum_{j = 1}^p \beta_j^2}_\text{Ridge Penalty} \qquad \textrm{where }  \lambda \geq 0
+$$
+
+  + Goal of Ridge Penalty: Make coefficients smaller
+
+:::
+
+::::
+
+## LASSO Regression
+
+$$\begin{aligned}
+\text{Least Squares: }& \text{Minimize RSS}\\
+\text{Ridge Regression: }& \text{Minimize RSS} + \lambda \sum_{j=1}^p \beta_j^2
+\end{aligned}$$
+
+**Least Absolute Shrinkage and Selection Operator**: Find $\beta$s that minimize
+$$
+\textrm{RSS} + \underbrace{\lambda\sum_{j = 1}^p \big|\beta_j\big|}_\text{LASSO Penalty} \qquad \textrm{where }  \lambda \geq 0
+$$
+
+::: {.fragment .nonincremental}
+
+  + Goal of LASSO Penalty: Make coefficients smaller
+
+  + Like Ridge, LASSO increases bias but decreases variance and (hopefully) MSE.
+
+So how is LASSO different from Ridge?
+
+:::
+
+## Geometric Perspective: Two Types of Distance
+
+How to measure distance between a point $x=(x_1, \dots, x_p)$ and the origin $(0, \dots, 0)$?
+
+
+:::: {.columns}
+
+::: {.column}
+
+::: {.fragment .nonincremental}
+
+**Euclidean distance:** "straight line" distance:
+$$
+\Vert x\Vert_2 = \sqrt{x_1^2 + \dots + x_p^2} = \sqrt{ \sum_{j=1}^p x_j^2}
+$$
+
+:::
+
+::: {.fragment .nonincremental}
+
+  - Most common: Result of the Pythagorean theorem
+
+  - Also called the **$\ell_2$ norm**
+
+  - **Ridge** uses $\big(\Vert x\Vert_2\big)^2$ to "shrink" coefficients
+
+:::
+
+:::
+
+::: {.column}
+
+::: {.fragment .nonincremental}
+
+**Manhattan distance:** "grid line" distance:
+$$
+\Vert x\Vert_1 = |x_1| + \dots + |x_p| = \sum_{j=1}^p |x_j|
+$$
+
+:::
+
+::: {.fragment .nonincremental}
+
+ - the **$\ell_1$ norm**
+
+ - **LASSO** uses $\Vert x\Vert_1$ directly for shrinkage
+
+:::
+
+:::
+
+::::
+
+## Geometric Perspective
+
+:::: {.columns}
+
+::: {.column width="65%"}
+
+```{r}
+#| out-width: "100%"
+#| echo: false
+ggplot(data = data.frame( x = c(0,3), y = c(0,4), name = c("Origin", "beta")),  aes(x = x, y = y, label = name) )+
+  geom_point(size =2 ) +
+  geom_text( parse = T, nudge_x = .25, nudge_y = .25, size = 5)+
+  theme_bw()+
+  coord_fixed()+
+  scale_x_continuous(limits = c(0,5), minor_breaks = NULL)+
+  scale_y_continuous(limits = c(0,5), minor_breaks = NULL)+
+  labs(x = expression(beta[1]), y = expression(beta[2]), parse = T)
+```
+
+:::
+
+::: {.column width="35%"}
+
+:::
+
+::::
+
+## Geometric Perspective
+
+:::: {.columns}
+
+::: {.column width="65%"}
+
+```{r}
+#| out-width: "100%"
+#| echo: false
+ggplot(data = data.frame( x = c(0,3), y = c(0,4), name = c("Origin", "beta")),  aes(x = x, y = y, label = name) )+
+  geom_point(size =2 ) +
+  geom_text( parse = T, nudge_x = .25, nudge_y = .25, size = 5)+
+  theme_bw()+
+  coord_fixed()+
+  scale_x_continuous(limits = c(0,5), minor_breaks = NULL)+
+  scale_y_continuous(limits = c(0,5), minor_breaks = NULL)+
+  labs(x = expression(beta[1]), y = expression(beta[2]), parse = T)+
+  geom_line(size = 1, color = "red")
+```
+
+:::
+
+::: {.column width="35%"}
+
+::: {.nonincremental}
+
+- [$\Vert \beta \Vert_2 = \sqrt{3^2 + 4^2} = 5$]{style="color: red;"}
+
+:::
+
+:::
+
+::::
+
+## Geometric Perspective
+
+:::: {.columns}
+
+::: {.column width="65%"}
+
+```{r}
+#| out-width: "100%"
+#| echo: false
+ggplot(data = data.frame( x = c(0,3), y = c(0,4), name = c("Origin", "beta")), aes(x = x, y = y, label = name))+
+  geom_point(   size =2 ) +
+  geom_text( parse = T, nudge_x = .25, nudge_y = .25, size = 5)+
+  theme_bw()+
+  coord_fixed()+
+  scale_x_continuous(limits = c(0,5), minor_breaks = NULL)+
+  scale_y_continuous(limits = c(0,5), minor_breaks = NULL)+
+  labs(x = expression(beta[1]), y = expression(beta[2]), parse = T)+
+  geom_line(size = 1, color = "red")+
+  geom_line(data = data.frame(  x = c(0,3, 3), y = c(0,0,4), name = c(1,2,3)  ), aes(x = x, y= y), color = "blue", size = 1)
+```
+
+:::
+
+::: {.column width="35%"}
+
+::: {.nonincremental}
+
+- [$\Vert \beta \Vert_2 = \sqrt{3^2 + 4^2} = 5$]{style="color: red;"}
+
+- [$\Vert \beta \Vert_1 = 3 + 4 = 7$]{style="color: blue;"}
+
+:::
+
+::: {.fragment .nonincremental}
+
+- **Takeaway:** Ridge and LASSO measure "distance" differently
+
+:::
+
+:::
+
+::::
+
+## Consider: Different Distance, Different Emphasis
+
+$$\begin{aligned}
+\text{Least Squares: }& \text{Minimize RSS}\\
+\text{Ridge Regression: }& \text{Minimize RSS} + \lambda \sum_{j=1}^p \beta_j^2\\
+\text{LASSO Regression: }& \text{Minimize RSS} + \lambda \sum_{j=1}^p \big|\beta_j\big|
+\end{aligned}$$
+
+::: {.nonincremental}
+
+1. Suppose $\beta_j=\ -10$. Calculate $\beta_j^2$ and $\big|\beta_j\big|$, then explain why this shows that Ridge penalizes "big" coefficients more than LASSO.
+
+2. Suppose $\beta_j=\ 0.1$. Calculate $\beta_j^2$ and $\big|\beta_j\big|$, then explain why this shows that LASSO penalizes "small" coefficients more than Ridge.
+
+3. Hypothesize why LASSO might shrink coefficients to **exactly zero** more often than Ridge.
+
+:::
+
+## LASSO for Variable Selection
+
+We've just uncovered why LASSO is a variable "**selection operator**":
+
+::: {.fragment .nonincremental}
+
+**Ridge *and* LASSO:** Coefficients with high variance are encouraged to shrink.
+
+:::
+
+::: {.fragment .nonincremental}
+
+**Ridge:** Penalty gets relatively smaller as coefficients get smaller
+
+  + No benefit of making small coefficients zero.
+
+:::
+
+::: {.fragment .nonincremental}
+
+**LASSO:** Penalty gets relatively larger as coefficients get smaller
+
+  + Bigger benefit of making small coefficients *precisely 0*.
+
+  + $\beta_j=0$ $\implies$ $X_j$ removed from model!
+
+  + This is variable selection!
+
+:::
+
+## Ridge vs. LASSO
+
+::: {.nonincremental}
+
+**Similarities:**
+
+  - Fast to estimate models (similar to Least Squares)
+
+  - Shrink coefficients: Increasing bias but reducing variance and MSE
+
+:::
+
+::: {.fragment .nonincremental}
+
+**Differences:**
+
+  - **LASSO performs variable selection simultaneously**, Ridge does not.
+
+  - LASSO generally outperforms Ridge when some coefficients are *truly* zero.
+
+  - Ridge generally outperforms LASSO when *all* coefficients are truly *non-zero*.
+
+:::
+
+# Case Study: Wine Acidity
+
+## Wine Acidity
+
+We study a "classic" dataset on red Vinho Verde wines grown in Northern Portugal.
+
+::: {.nonincremental}
+
+  + $n=200$ different wines
+
+  + $Y$=Fixed Acidity
+
+  + $X$=9 physical properties of the wine (e.g., residual sugar, pH, etc.) and average quality rating
+
+:::
+
+::: {.fragment .nonincremental}
+
+```{r}
+#| fig-asp: 0.5
+#| out-width: "80%"
+wine <- read_delim("https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv",
+           delim = ";", escape_double = FALSE, trim_ws = TRUE)
+wine <- wine[1:200,-8]
+head(wine)
+```
+
+:::
+
+## Wine Acidity: Response variable distribution
+
+```{r}
+#| output-location: column
+ggplot(wine, aes(x = `fixed acidity`)) +
+  geom_histogram(color = "white", fill = "steelblue") +
+  labs(title = "Distribution of Y (Fixed Acidity)", 
+       x = "Fixed Acidity") +
+  theme_bw()
+```
+
+
+## Least Squares Estimates
+
+```{r}
+#| fig-asp: 0.5
+#| out-width: "75%"
+model_ls <- lm(`fixed acidity` ~ ., data = wine)
+library(coefplot)
+coefplot(model_ls, intercept = F, sort = "magnitude") +
+  theme_bw() 
+```
+
+**Q:** Which coefficients will LASSO shrink to 0?
+
+## LASSO in `R`
+
+```{r}
+#| code-line-numbers: "1-9|8"
+library(glmnet)
+library(broom)
+grid <- 10^(seq(-4, 1, length = 1000))
+x <- model.matrix(`fixed acidity` ~ ., data = wine)[, -1]
+y <- wine$`fixed acidity`
+lasso_mod <- glmnet(x,
+                    y, 
+                    alpha = 1,
+                    lambda = grid)
+```
+
+
+## LASSO Estimates (ggplot2)
+
+Examine how LASSO coefficient estimates vary as $\lambda$ changes:
+
+```{r}
+tidied <- tidy(lasso_mod) %>% filter(term != "(Intercept)")
+ggplot(tidied, aes(x = lambda, y = estimate, group = term, color = term)) +
+  geom_line() + 
+  scale_x_log10(breaks = c(10^c(-4, -2, 0)),
+                labels = c(".0001", ".01", "1")) +
+  theme_bw(base_size = 10) +
+  labs(title = "Coefficent estimates based on LASSO",
+       x = expression(lambda ~ " (lambda)")) +
+  guides(color = guide_legend(ncol = 1))
+```
+
+## LASSO Estimates (base)
+
+```{r}
+plot(lasso_mod, sign.lambda = 1, label = TRUE)
+```
+
+
+## Cross-Validation for Optimal Tuning Parameter
+
+To find the optimal tuning parameter, $\lambda$, we again use Cross-Validation
+
+```{r}
+#| code-line-numbers: "2-6|7-8|10-17"
+#| output-location: column-fragment
+set.seed(1010)
+my_cv <- cv.glmnet(x,
+                   y,
+                   alpha = 1,
+                   lambda = grid,
+                   nfolds = 20)
+best_L <- my_cv$lambda.min
+reg_L <- my_cv$lambda.1se
+
+tidied <- tidy(my_cv)
+ggplot(tidied, aes(x = lambda, y = estimate)) + 
+  geom_line(color = "red") +
+  scale_x_log10(breaks = c(10^c(-4, -2, 0)),
+                labels = c(".0001", ".01", "1")) +
+  theme_bw(base_size = 15) +
+  labs(x = expression(lambda), y = "Test MSE") +
+  geom_vline(xintercept = best_L)
+```
+
+::: {.nonincremental .fragment}
+
++ Gray vertical line is optimal $\lambda$: Test MSE minimized at 0.4297.
+
++ (Ridge yields Test MSE of 0.4317)
+
+:::
+
+## Feature Selection
+
+What features did the best $\lambda$ **select?**
+
+```{r}
+s <- which(lasso_mod$lambda==best_L)
+names(coef(lasso_mod)[,s] != 0)[(coef(lasso_mod)[,s] != 0)]
+```
+
+::: {.fragment .nonincremental}
+
+What features did the best $\lambda$ **not** select?
+
+```{r}
+names(coef(lasso_mod)[,s] == 0)[(coef(lasso_mod)[,s] == 0)]
+```
+
+**Why not Quality, Free Sulfur Dioxide, Residual Sugar, and Total Sulfur Dioxide?**
+
+:::
+
+## Back to the Least Squares Estimates
+
+```{r}
+#| output-location: column
+model_ls <- lm(`fixed acidity`~.,data=wine)
+library(coefplot)
+coefplot(model_ls, intercept = F, sort = "magnitude") +
+  theme_bw() +
+  labs(title = "Coefficient Plot")
+```
+
+
+## Back to the Least Squares Estimates
+
+```{r}
+#| output-location: column
+model_ls <- lm(`fixed acidity`~.,data=wine)
+library(coefplot)
+coefplot(model_ls, intercept = F, sort = "magnitude") +
+  theme_bw() +
+  scale_x_continuous(limits = c(-.12, .18)) +
+  labs(title = "Coefficient Plot (Zoomed In)")
+```
+
+LASSO removed only a *high variance* coefficient that was near 0.
+
+
+## Recap
+
+::: {.nonincremental}
+
+Today, we learned about...
+
+  - LASSO as a penalization and variable selection method
+
+  - Similarities and differences with Ridge
+
+**Next time**
+
+  - Quiz
+  - Start the next lab!
+  
+:::
+

@@ -70,6 +70,174 @@
     "text": "Footnotes\n\n\nThis Code of Conduct is adapted from the Contributor Covenant, version 2.0.↩︎"
   },
   {
+    "objectID": "slides/stat243_wk06mon.html#goals-for-this-week",
+    "href": "slides/stat243_wk06mon.html#goals-for-this-week",
+    "title": "Stat 243",
+    "section": "Goals for this week",
+    "text": "Goals for this week\n\n\n\nToday:\n\nIntroduce penalization to improve MSE in regression models\nDefine and apply Ridge Regression in a case study\n\n\n\n\nNext time:\n\nIntroduce LASSO as a penalization and variable selection method\nApply LASSO in a case study"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#recall-bias-variance-trade-off",
+    "href": "slides/stat243_wk06mon.html#recall-bias-variance-trade-off",
+    "title": "Stat 243",
+    "section": "Recall: Bias-Variance Trade-Off",
+    "text": "Recall: Bias-Variance Trade-Off\n\n\n\n\n\n\n\n\n\n\n\n\nBias-Variance Trade-off is useful when selecting among candidate models\n\n\nLinear Regression:\n\nFew predictors (less complex)\nMany predictors (more complex)"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#recall-model-selection",
+    "href": "slides/stat243_wk06mon.html#recall-model-selection",
+    "title": "Stat 243",
+    "section": "Recall: Model Selection",
+    "text": "Recall: Model Selection\nSuppose we considered numerous “candidate” models, and picked one using cross-validation:\n\\[Y = \\beta_0 + \\beta_1X_1 + \\beta_2X_2 + \\epsilon,\\qquad \\epsilon\\sim N(0,~\\sigma^2)\\]\n\nNext, estimate coefficients using least-squares\n\\[\\begin{aligned}\n\\text{Find }& \\ \\hat\\beta_0,\\hat\\beta_1,\\hat\\beta_2\\ \\text{ that minimizes }RSS\\\\\nRSS&=\\sum_{i=1}^n\\Big(Y_i - (\\hat\\beta_0 + \\hat\\beta_1X_{1i} + \\hat\\beta_2X_{2i})\\ \\Big)^2\n\\end{aligned}\\]\n\n\nRemember: The model we chose minimized MSE among the candidate models: \\[\\text{MSE} = \\text{Bias}^2 + \\text{Variance}\\]\n\n\nQ: Could we further lower MSE, without changing the variables in our model?\n\n\nA: Yes! We can change how we estimate the coefficients."
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#penalization",
+    "href": "slides/stat243_wk06mon.html#penalization",
+    "title": "Stat 243",
+    "section": "Penalization",
+    "text": "Penalization\nThis week, we’re focusing on two penalization methods for estimating regression coefficients.\n\nNote: “Penalization”, “Regularization”, and “Shrinkage” are synonyms\n\n\nGeneral Premise:\n\n“Shrink” magnitude of least-squares coefficients\n\n\n\n\nThis always increases bias \\(\\rightarrow\\) bad!\n\n\n\n\nMaybe it will decrease variance a lot \\(\\rightarrow\\) good!\n\nOverall Effect: Decrease MSE (hopefully!)"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#toy-example",
+    "href": "slides/stat243_wk06mon.html#toy-example",
+    "title": "Stat 243",
+    "section": "Toy Example",
+    "text": "Toy Example\nSuppose we have the following model: \\[\nY = \\beta_0 + \\beta_1X_1 + \\beta_2X_2\n\\]\nLeast Squares Regression Coefficients: \\[\\hat\\beta_0 = 2, \\ \\ \\hat\\beta_1 = 3, \\ \\ \\hat\\beta_2 = 5\\]\n\nTwo Models:\n\\[\\begin{aligned}\n\\text{Least Squares:    }&Y = \\hat\\beta_0 \\ + &\\hat\\beta_1X_1+\\ \\ \\   &  \\ \\ \\ \\ \\hat\\beta_2X_2 \\\\\n\\text{Shrunken Model:     }&Y = \\hat\\beta_0 \\ + &.98\\hat\\beta_1X_1+\\ \\ \\ &0.95\\hat\\beta_2X_2 \\\\\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#toy-example-mathematical-explanation",
+    "href": "slides/stat243_wk06mon.html#toy-example-mathematical-explanation",
+    "title": "Stat 243",
+    "section": "Toy Example: Mathematical Explanation",
+    "text": "Toy Example: Mathematical Explanation\n\\[\\begin{aligned}\n\\text{Least Squares:    }&Y = 2 \\ + &3X_1+\\ \\ \\   & \\ \\ \\ \\ \\  5X_2 \\\\\n\\text{Shrunken Model:     }&Y = 2 \\ + &2.94X_1+\\ \\ \\ &4.75X_2 \\\\\n\\end{aligned}\\]\nShrunken Model has higher Bias than Least Squares – we modified the coefficients!\n\nShrunken Model has lower Variance than Least Squares\n\nRecall: \\(Var(cX) = c^2Var(X)\\)\n\n\n\n\nIntuition:\n\n\\[\\text{Least Squares:   }Var(3X_1)=9Var(X_1)\\]\n\n\n\\[\\text{Shrunken Model:  }Var(2.94X_1)=8.64Var(X_1)\\]\n\n\n\\[8.64Var(X_1) &lt; 9Var(X_1)\\]"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#toy-example-simulation-example",
+    "href": "slides/stat243_wk06mon.html#toy-example-simulation-example",
+    "title": "Stat 243",
+    "section": "Toy Example: Simulation Example",
+    "text": "Toy Example: Simulation Example\n\n\nset.seed(100)\nx1 &lt;- runif(20, 0, 1)\nx2 &lt;- 2 - 2*x1 + rnorm(20, 0, .3)\ne &lt;- rnorm(20, 0, 1)\ny &lt;- 1 + x1 + 5*x2 + e\ndata &lt;- data.frame(x1, x2, y)\nggplot(data, aes(x = x1, y = x2, color = y)) + \n  geom_point(size = 4) + \n  theme_minimal(base_size = 15) +\n  scale_color_viridis_c(option = \"B\", direction = -1)\n\n\n\n\n\n\n\n\n\nWe will:\n\nSplit data into training and test sets\nFit least squares model to the training data\nMake predictions on the test data using the “Least Squares” and “Shrunken Models”\nCompare MSE"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#toy-example-simulation-example-1",
+    "href": "slides/stat243_wk06mon.html#toy-example-simulation-example-1",
+    "title": "Stat 243",
+    "section": "Toy Example: Simulation Example",
+    "text": "Toy Example: Simulation Example\nStep 1: Split data into training and test sets\n\nset.seed(2)\ntrain_indices &lt;- sample(1:20,15)\ntrain &lt;- data[train_indices,]\ntest &lt;- data[-train_indices,]\n\n\nStep 2: Fit least squares model to the training data\n\nleast_squares &lt;- lm(y ~ x1 + x2, data = train)\ncoef(least_squares)\n\n(Intercept)          x1          x2 \n  0.6764753   1.5186322   5.2849000"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#toy-example-simulation-example-2",
+    "href": "slides/stat243_wk06mon.html#toy-example-simulation-example-2",
+    "title": "Stat 243",
+    "section": "Toy Example: Simulation Example",
+    "text": "Toy Example: Simulation Example\nStep 3: Make predictions on the test data using the “Least Squares” and “Shrunken Models”\n\nypred_least_squares &lt;- 0.676  + 1.519*test$x1 + 5.285*test$x2\nypred_shrunken_mod  &lt;- 0.676  + 0.95*1.519*test$x1 + 0.98*5.285*test$x2\n\n\nCould also use the predict() function for the least squares model.\n\n\nStep 4: Compare MSE\n\nMSE_LeastSquares &lt;- mean( (ypred_least_squares-test$y)^2 )\nMSE_ShrunkenMod  &lt;- mean( (ypred_shrunken_mod -test$y)^2 )\nc(MSE_LeastSquares, MSE_ShrunkenMod)\n\n[1] 0.3202499 0.2834931\n\n\nThe shrunken model has lower MSE!"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#when-penalization-works",
+    "href": "slides/stat243_wk06mon.html#when-penalization-works",
+    "title": "Stat 243",
+    "section": "When Penalization Works",
+    "text": "When Penalization Works\nConsider situations where regression has high MSE:\n\nPredictors are strongly correlated (high variance)\nMany predictors relative to data size (high variance)\nModel form is non-linear (high bias)\n\n\nTo improve models in cases (1) and (2), we could “shrink” coefficients\n\nPotentially big decreases in variance!\nBias might go up a bit, but maybe that’s okay.\nHopefully: MSE decreases overall.\n\n\n\nBig Question: How do we actually “shrink” coefficients?"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#ridge-regression-1",
+    "href": "slides/stat243_wk06mon.html#ridge-regression-1",
+    "title": "Stat 243",
+    "section": "Ridge Regression",
+    "text": "Ridge Regression\n\\[\\text{Regression Model:} \\ \\ \\ \\ \\ \\ \\ \\ Y = \\beta_0 + \\beta_1X_1 + \\dots + \\beta_pX_p\\]\n\nLeast Squares: Find \\(\\hat\\beta\\)s that minimize \\[RSS=\\sum_{i=1}^n\\Big(Y_i - \\underbrace{(\\hat\\beta_0 + \\hat\\beta_1X_{1i} + \\dots + \\hat\\beta_pX_{pi})}_{\\hat Y_i}\\ \\Big)^2\\]\n\nGoal of RSS: Make regression line “close to data”\n\n\n\nRidge Regression: Find \\(\\hat\\beta\\)s that minimize \\[\n\\textrm{RSS} + \\underbrace{\\lambda\\sum_{j = 1}^p \\hat\\beta_j^2}_\\text{Ridge Penalty} \\qquad \\textrm{where }  \\lambda \\geq 0 \\text{ is a set \\textbf{tuning parameter}}\n\\]"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#consider-effects-of-the-tuning-parameter-lambda",
+    "href": "slides/stat243_wk06mon.html#consider-effects-of-the-tuning-parameter-lambda",
+    "title": "Stat 243",
+    "section": "Consider: Effects of the Tuning Parameter, \\(\\lambda\\)",
+    "text": "Consider: Effects of the Tuning Parameter, \\(\\lambda\\)\nRidge Regression: Find \\(\\hat\\beta\\)s that minimize \\[\n\\textrm{RSS} + \\underbrace{\\lambda\\sum_{j = 1}^p \\hat\\beta_j^2}_\\text{Ridge Penalty}\n\\]\n\nImagine \\(\\lambda=0\\). How do “Ridge” coefficients compare to “Least Squares” coefficients?\n\nRidge = Least Squares regression when \\(\\lambda=0\\)\n\nWhat happens to \\(\\beta_1,\\dots,\\beta_p\\) as \\(\\lambda\\) gets bigger and bigger?\n\nAll \\(\\beta_1,\\dots,\\beta_p \\rightarrow 0\\) as \\(\\lambda\\) grows.\n\nWhat happens to \\(\\beta_0\\) (intercept) as \\(\\lambda\\) gets bigger and bigger?\n\n\\(\\beta_0 \\to \\bar{Y}\\) as \\(\\lambda\\) grows.\n\n\n\n\n\n−+\n01:30"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#note-effect-of-scale",
+    "href": "slides/stat243_wk06mon.html#note-effect-of-scale",
+    "title": "Stat 243",
+    "section": "Note: Effect of Scale",
+    "text": "Note: Effect of Scale\nSuppose that we find \\(\\hat{Y} = 1 + 5 X_1 + 20 X_2\\) using Least Squares.\n\n\n\nRecall: Coefficient Magnitude \\(\\neq\\) Importance\nVariables may have very different scales\n\n\nCoefficients in Least-Squares regression and scale-equivalent\n\nIf we multiply a predictor (\\(X_j\\)) by \\(2\\), then the resulting coefficient (\\(\\hat{\\beta}_j\\)) would be multiplied by \\(1/2\\).\n\n\n\n\n\nIn Ridge Regression, coefficients can change depending on scale!\n\nVariables with bigger scales are penalized more.\n\nSoftware solves this problem:\n\nVariables are “standardized”\nRidge Regression performed on standardized variables\nCoefficients are re-scaled to the original scale."
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#molecular-solubility",
+    "href": "slides/stat243_wk06mon.html#molecular-solubility",
+    "title": "Stat 243",
+    "section": "Molecular Solubility",
+    "text": "Molecular Solubility\nData: Chemical properties for \\(n\\)=285 compounds\n\nResponse, \\(Y\\): log(Solubility). Solubility is how easily a compound dissolves in a solvent.\nPredictors, \\(X\\): \\(p=20\\) chemical properties, such as “number of bromine atoms” or “molecular weight”.\n\nGoal: Model solubility based on these 20 chemical descriptors."
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#data-preprocessing-and-eda",
+    "href": "slides/stat243_wk06mon.html#data-preprocessing-and-eda",
+    "title": "Stat 243",
+    "section": "Data preprocessing and EDA",
+    "text": "Data preprocessing and EDA\n\n\nlibrary(AppliedPredictiveModeling)\ndata(solubility)\n\n# Data preprocessing\nsolTest &lt;- data.frame(solTestX, Solubility = solTestY)\nsolTrain &lt;- data.frame(solTrainX, Solubility =  solTrainY)\n\nsolTest &lt;- solTest %&gt;% select(!starts_with(\"FP\"))\nsolTrain &lt;- solTrain %&gt;% select(!starts_with(\"FP\"))\n\n# Considering a smaller training set (30% of original size)\nset.seed(1)\nsolTrain &lt;- solTrain %&gt;% sample_frac(.3) \n\n# Plotting\nsolTrain %&gt;%\n  ggplot(aes(x = Solubility)) +\n  geom_histogram(color = \"white\",\n                 fill = \"steelblue\") +\n  labs(title = \"Distribution of Y (Log Solubility)\",\n       x = \"Log Solubility\") +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#pairwise-scatterplots",
+    "href": "slides/stat243_wk06mon.html#pairwise-scatterplots",
+    "title": "Stat 243",
+    "section": "Pairwise Scatterplots",
+    "text": "Pairwise Scatterplots\n\nsolTrain %&gt;%\n  pivot_longer(-Solubility, names_to = \"var\", values_to = \"value\") %&gt;%\n  ggplot(aes(x = value, y = Solubility)) +\n  geom_point(alpha = .15, shape = 16) +\n  geom_smooth(se = F, color = \"maroon\", linewidth = .35) +\n  facet_wrap( ~ var, nrow = 5, scales = \"free\") +\n  theme_bw() +\n  labs(y = \"Log(Solubility)\")"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#least-squares",
+    "href": "slides/stat243_wk06mon.html#least-squares",
+    "title": "Stat 243",
+    "section": "Least Squares",
+    "text": "Least Squares\nConsider the least squares model fit to our data.\n\\[Y = \\hat\\beta_0 + \\hat\\beta_1X_1 + \\dots + \\hat\\beta_{20}X_{20}\\]\n\nSuppose we have a test set to evaluate our model, consisting of (new) 316 compounds.\n\nWe compute test MSE:\n\n\nfull_mod &lt;- lm(Solubility ~ ., data = solTrain)\npreds &lt;- predict(full_mod, solTest)\nmean((solTest$Solubility - preds)^2)\n\n[1] 0.9921199"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#ridge-regression-in-r",
+    "href": "slides/stat243_wk06mon.html#ridge-regression-in-r",
+    "title": "Stat 243",
+    "section": "Ridge Regression in R",
+    "text": "Ridge Regression in R\nCan we reduce the test MSE by “shrinking” the coefficients?\n\nLet’s re-fit our model using several different values of \\(\\lambda\\)…\n\n\n# [,-1] removes the first column of this matrix, in this case,\n# it is the intercept. We don't want to penalize the intercept!\nx &lt;- model.matrix(Solubility ~., data = solTrain)[,-1]\ny &lt;- solTrain$Solubility\n\ngrid &lt;- 10^(seq(-5, 3, length = 100))\n\nlibrary(glmnet) # fits ridge regression models\nridge_mod &lt;- glmnet(x = x,\n                    y = y, \n                    # alpha = 0 specifies \"ridge\"\n                    alpha = 0,\n                    lambda = grid)"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#ridge-coefficient-estimates-by-lambda",
+    "href": "slides/stat243_wk06mon.html#ridge-coefficient-estimates-by-lambda",
+    "title": "Stat 243",
+    "section": "Ridge Coefficient Estimates, by \\(\\lambda\\)",
+    "text": "Ridge Coefficient Estimates, by \\(\\lambda\\)\n\nplot(ridge_mod, \n     sign.lambda = 1, \n     label = TRUE)\n\n\n\n\n\n\n\n\nQ: What happens to coefficient size as \\(\\lambda\\) changes?\nQ: Why do some coefficients change sign as \\(\\lambda\\) changes?"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#ridge-coefficient-estimates-by-lambda-with-ggplot2",
+    "href": "slides/stat243_wk06mon.html#ridge-coefficient-estimates-by-lambda-with-ggplot2",
+    "title": "Stat 243",
+    "section": "Ridge Coefficient Estimates, by \\(\\lambda\\) with ggplot2",
+    "text": "Ridge Coefficient Estimates, by \\(\\lambda\\) with ggplot2\n\nlibrary(broom)\ntidied &lt;- tidy(ridge_mod) %&gt;% \n  filter(term != \"(Intercept)\")\nggplot(tidied, aes(lambda, estimate, group = term, color = term)) +\n  geom_line() +\n  scale_x_log10(breaks = c(10^c(-5, -3, 0, 3)),\n                labels = c(\".00001\", \".001\", \"1\", \"1000\")) +\n  theme_bw(base_size = 10) + \n  labs(y = \"Coefficent estimate\",\n       color = \"Predictor\",\n       x = expression(lambda~\" ('lambda')\")) +\n  guides(color = guide_legend(ncol = 2))"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#how-do-we-select-lambda",
+    "href": "slides/stat243_wk06mon.html#how-do-we-select-lambda",
+    "title": "Stat 243",
+    "section": "How do we select \\(\\lambda\\)?",
+    "text": "How do we select \\(\\lambda\\)?\nQ: How do we find the best value of \\(\\lambda\\)?\n\nA: Cross-validation!\n\nCompare test MSE between models fit using different values of \\(\\lambda\\)\nSelect \\(\\lambda\\) that minimizes the test MSE\nThis model represents an “optimal” relationship between bias and variance"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#cross-validation-estimate-of-test-mse-10-fold-cv",
+    "href": "slides/stat243_wk06mon.html#cross-validation-estimate-of-test-mse-10-fold-cv",
+    "title": "Stat 243",
+    "section": "Cross-Validation Estimate of Test MSE (10-fold CV)",
+    "text": "Cross-Validation Estimate of Test MSE (10-fold CV)\n\n\nset.seed(1010)\n# Cross validation with glmnet\nmy_cv &lt;- cv.glmnet(x = x,\n                   y = y,\n                   alpha = 0,\n                   lambda = grid,\n                   nfolds = 10)\n\n# Plotting results\ntidied &lt;- tidy(my_cv)\nggplot(tidied, aes(x = lambda, y = estimate)) +\n  geom_line(color = \"red\") +\n  scale_x_log10(breaks = c(10^c(-5, -3, 0, 3)),\n                labels = c(\".00001\", \".001\", \"1\", \"1000\")) +\n  theme_bw(base_size = 15) +\n  labs(x = expression(lambda), y = \"Test MSE\")"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#zooming-in",
+    "href": "slides/stat243_wk06mon.html#zooming-in",
+    "title": "Stat 243",
+    "section": "Zooming In",
+    "text": "Zooming In\n\n\ntidied %&gt;%\n  filter(lambda &lt;= 1e-03 & lambda &gt;= 1e-5) %&gt;%\n  ggplot(aes(x = lambda, y = estimate)) +\n  geom_line(color = \"red\") +\n  scale_x_log10(breaks = c(10^c(-5:-3)),\n                labels = c(\".00001\", \".0001\", \".001\")) +\n  theme_bw(base_size = 15) +\n  labs(x = expression(lambda), y = \"Test MSE\")\n\n\n\n\n\n\n\n\n\n\nTest MSE is minimized at 0.8841 when \\(\\lambda = 0.0001\\)\nRecall: Original model had Test MSE = 0.992. Ridge Regression improved predictive performance!"
+  },
+  {
+    "objectID": "slides/stat243_wk06mon.html#recap",
+    "href": "slides/stat243_wk06mon.html#recap",
+    "title": "Stat 243",
+    "section": "Recap",
+    "text": "Recap\nToday, we learned about…\n\nShrinking coefficients to increase bias, but lower variance and MSE\nRidge Regression as one type of penalization\n\nNext Time:\n\nIntroduce LASSO as a penalization and variable selection method\nApply LASSO in a case study"
+  },
+  {
     "objectID": "slides/stat243_wk05mon.html#goals-for-today-and-next-time",
     "href": "slides/stat243_wk05mon.html#goals-for-today-and-next-time",
     "title": "Stat 243",
@@ -2021,5 +2189,152 @@
     "title": "Stat 243",
     "section": "R code for creating the plot in the final slide",
     "text": "R code for creating the plot in the final slide\n\nlibrary(ggtext) \nmetrics &lt;- data.frame(model = 1:17,\n  adjr2 = summary(best_subset)$adjr2,\n  rss = summary(best_subset)$rss,\n  cp = summary(best_subset)$cp,\n  bic = summary(best_subset)$bic) %&gt;%\n  rbind(\n    data.frame(model = 1:17,\n        adjr2 = summary(forward_select)$adjr2,\n        rss = summary(forward_select)$rss,\n        cp = summary(forward_select)$cp,\n        bic = summary(forward_select)$bic\n    )\n  ) %&gt;%\n  rbind(\n    data.frame(model = 1:17,\n        adjr2 = summary(backward_elim)$adjr2,\n        rss = summary(backward_elim)$rss,\n        cp = summary(backward_elim)$cp,\n        bic = summary(backward_elim)$bic\n    )\n  ) %&gt;% \n  mutate(method = rep(c(\"best\", \"forward\", \"backward\"), each = 17))\n\nmetrics %&gt;%\n  pivot_longer(!c(model, method), names_to =  \"var\", values_to = \"value\") %&gt;%\n  ggplot(aes(x = model, y = value, color = method)) + \n  geom_line(linewidth = .5) + \n  facet_wrap(~var, scales = \"free\") + \n  scale_color_manual(\n    values = c(best = \"#0072B2\", forward = \"#009E73\", backward = \"#D55E00\")\n  ) +\n  theme_bw() +\n  labs(title = \"Resulting model selection metrics for \n    &lt;span style='color:#0072B2;'&gt;best&lt;/span&gt;, \n    &lt;span style='color:#D55E00;'&gt;backward&lt;/span&gt;, and\n    &lt;span style='color:#009E73;'&gt;forward&lt;/span&gt; variable selection criteria\") + \n  theme(legend.position = \"none\",\n        plot.title = element_markdown())"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#goals-for-this-week",
+    "href": "slides/stat243_wk06wed.html#goals-for-this-week",
+    "title": "Stat 243",
+    "section": "Goals for this week",
+    "text": "Goals for this week\n\n\n\nMonday:\n\nIntroduce penalization to improve MSE in regression models\nDefine and apply Ridge Regression in a case study\n\n\n\n\nToday:\n\nIntroduce LASSO as a penalization and variable selection method\nApply LASSO in a case study"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#recall-least-squares-and-ridge-regression",
+    "href": "slides/stat243_wk06wed.html#recall-least-squares-and-ridge-regression",
+    "title": "Stat 243",
+    "section": "Recall: Least Squares and Ridge Regression",
+    "text": "Recall: Least Squares and Ridge Regression\nSuppose we’ve selected a regression model: \\[Y = \\beta_0 + \\beta_1X_1 + \\dots + \\beta_pX_p + \\epsilon,\\qquad \\epsilon \\sim N(0,~\\sigma^2)\\]\n\n\nLeast Squares: Find \\(\\beta\\)s that minimize \\[RSS=\\sum_{i=1}^n\\Big(Y_i - \\hat{Y}_i\\ \\Big)^2\\]\n\nGoal of RSS: Make regression line “close to data”\n\n\nRidge Regression: Find \\(\\beta\\)s that minimize \\[\n\\textrm{RSS} + \\underbrace{\\lambda\\sum_{j = 1}^p \\beta_j^2}_\\text{Ridge Penalty} \\qquad \\textrm{where }  \\lambda \\geq 0\n\\]\n\nGoal of Ridge Penalty: Make coefficients smaller"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#lasso-regression",
+    "href": "slides/stat243_wk06wed.html#lasso-regression",
+    "title": "Stat 243",
+    "section": "LASSO Regression",
+    "text": "LASSO Regression\n\\[\\begin{aligned}\n\\text{Least Squares: }& \\text{Minimize RSS}\\\\\n\\text{Ridge Regression: }& \\text{Minimize RSS} + \\lambda \\sum_{j=1}^p \\beta_j^2\n\\end{aligned}\\]\nLeast Absolute Shrinkage and Selection Operator: Find \\(\\beta\\)s that minimize \\[\n\\textrm{RSS} + \\underbrace{\\lambda\\sum_{j = 1}^p \\big|\\beta_j\\big|}_\\text{LASSO Penalty} \\qquad \\textrm{where }  \\lambda \\geq 0\n\\]\n\n\nGoal of LASSO Penalty: Make coefficients smaller\nLike Ridge, LASSO increases bias but decreases variance and (hopefully) MSE.\n\nSo how is LASSO different from Ridge?"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#geometric-perspective-two-types-of-distance",
+    "href": "slides/stat243_wk06wed.html#geometric-perspective-two-types-of-distance",
+    "title": "Stat 243",
+    "section": "Geometric Perspective: Two Types of Distance",
+    "text": "Geometric Perspective: Two Types of Distance\nHow to measure distance between a point \\(x=(x_1, \\dots, x_p)\\) and the origin \\((0, \\dots, 0)\\)?\n\n\n\nEuclidean distance: “straight line” distance: \\[\n\\Vert x\\Vert_2 = \\sqrt{x_1^2 + \\dots + x_p^2} = \\sqrt{ \\sum_{j=1}^p x_j^2}\n\\]\n\n\n\nMost common: Result of the Pythagorean theorem\nAlso called the \\(\\ell_2\\) norm\nRidge uses \\(\\big(\\Vert x\\Vert_2\\big)^2\\) to “shrink” coefficients\n\n\n\n\nManhattan distance: “grid line” distance: \\[\n\\Vert x\\Vert_1 = |x_1| + \\dots + |x_p| = \\sum_{j=1}^p |x_j|\n\\]\n\n\n\nthe \\(\\ell_1\\) norm\nLASSO uses \\(\\Vert x\\Vert_1\\) directly for shrinkage"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#geometric-perspective",
+    "href": "slides/stat243_wk06wed.html#geometric-perspective",
+    "title": "Stat 243",
+    "section": "Geometric Perspective",
+    "text": "Geometric Perspective"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#geometric-perspective-1",
+    "href": "slides/stat243_wk06wed.html#geometric-perspective-1",
+    "title": "Stat 243",
+    "section": "Geometric Perspective",
+    "text": "Geometric Perspective\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(\\Vert \\beta \\Vert_2 = \\sqrt{3^2 + 4^2} = 5\\)"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#geometric-perspective-2",
+    "href": "slides/stat243_wk06wed.html#geometric-perspective-2",
+    "title": "Stat 243",
+    "section": "Geometric Perspective",
+    "text": "Geometric Perspective\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(\\Vert \\beta \\Vert_2 = \\sqrt{3^2 + 4^2} = 5\\)\n\\(\\Vert \\beta \\Vert_1 = 3 + 4 = 7\\)\n\n\n\nTakeaway: Ridge and LASSO measure “distance” differently"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#consider-different-distance-different-emphasis",
+    "href": "slides/stat243_wk06wed.html#consider-different-distance-different-emphasis",
+    "title": "Stat 243",
+    "section": "Consider: Different Distance, Different Emphasis",
+    "text": "Consider: Different Distance, Different Emphasis\n\\[\\begin{aligned}\n\\text{Least Squares: }& \\text{Minimize RSS}\\\\\n\\text{Ridge Regression: }& \\text{Minimize RSS} + \\lambda \\sum_{j=1}^p \\beta_j^2\\\\\n\\text{LASSO Regression: }& \\text{Minimize RSS} + \\lambda \\sum_{j=1}^p \\big|\\beta_j\\big|\n\\end{aligned}\\]\n\nSuppose \\(\\beta_j=\\ -10\\). Calculate \\(\\beta_j^2\\) and \\(\\big|\\beta_j\\big|\\), then explain why this shows that Ridge penalizes “big” coefficients more than LASSO.\nSuppose \\(\\beta_j=\\ 0.1\\). Calculate \\(\\beta_j^2\\) and \\(\\big|\\beta_j\\big|\\), then explain why this shows that LASSO penalizes “small” coefficients more than Ridge.\nHypothesize why LASSO might shrink coefficients to exactly zero more often than Ridge."
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#lasso-for-variable-selection",
+    "href": "slides/stat243_wk06wed.html#lasso-for-variable-selection",
+    "title": "Stat 243",
+    "section": "LASSO for Variable Selection",
+    "text": "LASSO for Variable Selection\nWe’ve just uncovered why LASSO is a variable “selection operator”:\n\nRidge and LASSO: Coefficients with high variance are encouraged to shrink.\n\n\nRidge: Penalty gets relatively smaller as coefficients get smaller\n\nNo benefit of making small coefficients zero.\n\n\n\nLASSO: Penalty gets relatively larger as coefficients get smaller\n\nBigger benefit of making small coefficients precisely 0.\n\\(\\beta_j=0\\) \\(\\implies\\) \\(X_j\\) removed from model!\nThis is variable selection!"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#ridge-vs.-lasso",
+    "href": "slides/stat243_wk06wed.html#ridge-vs.-lasso",
+    "title": "Stat 243",
+    "section": "Ridge vs. LASSO",
+    "text": "Ridge vs. LASSO\nSimilarities:\n\nFast to estimate models (similar to Least Squares)\nShrink coefficients: Increasing bias but reducing variance and MSE\n\n\nDifferences:\n\nLASSO performs variable selection simultaneously, Ridge does not.\nLASSO generally outperforms Ridge when some coefficients are truly zero.\nRidge generally outperforms LASSO when all coefficients are truly non-zero."
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#wine-acidity",
+    "href": "slides/stat243_wk06wed.html#wine-acidity",
+    "title": "Stat 243",
+    "section": "Wine Acidity",
+    "text": "Wine Acidity\nWe study a “classic” dataset on red Vinho Verde wines grown in Northern Portugal.\n\n\\(n=200\\) different wines\n\\(Y\\)=Fixed Acidity\n\\(X\\)=9 physical properties of the wine (e.g., residual sugar, pH, etc.) and average quality rating\n\n\n\nwine &lt;- read_delim(\"https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv\",\n           delim = \";\", escape_double = FALSE, trim_ws = TRUE)\nwine &lt;- wine[1:200,-8]\nhead(wine)\n\n# A tibble: 6 × 11\n  `fixed acidity` `volatile acidity` `citric acid` `residual sugar` chlorides\n            &lt;dbl&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;\n1             7.4               0.7           0                 1.9     0.076\n2             7.8               0.88          0                 2.6     0.098\n3             7.8               0.76          0.04              2.3     0.092\n4            11.2               0.28          0.56              1.9     0.075\n5             7.4               0.7           0                 1.9     0.076\n6             7.4               0.66          0                 1.8     0.075\n# ℹ 6 more variables: `free sulfur dioxide` &lt;dbl&gt;,\n#   `total sulfur dioxide` &lt;dbl&gt;, pH &lt;dbl&gt;, sulphates &lt;dbl&gt;, alcohol &lt;dbl&gt;,\n#   quality &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#wine-acidity-response-variable-distribution",
+    "href": "slides/stat243_wk06wed.html#wine-acidity-response-variable-distribution",
+    "title": "Stat 243",
+    "section": "Wine Acidity: Response variable distribution",
+    "text": "Wine Acidity: Response variable distribution\n\n\nggplot(wine, aes(x = `fixed acidity`)) +\n  geom_histogram(color = \"white\", fill = \"steelblue\") +\n  labs(title = \"Distribution of Y (Fixed Acidity)\", \n       x = \"Fixed Acidity\") +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#least-squares-estimates",
+    "href": "slides/stat243_wk06wed.html#least-squares-estimates",
+    "title": "Stat 243",
+    "section": "Least Squares Estimates",
+    "text": "Least Squares Estimates\n\nmodel_ls &lt;- lm(`fixed acidity` ~ ., data = wine)\nlibrary(coefplot)\ncoefplot(model_ls, intercept = F, sort = \"magnitude\") +\n  theme_bw() \n\n\n\n\n\n\n\n\nQ: Which coefficients will LASSO shrink to 0?"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#lasso-in-r",
+    "href": "slides/stat243_wk06wed.html#lasso-in-r",
+    "title": "Stat 243",
+    "section": "LASSO in R",
+    "text": "LASSO in R\n\nlibrary(glmnet)\nlibrary(broom)\ngrid &lt;- 10^(seq(-4, 1, length = 1000))\nx &lt;- model.matrix(`fixed acidity` ~ ., data = wine)[, -1]\ny &lt;- wine$`fixed acidity`\nlasso_mod &lt;- glmnet(x,\n                    y, \n                    alpha = 1,\n                    lambda = grid)"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#lasso-estimates-ggplot2",
+    "href": "slides/stat243_wk06wed.html#lasso-estimates-ggplot2",
+    "title": "Stat 243",
+    "section": "LASSO Estimates (ggplot2)",
+    "text": "LASSO Estimates (ggplot2)\nExamine how LASSO coefficient estimates vary as \\(\\lambda\\) changes:\n\ntidied &lt;- tidy(lasso_mod) %&gt;% filter(term != \"(Intercept)\")\nggplot(tidied, aes(x = lambda, y = estimate, group = term, color = term)) +\n  geom_line() + \n  scale_x_log10(breaks = c(10^c(-4, -2, 0)),\n                labels = c(\".0001\", \".01\", \"1\")) +\n  theme_bw(base_size = 10) +\n  labs(title = \"Coefficent estimates based on LASSO\",\n       x = expression(lambda ~ \" (lambda)\")) +\n  guides(color = guide_legend(ncol = 1))"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#lasso-estimates-base",
+    "href": "slides/stat243_wk06wed.html#lasso-estimates-base",
+    "title": "Stat 243",
+    "section": "LASSO Estimates (base)",
+    "text": "LASSO Estimates (base)\n\nplot(lasso_mod, sign.lambda = 1, label = TRUE)"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#cross-validation-for-optimal-tuning-parameter",
+    "href": "slides/stat243_wk06wed.html#cross-validation-for-optimal-tuning-parameter",
+    "title": "Stat 243",
+    "section": "Cross-Validation for Optimal Tuning Parameter",
+    "text": "Cross-Validation for Optimal Tuning Parameter\nTo find the optimal tuning parameter, \\(\\lambda\\), we again use Cross-Validation\n\n\nset.seed(1010)\nmy_cv &lt;- cv.glmnet(x,\n                   y,\n                   alpha = 1,\n                   lambda = grid,\n                   nfolds = 20)\nbest_L &lt;- my_cv$lambda.min\nreg_L &lt;- my_cv$lambda.1se\n\ntidied &lt;- tidy(my_cv)\nggplot(tidied, aes(x = lambda, y = estimate)) + \n  geom_line(color = \"red\") +\n  scale_x_log10(breaks = c(10^c(-4, -2, 0)),\n                labels = c(\".0001\", \".01\", \"1\")) +\n  theme_bw(base_size = 15) +\n  labs(x = expression(lambda), y = \"Test MSE\") +\n  geom_vline(xintercept = best_L)\n\n\n\n\n\n\n\n\n\n\n\nGray vertical line is optimal \\(\\lambda\\): Test MSE minimized at 0.4297.\n(Ridge yields Test MSE of 0.4317)"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#feature-selection",
+    "href": "slides/stat243_wk06wed.html#feature-selection",
+    "title": "Stat 243",
+    "section": "Feature Selection",
+    "text": "Feature Selection\nWhat features did the best \\(\\lambda\\) select?\n\ns &lt;- which(lasso_mod$lambda==best_L)\nnames(coef(lasso_mod)[,s] != 0)[(coef(lasso_mod)[,s] != 0)]\n\n [1] \"(Intercept)\"            \"`volatile acidity`\"     \"`citric acid`\"         \n [4] \"`residual sugar`\"       \"chlorides\"              \"`free sulfur dioxide`\" \n [7] \"`total sulfur dioxide`\" \"pH\"                     \"sulphates\"             \n[10] \"quality\"               \n\n\n\nWhat features did the best \\(\\lambda\\) not select?\n\nnames(coef(lasso_mod)[,s] == 0)[(coef(lasso_mod)[,s] == 0)]\n\n[1] \"alcohol\"\n\n\nWhy not Quality, Free Sulfur Dioxide, Residual Sugar, and Total Sulfur Dioxide?"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#back-to-the-least-squares-estimates",
+    "href": "slides/stat243_wk06wed.html#back-to-the-least-squares-estimates",
+    "title": "Stat 243",
+    "section": "Back to the Least Squares Estimates",
+    "text": "Back to the Least Squares Estimates\n\n\nmodel_ls &lt;- lm(`fixed acidity`~.,data=wine)\nlibrary(coefplot)\ncoefplot(model_ls, intercept = F, sort = \"magnitude\") +\n  theme_bw() +\n  labs(title = \"Coefficient Plot\")"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#back-to-the-least-squares-estimates-1",
+    "href": "slides/stat243_wk06wed.html#back-to-the-least-squares-estimates-1",
+    "title": "Stat 243",
+    "section": "Back to the Least Squares Estimates",
+    "text": "Back to the Least Squares Estimates\n\n\nmodel_ls &lt;- lm(`fixed acidity`~.,data=wine)\nlibrary(coefplot)\ncoefplot(model_ls, intercept = F, sort = \"magnitude\") +\n  theme_bw() +\n  scale_x_continuous(limits = c(-.12, .18)) +\n  labs(title = \"Coefficient Plot (Zoomed In)\")\n\n\n\n\n\n\n\n\n\nLASSO removed only a high variance coefficient that was near 0."
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#recap",
+    "href": "slides/stat243_wk06wed.html#recap",
+    "title": "Stat 243",
+    "section": "Recap",
+    "text": "Recap\nToday, we learned about…\n\nLASSO as a penalization and variable selection method\nSimilarities and differences with Ridge\n\nNext time\n\nQuiz\nStart the next lab!"
   }
 ]
