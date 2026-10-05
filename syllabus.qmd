@@ -84,6 +84,7 @@ We'll have a few types of assignments, activities, and projects for this course.
         
 -   **Lab Quizzes**:
     - We will have a short quiz in class on each lab the day it is due. 
+    - The lowest quiz score will be dropped.
     
 -   **In-class activities**:
     - During lecture, we will include some in-class activities. Including but not limited to: 
