@@ -168,17 +168,24 @@ $$\begin{aligned}
 \text{LASSO Regression: }& \text{Minimize RSS} + \lambda \sum_{j=1}^p \big|\beta_j\big|
 \end{aligned}$$
 
-::: {.nonincremental}
+::: {.nonincremental .small}
 
-1. Suppose $\beta_j=\ -10$. Calculate $\beta_j^2$ and $\big|\beta_j\big|$, then explain why this shows that Ridge penalizes "big" coefficients more than LASSO.
+1. Suppose $\beta_j= -10$. Calculate $\beta_j^2$ and $\big|\beta_j\big|$, then explain why this shows that Ridge penalizes "big" coefficients more than LASSO.
 
-2. Suppose $\beta_j=\ 0.1$. Calculate $\beta_j^2$ and $\big|\beta_j\big|$, then explain why this shows that LASSO penalizes "small" coefficients more than Ridge.
+2. Suppose $\beta_j= 0.1$. Calculate $\beta_j^2$ and $\big|\beta_j\big|$, then explain why this shows that LASSO penalizes "small" coefficients more than Ridge.
 
 3. How much does each penalty **decrease** if $\beta_j$ moves from $10$ to $9.9$? What about from $0.1$ to $0$?
 
 3. Hypothesize why LASSO might shrink coefficients to **exactly zero** more often than Ridge.
 
 :::
+
+```{r}
+#| echo: false
+countdown::countdown(3)
+```
+
+
 
 ## LASSO for Variable Selection
 
@@ -472,7 +479,7 @@ Instead of thinking of Ridge Regression and LASSO as minimizing the sum of RSS a
 
 ::: {.fragment}
 
-Suppose $q$ is $1$ or $2$. For each $\lambda \geq 0$, there is exactly one $s \geq 0$ so that if $\beta$ minimizes
+Suppose $q$ is $1$ or $2$. For each $\lambda > 0$, there is exactly one $s \geq 0$ so that if $\beta$ minimizes
 $$
 \textrm{RSS} + \lambda \Vert \beta \Vert_q^q \qquad
 $$
