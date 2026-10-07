@@ -37,6 +37,7 @@ library(moderndive)
 library(ggthemes)
 library(ISLR)
 library(rsample)
+library(ggforce)
 ```
 
 ::::: columns
@@ -58,6 +59,16 @@ library(rsample)
 :::::
 
 ------------------------------------------------------------------------
+
+## Announcements
+
+::: {.nonincremental}
+
+- Group Project Preferences. Please fill out the [Google form](https://forms.gle/RNnH2AryRaiGLzdS9) by Thursday at 3pm.
+
+- More discussion of the group project scope on Friday.
+
+:::
 
 ## Goals for this week
 
@@ -148,6 +159,61 @@ So how is LASSO different from Ridge?
 
 :::
 
+
+## Consider: Different Distance, Different Emphasis
+
+$$\begin{aligned}
+\text{Least Squares: }& \text{Minimize RSS}\\
+\text{Ridge Regression: }& \text{Minimize RSS} + \lambda \sum_{j=1}^p \beta_j^2\\
+\text{LASSO Regression: }& \text{Minimize RSS} + \lambda \sum_{j=1}^p \big|\beta_j\big|
+\end{aligned}$$
+
+::: {.nonincremental}
+
+1. Suppose $\beta_j=\ -10$. Calculate $\beta_j^2$ and $\big|\beta_j\big|$, then explain why this shows that Ridge penalizes "big" coefficients more than LASSO.
+
+2. Suppose $\beta_j=\ 0.1$. Calculate $\beta_j^2$ and $\big|\beta_j\big|$, then explain why this shows that LASSO penalizes "small" coefficients more than Ridge.
+
+3. How much does each penalty **decrease** if $\beta_j$ moves from $10$ to $9.9$? What about from $0.1$ to $0$?
+
+3. Hypothesize why LASSO might shrink coefficients to **exactly zero** more often than Ridge.
+
+:::
+
+## LASSO for Variable Selection
+
+We've just uncovered why LASSO is a variable "**selection operator**":
+
+::: {.fragment .nonincremental}
+
+**Ridge *and* LASSO:** Coefficients are encouraged to shrink.
+
+:::
+
+::: {.fragment .nonincremental}
+
+**Ridge:** Penalty gets relatively smaller as coefficients get smaller
+
+  + No benefit of making small coefficients zero.
+
+:::
+
+::: {.fragment .nonincremental}
+
+**LASSO:** Penalty gets relatively larger as coefficients get smaller
+
+  + Bigger benefit of making small coefficients *precisely 0*.
+
+  + $\beta_j=0$ $\implies$ $X_j$ removed from model!
+
+  + This is variable selection!
+
+:::
+
+
+# Geometric Perspective
+
+
 ## Geometric Perspective: Two Types of Distance
 
 How to measure distance between a point $x=(x_1, \dots, x_p)$ and the origin $(0, \dots, 0)$?
@@ -200,6 +266,8 @@ $$
 :::
 
 ::::
+
+
 
 ## Geometric Perspective
 
@@ -305,53 +373,266 @@ ggplot(data = data.frame( x = c(0,3), y = c(0,4), name = c("Origin", "beta")), a
 
 ::::
 
-## Consider: Different Distance, Different Emphasis
 
-$$\begin{aligned}
-\text{Least Squares: }& \text{Minimize RSS}\\
-\text{Ridge Regression: }& \text{Minimize RSS} + \lambda \sum_{j=1}^p \beta_j^2\\
-\text{LASSO Regression: }& \text{Minimize RSS} + \lambda \sum_{j=1}^p \big|\beta_j\big|
-\end{aligned}$$
 
-::: {.nonincremental}
+## Geometric Perspective II
 
-1. Suppose $\beta_j=\ -10$. Calculate $\beta_j^2$ and $\big|\beta_j\big|$, then explain why this shows that Ridge penalizes "big" coefficients more than LASSO.
+What does a circle of radius $r$ look like in the $\ell_2$ norm?
 
-2. Suppose $\beta_j=\ 0.1$. Calculate $\beta_j^2$ and $\big|\beta_j\big|$, then explain why this shows that LASSO penalizes "small" coefficients more than Ridge.
+::: {.fragment}
 
-3. Hypothesize why LASSO might shrink coefficients to **exactly zero** more often than Ridge.
+$$
+\Vert \beta \Vert_2 =  \sqrt{ \beta_1^2 + \beta_2^2 }      \leq r
+$$
+
+```{r}
+#| echo: false
+#| fig-width: 5
+#| fig-height: 5
+circles <- data.frame(x0 = 0, y0 = 0, r = 2)
+t<-seq(from = 0, to = 8, by = 1)
+ggplot() +
+  xlim(-3, 3)+
+  ylim(-3,3) +
+  coord_fixed()+
+  labs(x = expression(beta[1]), y = expression(beta[2]), parse = T)+
+  geom_circle(aes(x0 = x0, y0 = y0, r = r), data = circles, fill = "steelblue")+
+  geom_point( data = data.frame(x = c(0,1.41), y = c(0, 1.41)), aes(x = x, y=y))+
+  geom_line(data = data.frame(x = c(0,1.41), y = c(0, 1.41)), aes(x = x, y=y))+
+  annotate(geom = "text", y = 1, x = 0.45, label = "r = 2") + 
+  theme_bw()
+```
 
 :::
 
-## LASSO for Variable Selection
+## Geometric Perspective II
 
-We've just uncovered why LASSO is a variable "**selection operator**":
+What does a "circle" of radius $r$ look like in the $\ell_1$ norm?
+
+::: {.fragment}
+
+$$
+\Vert \beta \Vert_1  = |\beta_1| + |\beta_2|     \leq r
+$$
+
+```{r}
+#| echo: false 
+#| fig-width: 5
+#| fig-height: 5
+d<-data.frame(x = c(2,0,-2, 0), y = c(0,2,0,-2))
+ggplot() +
+  xlim(-3, 3)+
+  ylim(-3,3) +
+  coord_fixed()+
+  theme_bw()+
+  labs(x = expression(beta[1]), y = expression(beta[2]), parse = T)+
+  geom_polygon(d, mapping = aes(x = x, y = y), fill = "steelblue", color = "black" )+
+  geom_point( data = data.frame(x = c(0,1), y = c(0, 1)), aes(x = x, y=y))+
+  geom_line(data = data.frame(x = c(0,1,1), y = c(0, 0,1)), aes(x = x, y=y))+
+  annotate(geom = "text", y = .5, x = 0.45, label = "r = 2")
+```
+
+:::
+
+## Ridge and LASSO in terms of $\ell_q$ norms
+
+In ridge regression, we seek parameters $\beta$ that minimize RSS plus the (squared) $\ell_2$ norm of $\beta$:
+$$
+\textrm{RSS} + \lambda \sum_{i =1}^p \beta_i^2 = \mathrm{RSS} + \lambda\Vert\beta\Vert_2^2
+$$
 
 ::: {.fragment .nonincremental}
 
-**Ridge *and* LASSO:** Coefficients with high variance are encouraged to shrink.
+Alternatively, we could seek parameters $\beta$ that minimize RSS plus the $\ell_1$ norm of $\beta$:
+
+$$
+\textrm{RSS} + \lambda \sum_{i =1}^p |\beta_i| = \mathrm{RSS} + \lambda \Vert \beta \Vert_1
+$$
+
+We have now reconstructed ridge and LASSO regression in terms of $\ell_1$ and $\ell_2$ norms!
 
 :::
+
+
+- In addition to shrinking coefficients, LASSO also happens to perform variable selection!
+
+
+
+## Alternative Formulations
+
+Instead of thinking of Ridge Regression and LASSO as minimizing the sum of RSS and the shrinkage penalty, we can think of them as solving a restricted optimization problem:
 
 ::: {.fragment .nonincremental}
 
-**Ridge:** Penalty gets relatively smaller as coefficients get smaller
+- For each $s \geq 0$, Ridge Regression seeks to minimize $\textrm{RSS}$ subject to $\Vert\beta\Vert_2^2 \leq s$
 
-  + No benefit of making small coefficients zero.
+- For each $s \geq 0$, LASSO seeks to minimize $\textrm{RSS}$ subject to $\Vert\beta\Vert_1 \leq s$
+
+:::
+
+::: {.fragment}
+
+Suppose $q$ is $1$ or $2$. For each $\lambda \geq 0$, there is exactly one $s \geq 0$ so that if $\beta$ minimizes
+$$
+\textrm{RSS} + \lambda \Vert \beta \Vert_q^q \qquad
+$$
+
+then $\beta$ minimizes
+$$
+\mathrm{RSS} \qquad \textrm{ subject to } \Vert \beta \Vert_q^q \leq s
+$$
 
 :::
 
-::: {.fragment .nonincremental}
+## Variable Selection with LASSO
 
-**LASSO:** Penalty gets relatively larger as coefficients get smaller
+For LASSO, the solution to the optimization problem often lies on a vertex of the domain, which corresponds to a subspace where one or more parameters are $0$.
 
-  + Bigger benefit of making small coefficients *precisely 0*.
+```{r}
+#| echo: false
+x<-rep(seq(from = -3, to = 3,  length = 50), 50)
+y<-rep(seq(from = -3, to = 3,  length = 50), each = 50)
 
-  + $\beta_j=0$ $\implies$ $X_j$ removed from model!
+dd<-data.frame(x,y) %>% mutate(z = 2*( (x-1.5)^2 - 1.25*(x-1.5)*(y-2.5) +(y-2.5)^2) )
+```
 
-  + This is variable selection!
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: "100%"
+#| echo: false
+#| fig-width: 5
+#| fig-height: 5
+library(ggforce)
+circles <- data.frame(
+  x0 = 0,
+  y0 = 0,
+  r = 1
+)
+
+t<-seq(from = 0, to = 8, by = 1)
+
+ggplot(  ) +
+  xlim(-1.5, 3)+
+  ylim(-1.5,3) +
+  coord_fixed()+
+  theme_bw()+
+  labs(x = expression(beta[1]), y = expression(beta[2]), title = "Ridge Regression", color = "RSS")  +
+  geom_contour(dd,mapping = aes(x = x, y = y, z = z, color = after_stat(level)), breaks = t)+
+  geom_circle(aes(x0 = x0, y0 = y0, r = r), data = circles, fill = "steelblue")+
+  geom_point(aes(x = 1.5, y = 2.5))+
+  annotate(geom="point", x = 1.5, y = 2.5)+
+  annotate(geom="text", x = 1.65, y = 2.8, label = expression(hat(beta)))+
+  viridis::scale_color_viridis(option = "D")
+```
 
 :::
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: "100%"
+#| echo: false
+#| fig-width: 5
+#| fig-height: 5
+d<-data.frame(x = c(1,0,-1, 0), y = c(0,1,0,-1))
+ggplot( ) +
+  coord_fixed()+
+  theme_bw()+
+  xlim(-1.5, 3)+
+  ylim(-1.5,3) +
+  labs(x = expression(beta[1]), y = expression(beta[2]), title = "LASSO", color = "RSS")+
+  geom_contour(dd,mapping = aes(x = x, y = y, z = z, color = after_stat(level)), breaks = t)  +
+  geom_polygon(d, mapping = aes(x = x, y = y), fill = "steelblue", color = "black" )+
+  annotate(geom="point", x = 1.5, y = 2.5)+
+  annotate(geom="text", x = 1.65, y = 2.8, label = expression(hat(beta)))+
+  viridis::scale_color_viridis(option = "D")
+```
+
+:::
+
+::::
+
+
+
+
+## Variable Selection with LASSO
+
+For LASSO, the solution to the optimization problem often lies on a vertex of the domain, which corresponds to a subspace where one or more parameters are $0$.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: "100%"
+#| echo: false
+#| fig-width: 5
+#| fig-height: 5
+library(ggforce)
+circles <- data.frame(
+  x0 = 0,
+  y0 = 0,
+  r = 1
+)
+
+t<-seq(from = 0, to = 8, by = 1)
+
+ggplot(  ) +
+  xlim(-1.5, 3)+
+  ylim(-1.5,3) +
+  coord_fixed()+
+  theme_bw()+
+  labs(x = expression(beta[1]), y = expression(beta[2]), title = "Ridge Regression", color = "RSS")  +
+  geom_contour(dd,mapping = aes(x = x, y = y, z = z, color = after_stat(level)), breaks = t)+
+  geom_circle(aes(x0 = x0, y0 = y0, r = r), data = circles, fill = "steelblue")+
+  geom_contour(dd, mapping = aes(x = x, y = y, z = z), 
+               breaks = 3.02,
+               color = "tomato", 
+               linewidth = 1)+
+  annotate(geom = "point", x = 0.29, y = 0.96, color = "tomato", size = 2)+
+  geom_point(aes(x = 1.5, y = 2.5))+
+  annotate(geom="point", x = 1.5, y = 2.5)+
+  annotate(geom="text", x = 1.65, y = 2.8, label = expression(hat(beta)))+
+  viridis::scale_color_viridis(option = "D")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: "100%"
+#| echo: false
+#| fig-width: 5
+#| fig-height: 5
+d<-data.frame(x = c(1,0,-1, 0), y = c(0,1,0,-1))
+ggplot( ) +
+  coord_fixed()+
+  theme_bw()+
+  xlim(-1.5, 3)+
+  ylim(-1.5,3) +
+  labs(x = expression(beta[1]), y = expression(beta[2]), title = "LASSO", color = "RSS")+
+  geom_contour(dd,mapping = aes(x = x, y = y, z = z, color = after_stat(level)), breaks = t)  +
+  geom_polygon(d, mapping = aes(x = x, y = y), fill = "steelblue", color = "black" )+
+  geom_contour(dd, mapping = aes(x = x, y = y, z = z),
+               breaks = 3.375,
+               color = "tomato", linewidth = 1)+
+  annotate(geom = "point", x = 0, y = 1, color = "tomato", size = 2)+
+  annotate(geom="point", x = 1.5, y = 2.5)+
+  annotate(geom="text", x = 1.65, y = 2.8, label = expression(hat(beta)))+
+  viridis::scale_color_viridis(option = "D")
+```
+
+:::
+
+::::
+
+
+
+
 
 ## Ridge vs. LASSO
 
@@ -565,7 +846,7 @@ Today, we learned about...
 **Next time**
 
   - Quiz
-  - Start the next lab!
+  - Discuss the project
   
 :::
 

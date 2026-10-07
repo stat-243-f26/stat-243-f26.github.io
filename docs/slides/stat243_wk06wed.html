@@ -213,6 +213,13 @@
 <p><span class="custom-subtitle">Stat 243 <br> Week 6 | Fall 2026</span></p>
 </div></div>
 </section>
+<section id="announcements" class="slide level2">
+<h2>Announcements</h2>
+<ul>
+<li><p>Group Project Preferences. Please fill out the <a href="https://forms.gle/RNnH2AryRaiGLzdS9">Google form</a> by Thursday at 3pm.</p></li>
+<li><p>More discussion of the group project scope on Friday.</p></li>
+</ul>
+</section>
 <section id="goals-for-this-week" class="slide level2">
 <h2>Goals for this week</h2>
 <div class="columns">
@@ -274,6 +281,46 @@
 <p>So how is LASSO different from Ridge?</p>
 </div>
 </section>
+<section id="consider-different-distance-different-emphasis" class="slide level2">
+<h2>Consider: Different Distance, Different Emphasis</h2>
+<p><span class="math display">\[\begin{aligned}
+\text{Least Squares: }&amp; \text{Minimize RSS}\\
+\text{Ridge Regression: }&amp; \text{Minimize RSS} + \lambda \sum_{j=1}^p \beta_j^2\\
+\text{LASSO Regression: }&amp; \text{Minimize RSS} + \lambda \sum_{j=1}^p \big|\beta_j\big|
+\end{aligned}\]</span></p>
+<ol type="1">
+<li><p>Suppose <span class="math inline">\(\beta_j=\ -10\)</span>. Calculate <span class="math inline">\(\beta_j^2\)</span> and <span class="math inline">\(\big|\beta_j\big|\)</span>, then explain why this shows that Ridge penalizes “big” coefficients more than LASSO.</p></li>
+<li><p>Suppose <span class="math inline">\(\beta_j=\ 0.1\)</span>. Calculate <span class="math inline">\(\beta_j^2\)</span> and <span class="math inline">\(\big|\beta_j\big|\)</span>, then explain why this shows that LASSO penalizes “small” coefficients more than Ridge.</p></li>
+<li><p>How much does each penalty <strong>decrease</strong> if <span class="math inline">\(\beta_j\)</span> moves from <span class="math inline">\(10\)</span> to <span class="math inline">\(9.9\)</span>? What about from <span class="math inline">\(0.1\)</span> to <span class="math inline">\(0\)</span>?</p></li>
+<li><p>Hypothesize why LASSO might shrink coefficients to <strong>exactly zero</strong> more often than Ridge.</p></li>
+</ol>
+</section>
+<section id="lasso-for-variable-selection" class="slide level2">
+<h2>LASSO for Variable Selection</h2>
+<p>We’ve just uncovered why LASSO is a variable “<strong>selection operator</strong>”:</p>
+<div class="fragment">
+<p><strong>Ridge <em>and</em> LASSO:</strong> Coefficients are encouraged to shrink.</p>
+</div>
+<div class="fragment">
+<p><strong>Ridge:</strong> Penalty gets relatively smaller as coefficients get smaller</p>
+<ul>
+<li>No benefit of making small coefficients zero.</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>LASSO:</strong> Penalty gets relatively larger as coefficients get smaller</p>
+<ul>
+<li><p>Bigger benefit of making small coefficients <em>precisely 0</em>.</p></li>
+<li><p><span class="math inline">\(\beta_j=0\)</span> <span class="math inline">\(\implies\)</span> <span class="math inline">\(X_j\)</span> removed from model!</p></li>
+<li><p>This is variable selection!</p></li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="geometric-perspective" class="title-slide slide level1 center">
+<h1>Geometric Perspective</h1>
+
+</section>
 <section id="geometric-perspective-two-types-of-distance" class="slide level2">
 <h2>Geometric Perspective: Two Types of Distance</h2>
 <p>How to measure distance between a point <span class="math inline">\(x=(x_1, \dots, x_p)\)</span> and the origin <span class="math inline">\((0, \dots, 0)\)</span>?</p>
@@ -305,7 +352,7 @@
 </div>
 </div></div>
 </section>
-<section id="geometric-perspective" class="slide level2">
+<section id="geometric-perspective-1" class="slide level2">
 <h2>Geometric Perspective</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
@@ -322,7 +369,7 @@
 
 </div></div>
 </section>
-<section id="geometric-perspective-1" class="slide level2">
+<section id="geometric-perspective-2" class="slide level2">
 <h2>Geometric Perspective</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
@@ -341,7 +388,7 @@
 </ul>
 </div></div>
 </section>
-<section id="geometric-perspective-2" class="slide level2">
+<section id="geometric-perspective-3" class="slide level2">
 <h2>Geometric Perspective</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
@@ -366,39 +413,127 @@
 </div>
 </div></div>
 </section>
-<section id="consider-different-distance-different-emphasis" class="slide level2">
-<h2>Consider: Different Distance, Different Emphasis</h2>
-<p><span class="math display">\[\begin{aligned}
-\text{Least Squares: }&amp; \text{Minimize RSS}\\
-\text{Ridge Regression: }&amp; \text{Minimize RSS} + \lambda \sum_{j=1}^p \beta_j^2\\
-\text{LASSO Regression: }&amp; \text{Minimize RSS} + \lambda \sum_{j=1}^p \big|\beta_j\big|
-\end{aligned}\]</span></p>
-<ol type="1">
-<li><p>Suppose <span class="math inline">\(\beta_j=\ -10\)</span>. Calculate <span class="math inline">\(\beta_j^2\)</span> and <span class="math inline">\(\big|\beta_j\big|\)</span>, then explain why this shows that Ridge penalizes “big” coefficients more than LASSO.</p></li>
-<li><p>Suppose <span class="math inline">\(\beta_j=\ 0.1\)</span>. Calculate <span class="math inline">\(\beta_j^2\)</span> and <span class="math inline">\(\big|\beta_j\big|\)</span>, then explain why this shows that LASSO penalizes “small” coefficients more than Ridge.</p></li>
-<li><p>Hypothesize why LASSO might shrink coefficients to <strong>exactly zero</strong> more often than Ridge.</p></li>
-</ol>
+<section id="geometric-perspective-ii" class="slide level2">
+<h2>Geometric Perspective II</h2>
+<p>What does a circle of radius <span class="math inline">\(r\)</span> look like in the <span class="math inline">\(\ell_2\)</span> norm?</p>
+<div class="fragment">
+<p><span class="math display">\[
+\Vert \beta \Vert_2 =  \sqrt{ \beta_1^2 + \beta_2^2 }      \leq r
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="lasso-for-variable-selection" class="slide level2">
-<h2>LASSO for Variable Selection</h2>
-<p>We’ve just uncovered why LASSO is a variable “<strong>selection operator</strong>”:</p>
+<section id="geometric-perspective-ii-1" class="slide level2">
+<h2>Geometric Perspective II</h2>
+<p>What does a “circle” of radius <span class="math inline">\(r\)</span> look like in the <span class="math inline">\(\ell_1\)</span> norm?</p>
 <div class="fragment">
-<p><strong>Ridge <em>and</em> LASSO:</strong> Coefficients with high variance are encouraged to shrink.</p>
+<p><span class="math display">\[
+\Vert \beta \Vert_1  = |\beta_1| + |\beta_2|     \leq r
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="480"></p>
+</figure>
 </div>
+</div>
+</div>
+</div>
+</section>
+<section id="ridge-and-lasso-in-terms-of-ell_q-norms" class="slide level2">
+<h2>Ridge and LASSO in terms of <span class="math inline">\(\ell_q\)</span> norms</h2>
+<p>In ridge regression, we seek parameters <span class="math inline">\(\beta\)</span> that minimize RSS plus the (squared) <span class="math inline">\(\ell_2\)</span> norm of <span class="math inline">\(\beta\)</span>: <span class="math display">\[
+\textrm{RSS} + \lambda \sum_{i =1}^p \beta_i^2 = \mathrm{RSS} + \lambda\Vert\beta\Vert_2^2
+\]</span></p>
 <div class="fragment">
-<p><strong>Ridge:</strong> Penalty gets relatively smaller as coefficients get smaller</p>
+<p>Alternatively, we could seek parameters <span class="math inline">\(\beta\)</span> that minimize RSS plus the <span class="math inline">\(\ell_1\)</span> norm of <span class="math inline">\(\beta\)</span>:</p>
+<p><span class="math display">\[
+\textrm{RSS} + \lambda \sum_{i =1}^p |\beta_i| = \mathrm{RSS} + \lambda \Vert \beta \Vert_1
+\]</span></p>
+<p>We have now reconstructed ridge and LASSO regression in terms of <span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_2\)</span> norms!</p>
+</div>
 <ul>
-<li>No benefit of making small coefficients zero.</li>
+<li class="fragment">In addition to shrinking coefficients, LASSO also happens to perform variable selection!</li>
+</ul>
+</section>
+<section id="alternative-formulations" class="slide level2">
+<h2>Alternative Formulations</h2>
+<p>Instead of thinking of Ridge Regression and LASSO as minimizing the sum of RSS and the shrinkage penalty, we can think of them as solving a restricted optimization problem:</p>
+<div class="fragment">
+<ul>
+<li><p>For each <span class="math inline">\(s \geq 0\)</span>, Ridge Regression seeks to minimize <span class="math inline">\(\textrm{RSS}\)</span> subject to <span class="math inline">\(\Vert\beta\Vert_2^2 \leq s\)</span></p></li>
+<li><p>For each <span class="math inline">\(s \geq 0\)</span>, LASSO seeks to minimize <span class="math inline">\(\textrm{RSS}\)</span> subject to <span class="math inline">\(\Vert\beta\Vert_1 \leq s\)</span></p></li>
 </ul>
 </div>
 <div class="fragment">
-<p><strong>LASSO:</strong> Penalty gets relatively larger as coefficients get smaller</p>
-<ul>
-<li><p>Bigger benefit of making small coefficients <em>precisely 0</em>.</p></li>
-<li><p><span class="math inline">\(\beta_j=0\)</span> <span class="math inline">\(\implies\)</span> <span class="math inline">\(X_j\)</span> removed from model!</p></li>
-<li><p>This is variable selection!</p></li>
-</ul>
+<p>Suppose <span class="math inline">\(q\)</span> is <span class="math inline">\(1\)</span> or <span class="math inline">\(2\)</span>. For each <span class="math inline">\(\lambda \geq 0\)</span>, there is exactly one <span class="math inline">\(s \geq 0\)</span> so that if <span class="math inline">\(\beta\)</span> minimizes <span class="math display">\[
+\textrm{RSS} + \lambda \Vert \beta \Vert_q^q \qquad
+\]</span></p>
+<p>then <span class="math inline">\(\beta\)</span> minimizes <span class="math display">\[
+\mathrm{RSS} \qquad \textrm{ subject to } \Vert \beta \Vert_q^q \leq s
+\]</span></p>
 </div>
+</section>
+<section id="variable-selection-with-lasso" class="slide level2">
+<h2>Variable Selection with LASSO</h2>
+<p>For LASSO, the solution to the optimization problem often lies on a vertex of the domain, which corresponds to a subspace where one or more parameters are <span class="math inline">\(0\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="variable-selection-with-lasso-1" class="slide level2">
+<h2>Variable Selection with LASSO</h2>
+<p>For LASSO, the solution to the optimization problem often lies on a vertex of the domain, which corresponds to a subspace where one or more parameters are <span class="math inline">\(0\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <section id="ridge-vs.-lasso" class="slide level2">
 <h2>Ridge vs.&nbsp;LASSO</h2>
@@ -465,7 +600,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -481,7 +616,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></p>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></p>
 </figure>
 </div>
 </div>
@@ -518,7 +653,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -531,7 +666,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -563,7 +698,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-18-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -612,7 +747,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-21-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -632,7 +767,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="stat243_wk06wed_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -649,7 +784,7 @@
 <p><strong>Next time</strong></p>
 <ul>
 <li>Quiz</li>
-<li>Start the next lab!</li>
+<li>Discuss the project</li>
 </ul>
 
 

@@ -2191,6 +2191,13 @@
     "text": "R code for creating the plot in the final slide\n\nlibrary(ggtext) \nmetrics &lt;- data.frame(model = 1:17,\n  adjr2 = summary(best_subset)$adjr2,\n  rss = summary(best_subset)$rss,\n  cp = summary(best_subset)$cp,\n  bic = summary(best_subset)$bic) %&gt;%\n  rbind(\n    data.frame(model = 1:17,\n        adjr2 = summary(forward_select)$adjr2,\n        rss = summary(forward_select)$rss,\n        cp = summary(forward_select)$cp,\n        bic = summary(forward_select)$bic\n    )\n  ) %&gt;%\n  rbind(\n    data.frame(model = 1:17,\n        adjr2 = summary(backward_elim)$adjr2,\n        rss = summary(backward_elim)$rss,\n        cp = summary(backward_elim)$cp,\n        bic = summary(backward_elim)$bic\n    )\n  ) %&gt;% \n  mutate(method = rep(c(\"best\", \"forward\", \"backward\"), each = 17))\n\nmetrics %&gt;%\n  pivot_longer(!c(model, method), names_to =  \"var\", values_to = \"value\") %&gt;%\n  ggplot(aes(x = model, y = value, color = method)) + \n  geom_line(linewidth = .5) + \n  facet_wrap(~var, scales = \"free\") + \n  scale_color_manual(\n    values = c(best = \"#0072B2\", forward = \"#009E73\", backward = \"#D55E00\")\n  ) +\n  theme_bw() +\n  labs(title = \"Resulting model selection metrics for \n    &lt;span style='color:#0072B2;'&gt;best&lt;/span&gt;, \n    &lt;span style='color:#D55E00;'&gt;backward&lt;/span&gt;, and\n    &lt;span style='color:#009E73;'&gt;forward&lt;/span&gt; variable selection criteria\") + \n  theme(legend.position = \"none\",\n        plot.title = element_markdown())"
   },
   {
+    "objectID": "slides/stat243_wk06wed.html#announcements",
+    "href": "slides/stat243_wk06wed.html#announcements",
+    "title": "Stat 243",
+    "section": "Announcements",
+    "text": "Announcements\n\nGroup Project Preferences. Please fill out the Google form by Thursday at 3pm.\nMore discussion of the group project scope on Friday."
+  },
+  {
     "objectID": "slides/stat243_wk06wed.html#goals-for-this-week",
     "href": "slides/stat243_wk06wed.html#goals-for-this-week",
     "title": "Stat 243",
@@ -2212,6 +2219,20 @@
     "text": "LASSO Regression\n\\[\\begin{aligned}\n\\text{Least Squares: }& \\text{Minimize RSS}\\\\\n\\text{Ridge Regression: }& \\text{Minimize RSS} + \\lambda \\sum_{j=1}^p \\beta_j^2\n\\end{aligned}\\]\nLeast Absolute Shrinkage and Selection Operator: Find \\(\\beta\\)s that minimize \\[\n\\textrm{RSS} + \\underbrace{\\lambda\\sum_{j = 1}^p \\big|\\beta_j\\big|}_\\text{LASSO Penalty} \\qquad \\textrm{where }  \\lambda \\geq 0\n\\]\n\n\nGoal of LASSO Penalty: Make coefficients smaller\nLike Ridge, LASSO increases bias but decreases variance and (hopefully) MSE.\n\nSo how is LASSO different from Ridge?"
   },
   {
+    "objectID": "slides/stat243_wk06wed.html#consider-different-distance-different-emphasis",
+    "href": "slides/stat243_wk06wed.html#consider-different-distance-different-emphasis",
+    "title": "Stat 243",
+    "section": "Consider: Different Distance, Different Emphasis",
+    "text": "Consider: Different Distance, Different Emphasis\n\\[\\begin{aligned}\n\\text{Least Squares: }& \\text{Minimize RSS}\\\\\n\\text{Ridge Regression: }& \\text{Minimize RSS} + \\lambda \\sum_{j=1}^p \\beta_j^2\\\\\n\\text{LASSO Regression: }& \\text{Minimize RSS} + \\lambda \\sum_{j=1}^p \\big|\\beta_j\\big|\n\\end{aligned}\\]\n\nSuppose \\(\\beta_j=\\ -10\\). Calculate \\(\\beta_j^2\\) and \\(\\big|\\beta_j\\big|\\), then explain why this shows that Ridge penalizes “big” coefficients more than LASSO.\nSuppose \\(\\beta_j=\\ 0.1\\). Calculate \\(\\beta_j^2\\) and \\(\\big|\\beta_j\\big|\\), then explain why this shows that LASSO penalizes “small” coefficients more than Ridge.\nHow much does each penalty decrease if \\(\\beta_j\\) moves from \\(10\\) to \\(9.9\\)? What about from \\(0.1\\) to \\(0\\)?\nHypothesize why LASSO might shrink coefficients to exactly zero more often than Ridge."
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#lasso-for-variable-selection",
+    "href": "slides/stat243_wk06wed.html#lasso-for-variable-selection",
+    "title": "Stat 243",
+    "section": "LASSO for Variable Selection",
+    "text": "LASSO for Variable Selection\nWe’ve just uncovered why LASSO is a variable “selection operator”:\n\nRidge and LASSO: Coefficients are encouraged to shrink.\n\n\nRidge: Penalty gets relatively smaller as coefficients get smaller\n\nNo benefit of making small coefficients zero.\n\n\n\nLASSO: Penalty gets relatively larger as coefficients get smaller\n\nBigger benefit of making small coefficients precisely 0.\n\\(\\beta_j=0\\) \\(\\implies\\) \\(X_j\\) removed from model!\nThis is variable selection!"
+  },
+  {
     "objectID": "slides/stat243_wk06wed.html#geometric-perspective-two-types-of-distance",
     "href": "slides/stat243_wk06wed.html#geometric-perspective-two-types-of-distance",
     "title": "Stat 243",
@@ -2219,39 +2240,67 @@
     "text": "Geometric Perspective: Two Types of Distance\nHow to measure distance between a point \\(x=(x_1, \\dots, x_p)\\) and the origin \\((0, \\dots, 0)\\)?\n\n\n\nEuclidean distance: “straight line” distance: \\[\n\\Vert x\\Vert_2 = \\sqrt{x_1^2 + \\dots + x_p^2} = \\sqrt{ \\sum_{j=1}^p x_j^2}\n\\]\n\n\n\nMost common: Result of the Pythagorean theorem\nAlso called the \\(\\ell_2\\) norm\nRidge uses \\(\\big(\\Vert x\\Vert_2\\big)^2\\) to “shrink” coefficients\n\n\n\n\nManhattan distance: “grid line” distance: \\[\n\\Vert x\\Vert_1 = |x_1| + \\dots + |x_p| = \\sum_{j=1}^p |x_j|\n\\]\n\n\n\nthe \\(\\ell_1\\) norm\nLASSO uses \\(\\Vert x\\Vert_1\\) directly for shrinkage"
   },
   {
-    "objectID": "slides/stat243_wk06wed.html#geometric-perspective",
-    "href": "slides/stat243_wk06wed.html#geometric-perspective",
-    "title": "Stat 243",
-    "section": "Geometric Perspective",
-    "text": "Geometric Perspective"
-  },
-  {
     "objectID": "slides/stat243_wk06wed.html#geometric-perspective-1",
     "href": "slides/stat243_wk06wed.html#geometric-perspective-1",
     "title": "Stat 243",
     "section": "Geometric Perspective",
-    "text": "Geometric Perspective\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(\\Vert \\beta \\Vert_2 = \\sqrt{3^2 + 4^2} = 5\\)"
+    "text": "Geometric Perspective"
   },
   {
     "objectID": "slides/stat243_wk06wed.html#geometric-perspective-2",
     "href": "slides/stat243_wk06wed.html#geometric-perspective-2",
     "title": "Stat 243",
     "section": "Geometric Perspective",
+    "text": "Geometric Perspective\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(\\Vert \\beta \\Vert_2 = \\sqrt{3^2 + 4^2} = 5\\)"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#geometric-perspective-3",
+    "href": "slides/stat243_wk06wed.html#geometric-perspective-3",
+    "title": "Stat 243",
+    "section": "Geometric Perspective",
     "text": "Geometric Perspective\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(\\Vert \\beta \\Vert_2 = \\sqrt{3^2 + 4^2} = 5\\)\n\\(\\Vert \\beta \\Vert_1 = 3 + 4 = 7\\)\n\n\n\nTakeaway: Ridge and LASSO measure “distance” differently"
   },
   {
-    "objectID": "slides/stat243_wk06wed.html#consider-different-distance-different-emphasis",
-    "href": "slides/stat243_wk06wed.html#consider-different-distance-different-emphasis",
+    "objectID": "slides/stat243_wk06wed.html#geometric-perspective-ii",
+    "href": "slides/stat243_wk06wed.html#geometric-perspective-ii",
     "title": "Stat 243",
-    "section": "Consider: Different Distance, Different Emphasis",
-    "text": "Consider: Different Distance, Different Emphasis\n\\[\\begin{aligned}\n\\text{Least Squares: }& \\text{Minimize RSS}\\\\\n\\text{Ridge Regression: }& \\text{Minimize RSS} + \\lambda \\sum_{j=1}^p \\beta_j^2\\\\\n\\text{LASSO Regression: }& \\text{Minimize RSS} + \\lambda \\sum_{j=1}^p \\big|\\beta_j\\big|\n\\end{aligned}\\]\n\nSuppose \\(\\beta_j=\\ -10\\). Calculate \\(\\beta_j^2\\) and \\(\\big|\\beta_j\\big|\\), then explain why this shows that Ridge penalizes “big” coefficients more than LASSO.\nSuppose \\(\\beta_j=\\ 0.1\\). Calculate \\(\\beta_j^2\\) and \\(\\big|\\beta_j\\big|\\), then explain why this shows that LASSO penalizes “small” coefficients more than Ridge.\nHypothesize why LASSO might shrink coefficients to exactly zero more often than Ridge."
+    "section": "Geometric Perspective II",
+    "text": "Geometric Perspective II\nWhat does a circle of radius \\(r\\) look like in the \\(\\ell_2\\) norm?\n\n\\[\n\\Vert \\beta \\Vert_2 =  \\sqrt{ \\beta_1^2 + \\beta_2^2 }      \\leq r\n\\]"
   },
   {
-    "objectID": "slides/stat243_wk06wed.html#lasso-for-variable-selection",
-    "href": "slides/stat243_wk06wed.html#lasso-for-variable-selection",
+    "objectID": "slides/stat243_wk06wed.html#geometric-perspective-ii-1",
+    "href": "slides/stat243_wk06wed.html#geometric-perspective-ii-1",
     "title": "Stat 243",
-    "section": "LASSO for Variable Selection",
-    "text": "LASSO for Variable Selection\nWe’ve just uncovered why LASSO is a variable “selection operator”:\n\nRidge and LASSO: Coefficients with high variance are encouraged to shrink.\n\n\nRidge: Penalty gets relatively smaller as coefficients get smaller\n\nNo benefit of making small coefficients zero.\n\n\n\nLASSO: Penalty gets relatively larger as coefficients get smaller\n\nBigger benefit of making small coefficients precisely 0.\n\\(\\beta_j=0\\) \\(\\implies\\) \\(X_j\\) removed from model!\nThis is variable selection!"
+    "section": "Geometric Perspective II",
+    "text": "Geometric Perspective II\nWhat does a “circle” of radius \\(r\\) look like in the \\(\\ell_1\\) norm?\n\n\\[\n\\Vert \\beta \\Vert_1  = |\\beta_1| + |\\beta_2|     \\leq r\n\\]"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#ridge-and-lasso-in-terms-of-ell_q-norms",
+    "href": "slides/stat243_wk06wed.html#ridge-and-lasso-in-terms-of-ell_q-norms",
+    "title": "Stat 243",
+    "section": "Ridge and LASSO in terms of \\(\\ell_q\\) norms",
+    "text": "Ridge and LASSO in terms of \\(\\ell_q\\) norms\nIn ridge regression, we seek parameters \\(\\beta\\) that minimize RSS plus the (squared) \\(\\ell_2\\) norm of \\(\\beta\\): \\[\n\\textrm{RSS} + \\lambda \\sum_{i =1}^p \\beta_i^2 = \\mathrm{RSS} + \\lambda\\Vert\\beta\\Vert_2^2\n\\]\n\nAlternatively, we could seek parameters \\(\\beta\\) that minimize RSS plus the \\(\\ell_1\\) norm of \\(\\beta\\):\n\\[\n\\textrm{RSS} + \\lambda \\sum_{i =1}^p |\\beta_i| = \\mathrm{RSS} + \\lambda \\Vert \\beta \\Vert_1\n\\]\nWe have now reconstructed ridge and LASSO regression in terms of \\(\\ell_1\\) and \\(\\ell_2\\) norms!\n\n\nIn addition to shrinking coefficients, LASSO also happens to perform variable selection!"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#alternative-formulations",
+    "href": "slides/stat243_wk06wed.html#alternative-formulations",
+    "title": "Stat 243",
+    "section": "Alternative Formulations",
+    "text": "Alternative Formulations\nInstead of thinking of Ridge Regression and LASSO as minimizing the sum of RSS and the shrinkage penalty, we can think of them as solving a restricted optimization problem:\n\n\nFor each \\(s \\geq 0\\), Ridge Regression seeks to minimize \\(\\textrm{RSS}\\) subject to \\(\\Vert\\beta\\Vert_2^2 \\leq s\\)\nFor each \\(s \\geq 0\\), LASSO seeks to minimize \\(\\textrm{RSS}\\) subject to \\(\\Vert\\beta\\Vert_1 \\leq s\\)\n\n\n\nSuppose \\(q\\) is \\(1\\) or \\(2\\). For each \\(\\lambda \\geq 0\\), there is exactly one \\(s \\geq 0\\) so that if \\(\\beta\\) minimizes \\[\n\\textrm{RSS} + \\lambda \\Vert \\beta \\Vert_q^q \\qquad\n\\]\nthen \\(\\beta\\) minimizes \\[\n\\mathrm{RSS} \\qquad \\textrm{ subject to } \\Vert \\beta \\Vert_q^q \\leq s\n\\]"
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#variable-selection-with-lasso",
+    "href": "slides/stat243_wk06wed.html#variable-selection-with-lasso",
+    "title": "Stat 243",
+    "section": "Variable Selection with LASSO",
+    "text": "Variable Selection with LASSO\nFor LASSO, the solution to the optimization problem often lies on a vertex of the domain, which corresponds to a subspace where one or more parameters are \\(0\\)."
+  },
+  {
+    "objectID": "slides/stat243_wk06wed.html#variable-selection-with-lasso-1",
+    "href": "slides/stat243_wk06wed.html#variable-selection-with-lasso-1",
+    "title": "Stat 243",
+    "section": "Variable Selection with LASSO",
+    "text": "Variable Selection with LASSO\nFor LASSO, the solution to the optimization problem often lies on a vertex of the domain, which corresponds to a subspace where one or more parameters are \\(0\\)."
   },
   {
     "objectID": "slides/stat243_wk06wed.html#ridge-vs.-lasso",
@@ -2335,6 +2384,6 @@
     "href": "slides/stat243_wk06wed.html#recap",
     "title": "Stat 243",
     "section": "Recap",
-    "text": "Recap\nToday, we learned about…\n\nLASSO as a penalization and variable selection method\nSimilarities and differences with Ridge\n\nNext time\n\nQuiz\nStart the next lab!"
+    "text": "Recap\nToday, we learned about…\n\nLASSO as a penalization and variable selection method\nSimilarities and differences with Ridge\n\nNext time\n\nQuiz\nDiscuss the project"
   }
 ]
