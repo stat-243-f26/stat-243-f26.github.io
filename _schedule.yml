@@ -149,6 +149,10 @@ scheduled-docs:
           docs:
             - type: Lab 5
               href: labs/lab05.qmd
+            - type: Project Groups
+              href: projects/proj_groups.qmd
+            - type: Project Description and Timeline
+              href: projects/proj.qmd
       resources:
         - 'For Monday: ISLR Chapter 6.2.1'
         - 'For Wednesday: ISLR Chapter 6.2.2'

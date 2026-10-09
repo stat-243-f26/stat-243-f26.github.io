@@ -1,0 +1,158 @@
+---
+editor: source
+---
+
+## Project Guidelines
+
+In this project, you will work in groups of 2-3 students on a project that answers a significant research question using real-world data. Your project should apply and compare multiple of the statistical learning techniques covered in this class. The project will culminate in an in-class presentation during Week 14 (the final week of classes) and a technical report that reflects the norms of real-world applied statistical analyses. The project is an excellent opportunity to combine theoretical and practical skills in statistics, engage in the collaborative nature of modern data analysis, and to practice both verbal and written scientific communication. 
+
+
+## Timeline
+
+A summary of the project timeline and associated due dates is below. Further details of each assignment are provided on the subsequent pages.
+
+  - **Friday 10/16**: Project Assignment 1 (Proposal) due. Your group will propose datasets and research questions. I will give written feedback on your proposals.
+  
+  - **Friday 11/6**: Project Assignment 2 (Exploratory Analysis) due. Your group will draft the Introduction, Data and Background, and Exploratory Data Analysis sections of your report. I will provide written feedback.
+  
+  - **Friday 11/20**: Project Assignment 3 (Methods) due. Your group will update your draft based on my previous feedback and describe your methodological plans for data analysis. I will provide written feedback.
+  
+  - **Wednesday 12/2**: Project Assignment 4 (Draft and Peer Review) due. Your group will write and submit a full draft of your report. In-class, you will review another group's work, mimicking the process of scientific *peer review*. I will again provide written feedback.
+  
+  - **Sunday 12/6**: Project Presentations and Report due at 10pm. Your group will submit a final copy of your report and give a presentation to the class. I am likely to provide wintery treats as we discuss and celebrate each other's work!
+  
+## Assessment
+
+Each assignment will be assessed on the following items:
+
+  - If the submission reflects the guidelines of the assignment.
+  - The degree to which the statistical analyses demonstrate substantial, thoughtful, and ethical investigation of the data and/or research questions.
+  - The degree to which the submission supports a clear and cohesive story or argument regarding your data and research question.
+  - The interpretability and usefulness of technical components of the submission, such as figures, tables, computational calculations, and code.
+  - The quality of your writing.
+
+# Project Assignment 1 (Proposal)
+
+As a group, have **one** group member submit a PDF to Gradescope in which you:
+
+1) Choose **two** potential datasets you might like to analyze (see guidance below for choosing a dataset). For each dataset, provide me: 
+
+  - A brief description of the data and the variables it includes.
+  - A brief description of any ethical concerns or considerations regarding a potential analysis.
+  - A link or clear instructions to access the data.
+
+2) For each dataset, propose **two** potential research questions (see guidance below for coming up with research questions). Your research questions should each do one of the following:
+
+  - Describe an inference-related problem (e.g., what is the relationship between X and Y?)
+  - Describe a prediction-related problem (e.g., can we use X to build a highly predictive model for Y?)
+  
+### Guidance on Choosing a Dataset
+
+  - The dataset should be sufficiently rich to warrant a full-scale analysis. Desirable properties include having a reasonably large number of observations ($\geq100$) and variables ($\geq5$). Larger is generally better than smaller!
+  - Based on the methodologies we'll cover in class, the dataset should naturally lead to a supervised learning research problem (i.e., there should be an observed response variable). Furthermore, the response variable should either be quantitative or binary categorical.
+  - The dataset should be *real*! Some data repositories include simulated or hypothetical datasets; these are disconnected from reality and usually not very interesting to analyze!
+  - The dataset should be interesting to everyone in the group, and somehow meaningful to the world! Meaningful does not necessarily mean "life changing," but does require some level of scientific/historical/social impact.
+  - Data can be found in many places on the web. The following is a (very incomplete) list of some data repositories: 
+    * [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu), 
+    * [SCORE Repository](https://scorenetwork.org/about.html), 
+    * [Industry Data](https://docs.google.com/spreadsheets/d/1_FDKVZxh6bSLHYsfbUYVPwdRZFUkFxLmS_uenFPN4as/edit?gid=0#gid=0),
+    * [Data is Plural](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0),
+    * [Data.gov](https://data.gov/),
+    * [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data),
+    * [Opportunity Insights](https://opportunityinsights.org/data/),
+    * [The ASA SSDSE Dataset Repository](https://docs.google.com/spreadsheets/d/1tuCXok_y_zQpSDGssaypETf9lnB6nCh9XVoCiMaPCuc/edit?gid=591469695#gid=591469695),
+    * Many R packages also contain rich datasets!
+  
+### Guidance on Choosing Research Questions
+
+  - Before deciding on research questions to propose, please read any available background information about your proposed datasets, and take a look at the datasets (e.g., in Excel or in `R`)
+  - Choosing response variable(s) first is usually easier! Remember that we will be learning how to analyze both quantitative response variables *and* binary categorical response variables.
+  - Then, decide if you're most interested in the relationship between the chosen response variables(s) and some predictor variables in the dataset (i.e., inference), or if you're most interested in building a model that can accurately predict the chosen response variable(s) (i.e., prediction).
+  
+### Examples of Project Abstracts from Previous Years
+
+  - **Predicting Police Response Time:**  This project is an attempt to fit a predictive model on police response time data in order to determine if population density, neighborhood race and income characteristics, and the call type have any significant influence on the time it takes for an officer to be dispatched and the time it takes for a dispatched officer to arrive to the call. We fit a model to Portland data and test the model on different cities.
+
+  - **Yelp! An Exploratory Journey in Natural Language Processing:** The Yelp dataset includes over 5 million text reviews from businesses around the world. We aim to predict the number of stars a reviewer gives a business from the text of the review itself. To do so, we take two approaches: connecting review words to sentiment dictionaries and learning from the data itself. Because the nature of our response variable is ordered, we also think about how the fit of our model should be judged using a handful of different error measurements.
+  
+  - **Predicting Likelihood of Stroke:** Strokes are the second leading cause of death worldwide and are caused by a combination of physiological and lifestyle factors. A boosted tree model and a penalized classification tree model were used to infer which variables, from a set of eight lifestyle and other categorical variables, had the largest impact on occurrence of a stroke. Hypertension, heart disease, smoking status, and marital status were found to have the greatest effect on stroke likelihood.
+  
+  - **Oscars Predictions** We analyze a dataset of IMDb ratings and general information about the corresponding movies in order to predict the IMDb score, profit, and probability of winning an Oscar of upcoming movies. Using the `stacks` R package, we create three corresponding ensemble models comprised of linear regression, logistic regression, and KNN models.
+  
+  - **Predicting the Musical Instrument from a Recorded Note:**  Can we predict the instrument being played from a sound recording? This project will utilize data from isolated sound recordings of different instruments being played, with possible predictors relating to unexplained differences in the frequency wave patterns, the modulation of frequency or amplitude over time, or the prevalence of different overtones in the sound. The goal will be to predict the instrument being played based on a test sound recording.
+
+
+# Project Assignment 2 (Exploratory Analysis)
+
+As a group, start by completing the following tasks:
+
+1) Based on my feedback, select a single dataset and corresponding research question to investigate.
+
+2) Prepare your data for your analysis. This **will** involve:
+    
+  - Completing any necessary data wrangling. This may include merging together multiple data sources, creating new variables in your dataset, removing variables that are not useful, or removing observations from the data that have too many missing values. 
+  - Deciding on the the sample for your analysis (e.g., if your dataset has many countries in it, and you are only interested in studying one country) and carefully describing the population to which it may be generalized (if any).
+    
+3) Create 3 or 4 data visualizations or summary tables that relate to your research question(s). At least one of these should be a data visualization. This **may** involve:
+    
+  - Looking at the distributions of your response variable or key predictors.
+  - Looking at the relationships between your response variable and your predictors (e.g., pair-wise scatterplots between a quantitative response variable and quantitative predictors).
+  - Looking at the pair-wise relationships between your predictors (e.g., pair-wise scatterplots between your predictors)
+  - If applicable, comparing the summary statistics of the predictors and response in your sample of interest versus the whole entire dataset (e.g., if your dataset has may countries in it and you are only focused on one country, comparing the average values for the predictors in your country versus the averages in the whole dataset).
+  - If applicable, investigating trends for your variables over time (e.g., plotting the average of your response variable over time).
+    
+Subsequently, have **one** group member submit a short report in PDF form to Gradescope. I expect that **the text (i.e., excluding figures and tables) of this report will be no more than 5 pages (and likely fewer than that)**. At this stage, the report should have three sections:
+
++ **Introduction:** 
+  - *Broadly* describe your chosen dataset.
+  - State your research question and why it is meaningful (to you personally or more broadly).
+  
++ **Data and Background:** 
+  - List the data source(s), state where you found them, and describe your data wrangling process.
+  - Describe the dimensionality of your data (e.g., number of variables and observations). Describe how you will split your data into training and test sets, if applicable.
+  - Describe the context of your data, including who/what it represents and in what time period, when/how/where/by whom it was collected, and potential ethical considerations of your project. Is there anything to be particularly sensitive or careful about? For further reading on such contextual analyses, it may be helpful to read Chapter 6 from the book \textit{Data Feminism} by D'Ignazio and Klein (pdf on Moodle).
+
++ **Exploratory Data Analysis**
+  - Show your 3 or 4 data visualizations or summary tables.
+  - Summarize the findings from your visualizations and summary tables, and explain how they relate to your research question(s).
+  
+  
+# Project Assignment 3 (Methods)
+
+This project assignment is relatively small in scope, but provides an important "check-in" point for me to review your methodological (i.e., data analysis) plans before you spend time completing them! For this assignment, have **one** group member submit a PDF to Gradescope based on the following tasks:
+
+1) As a group, carefully review my feedback from Project Assignment 2 and update the first three sections of your report accordingly. Remember that my expectations for each section raise at each resubmission: Aim for polished and professional statistical work!
+
+2) Carefully describe how you will analyze your data to answer your research question. You should state which statistical learning methods from class will be applied and compared. Be precise: Will you include all potential predictor variables in all models or engage in some form of model selection? Will you split your data into training and test sets or employ cross-validation? How will you determine which model is "best"? How will you create a "final" model to be (potentially) used in the future? *Note: You should not actually implement these plans at this stage!*
+
+
+# Project Assignment 4 (Draft and Peer Review)
+
+Before class on Wednesday 12/2, you will complete a draft of your final report *in a .qmd file and rendered as a PDF* that explains your statistical analyses and the project work you have done this semester. Your report should have the sections listed below. **Do not include your R code in sections other than the Code Appendix (described below)**. Note that you can add `#| echo: false` to the `R` chunk options to suppress code in the knitted PDF.
+
+  - **Abstract:** A very brief description of the topic you are investigating, your methods of analysis, and the general conclusion of your study.
+  
+  - **Introduction:** As described for Project Assignment 2.
+  
+  - **Data and Background:** As described for Project Assignment 2.
+   
+  - **Exploratory Data Analysis:** As described for Project Assignment 2.
+   
+  - **Results:** A description of the tools and methods used to build your statistical models; an overview of the models themselves and a summary of their attributes; a discussion of model comparisons, accuracy, and diagnostics; and a presentation of model predictions, classifications, and/or parameter inference.
+   
+  - **Discussion:** A review of the results of your statistical analyses and how they answer your original research question(s), plus a discussion of your study's limitations and ideas for further research.
+   
+  - **References:** Citations for any data sets, literature or resources directly or indirectly referenced in your report, along with any sources you consulted during your investigation that had a significant impact on your analysis.
+   
+  - **Code Appendix:** A collection of R code used to process data, perform analysis, and build models. To avoid excessive run-times when knitting your .qmd document, consider adding `eval: false` to the chunk options (which will force the code not to be run when compiling the document into PDF)
+  
+**Important:** Each group should have one person (i) submit a full copy to Gradescope before class and (ii) bring one paper copy of your report to class for each group member. You may exclude the code appendix from your paper copies.
+
+During class, each student will review another group's draft report and provide written and verbal feedback. After class, each group will receive feedback from the instructor.
+
+
+# Presentations and Final Report
+
++ During the final week of class (i.e., on Monday 12/7 or Wednesday 12/9), each group will give a 15 minute presentation outlining your project and results. The structure of this presentation should mirror the structure of your technical report (albeit greatly abbreviated, \textbf{and excluding R code}).
+
++ Each group will have one student submit a final copy of your report to Gradescope that satisfies the requirements of Project Assignment 4. After peer review, I expect each group will only need to make minimal changes!
