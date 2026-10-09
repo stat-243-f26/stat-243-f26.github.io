@@ -145,7 +145,7 @@ scheduled-docs:
               href: slides/stat243_wk06wed.qmd
         - topic: "Lab 5: Penalized Regression (and Quiz 4)"
           display-date: Friday, Oct 9
-          date: 10/8/26
+          date: 10/9/26
           docs:
             - type: Lab 5
               href: labs/lab05.qmd
