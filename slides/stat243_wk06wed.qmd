@@ -763,7 +763,7 @@ plot(lasso_mod, sign.lambda = 1, label = TRUE)
 To find the optimal tuning parameter, $\lambda$, we again use Cross-Validation
 
 ```{r}
-#| code-line-numbers: "2-6|7-8|10-17"
+#| code-line-numbers: "2-6|7-8|10-18"
 #| output-location: column-fragment
 set.seed(1010)
 my_cv <- cv.glmnet(x,
@@ -781,7 +781,8 @@ ggplot(tidied, aes(x = lambda, y = estimate)) +
                 labels = c(".0001", ".01", "1")) +
   theme_bw(base_size = 15) +
   labs(x = expression(lambda), y = "Test MSE") +
-  geom_vline(xintercept = best_L)
+  geom_vline(xintercept = best_L, color = "goldenrod") +
+  geom_vline(xintercept = reg_L, color = "steelblue")
 ```
 
 ::: {.nonincremental .fragment}

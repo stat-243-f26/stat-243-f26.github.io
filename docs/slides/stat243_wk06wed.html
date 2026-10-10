@@ -300,7 +300,7 @@
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="countdown" id="timer_092b9bc3" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_dc20e9f7" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -689,7 +689,7 @@
 <p>To find the optimal tuning parameter, <span class="math inline">\(\lambda\)</span>, we again use Cross-Validation</p>
 <div class="cell columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" data-code-line-numbers="2-6|7-8|10-17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">1010</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" data-code-line-numbers="2-6|7-8|10-18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">1010</span>)</span>
 <span id="cb8-2"><a aria-label="2"></a>my_cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x,</span>
 <span id="cb8-3"><a aria-label="3"></a>                   y,</span>
 <span id="cb8-4"><a aria-label="4"></a>                   <span class="at">alpha =</span> <span class="dv">1</span>,</span>
@@ -705,7 +705,8 @@
 <span id="cb8-14"><a aria-label="14"></a>                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">".0001"</span>, <span class="st">".01"</span>, <span class="st">"1"</span>)) <span class="sc">+</span></span>
 <span id="cb8-15"><a aria-label="15"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
 <span id="cb8-16"><a aria-label="16"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(lambda), <span class="at">y =</span> <span class="st">"Test MSE"</span>) <span class="sc">+</span></span>
-<span id="cb8-17"><a aria-label="17"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> best_L)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-17"><a aria-label="17"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> best_L, <span class="at">color =</span> <span class="st">"goldenrod"</span>) <span class="sc">+</span></span>
+<span id="cb8-18"><a aria-label="18"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> reg_L, <span class="at">color =</span> <span class="st">"steelblue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
