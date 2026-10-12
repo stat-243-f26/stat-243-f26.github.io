@@ -445,7 +445,7 @@ competition <- list(
       exp(predict(my_mod, testing_data) + sigma^2 / 2) 
     }
   ),
-  seeds = 12:1
+  seeds = c(6, 8, 12, 10, 11, 9, 7, 2, 5, 4, 3, 1)
 )
 
 
@@ -532,14 +532,29 @@ compete <- function(seeds, training_data, testing_data, print_rmse) {
 # The Play-in
 
 
+## The Play-in
+
+- In order to induce some randomness into the tournament, at each phase, we will first take a **bootstrap sample** of our testing data.
+
+- In the "finals" we will use the original (non-bootstrapped) sample. 
+
+
 ## Play-in: Game 1
+
+```{r}
+set.seed(1)
+boot_indx <- sample(1:nrow(house_test),
+                    replace = TRUE,
+                    size = nrow(house_test))
+house_test_boot <- house_test[boot_indx, ]
+```
 
 ```{r}
 #| eval: false
 compete(c(8, 9), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 ## Play-in: Game 1
@@ -547,8 +562,8 @@ compete(c(8, 9),
 ```{r}
 compete(c(8, 9), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 
@@ -558,8 +573,8 @@ compete(c(8, 9),
 #| eval: false
 compete(c(5, 12),
         house_train, 
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 ## Play-in: Game 2
@@ -567,8 +582,8 @@ compete(c(5, 12),
 ```{r}
 compete(c(5, 12),
         house_train, 
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 
@@ -578,8 +593,8 @@ compete(c(5, 12),
 #| eval: false
 compete(c(7, 10), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 ## Play-in: Game 3
@@ -587,8 +602,8 @@ compete(c(7, 10),
 ```{r}
 compete(c(7, 10), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 ## Play-in: Game 4
@@ -597,8 +612,8 @@ compete(c(7, 10),
 #| eval: false
 compete(c(6, 11), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 ## Play-in: Game 4
@@ -606,21 +621,40 @@ compete(c(6, 11),
 ```{r}
 compete(c(6, 11), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
-# Round 1
+## Round 1
+
+```{r}
+set.seed(2)
+boot_indx <- sample(1:nrow(house_test),
+                    replace = TRUE,
+                    size = nrow(house_test))
+house_test_boot <- house_test[boot_indx, ]
+```
+
 
 ## Round 1: Game 1
 
 ```{r}
 #| eval: false
 # 1 with 8 or 9
-compete(c(1, X), 
+compete(c(1, 9), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
+```
+
+## Round 1: Game 1
+
+```{r}
+# 1 with 8 or 9
+compete(c(1, 9), 
+        house_train,
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 ## Round 1: Game 2
@@ -628,10 +662,20 @@ compete(c(1, X),
 ```{r}
 #| eval: false
 # 4 with 5 or 12
-compete(c(4, X), 
+compete(c(4, 12), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
+```
+
+## Round 1: Game 2
+
+```{r}
+# 4 with 5 or 12
+compete(c(4, 12), 
+        house_train,
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 
@@ -640,10 +684,20 @@ compete(c(4, X),
 ```{r}
 #| eval: false
 # 2 with 7 or 10
-compete(c(2, X), 
+compete(c(2, 10), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
+```
+
+## Round 1: Game 3
+
+```{r}
+# 2 with 7 or 10
+compete(c(2, 10), 
+        house_train,
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 
@@ -652,23 +706,50 @@ compete(c(2, X),
 ```{r}
 #| eval: false
 # 3 with 6 or 11
-compete(c(3, X), 
+compete(c(3, 6), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
+```
+
+## Round 1: Game 4
+
+```{r}
+# 3 with 6 or 11
+compete(c(3, 6), 
+        house_train,
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 
-# Round 2
+## Round 2
+
+```{r}
+set.seed(3)
+boot_indx <- sample(1:nrow(house_test),
+                    replace = TRUE,
+                    size = nrow(house_test))
+house_test_boot <- house_test[boot_indx, ]
+```
 
 ## Round 2: Game 1
 
 ```{r}
 #| eval: false
-compete(c(X, Y), 
+compete(c(1, 4), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
+```
+
+## Round 2: Game 1
+
+```{r}
+compete(c(1, 4), 
+        house_train,
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 
@@ -676,10 +757,20 @@ compete(c(X, Y),
 
 ```{r}
 #| eval: false
-compete(c(X, Y), 
+compete(c(10, 6), 
         house_train,
-        house_test,
-        print_rmse = FALSE)
+        house_test_boot,
+        print_rmse = TRUE)
+```
+
+
+## Round 2: Game 2
+
+```{r}
+compete(c(10, 6), 
+        house_train,
+        house_test_boot,
+        print_rmse = TRUE)
 ```
 
 
@@ -689,11 +780,56 @@ compete(c(X, Y),
 
 ```{r}
 #| eval: false
-compete(c(X, Y), 
+compete(c(1, 6), 
         house_train,
         house_test,
         print_rmse = TRUE)
 ```
+
+## The Finals
+
+```{r}
+compete(c(1, 6), 
+        house_train,
+        house_test,
+        print_rmse = TRUE)
+```
+
+
+## Most unbiased predictions
+
+```{r}
+compete_bias <- function(seeds, training_data, testing_data) {
+  indx1 <- which(competition$seeds == seeds[1])
+  indx2 <- which(competition$seeds == seeds[2])
+  
+  indx1_preds <- competition$models[[indx1]](training_data, testing_data)
+  indx2_preds <- competition$models[[indx2]](training_data, testing_data)
+  
+  bias1 <- mean( (indx1_preds - testing_data$SalePrice) )
+  bias2 <- mean( (indx2_preds - testing_data$SalePrice) )
+
+
+    if (abs(bias1) < abs(bias2)) {
+      print(paste0("Seed ", seeds[1], " wins with an bias of ", round(bias1, 2),
+                   " compared to Seed ", seeds[2], "'s bias of ", round(bias2, 2)))
+    } else if (abs(bias1) > abs(bias2)) {
+      print(paste0("Seed ", seeds[2], " wins with an bias of ", round(bias2, 2),
+               " compared to Seed ", seeds[1], "'s bias of ", round(bias1, 2)))
+    } else {
+      print("Tie!")
+    }
+  
+
+}
+```
+
+
+```{r}
+compete_bias(seeds = c(3, 2), training_data = house_train, testing_data = house_test)
+```
+
+
 
 
 ## Next time

@@ -171,7 +171,7 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/stat243_wk07wed.qmd
-        - topic: "Lab 6: kNN (and Quiz 5)"
+        - topic: "Quiz 5"
           display-date: Friday, Oct 16
           date: 10/16/26
           docs:
@@ -187,19 +187,19 @@ scheduled-docs:
           display-date: Saturday, Oct 17 - Sunday, Oct 25
     - week: 8
       days:
-        - topic: "Classification with Generalized Linear Models (GLMs)"
+        - topic: "Logistic Regression I"
           display-date: Monday, Oct 26
           date: 10/26/26
           docs:
             - type: Slides
               href: slides/stat243_wk08mon.qmd
-        - topic: "More classification with GLMs"
+        - topic: "Logistic Regression II"
           display-date: Wednesday, Oct 28
           date: 10/28/26
           docs:
             - type: Slides
               href: slides/stat243_wk08wed.qmd
-        - topic: "Lab 7: Logistic Regression I (and Quiz 6)"
+        - topic: "Lab 6: kNN and Logistic Regression (and Quiz 6)"
           display-date: Friday, Oct 30
           date: 10/30/26
           docs:
