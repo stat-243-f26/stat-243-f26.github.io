@@ -159,13 +159,13 @@ scheduled-docs:
         - 'For Friday: none'
     - week: 7
       days:
-        - topic: "Classification with kNN"
+        - topic: "Regression Competition"
           display-date: Monday, Oct 12
           date: 10/12/26
           docs:
             - type: Slides
               href: slides/stat243_wk07mon.qmd
-        - topic: "More kNN"
+        - topic: "kNN"
           display-date: Wednesday, Oct 14
           date: 10/14/26
           docs:
@@ -178,8 +178,8 @@ scheduled-docs:
             - type: Lab 6
               href: labs/lab06.qmd
       resources:
-        - 'For Monday: TBD'
-        - 'For Wednesday: TBD'
+        - 'For Monday: none'
+        - 'For Wednesday: ISLR 2.2.3'
         - 'For Friday: none'
     - week: Fall Break
       days:
