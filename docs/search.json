@@ -2727,7 +2727,14 @@
     "href": "slides/stat243_wk07mon.html#most-unbiased-predictions",
     "title": "Stat 243",
     "section": "Most unbiased predictions",
-    "text": "Most unbiased predictions\n\ncompete_bias &lt;- function(seeds, training_data, testing_data) {\n  indx1 &lt;- which(competition$seeds == seeds[1])\n  indx2 &lt;- which(competition$seeds == seeds[2])\n  \n  indx1_preds &lt;- competition$models[[indx1]](training_data, testing_data)\n  indx2_preds &lt;- competition$models[[indx2]](training_data, testing_data)\n  \n  bias1 &lt;- mean( (indx1_preds - testing_data$SalePrice) )\n  bias2 &lt;- mean( (indx2_preds - testing_data$SalePrice) )\n\n    if (abs(bias1) &lt; abs(bias2)) {\n      print(paste0(\"Seed \", seeds[1], \" wins with an bias of \", round(bias1, 2),\n                   \" compared to Seed \", seeds[2], \"'s bias of \", round(bias2, 2)))\n    } else if (abs(bias1) &gt; abs(bias2)) {\n      print(paste0(\"Seed \", seeds[2], \" wins with an bias of \", round(bias2, 2),\n               \" compared to Seed \", seeds[1], \"'s bias of \", round(bias1, 2)))\n    } else {\n      print(\"Tie!\")\n    }\n  \n\n}\n\n\ncompete_bias(seeds = c(3, 2), training_data = house_train, testing_data = house_test)\n\n[1] \"Seed 3 wins with an bias of -377.51 compared to Seed 2's bias of 7796.56\""
+    "text": "Most unbiased predictions\n\ncompete_bias &lt;- function(seeds, training_data, testing_data) {\n  indx1 &lt;- which(competition$seeds == seeds[1])\n  indx2 &lt;- which(competition$seeds == seeds[2])\n  \n  indx1_preds &lt;- competition$models[[indx1]](training_data, testing_data)\n  indx2_preds &lt;- competition$models[[indx2]](training_data, testing_data)\n  \n  bias1 &lt;- mean( (indx1_preds - testing_data$SalePrice) )\n  bias2 &lt;- mean( (indx2_preds - testing_data$SalePrice) )\n\n    if (abs(bias1) &lt; abs(bias2)) {\n      print(paste0(\"Seed \", seeds[1], \" wins with an bias of \", round(bias1, 2),\n                   \" compared to Seed \", seeds[2], \"'s bias of \", round(bias2, 2)))\n    } else if (abs(bias1) &gt; abs(bias2)) {\n      print(paste0(\"Seed \", seeds[2], \" wins with an bias of \", round(bias2, 2),\n               \" compared to Seed \", seeds[1], \"'s bias of \", round(bias1, 2)))\n    } else {\n      print(\"Tie!\")\n    }\n  \n\n}"
+  },
+  {
+    "objectID": "slides/stat243_wk07mon.html#most-unbiased-predictions-1",
+    "href": "slides/stat243_wk07mon.html#most-unbiased-predictions-1",
+    "title": "Stat 243",
+    "section": "Most unbiased predictions",
+    "text": "Most unbiased predictions\n\ncompete_bias(seeds = c(3, 2), training_data = house_train, testing_data = house_test)\n\n[1] \"Seed 3 wins with an bias of -377.51 compared to Seed 2's bias of 7796.56\""
   },
   {
     "objectID": "slides/stat243_wk07mon.html#next-time",

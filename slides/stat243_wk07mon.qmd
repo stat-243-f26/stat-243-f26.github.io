@@ -825,6 +825,9 @@ compete_bias <- function(seeds, training_data, testing_data) {
 ```
 
 
+## Most unbiased predictions
+
+
 ```{r}
 compete_bias(seeds = c(3, 2), training_data = house_train, testing_data = house_test)
 ```
