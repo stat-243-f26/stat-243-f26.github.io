@@ -165,18 +165,15 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/stat243_wk07mon.qmd
-        - topic: "kNN"
+        - topic: "kNN (Grayson out, Lenny sub)"
           display-date: Wednesday, Oct 14
           date: 10/14/26
           docs:
             - type: Slides
-              href: slides/stat243_wk07wed.qmd
+              href: slides/07_KNN.pdf
         - topic: "Quiz 5"
           display-date: Friday, Oct 16
           date: 10/16/26
-          docs:
-            - type: Lab 6
-              href: labs/lab06.qmd
       resources:
         - 'For Monday: none'
         - 'For Wednesday: ISLR 2.2.3'
@@ -187,24 +184,24 @@ scheduled-docs:
           display-date: Saturday, Oct 17 - Sunday, Oct 25
     - week: 8
       days:
-        - topic: "Logistic Regression I"
+        - topic: "Logistic Regression I (Grayson out, Lenny sub)"
           display-date: Monday, Oct 26
           date: 10/26/26
           docs:
             - type: Slides
-              href: slides/stat243_wk08mon.qmd
+              href: slides/18_Logistic_Regression_I.pdf
         - topic: "Logistic Regression II"
           display-date: Wednesday, Oct 28
           date: 10/28/26
           docs:
             - type: Slides
               href: slides/stat243_wk08wed.qmd
-        - topic: "Lab 6: kNN and Logistic Regression (and Quiz 6)"
+        - topic: "Lab 6: kNN and Logistic Regression"
           display-date: Friday, Oct 30
           date: 10/30/26
           docs:
-            - type: Lab 7
-              href: labs/lab07.qmd
+            - type: Lab 6
+              href: labs/lab06.qmd
       resources:
         - 'For Monday: ISLR Chapter 4.1, 4.2, 4.3'
         - 'For Wednesday: Review ISLR Chapters 4.1, 4.2, 4.3'
@@ -223,12 +220,12 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/stat243_wk09wed.qmd
-        - topic: "Lab 8: Trees (and Quiz 7)"
+        - topic: "Lab 7: Trees (and Quiz 6)"
           display-date: Friday, Nov 6
           date: 11/6/26
           docs:
-            - type: Lab 8
-              href: labs/lab08.qmd
+            - type: Lab 7
+              href: labs/lab07.qmd
       # resources:
       #   - 'Some text'
     - week: 10
@@ -245,12 +242,12 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/stat243_wk10wed.qmd
-        - topic: "Lab 9: Ensemble Trees (and Quiz 8)"
+        - topic: "Lab 8: Ensemble Trees (and Quiz 7)"
           display-date: Friday, Nov 13
           date: 11/13/26
           docs:
-            - type: Lab 9
-              href: labs/lab09.qmd
+            - type: Lab 8
+              href: labs/lab08.qmd
       # resources:
       #   - 'Some text'
     - week: 11
@@ -267,12 +264,12 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/stat243_wk11wed.qmd
-        - topic: "Lab 10: Clustering (and Quiz 9)"
+        - topic: "Lab 9: Clustering (and Quiz 8)"
           display-date: Friday, Nov 20
           date: 11/20/26
           docs:
-            - type: Lab 10
-              href: labs/lab10.qmd
+            - type: Lab 9
+              href: labs/lab09.qmd
       # resources:
       #   - 'Some text'
     - week: 12

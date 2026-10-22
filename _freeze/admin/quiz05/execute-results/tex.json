@@ -1,0 +1,17 @@
+{
+  "hash": "e0f6525e6f09519032b5ae294960a359",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Stat 243: Quiz 5\"\nformat: pdf\neditor: source\n---\n\n\n## Instructions\n\nQuizzes are your opportunity to demonstrate individual knowledge of the content covered in the class. \n\n- This quiz is closed-everything: closed-note, closed-book, closed-R, closed-calculator, closed-internet, closed-resources, etc. \n\n- Please make sure to write legibly. \n\n- You have 20 minutes to complete this quiz. \n\n**The Honor Principle must guide your work on this quiz.**\n\n\\vspace{2em}\n\n\nWrite your name on the line below to acknowledge that you will only engage in proper academic conduct on this quiz.\n\n\\vspace{2em}\n\n\n\n---\n\n\n\\newpage\n\n## Problem 1\n\nIn ridge and LASSO regression, we would like to minimize\n\n$$\n\\mbox{RSS} + \\lambda \\sum_{j=1}^p \\beta_j^2 \\qquad \\mbox{and} \\qquad \\mbox{RSS} + \\lambda \\sum_{j=1}^p \\vert \\beta_j \\vert,\n$$\nrespectively, in order to estimate our regression coefficients. Recall that $\\mbox{RSS} =\\sum_{i=1}^{n}(\\hat y_i - y_i)^2$. \n\n\na.  How do the estimated coeffients from ridge and LASSO compare to the estimated coeffients from least squares when $\\lambda = 0$?\n\n\n\\vspace{7em}\n\n\nb.  What value will the ridge and LASSO regression coefficients approach as $\\lambda \\to \\infty$?\n\n\n\nc.  Let $\\boldsymbol{\\hat\\beta} = (\\hat\\beta_1 = 1.5,~ \\hat\\beta_2 = 2.5)$ be the vector of estimated least squares regression coefficients. This vector is displayed on the plot below. Draw an arrow, starting from $\\boldsymbol{\\hat\\beta}$ in the direction that ridge or LASSO regression would penalize these coefficients, assuming that $\\lambda$ is positive. \n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](quiz05_files/figure-pdf/unnamed-chunk-1-1.pdf){fig-align='center' width=25%}\n:::\n:::\n\n\n\n## Problem 3\n\nBoth ridge and LASSO aim to reduce test MSE compared to least squares regression. Clearly explain, in terms of bias and variance, how these techniques achieve this reduction in test MSE. \n\n\\newpage\n\n## Problem 4\n\nRidge and LASSO are both *shrinkage* techniques, but one of them is also a *model selection* technique. State which of these techniques is a model selection technique, and make an argument (this may be geometric or algebraic) regarding how this technique performs model selection. \n\n\n\n\n\n\n",
+    "supporting": [
+      "quiz05_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}
