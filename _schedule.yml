@@ -208,68 +208,62 @@ scheduled-docs:
         - 'For Friday: none'
     - week: 9
       days:
-        - topic: "Regression Trees I"
+        - topic: "Trees I"
           display-date: Monday, Nov 2
-          date: 11/2/26
+          date: 10/28/26
           docs:
             - type: Slides
-              href: slides/stat243_wk09mon.qmd
-        - topic: "Regression Trees II"
+              href: slides/Trees_I.pdf
+        - topic: "Trees II"
           display-date: Wednesday, Nov 4
-          date: 11/4/26
+          date: 10/28/26
           docs:
             - type: Slides
-              href: slides/stat243_wk09wed.qmd
-        - topic: "Lab 7: Trees (and Quiz 6)"
+              href: slides/Trees_II.pdf
+        - topic: "Lab 7: Trees"
           display-date: Friday, Nov 6
-          date: 11/6/26
+          date: 10/28/26
           docs:
             - type: Lab 7
               href: labs/lab07.qmd
-      # resources:
-      #   - 'Some text'
+      resources:
+        - 'ISLR Chapter 8.1'
     - week: 10
       days:
-        - topic: "Bagging"
+        - topic: "Trees III"
           display-date: Monday, Nov 9
-          date: 11/9/26
+          date: 10/28/26
           docs:
             - type: Slides
-              href: slides/stat243_wk10mon.qmd
-        - topic: "Boosting"
+              href: slides/Trees_III.pdf
+        - topic: "Trees IV"
           display-date: Wednesday, Nov 11
-          date: 11/11/26
+          date: 10/28/26
           docs:
             - type: Slides
-              href: slides/stat243_wk10wed.qmd
-        - topic: "Lab 8: Ensemble Trees (and Quiz 7)"
+              href: slides/Trees_IV.pdf
+        - topic: "Lab 8: CART, Bagging, and Random Forests"
           display-date: Friday, Nov 13
-          date: 11/13/26
+          date: 10/28/26
           docs:
             - type: Lab 8
               href: labs/lab08.qmd
-      # resources:
-      #   - 'Some text'
+      resources:
+        - 'ISLR Chapter 8.2'
     - week: 11
       days:
-        - topic: "k-Means clustering"
+        - topic: "Trees V"
           display-date: Monday, Nov 16
-          date: 11/16/26
+          date: 10/28/26
           docs:
             - type: Slides
-              href: slides/stat243_wk11mon.qmd
-        - topic: "Hierarchical clustering"
+              href: slides/Trees_V.pdf
+        - topic: "Project Work Day"
           display-date: Wednesday, Nov 18
-          date: 11/18/26
-          docs:
-            - type: Slides
-              href: slides/stat243_wk11wed.qmd
-        - topic: "Lab 9: Clustering (and Quiz 8)"
+          date: 10/28/26
+        - topic: "Project Work Day"
           display-date: Friday, Nov 20
           date: 11/20/26
-          docs:
-            - type: Lab 9
-              href: labs/lab09.qmd
       # resources:
       #   - 'Some text'
     - week: 12

@@ -1,0 +1,15 @@
+{
+  "hash": "4c67c65d961054ee71803a3b115c8693",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Lab 7: Regression Trees\"\nformat: pdf\neditor: source\n---\n\n\n\n## Problem 1: Visualizing Trees\n\nIn small groups, draw an example on the blackboard (of your own invention) of a partition of two-dimensional predictor space that could result from growing a regression tree with recursive binary splitting. **Your example should contain at least 6 regions.**\n\nThen, draw the decision tree corresponding to this partition. Be sure to label all aspects of your figures, including the regions, the splitting points, and so forth.\n\n## Problem 2: Comparing Regression Models with `College` Data\n\nFor this exercise, we will use the `College` data from the ISLR2 package. Familiarize yourself with this dataset before performing analysis. We will attempt to predict the `Outstate` variable, which indicates the college's out-of-state tuition rate in 1995. Load the data with the following code:\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndata(\"College\")\n```\n:::\n\n\n(a) Fit each of the following three models to the complete `College` dataset:\n\n- A linear model using all remaining variables as predictors\n- A well-tuned LASSO regression model (i.e., based on optimal $\\lambda$)\n- A well-tuned regression tree (i.e., based on optimal $\\alpha$)\n\n(b) Calculate and compare the Training RMSE for each model. Then, comment on what you observe.\n\n(c) Which features seem most important for predicting out-of-state tuition for each model?\n\n------------------------------------------------------------------------\n\n------------------------------------------------------------------------\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}
