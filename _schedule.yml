@@ -208,21 +208,21 @@ scheduled-docs:
         - 'For Friday: none'
     - week: 9
       days:
-        - topic: "Trees I"
+        - topic: "Trees I (Grayson out, Lenny sub)"
           display-date: Monday, Nov 2
-          date: 10/28/26
+          date: 11/2/26
           docs:
             - type: Slides
               href: slides/Trees_I.pdf
-        - topic: "Trees II"
+        - topic: "Trees II (Grayson out, Lenny sub)"
           display-date: Wednesday, Nov 4
-          date: 10/28/26
+          date: 11/4/26
           docs:
             - type: Slides
               href: slides/Trees_II.pdf
-        - topic: "Lab 7: Trees"
+        - topic: "Lab 7: Trees (Grayson out, Lenny sub)"
           display-date: Friday, Nov 6
-          date: 10/28/26
+          date: 11/6/26
           docs:
             - type: Lab 7
               href: labs/lab07.qmd
@@ -230,21 +230,21 @@ scheduled-docs:
         - 'ISLR Chapter 8.1'
     - week: 10
       days:
-        - topic: "Trees III"
+        - topic: "Trees III (Grayson out, Lenny sub)"
           display-date: Monday, Nov 9
-          date: 10/28/26
+          date: 11/9/26
           docs:
             - type: Slides
               href: slides/Trees_III.pdf
-        - topic: "Trees IV"
+        - topic: "Trees IV (Grayson out, Lenny sub)"
           display-date: Wednesday, Nov 11
-          date: 10/28/26
+          date: 11/11/26
           docs:
             - type: Slides
               href: slides/Trees_IV.pdf
-        - topic: "Lab 8: CART, Bagging, and Random Forests"
+        - topic: "Lab 8: CART, Bagging, and Random Forests (Grayson out, Lenny sub)"
           display-date: Friday, Nov 13
-          date: 10/28/26
+          date: 11/13/26
           docs:
             - type: Lab 8
               href: labs/lab08.qmd
@@ -254,13 +254,16 @@ scheduled-docs:
       days:
         - topic: "Trees V"
           display-date: Monday, Nov 16
-          date: 10/28/26
+          date: 11/16/26
           docs:
             - type: Slides
               href: slides/Trees_V.pdf
-        - topic: "Project Work Day"
+        - topic: "Logistic Regression III"
           display-date: Wednesday, Nov 18
-          date: 10/28/26
+          date: 11/18/26
+          docs:
+            - type: Slides
+              href: slides/stat243_wk11wed.qmd
         - topic: "Project Work Day"
           display-date: Friday, Nov 20
           date: 11/20/26
@@ -268,13 +271,13 @@ scheduled-docs:
       #   - 'Some text'
     - week: 12
       days:
-        - topic: "GLMs for counts"
+        - topic: "Generalized Linear Models I"
           display-date: Monday, Nov 23
           date: 11/23/26
           docs:
             - type: Slides
               href: slides/stat243_wk12mon.qmd
-        - topic: "GLMs for counts"
+        - topic: "Generalized Linear Models II"
           display-date: Wednesday, Nov 25
           date: 12/25/26
           docs:
@@ -287,32 +290,32 @@ scheduled-docs:
       #   - 'Some text'
     - week: 13
       days:
-        - topic: "Linear mixed models"
+        - topic: "Linear Mixed Models I"
           display-date: Monday, Nov 30
           date: 11/30/26
           docs:
             - type: Slides
               href: slides/stat243_wk13mon.qmd
-        - topic: "Generalized linear mixed models"
+        - topic: "Linear Mixed Models II"
           display-date: Wednesday, Dec 2
           date: 12/2/26
           docs:
             - type: Slides
               href: slides/stat243_wk13wed.qmd
-        - topic: "Project Work Day"
+        - topic: "Project Work / Final Exam Review Day"
           display-date: Friday, Dec 4
           date: 12/4/26
       # resources:
       #   - 'Some text'
     - week: 14
       days:
-        - topic: "Selected Topics / Project Presentations"
+        - topic: "Final Project Presentations"
           display-date: Monday, Dec 7
           date: 12/7/26
           docs:
             - type: Slides
               href: slides/stat243_wk14mon.qmd
-        - topic: "Project Presentations"
+        - topic: "Final Project Presentations"
           display-date: Wednesday, Dec 9
           date: 12/9/26
       # resources:
