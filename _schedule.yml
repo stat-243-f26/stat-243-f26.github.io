@@ -258,17 +258,17 @@ scheduled-docs:
           docs:
             - type: Slides
               href: slides/Trees_V.pdf
-        - topic: "Logistic Regression III"
+        - topic: "Project Work Day"
           display-date: Wednesday, Nov 18
           date: 11/18/26
+        - topic: "Logistic Regression III"
+          display-date: Friday, Nov 20
+          date: 11/20/26
           docs:
             - type: Slides
               href: slides/stat243_wk11wed.qmd
-        - topic: "Project Work Day"
-          display-date: Friday, Nov 20
-          date: 11/20/26
-      # resources:
-      #   - 'Some text'
+      resources:
+        - 'Monday: Review ISLR 8.2.3'
     - week: 12
       days:
         - topic: "Generalized Linear Models I"
