@@ -266,7 +266,7 @@ scheduled-docs:
           date: 11/20/26
           docs:
             - type: Slides
-              href: slides/stat243_wk11wed.qmd
+              href: slides/stat243_wk11fri.qmd
       resources:
         - 'Monday: Review ISLR 8.2.3'
     - week: 12
