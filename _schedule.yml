@@ -271,6 +271,12 @@ scheduled-docs:
         - 'Monday: Review ISLR 8.2.3'
     - week: 12
       days:
+        - topic: "Lab 9: (More) Regression and Classification Trees"
+          display-date: Sunday, Nov 22
+          date: 11/22/26
+          docs:
+            - type: Lab 9
+              href: labs/lab09.qmd
         - topic: "Generalized Linear Models I"
           display-date: Monday, Nov 23
           date: 11/23/26
