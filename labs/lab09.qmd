@@ -1,6 +1,6 @@
 ---
 title: "(More) Regression and Classification Trees"
-subtitle: "Stat 243: Lab 8"
+subtitle: "Stat 243: Lab 9"
 format: html
 editor: source
 toc: false
