@@ -381,12 +381,34 @@ Want to fix **linearity** and **Mean = Variance** assumptions. How?
 - **Linearity:** quadratic term will do the trick! 
 - **Mean = Variance:** a bit harder... 
     - However, this assumption only causes issues the value of our estimated standard errors (typically, these become under estimated), not our $\hat\beta$'s!
-    - We can account for this degradation by estimating an **overdispersion** parameter! 
+    - We can account for this degradation by estimating a **dispersion** parameter! 
+    
+    
+::: {.fragment}
+
+Dispersion parameter for Poisson regression:
+
+$$
+\hat\phi = \left(\sum_{i=1}^n\frac{(y_i - \hat y_i)^2}{\hat y_i} \right) / (n-p)
+$$
+
+- If $\hat\phi = 1$ we have perfectly specified dispersion for Poisson regression, $\hat\phi > 1$ implies overdispersion, and $\hat\phi < 1$ implies underdispersion.
+
+:::
+
+
+## Accounting for Overdispersion
+
+To account for overdispersion in Poisson regression, we multiply the estimated dispersion parameter with the estimated standard errors: 
+
+$$
+\widehat{SE}_Q(\hat\beta) = \widehat{SE}(\hat\beta) \cdot \sqrt{\hat\phi}
+$$
 
 
 ## Overdispersion via quasi-Poisson
 
-In essence, an overdispersion parameter allows us to use the Poisson distribution to model counts through a GLM, when Mean $\neq$ Variance. For details on overdispersion, see [Beyond MLR Section 4.9](https://bookdown.org/roback/bookdown-BeyondMLR/ch-poissonreg.html#sec-overdispPois).
+In essence, a dispersion parameter allows us to use the Poisson distribution to model counts through a GLM, when Mean $\neq$ Variance. For details on (over)dispersion, see [Beyond MLR Section 4.9](https://bookdown.org/roback/bookdown-BeyondMLR/ch-poissonreg.html#sec-overdispPois).
 
 ::: {.fragment}
 
@@ -403,7 +425,41 @@ summary(mod_quasipois)
 :::
 
 
+## Comparing Poisson and quasi-Poisson
 
+
+
+:::: {.columns}
+
+
+::: {.column}
+
+```{r}
+mod_quasipois <- glm(total ~ poly(age, degree = 2), 
+                     family = quasipoisson(link = "log"), 
+                     data = household)
+broom::tidy(mod_quasipois)
+```
+
+:::
+
+::: {.column}
+
+```{r}
+mod_pois <- glm(total ~ poly(age, degree = 2), 
+                family = poisson(link = "log"), 
+                data = household)
+broom::tidy(mod_pois)
+```
+
+:::
+
+
+::::
+
+------------------------------------------------------------------------
+
+![](img/course-evals.png){width='70%' fig-align='center'}
 
 # Have an excellent break! 
 

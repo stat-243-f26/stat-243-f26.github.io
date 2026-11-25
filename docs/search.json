@@ -3490,13 +3490,27 @@
     "href": "slides/stat243_wk12wed.html#poisson-assumptions-5",
     "title": "Stat 243",
     "section": "Poisson Assumptions",
-    "text": "Poisson Assumptions\nWant to fix linearity and Mean = Variance assumptions. How?\n\nLinearity: quadratic term will do the trick!\nMean = Variance: a bit harder…\n\nHowever, this assumption only causes issues the value of our estimated standard errors (typically, these become under estimated), not our \\(\\hat\\beta\\)’s!\nWe can account for this degradation by estimating an overdispersion parameter!"
+    "text": "Poisson Assumptions\nWant to fix linearity and Mean = Variance assumptions. How?\n\nLinearity: quadratic term will do the trick!\nMean = Variance: a bit harder…\n\nHowever, this assumption only causes issues the value of our estimated standard errors (typically, these become under estimated), not our \\(\\hat\\beta\\)’s!\nWe can account for this degradation by estimating a dispersion parameter!\n\n\n\nDispersion parameter for Poisson regression:\n\\[\n\\hat\\phi = \\left(\\sum_{i=1}^n\\frac{(y_i - \\hat y_i)^2}{\\hat y_i} \\right) / (n-p)\n\\]\n\nIf \\(\\hat\\phi = 1\\) we have perfectly specified dispersion for Poisson regression, \\(\\hat\\phi &gt; 1\\) implies overdispersion, and \\(\\hat\\phi &lt; 1\\) implies underdispersion."
+  },
+  {
+    "objectID": "slides/stat243_wk12wed.html#accounting-for-overdispersion",
+    "href": "slides/stat243_wk12wed.html#accounting-for-overdispersion",
+    "title": "Stat 243",
+    "section": "Accounting for Overdispersion",
+    "text": "Accounting for Overdispersion\nTo account for overdispersion in Poisson regression, we multiply the estimated dispersion parameter with the estimated standard errors:\n\\[\n\\widehat{SE}_Q(\\hat\\beta) = \\widehat{SE}(\\hat\\beta) \\cdot \\sqrt{\\hat\\phi}\n\\]"
   },
   {
     "objectID": "slides/stat243_wk12wed.html#overdispersion-via-quasi-poisson",
     "href": "slides/stat243_wk12wed.html#overdispersion-via-quasi-poisson",
     "title": "Stat 243",
     "section": "Overdispersion via quasi-Poisson",
-    "text": "Overdispersion via quasi-Poisson\nIn essence, an overdispersion parameter allows us to use the Poisson distribution to model counts through a GLM, when Mean \\(\\neq\\) Variance. For details on overdispersion, see Beyond MLR Section 4.9.\n\nIn R, accounting for overdispersion and non-linearity:\n\nmod_quasipois &lt;- glm(total ~ poly(age, degree = 2), \n                     family = quasipoisson, \n                     data = household)\nsummary(mod_quasipois)\n\n\nCall:\nglm(formula = total ~ poly(age, degree = 2), family = quasipoisson, \n    data = household)\n\nCoefficients:\n                       Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)             1.28739    0.01638  78.585  &lt; 2e-16 ***\npoly(age, degree = 2)1 -3.35563    0.69839  -4.805  1.7e-06 ***\npoly(age, degree = 2)2 -6.83255    0.73837  -9.254  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for quasipoisson family taken to be 1.427994)\n\n    Null deviance: 2362.5  on 1499  degrees of freedom\nResidual deviance: 2200.9  on 1497  degrees of freedom\nAIC: NA\n\nNumber of Fisher Scoring iterations: 5"
+    "text": "Overdispersion via quasi-Poisson\nIn essence, a dispersion parameter allows us to use the Poisson distribution to model counts through a GLM, when Mean \\(\\neq\\) Variance. For details on (over)dispersion, see Beyond MLR Section 4.9.\n\nIn R, accounting for overdispersion and non-linearity:\n\nmod_quasipois &lt;- glm(total ~ poly(age, degree = 2), \n                     family = quasipoisson, \n                     data = household)\nsummary(mod_quasipois)\n\n\nCall:\nglm(formula = total ~ poly(age, degree = 2), family = quasipoisson, \n    data = household)\n\nCoefficients:\n                       Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)             1.28739    0.01638  78.585  &lt; 2e-16 ***\npoly(age, degree = 2)1 -3.35563    0.69839  -4.805  1.7e-06 ***\npoly(age, degree = 2)2 -6.83255    0.73837  -9.254  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for quasipoisson family taken to be 1.427994)\n\n    Null deviance: 2362.5  on 1499  degrees of freedom\nResidual deviance: 2200.9  on 1497  degrees of freedom\nAIC: NA\n\nNumber of Fisher Scoring iterations: 5"
+  },
+  {
+    "objectID": "slides/stat243_wk12wed.html#comparing-poisson-and-quasi-poisson",
+    "href": "slides/stat243_wk12wed.html#comparing-poisson-and-quasi-poisson",
+    "title": "Stat 243",
+    "section": "Comparing Poisson and quasi-Poisson",
+    "text": "Comparing Poisson and quasi-Poisson\n\n\n\nmod_quasipois &lt;- glm(total ~ poly(age, degree = 2), \n                     family = quasipoisson(link = \"log\"), \n                     data = household)\nbroom::tidy(mod_quasipois)\n\n# A tibble: 3 × 5\n  term                   estimate std.error statistic  p.value\n  &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)                1.29    0.0164     78.6  0       \n2 poly(age, degree = 2)1    -3.36    0.698      -4.80 1.70e- 6\n3 poly(age, degree = 2)2    -6.83    0.738      -9.25 7.27e-20\n\n\n\n\nmod_pois &lt;- glm(total ~ poly(age, degree = 2), \n                family = poisson(link = \"log\"), \n                data = household)\nbroom::tidy(mod_pois)\n\n# A tibble: 3 × 5\n  term                   estimate std.error statistic  p.value\n  &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)                1.29    0.0137     93.9  0       \n2 poly(age, degree = 2)1    -3.36    0.584      -5.74 9.37e- 9\n3 poly(age, degree = 2)2    -6.83    0.618     -11.1  2.01e-28"
   }
 ]
