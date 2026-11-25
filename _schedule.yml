@@ -277,21 +277,21 @@ scheduled-docs:
           docs:
             - type: Lab 9
               href: labs/lab09.qmd
-        - topic: "Generalized Linear Models I"
+        - topic: "Generalized Linear Models: An introduction"
           display-date: Monday, Nov 23
           date: 11/23/26
           docs:
             - type: Slides
               href: slides/stat243_wk12mon.qmd
-        - topic: "Generalized Linear Models II"
+        - topic: "Generalized Linear Models II: Poisson Regression"
           display-date: Wednesday, Nov 25
-          date: 12/25/26
+          date: 11/25/26
           docs:
             - type: Slides
               href: slides/stat243_wk12wed.qmd
         - topic: "No class: Holiday"
-          display-date: Friday, Oct 16
-          date: 10/16/26
+          display-date: Friday, Nov 27
+          date: 11/27/26
       # resources:
       #   - 'Some text'
     - week: 13
